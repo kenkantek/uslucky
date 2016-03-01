@@ -79,4 +79,10 @@ class AuthController extends Controller
         $user->assignRole('player');
         return $user;
     }
+
+
+    public function sendFailedLoginResponse()
+    {
+        return response(['message' => 'Your email or password does not match!'], 401);
+    }
 }

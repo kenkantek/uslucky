@@ -8,3 +8,5 @@ Homestead.json
 Thumbs.db
 /composer.lock
 npm-debug.log
+.idea
+_ide_helper.php
