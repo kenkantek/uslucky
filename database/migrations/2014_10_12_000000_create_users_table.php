@@ -17,6 +17,13 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
+            $table->timestamp('birthday');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('county');
+            $table->string('state');
+            $table->string('city');
+            $table->string('zipcode');
             $table->string('avatar')->default('https://ssl.gstatic.com/accounts/ui/avatar_1x.png');
             $table->string('password', 60);
             $table->rememberToken();

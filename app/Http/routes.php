@@ -12,6 +12,8 @@
  */
 
 $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($router) {
+    $router->auth();
+
     $router->get('/', [
         'as'   => 'home',
         'uses' => 'PagesController@index',

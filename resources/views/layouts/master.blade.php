@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Home')</title>
+    <title>@yield('title', 'Home') | {!! env('TITLE') !!}</title>
 
     {!! HTML::style('css/font-awesome-4.5.0/css/font-awesome.min.css') !!}
+    {!! HTML::style('js/libs/sweetalert/sweetalert.css') !!}
+    {!! HTML::style('js/libs/toastr/toastr.min.css') !!}
     @yield('styles')
     {!! HTML::style(elixir('css/app.css')) !!}
 
@@ -24,6 +26,8 @@
 
     {!! HTML::script('js/libs/jquery-2.1.4.min.js') !!}
     {!! HTML::script('js/libs/bootstrap.min.js') !!}
+    {!! HTML::script('js/libs/sweetalert/sweetalert.min.js') !!}
+    {!! HTML::script('js/libs/toastr/toastr.min.js') !!}
 
     @yield('scripts')
 

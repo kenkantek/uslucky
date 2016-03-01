@@ -15,7 +15,7 @@ class UserTableSeeder extends Seeder
             if ($u->id == 1) {
                 $u->assignRole('admin');
             } else {
-                $u->assignRole('member');
+                $u->assignRole('player');
             }
         });
     }

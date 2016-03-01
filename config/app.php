@@ -160,6 +160,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Sofa\Eloquence\ServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
     ],
 
     /*
