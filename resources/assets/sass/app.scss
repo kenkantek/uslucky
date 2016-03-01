@@ -13,3 +13,16 @@
 main {
 	min-height: 500px;
 }
+
+#sizebar {
+	display: block;
+	width: 90%;
+	position: static;
+	
+	&>li.current {
+		a{
+			font-weight: bold!important;
+		}
+	}
+}
+

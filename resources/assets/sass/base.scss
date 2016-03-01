@@ -1,6 +1,19 @@
 /* Variable, reset, common SCSS */
-
+$text-color: #3a3a3a;
 
 
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}

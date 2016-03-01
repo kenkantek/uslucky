@@ -6,8 +6,14 @@ use App\Http\Controllers\Controller;
 
 class SettingsController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('auth');
+    }
+
     public function getAccount()
     {
-        return 'page account content';
+        return view('user.setings.account');
     }
 }
