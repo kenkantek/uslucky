@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Validator;
@@ -39,6 +39,11 @@ class AuthController extends Controller
     {
         parent::__construct();
         $this->middleware('guest', ['except' => 'logout']);
+        \JavaScript::put([
+            '_link' => [
+                'account' => route('front::settings.account'),
+            ],
+        ]);
     }
 
     /**
@@ -65,11 +70,13 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name'  => $data['last_name'],
             'email'      => $data['email'],
             'password'   => bcrypt($data['password']),
         ]);
+        $user->assignRole('player');
+        return $user;
     }
 }

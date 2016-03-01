@@ -74,19 +74,24 @@
 					this.submiting = false;
 					swal({
 					    title: "Account create successfully!",
-					    text: "Auto redirect to profile",
+					    timer: 2000,
+					    text: "Auto redirect to profile in 2 seconds.",
 					    type: "info",
 					    closeOnConfirm: false,
 					    showLoaderOnConfirm: true,
 					}, function() {
-						location.href = '/profile';
+						location.href = _link.account;
 					    setTimeout(() =>{}, 2000);
 					});
 
 				}, (res) => {
 					this.formErrors = res.data;
 					this.submiting = false;
-					toastr.error('Please check input field!.', 'Validate!')
+					if(res.status === 500) {
+						BOX.alertError();
+					} else  {
+						toastr.error('Please check input field!.', 'Validate!');
+					}
 				});
 			}
 		}
