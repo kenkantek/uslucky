@@ -134,6 +134,9 @@
                         type: "info",
                         closeOnConfirm: false,
                         showLoaderOnConfirm: true,
+                    },function() {
+                        location.href = 'account';
+                        setTimeout(() =>{}, 1);
                     });
                 }, (res) => {
                     this.formErrors = res.data;
