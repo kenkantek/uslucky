@@ -11,7 +11,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 5)->create()->each(function ($u) {
+        factory(App\Models\User::class, 5)->create()->each(function ($u) {
             if ($u->id == 1) {
                 $u->assignRole('admin');
             } else {

@@ -29,9 +29,14 @@ class User extends Authenticatable
         'password', 'remember_token', 'avatar',
     ];
 
-
     public function getImageAttribute()
     {
         return asset($this->avatar);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
 }
