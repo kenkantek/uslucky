@@ -15,9 +15,9 @@
 				<span class="help-block" v-show="formErrors.password" v-text="formErrors.password"></span>
 			</div>
 		</div>
-		<div class="form-group" v-show="formErrors.message.length">
+		<div class="form-group" v-show="formErrors.message">
 			<div class="col-md-6 col-md-offset-4">
-				<span class="help-block err"  v-text="formErrors.message"></span>
+				<span class="help-block err" v-text="formErrors.message"></span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -32,7 +32,7 @@
 
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4">
-				<button type="submit" class="btn btn-primary">
+				<button type="submit" class="btn btn-primary" :disabled="submiting">
 					<i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Sign In
 				</button>
 				<a class="btn btn-link" href="">Forgot Your Password?</a>

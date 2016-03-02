@@ -161,6 +161,7 @@ return [
         Sofa\Eloquence\ServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
     ],
 
     /*
@@ -209,7 +210,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'HTML'      => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
+        'Stripe'    => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
     ],
 
 ];

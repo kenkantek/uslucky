@@ -22,7 +22,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('page', 'PagesController');
 
     $router->controller('settings', 'User\SettingsController', [
-        'getAccount' => 'settings.account',
-        'getApiAccount' => 'settings.api.account'
+        'getAccount'    => 'settings.account',
+        'getApiAccount' => 'settings.api.account',
+        'getPayment'    => 'settings.payment',
     ]);
 });
