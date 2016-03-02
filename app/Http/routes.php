@@ -24,7 +24,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('settings', 'User\SettingsController', [
         'getAccount' => 'settings.account',
         'getApiAccount' => 'settings.api.account',
-        'putEditAccount' => 'settings.put.account',
-        'postChangeAvatar' => 'settings.avatar'
+    ]);
+
+    $router->controller('account', 'User\AccountController', [
+        'putEditAccount' => 'account.put.account',
+        'postChangeAvatar' => 'account.avatar'
     ]);
 });

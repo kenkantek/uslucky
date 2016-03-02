@@ -18,18 +18,20 @@ class User extends Authenticatable
         'first_name', 'last_name', 'avatar', 'email', 'password',
     ];
 
+    protected $appends = ['image'];
+
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'avatar',
     ];
 
 
-    public function getAvatarAttribute($data)
+    public function getImageAttribute()
     {
-        return asset($data);
+        return asset($this->avatar);
     }
 }

@@ -13,7 +13,7 @@ class AvatarRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class AvatarRequest extends Request
     public function rules()
     {
         return [
-            'avatar' => 'image|size:500'
+            'avatar' => 'image|max:2024'
         ];
     }
 

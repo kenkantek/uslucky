@@ -1,9 +1,15 @@
 <template>
     <div v-if="$loadingAsyncData">Loading...</div>
+    <div class="col-md-4 col-md-offset-8">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            CHANGR PASSWORD
+        </button>
+    </div>
     <form  v-if="!$loadingAsyncData" class="" @submit.prevent="onSubmit" novalidate>
         <div class="form-group">
             <label>Avatar: <sup class="text-danger">*</sup></label>
-            <img :src="user.avatar" alt="" @click="getFilePathFromDialog($event)">
+            <img :src="user.image" alt="" @click="getFilePathFromDialog($event)">
             <span>Click image to change</span><br />
             <span class="help-block" v-show="formErrors.avatar" v-text="formErrors.avatar"></span><br>
             <input type="file" @change="onChangeAvatar($event)" accept="image/*" v-el:input-avatar class="hidden" />
@@ -61,6 +67,28 @@
         </div>
 
     </form>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
     import BOX from '../../../common';
@@ -120,35 +148,63 @@
                 const images = event.target.files;
 
 
-                var formData = new FormData();
+
 
                 if (images.length) {
-                    formData.append('avatar', images[0]);
-                }
-//                console.log(images);return;
-                this.submiting = true;
-                this.$http.post(_api.put_avatar, formData).then(res => {
-                    this.submiting = false;
+                    let formData = new FormData();
+                    let image = images[0];
+                    formData.append('avatar', image);
+
+                    var reader = new FileReader();
+
+                    reader.onload =  (e) => {
+                        this.$set('user.image', e.target.result);
+                    };
+
+
+
+
                     swal({
                         title: "Your avatar was updated!",
                         type: "info",
                         closeOnConfirm: false,
                         showLoaderOnConfirm: true,
-                    },function() {
-                        location.href = 'account';
-                        setTimeout(() =>{}, 1);
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true
+                    }, (isConfirm) => {
+
+                        if(isConfirm) {
+                            reader.readAsDataURL(image);
+
+                            this.$http.post(_api.put_avatar, formData).then(res => {
+                                this.submiting = false;
+                                swal.close();
+                            }, (res) => {
+                                    this.formErrors = res.data;
+                                    if(res.status === 500) {
+                                        BOX.alertError();
+                                    } else  {
+                                        toastr.error('Please check input field!.', 'Validate!');
+                                    }
+                                }
+
+                            );
+
+
+                        } else {
+                            swal.close();
+                        }
                     });
-                }, (res) => {
-                    this.formErrors = res.data;
-                    this.submiting = false;
-                    if(res.status === 500) {
-                        BOX.alertError();
-                    } else  {
-                        toastr.error('Please check input field!.', 'Validate!');
-                    }
+
+
+
+
+                } else {
+                    return false;
                 }
 
-            );
+
             }
         }
 
