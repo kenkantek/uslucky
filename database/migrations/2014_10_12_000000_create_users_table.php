@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('birthday');
             $table->string('phone');
             $table->string('address');
-            $table->string('county');
+            $table->string('country');
             $table->string('state');
             $table->string('city');
             $table->string('zipcode');

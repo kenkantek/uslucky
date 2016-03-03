@@ -2,96 +2,86 @@
     <div v-if="$loadingAsyncData">Loading...</div>
     <div class="col-md-4 col-md-offset-8">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            CHANGR PASSWORD
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Change Password
         </button>
     </div>
     <form  v-if="!$loadingAsyncData" class="" @submit.prevent="onSubmit" novalidate>
         <div class="form-group">
             <label>Avatar: <sup class="text-danger">*</sup></label>
-            <img :src="user.image" alt="" @click="getFilePathFromDialog($event)">
+            <img :src="user.image" alt="" @click="getFilePathFromDialog($event)" style="max-width: 200px">
             <span>Click image to change</span><br />
             <span class="help-block" v-show="formErrors.avatar" v-text="formErrors.avatar"></span><br>
             <input type="file" @change="onChangeAvatar($event)" accept="image/*" v-el:input-avatar class="hidden" />
         </div>
-        <div class="form-group" :class="{'has-error': formErrors.first_name}">
+        <div class="form-group col-md-4" :class="{'has-error': formErrors.first_name}">
             <label>First Name: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.first_name">
             <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.first_name"></span>
         </div>
-        <div class="form-group" :class="{'has-error': formErrors.last_name}">
+        <div class="form-group col-md-4" :class="{'has-error': formErrors.last_name}">
             <label>Last Name: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.last_name">
-            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.last_name"></span>
+            <span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>
         </div>
-        <div class="form-group" :class="{'has-error': formErrors.email}">
+        <div class="form-group col-md-4" :class="{'has-error': formErrors.birthday}">
+            <label>Birthday: <sup class="text-danger">*</sup></label>
+            <input type="date" class="form-control" autocomplete="off" v-model="user.birthday">
+            <span class="help-block" v-show="formErrors.birthday" v-text="formErrors.birthday"></span>
+        </div>
+        <div class="form-group col-md-6" :class="{'has-error': formErrors.email}">
             <label>Email:</label>
             <input readonly type="text" class="form-control" autocomplete="off" v-model="user.email">
-            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.email"></span>
+            <span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
         </div>
-        <div class="form-group" :class="{'has-error': formErrors.birthday}">
-            <label>Birthday: <sup class="text-danger">*</sup></label>
-            <input type="text" class="form-control" autocomplete="off" v-model="user.birthday">
-            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.birthday"></span>
-        </div>
-        <div class="form-group" :class="{'has-error': formErrors.phone}">
+        <div class="form-group col-md-6" :class="{'has-error': formErrors.phone}">
             <label>Phone: <sup class="text-danger">*</sup></label>
-            <input type="text" class="form-control" autocomplete="off" v-model="user.phone">
-            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.phone"></span>
+            <input type="number" class="form-control" autocomplete="off" v-model="user.phone">
+            <span class="help-block" v-show="formErrors.phone" v-text="formErrors.phone"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label>Address: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.address">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label>Country: <sup class="text-danger">*</sup></label>
-            <input type="text" class="form-control" autocomplete="off" v-model="user.county">
+            <select class="form-control" v-model="user.country">
+                <option v-for="country in countries" v-text="country.name" :value="country.code"></option>
+            </select>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12" v-show="states.length">
             <label>State: <sup class="text-danger">*</sup></label>
-            <input type="text" class="form-control" autocomplete="off" v-model="user.state">
+            <select class="form-control" v-model="user.state">
+                <option v-for="state in states" v-text="state.name" :value="state.code"></option>
+            </select>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label>City: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.city">
         </div>
-        <div class="form-group" :class="{'has-error': formErrors.zipcode}">
+        <div class="form-group col-md-12" :class="{'has-error': formErrors.zipcode}">
             <label>Zipcode: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.zipcode">
-            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.zipcode"></span>
+            <span class="help-block" v-show="formErrors.zipcode" v-text="formErrors.zipcode"></span>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">
-                Update Account
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-primary" :disabled="submiting">
+                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Update Account
             </button>
         </div>
 
     </form>
 
 
-
+    <changepass></changepass>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </template>
 <script>
-    import BOX from '../../../common';
+    import BOX from '../../../../common';
+    import Changepass from './Changepass.vue';
+    import _ from 'lodash';
 
     export default {
 
@@ -99,7 +89,10 @@
             return {
                 user: {},
                 formErrors: {},
-                submiting: false
+                formInputs: {},
+                submiting: false,
+                countries: [],
+                states: []
             }
         },
 
@@ -116,11 +109,27 @@
             });
         },
 
+        ready(){
+            this.countries = JSON.parse(_countries).result;
+        },
+
+
+
+        computed: {
+            states() {
+                if(!this.user.country) return [];
+
+                const country = _.find(this.countries, {code: this.user.country});
+
+                return country.states || [];
+            }
+        },
 
         methods: {
             getFilePathFromDialog(event){
                 this.$els.inputAvatar.click();
             },
+
             onSubmit() {
                 const user = this.user;
                 this.submiting = true;
@@ -206,7 +215,8 @@
 
 
             }
-        }
+        },
+         components: { Changepass }
 
     }
 

@@ -30,6 +30,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('account', 'User\AccountController', [
         'putEditAccount'   => 'account.put.account',
         'postChangeAvatar' => 'account.avatar',
+        'putChangePass'    => 'account.put.changepass'
     ]);
 
     $router->controller('payment', 'User\PaymentController', [
