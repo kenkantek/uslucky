@@ -31,4 +31,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'putEditAccount'   => 'account.put.account',
         'postChangeAvatar' => 'account.avatar',
     ]);
+
+    $router->controller('payment', 'User\PaymentController', [
+        'putPayment' => 'put.payment',
+    ]);
 });

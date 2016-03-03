@@ -40,8 +40,11 @@ class SettingsController extends Controller
                 'year'  => generateYear(15),
             ],
             '_payments' => $this->user->payments,
+            '_api'      => [
+                'put_payment' => route('front::put.payment'),
+            ],
         ]);
-        // return Stripe::customers()->all();
+
         return view('user.setings.credit-card');
     }
 }
