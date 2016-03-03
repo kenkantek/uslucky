@@ -5,14 +5,9 @@
 	<div v-show="!payments.length">
 		<slot name="warning-no-payment"></slot>
 	</div>
-	
-	<div v-show="!payment.show">
-	    <!-- <form-card :payment.sync="payment"></form-card> -->
-	    <h3></h3> <h3></h3>
-	</div>
 
 	<div v-el v-for="payment in payments">
-		<div class="panel panel-default" v-show="payment.show">
+		<div class="panel panel-default" v-show="payment.id && payment.show">
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<strong>{{ payment.card_brand | uppercase }} ****{{ payment.card_last_four }} </strong>
@@ -24,6 +19,8 @@
 				<p><strong>EXPIRY DATE:</strong> <span>{{ payment.month_exp | twoChaMonth }} / {{ payment.year_exp }}</span></p>
 			</div>
 			<div class="panel-footer clearfix">
+				<a href="#" class="pull-right" @click.prevent="onDelete(payment.id, $event)"><strong>Delete</strong></a>
+				<span class="pull-right"> . </span>
 				<a href="#" class="pull-right" @click.prevent="onOpenEdit(payment.id, $event)"><strong>Edit</strong></a>
 			</div>
 		</div>
@@ -43,7 +40,7 @@
 					card_brand: '',
 					card_last_four: '',
 					month_exp: 1,
-					year_exp: 2022,
+					year_exp: new Date().getFullYear(),
 					show: false
 				}
 			}
@@ -62,6 +59,26 @@
 
 			addNewCard() {
 				this.payments.unshift({...this.payment, uid: Math.random()});
+			},
+
+			onDelete(id) {
+				swal({
+				    title: "Are you sure delete it?",
+				    type: "info",
+				    showCancelButton: true,
+				    closeOnConfirm: false,
+				    showLoaderOnConfirm: true,
+				}, () => {
+					this.$http.delete(`${_api.post_payment}/${id}`).then(res => {
+				    	toastr.success('Delete Credit card success.', 'Success!');
+				    	this.payments = this.payments.filter(payment => payment.id !== id);
+				    	swal.close();
+				    }, res => {
+				    	toastr.error('Can not delete Credit card. Please try again!', 'Error!');
+				    	swal.close();
+				    	console.warn(res);
+				    });
+				});
 			}
 		},
 
@@ -70,6 +87,12 @@
 				return data < 10 ? '0' + data : data;
 			}
 		},
+
+		events: {
+            'remove-form-card'(payment) {
+                this.payments.$remove(payment);
+            }
+        },
 
 		components: { FormCard }
 	}

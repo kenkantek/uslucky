@@ -37,9 +37,9 @@
 	          <hr>
 	        </div>
 	        <button type="submit" class="btn btn-primary" :disabled="submiting">
-	            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Update Credit Card
+	            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{ card.id ? 'Update' : 'Add' }} Credit Card
 	        </button>
-	        <button class="btn btn-info" @click.prevent="onCloseForm">Cancle</button>
+	        <button class="btn btn-info" @click.prevent="onCloseForm" :disabled="submiting">Cancle</button>
 	    </div>
 		
 		<hr> <h3></h3>
@@ -68,7 +68,12 @@
 
 		methods: {
 			onCloseForm() {
-				this.payment.show = true;
+				if(this.payment.id) {
+					this.payment.show = true;
+				} else {
+					this.$dispatch('remove-form-card', this.payment);
+					this.$remove();
+				}
 			},
 
 			onSubmit(e) {
@@ -81,24 +86,44 @@
 						toastr.error(this.message, 'Error');
 					} else {
 						this.message = '';
-						this._updateCard(res.id);
+						if(this.card.id) {
+							this._updateCard(res.id);
+						} else {
+							this._addCard(res.id);
+						}
 					}
+				});
+			},
+
+			_addCard(source) {
+				this.$http.post(_api.post_payment, { ...this.card, source }).then(res => {
+					this.__processSuccessCard(res, 'Add ew credit card successfully.');
+				}, res => {
+					this.__processFailCard(res);
 				});
 			},
 
 			_updateCard(source) {
 				this.$http.put(`${_api.put_payment}/${this.payment.id}`, { ...this.card, source }).then(res => {
-					this.submiting = false;
-					toastr.success('Update credit card successfully.', 'Success!');
-					this.payment = {...this.card, ...res.data};
+					this.__processSuccessCard(res);
 				}, res => {
-					this.submiting = false;
-					if(res.status === 500) {
-						BOX.alertError();
-					} else  {
-						this.message = res.data.card_name || 'Somthing wrong fields.';
-					}
+					this.__processFailCard(res);
 				});
+			},
+
+			__processSuccessCard(res, message = 'Update credit card successfully.') {
+				this.submiting = false;
+				toastr.success(message, 'Success!');
+				this.payment = {...this.card, ...res.data, show: true};
+			},
+
+			__processFailCard(res) {
+				this.submiting = false;
+				if(res.status === 500) {
+					BOX.alertError();
+				} else  {
+					this.message = res.data.card_name || 'Somthing wrong fields.';
+				}
 			}
 
 		},

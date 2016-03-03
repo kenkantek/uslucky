@@ -36,4 +36,36 @@ class PaymentController extends Controller
         $payment->save();
         return $payment;
     }
+
+    public function postPayment(CreditCardRequest $request)
+    {
+        $user = $this->user;
+
+        $customer = Stripe::customers()->create([
+            'email'       => $user->email,
+            'description' => $request->card_name,
+            'source'      => $request->source,
+        ]);
+
+        $card    = $customer['sources']['data'][0];
+        $payment = new Payment([
+            'stripe_id'      => $card['customer'],
+            'card_name'      => $request->card_name,
+            'card_brand'     => $card['brand'],
+            'card_last_four' => substr($request->card_number, -4),
+            'month_exp'      => $request->month_exp,
+            'year_exp'       => $request->year_exp,
+        ]);
+        $user->payments()->save($payment);
+
+        return $payment;
+    }
+
+    public function deletePayment($id)
+    {
+        $payment = Payment::findOrFail($id);
+        Stripe::customers()->delete($payment->stripe_id);
+        $payment->delete();
+        return $payment;
+    }
 }

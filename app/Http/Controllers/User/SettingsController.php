@@ -41,7 +41,9 @@ class SettingsController extends Controller
             ],
             '_payments' => $this->user->payments,
             '_api'      => [
-                'put_payment' => route('front::put.payment'),
+                'post_payment'   => route('front::post.payment'),
+                'put_payment'    => route('front::put.payment'),
+                'delete_payment' => route('front::delete.payment'),
             ],
         ]);
 

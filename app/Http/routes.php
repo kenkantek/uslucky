@@ -33,6 +33,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     ]);
 
     $router->controller('payment', 'User\PaymentController', [
-        'putPayment' => 'put.payment',
+        'putPayment'    => 'put.payment',
+        'postPayment'   => 'post.payment',
+        'deletePayment' => 'delete.payment',
     ]);
 });

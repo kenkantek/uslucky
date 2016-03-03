@@ -18,6 +18,7 @@ $text-color: #3a3a3a;
   }
 }
 
+/* Notice Background  */
 .error-notice {
   margin: 5px 5px; /* Making sure to keep some distance from all side */
 }
@@ -67,4 +68,19 @@ $text-color: #3a3a3a;
 
 .success strong {
   color: #2b542c;
+}
+
+
+/* Flash Background*/
+.flashBg {
+    animation-name: flash;
+    animation-timing-function: ease-out;
+    animation-duration: 2s;
+    animation-name: flash;
+    animation-timing-function: ease-out;
+    animation-duration: 2s;
+}
+@keyframes flash {
+    0% { background: #CD4B5B; }
+    100% { background: none; }
 }
