@@ -2,37 +2,37 @@
     <div v-if="$loadingAsyncData">Loading...</div>
     <div class="col-md-4 col-md-offset-8">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            CHANGR PASSWORD
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Change Password
         </button>
     </div>
     <form  v-if="!$loadingAsyncData" class="" @submit.prevent="onSubmit" novalidate>
         <div class="form-group">
             <label>Avatar: <sup class="text-danger">*</sup></label>
-            <img :src="user.image" alt="" @click="getFilePathFromDialog($event)">
+            <img :src="user.image" alt="" @click="getFilePathFromDialog($event)" style="max-width: 200px">
             <span>Click image to change</span><br />
             <span class="help-block" v-show="formErrors.avatar" v-text="formErrors.avatar"></span><br>
             <input type="file" @change="onChangeAvatar($event)" accept="image/*" v-el:input-avatar class="hidden" />
         </div>
-        <div class="form-group" :class="{'has-error': formErrors.first_name}">
+        <div class="form-group col-md-4" :class="{'has-error': formErrors.first_name}">
             <label>First Name: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.first_name">
             <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.first_name"></span>
         </div>
-        <div class="form-group" :class="{'has-error': formErrors.last_name}">
+        <div class="form-group col-md-4" :class="{'has-error': formErrors.last_name}">
             <label>Last Name: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.last_name">
             <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.last_name"></span>
+        </div>
+        <div class="form-group col-md-4" :class="{'has-error': formErrors.birthday}">
+            <label>Birthday: <sup class="text-danger">*</sup></label>
+            <input type="date" class="form-control" autocomplete="off" v-model="user.birthday">
+            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.birthday"></span>
         </div>
         <div class="form-group" :class="{'has-error': formErrors.email}">
             <label>Email:</label>
             <input readonly type="text" class="form-control" autocomplete="off" v-model="user.email">
             <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.email"></span>
-        </div>
-        <div class="form-group" :class="{'has-error': formErrors.birthday}">
-            <label>Birthday: <sup class="text-danger">*</sup></label>
-            <input type="text" class="form-control" autocomplete="off" v-model="user.birthday">
-            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.birthday"></span>
         </div>
         <div class="form-group" :class="{'has-error': formErrors.phone}">
             <label>Phone: <sup class="text-danger">*</sup></label>
