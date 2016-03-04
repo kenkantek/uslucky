@@ -54,6 +54,12 @@ class SettingsController extends Controller
 
     public function getWinning()
     {
+        \JavaScript::put([
+            '_link'     => [
+                'payment' => route('front::settings.payment'),
+            ],
+            '_payments' => $this->user->payments,
+        ]);
         return view('user.setings.winning');
     }
 }
