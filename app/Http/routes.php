@@ -25,12 +25,13 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getAccount'    => 'settings.account',
         'getApiAccount' => 'settings.api.account',
         'getPayment'    => 'settings.payment',
+        'getWinning'    => 'settings.winning',
     ]);
 
     $router->controller('account', 'User\AccountController', [
         'putEditAccount'   => 'account.put.account',
         'postChangeAvatar' => 'account.avatar',
-        'putChangePass'    => 'account.put.changepass'
+        'putChangePass'    => 'account.put.changepass',
     ]);
 
     $router->controller('payment', 'User\PaymentController', [

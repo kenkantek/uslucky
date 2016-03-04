@@ -15,13 +15,13 @@ class SettingsController extends Controller
     public function getAccount()
     {
         \JavaScript::put([
-            '_api' => [
+            '_api'        => [
                 'user'        => route('front::settings.api.account'),
                 'put_account' => route('front::account.put.account'),
                 'put_avatar'  => route('front::account.avatar'),
             ],
-            '_countries' => file_get_contents(storage_path('countries.json')),
-            '_changepass' => route('front::account.put.changepass')
+            '_countries'  => file_get_contents(storage_path('countries.json')),
+            '_changepass' => route('front::account.put.changepass'),
         ]);
         return view('user.setings.account');
     }
@@ -50,5 +50,10 @@ class SettingsController extends Controller
         ]);
 
         return view('user.setings.credit-card');
+    }
+
+    public function getWinning()
+    {
+        return view('user.setings.winning');
     }
 }
