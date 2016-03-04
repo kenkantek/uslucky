@@ -21,6 +21,7 @@ class CreateStripeTable extends Migration
             $table->string('card_last_four')->nullable();
             $table->tinyInteger('month_exp')->nullable();
             $table->integer('year_exp')->nullable();
+            $table->boolean('default')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')

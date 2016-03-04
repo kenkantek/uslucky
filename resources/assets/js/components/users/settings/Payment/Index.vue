@@ -15,7 +15,7 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<p><strong>FULL NAME:</strong> <span>{{ payment.card_name }}</span></p>
+				<p><strong>FULL NAME:</strong> <span>{{ payment.card_name }}</span> <span v-show="default" class="label label-info pull-right">Default</span></p>
 				<p><strong>EXPIRY DATE:</strong> <span>{{ payment.month_exp | twoChaMonth }} / {{ payment.year_exp }}</span></p>
 			</div>
 			<div class="panel-footer clearfix">
@@ -39,6 +39,7 @@
 					card_name: '',
 					card_brand: '',
 					card_last_four: '',
+					default: 0,
 					month_exp: 1,
 					year_exp: new Date().getFullYear(),
 					show: false
