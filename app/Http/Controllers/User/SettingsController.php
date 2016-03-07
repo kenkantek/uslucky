@@ -58,7 +58,11 @@ class SettingsController extends Controller
             '_link'     => [
                 'payment' => route('front::settings.payment'),
             ],
+            '_api'      => [
+                'charge' => route('front::post.charge'),
+            ],
             '_payments' => $this->user->payments,
+            '_amount'   => $this->user->amount ? $this->user->amount->amount : 0,
         ]);
         return view('user.setings.winning');
     }

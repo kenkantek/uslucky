@@ -1,6 +1,6 @@
 <template>
 	You currently have
-	<h3>US <span>$ 0.00</span> </h3>
+	<h3>US <span>{{ amount | currency }}</span> </h3>
 	in your account balance
 	<hr>
 	<slot name="notice-minimum"></slot>
@@ -14,7 +14,7 @@
 
 	<div class="transactions">
 		<hr>
-		<form-deposit :payments="payments" :status.sync="statusForm.desposit"></form-deposit>
+		<form-deposit :payments="payments" :status.sync="statusForm.desposit" :amount.sync="amount"></form-deposit>
 	</div>
 </template>
 
@@ -24,6 +24,7 @@
 	export default {
 		data() {
 			return {
+                amount: _amount,
 				payments: [],
 				statusForm: {
 					desposit: false,
@@ -32,9 +33,9 @@
 			}
 		},
 
-		ready() {
-			this.payments = _payments;
-		},
+        ready() {
+            this.payments = _payments;
+        },
 
 		methods: {
 			openDeposit(e) {

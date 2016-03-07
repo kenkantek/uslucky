@@ -18,7 +18,7 @@ class Controller extends BaseController
         $this->user = auth()->user();
         \JavaScript::put([
             '_token' => csrf_token(),
-            '_user'  => ['isLogin' => !!$this->user, 'level' => $this->user ? $this->user->roles() : 0],
+            '_user'  => ['isLogin' => !!$this->user, 'level' => $this->user ? $this->user->roles : 0],
         ]);
     }
 }
