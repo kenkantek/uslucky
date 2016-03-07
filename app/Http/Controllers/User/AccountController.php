@@ -111,7 +111,7 @@ class AccountController extends Controller
                 $message->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
                 $message->to($user->email)->subject('Verify your email address');
             });
-            $flash_mes = 'resent'
+            $flash_mes = 'resent';
             return view('user.verify', compact('flash_mes'));
         }
     }
