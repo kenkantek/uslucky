@@ -10,6 +10,7 @@ class SettingsController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
+        $this->middleware('active');
     }
 
     public function getAccount()
