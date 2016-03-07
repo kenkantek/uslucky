@@ -12,7 +12,7 @@
                             @if($flash_mes == 'success')
 
                                 Thank you! We had sent an email to verify, please check inbox/spam or junk mail. <br>
-                                If you don't receive, please <a
+                                If you do not receive, please <a
                                         href="{{url(route('front::register.resend.email'))}}">click here to resend
                                     this email</a>.
 

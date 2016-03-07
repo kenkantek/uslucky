@@ -9,7 +9,7 @@
 <div>
     Thanks for creating an account with the verification US Lucky.
     Please follow the link below to verify your email address
-    {{ URL::to('account/verify/' . $event->active_code) }}.<br/>
+    {{ route('front::register.verify', $event->active_code) }}.<br/>
 
 </div>
 
