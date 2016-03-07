@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'avatar', 'email', 'password',
+        'first_name', 'last_name', 'avatar', 'email', 'password','active_code'
     ];
 
     protected $appends = ['image'];
@@ -27,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'avatar',
+        'password', 'remember_token', 'avatar'
     ];
 
     public function getImageAttribute()
