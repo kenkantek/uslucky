@@ -19,6 +19,7 @@
 </template>
 
 <script>
+	import laroute from '../../../../laroute';
 	import FormDeposit from './FormDeposit.vue';
 
 	export default {
@@ -51,7 +52,7 @@
 						confirmButtonText: "Yes",
 						closeOnConfirm: false
 					}, () => {
-						location.href = _link.payment;
+						location.href = laroute.route('front::settings.payment');
 					});
 				}
 			}
