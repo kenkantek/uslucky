@@ -123,4 +123,8 @@ class AuthController extends Controller
             ->scopes(['email'])->redirect();
     }
 
+    public function sendFailedLoginResponse()
+    {
+        return response(['message' => 'Your email or password does not match!'], 401);
+    }
 }

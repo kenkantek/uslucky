@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Settings;
 
 use App\Http\Requests\Request;
 
-class CreditCardRequest extends Request
+class ChargeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class CreditCardRequest extends Request
     public function rules()
     {
         return [
-            'source'    => 'required',
-            'card_name' => 'required|max:255',
+            'amount'      => 'required|numeric',
+            'payment'     => 'required|exists:payments,id',
+            'description' => 'required|max:255|min:50',
         ];
     }
 }

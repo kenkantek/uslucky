@@ -29,6 +29,13 @@
 	        <input type="text" class="form-control" autocomplete="off" size="4" data-stripe="cvc" v-model="card.cvv" placeholder="CVV">
 	    </div>
 
+	    <div>
+	        <label>
+	        	Payment default: <input type="checkbox" v-model="card.default"> 
+	        </label>
+	        <h3></h3>
+	    </div>
+
 	    <div class="form-group">
 	    	<div class="error-notice" v-show="message">
 	          <div class="oaerror danger">

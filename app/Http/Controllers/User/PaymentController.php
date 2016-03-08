@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreditCardRequest;
+use App\Http\Requests\Settings\CreditCardRequest;
 use App\Models\Payment;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 

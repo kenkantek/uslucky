@@ -35,6 +35,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getAccount'    => 'settings.account',
         'getApiAccount' => 'settings.api.account',
         'getPayment'    => 'settings.payment',
+        'getWinning'    => 'settings.winning',
     ]);
 
     $router->controller('account', 'User\AccountController', [
@@ -50,5 +51,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'putPayment'    => 'put.payment',
         'postPayment'   => 'post.payment',
         'deletePayment' => 'delete.payment',
+        'postCharge'    => 'post.charge',
+    ]);
+
+    $router->controller('winning', 'User\WinningController', [
+        'postCharge' => 'post.charge',
     ]);
 });

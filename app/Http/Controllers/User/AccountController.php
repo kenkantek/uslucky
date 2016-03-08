@@ -107,7 +107,7 @@ class AccountController extends Controller
             return redirect()->route('front::settings.account');
         } else {
             $user = $this->user;
-            \Mail::send('verify', ['event' => $user], function ($message) use ($user) {
+            \Mail::send('mail.verify', ['event' => $user], function ($message) use ($user) {
                 $message->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
                 $message->to($user->email)->subject('Verify your email address');
             });

@@ -35,13 +35,18 @@ class User extends Authenticatable
         return asset($this->avatar);
     }
 
+    public function getBirthdayAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);
     }
 
-    public function getBirthdayAttribute($date)
+    public function amount()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+        return $this->hasOne(Amount::class);
     }
 }

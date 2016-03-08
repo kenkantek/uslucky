@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateStripeTable extends Migration
+class CreateAmountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -11,17 +12,10 @@ class CreateStripeTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('payments', function ($table) {
+        Schema::create('amounts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('stripe_id')->nullable();
-            $table->string('card_name')->nullable();
-            $table->string('card_brand')->default('Visa');
-            $table->string('card_last_four')->nullable();
-            $table->tinyInteger('month_exp')->nullable();
-            $table->integer('year_exp')->nullable();
-            $table->boolean('default')->default(false);
+            $table->string('amount')->index();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -38,6 +32,6 @@ class CreateStripeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('amounts');
     }
 }

@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        view()->composer('user.setings._sizebar', function ($view) {
+            $view->with('routeName', \Request::route()->getName());
+        });
     }
 
     /**

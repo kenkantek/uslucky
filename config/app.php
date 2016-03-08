@@ -162,6 +162,7 @@ return [
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        Lord\Laroute\LarouteServiceProvider::class,
     ],
 
     /*
