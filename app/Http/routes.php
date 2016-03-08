@@ -19,6 +19,16 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'uses' => 'PagesController@index',
     ]);
 
+    $router->get('auth/facebook', [
+        'as'   => 'auth.facebook',
+        'uses' => 'Auth\AuthController@redirectToProvider',
+    ]);
+
+    $router->get('auth/facebook/callback', [
+        'as'   => 'auth.social.confirm',
+        'uses' => 'Auth\AuthController@handleProviderCallback',
+    ]);
+
     $router->controller('page', 'PagesController');
 
     $router->controller('settings', 'User\SettingsController', [

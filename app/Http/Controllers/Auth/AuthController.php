@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 use Validator;
 
 class AuthController extends Controller
@@ -84,6 +86,41 @@ class AuthController extends Controller
         event(new UserCreated($user));
 
         return $user;
+    }
+
+    public function handleProviderCallback()
+    {
+        if (!empty($_REQUEST['error']) && ($_REQUEST['error'] == 'access_denied')) {
+            return redirect()->route('front::auth.facebook');
+        }
+        $userfb = Socialite::driver('facebook')->user();
+
+        if (User::where('email', '=', $userfb->email)->first()) {
+            $checkUser = User::where('email', '=', $userfb->email)->first();
+            Auth::login($checkUser);
+            return redirect()->route('front::settings.account');
+        }
+        // $userfb           = $userfb->user;
+        if ($userfb->email == null) {
+            return redirect()->route('front::auth.facebook');
+        }
+
+        $user             = new User;
+        $user->first_name = $userfb->user['first_name'];
+        $user->last_name  = $userfb->user['last_name'];
+        $user->email      = $userfb->user['email'];
+        $user->avatar     = $userfb->avatar;
+        $user->active     = 1;
+        $user->save();
+
+        Auth::login($user);
+        return redirect()->route('front::settings.account');
+    }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')
+            ->scopes(['email'])->redirect();
     }
 
 }
