@@ -44,6 +44,7 @@
 </template>
 
 <script>
+    import laroute from '../../../../laroute';
     import BOX from '../../../../common';
 
 	export default {
@@ -67,7 +68,8 @@
 		},
 
 		methods: {
-			onSubmit() {
+			onSubmit(e) {
+                const form  = e.target;
                 this.message = '';
                 this.formErrors = {};
                 swal({
@@ -81,7 +83,12 @@
 
                     if(isConfirm) {
                         this.submiting = true;
-                        this.$http.post(_api.charge, this.formInputs).then(res => {
+                        this.$http.post(laroute.route('front::post.charge'), this.formInputs).then(res => {
+                            if(res && typeof res.data === 'number') {
+                                this.amount = res.data;
+                                this.status = false;
+                                form.reset();
+                            }
                             this.submiting = false;
                             swal("Charged!", "Charged successfully!", "success");
                         }, res => {
@@ -91,7 +98,7 @@
                             } else if(res.status === 422) { // validate
                                 swal.close();
                                 this.formErrors = res.data;
-                            } else { // 401 eror payment
+                            } else { // 401 error payment
                                 swal.close();
                                 this.message = res.data.message;
                             }

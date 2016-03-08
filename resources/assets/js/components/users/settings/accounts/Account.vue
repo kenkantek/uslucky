@@ -79,6 +79,7 @@
 
 </template>
 <script>
+    import laroute from '../../../../laroute';
     import BOX from '../../../../common';
     import Changepass from './Changepass.vue';
     import _ from 'lodash';
@@ -97,7 +98,7 @@
         },
 
         asyncData(resolve, reject){
-            this.$http.get(_api.user).then(res => {
+            this.$http.get(laroute.route('front::settings.api.account')).then(res => {
                 const user = res.data;
 
                 resolve({
@@ -133,7 +134,7 @@
             onSubmit() {
                 const user = this.user;
                 this.submiting = true;
-                this.$http.put(_api.put_account, user).then(res => {
+                this.$http.put(laroute.route('front::account.put.account'), user).then(res => {
                     this.submiting = false;
                 swal({
                     title: "Account edit successfully!",
@@ -156,22 +157,15 @@
             onChangeAvatar(event) {
                 const images = event.target.files;
 
-
-
-
                 if (images.length) {
                     let formData = new FormData();
                     let image = images[0];
                     formData.append('avatar', image);
 
                     var reader = new FileReader();
-
                     reader.onload =  (e) => {
                         this.$set('user.image', e.target.result);
                     };
-
-
-
 
                     swal({
                         title: "Your avatar was updated!",
@@ -185,8 +179,7 @@
 
                         if(isConfirm) {
                             reader.readAsDataURL(image);
-
-                            this.$http.post(_api.put_avatar, formData).then(res => {
+                            this.$http.post(laroute.route('front::account.avatar'), formData).then(res => {
                                 this.submiting = false;
                                 swal.close();
                             }, (res) => {
@@ -197,27 +190,16 @@
                                         toastr.error('Please check input field!.', 'Validate!');
                                     }
                                 }
-
                             );
-
-
                         } else {
                             swal.close();
                         }
                     });
-
-
-
-
                 } else {
                     return false;
                 }
-
-
             }
         },
-         components: { Changepass }
-
+        components: { Changepass }
     }
-
 </script>

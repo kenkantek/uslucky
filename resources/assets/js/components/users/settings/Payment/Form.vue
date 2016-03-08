@@ -54,6 +54,7 @@
 </template>
 
 <script>
+	import laroute from '../../../../laroute';
 	import BOX from '../../../../common';
 
 	export default {
@@ -103,7 +104,7 @@
 			},
 
 			_addCard(source) {
-				this.$http.post(_api.post_payment, { ...this.card, source }).then(res => {
+				this.$http.post(laroute.route('front::post.payment'), { ...this.card, source }).then(res => {
 					this.__processSuccessCard(res, 'Add ew credit card successfully.');
 				}, res => {
 					this.__processFailCard(res);
@@ -111,7 +112,7 @@
 			},
 
 			_updateCard(source) {
-				this.$http.put(`${_api.put_payment}/${this.payment.id}`, { ...this.card, source }).then(res => {
+				this.$http.put(laroute.route('front::put.payment', {one: this.payment.id}), { ...this.card, source }).then(res => {
 					this.__processSuccessCard(res);
 				}, res => {
 					this.__processFailCard(res);
