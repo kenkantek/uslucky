@@ -14,6 +14,10 @@
 $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($router) {
     $router->auth();
 
+    $router->get('home', function () {
+        return redirect()->route('front::settings.account');
+    });
+
     $router->get('/', [
         'as'   => 'home',
         'uses' => 'PagesController@index',

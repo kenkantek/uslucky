@@ -38,7 +38,7 @@
 				<a href="auth/facebook" class="btn btn-primary">
 					<i class="fa fa-facebook"></i> Sign In with Facebook
 				</a>
-				<a class="btn btn-link" href="">Forgot Your Password?</a>
+				<a href="password/reset" class="btn btn-link" href="">Forgot Your Password?</a>
 			</div>
 		</div>
 	</form>
