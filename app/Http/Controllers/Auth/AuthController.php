@@ -102,7 +102,7 @@ class AuthController extends Controller
         }
         // $userfb           = $userfb->user;
         if ($userfb->email == null) {
-            return redirect()->route('front::auth.facebook');
+            return redirect('register');
         }
 
         $user             = new User;
