@@ -56,6 +56,7 @@
 </template>
 
 <script>
+	import laroute from '../../laroute';
 	import BOX from '../../common';
 
 	export default {
@@ -79,8 +80,8 @@
 					    type: "info",
 					    closeOnConfirm: false,
 					    showLoaderOnConfirm: true,
-					}, function() {
-						location.href = _link.account;
+					}, () => {
+						location.href = laroute.route('front::settings.account');
 					    setTimeout(() =>{}, 2000);
 					});
 

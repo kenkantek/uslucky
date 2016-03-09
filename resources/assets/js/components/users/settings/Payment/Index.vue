@@ -29,6 +29,7 @@
 </template>
 
 <script>
+	import laroute from  '../../../../laroute';
 	import FormCard  from './Form.vue';
 
 	export default {
@@ -70,7 +71,7 @@
 				    closeOnConfirm: false,
 				    showLoaderOnConfirm: true,
 				}, () => {
-					this.$http.delete(`${_api.post_payment}/${id}`).then(res => {
+					this.$http.delete(laroute.route('front::put.payment', {one: id})).then(res => {
 				    	toastr.success('Delete Credit card success.', 'Success!');
 				    	this.payments = this.payments.filter(payment => payment.id !== id);
 				    	swal.close();
