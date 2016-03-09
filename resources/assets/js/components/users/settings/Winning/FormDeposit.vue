@@ -1,5 +1,5 @@
 <template>
-	<form class="deposit"  @submit.prevent="onSubmit" v-show="status" novalidate>
+	<form class="deposit"  @submit.prevent="onSubmit" v-show="statusForm.deposit" novalidate>
 		<h2>Payment on account:</h2>
 		<hr>
 
@@ -34,7 +34,7 @@
 	          <hr>
 	        </div>
 	        <button type="submit" class="btn btn-primary" :disabled="submiting">
-	            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Continue
+	            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Continue Charge
 	        </button>
 
 	        <button type="button" class="btn btn-info" :disabled="submiting" @click="onCancle"> Cancle </button>
@@ -48,7 +48,7 @@
     import BOX from '../../../../common';
 
 	export default {
-		props: ['amount', 'payments', 'status'],
+		props: ['amount', 'payments', 'statusForm'],
 
 		data() {			
 			return {
@@ -74,7 +74,7 @@
                 this.formErrors = {};
                 swal({
                     title: "Are you sure?",
-                    text: "Submit to run ajax request",
+                    text: "Submit to payment on account",
                     type: "warning",
                     showCancelButton: true,
                     closeOnConfirm: false,
@@ -86,7 +86,7 @@
                         this.$http.post(laroute.route('front::post.charge'), this.formInputs).then(res => {
                             if(res && typeof res.data === 'number') {
                                 this.amount = res.data;
-                                this.status = false;
+                                this.$set('statusForm.deposit', false);
                                 form.reset();
                             }
                             this.submiting = false;
@@ -98,6 +98,7 @@
                             } else if(res.status === 422) { // validate
                                 swal.close();
                                 this.formErrors = res.data;
+                                toastr.error('Please check input field!.', 'Validate!');
                             } else { // 401 error payment
                                 swal.close();
                                 this.message = res.data.message;
@@ -108,7 +109,7 @@
                 });
 			},
 			onCancle() {
-				this.status = false;
+				this.$set('statusForm.deposit', false);
 			}
 		}
 	}

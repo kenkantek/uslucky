@@ -163,6 +163,7 @@ return [
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
+        Snowfire\Beautymail\BeautymailServiceProvider::class,
     ],
 
     /*

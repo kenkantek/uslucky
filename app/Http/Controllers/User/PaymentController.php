@@ -68,4 +68,9 @@ class PaymentController extends Controller
         $payment->delete();
         return $payment;
     }
+
+    public function getHistory()
+    {
+        return 'page history';
+    }
 }

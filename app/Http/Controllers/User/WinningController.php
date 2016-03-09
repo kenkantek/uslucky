@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Events\UserDepositEvent;
+use App\Events\Payment\UserClaimEvent;
+use App\Events\Payment\UserDepositEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ChargeRequest;
+use App\Http\Requests\Settings\ClaimRequest;
 use App\Models\Amount;
 use App\Models\Status;
 use App\Models\Transaction;
@@ -74,5 +76,48 @@ class WinningController extends Controller
             //END transaction
         }
         return response(['message' => $charge['failure_message']], 402);
+    }
+
+    public function postClaim(ClaimRequest $request)
+    {
+        $user        = $this->user;
+        $user_amount = $user->amount;
+        $amount_prev = $user_amount ? $user_amount->amount : 0;
+        if ($amount_prev <= $request->amount) {
+            return response(['message' => "Your currenttly $amount_prev is less than {$request->amount}."], 400);
+        }
+
+        //BEGIN transaction
+
+        return DB::transaction(function () use ($user, $user_amount, $amount_prev, $request) {
+            $amount_total = $amount_prev - $request->amount;
+            //create Transaction
+            $transaction = new Transaction([
+                'type'         => 0,
+                'amount'       => $request->amount,
+                'amount_prev'  => $amount_prev,
+                'amount_total' => $amount_total,
+                'description'  => $request->description,
+            ]);
+
+            $user->transactions()->save($transaction);
+
+            // Transaction add status
+            $status = new Status;
+            $status->withStatus('pendding')->regarding($transaction)->save();
+            $transaction->status()->save($status);
+
+            // update Amount
+            $amount = $user_amount ? $user_amount : new Amount;
+            $amount->amount = $amount_total;
+            $amount->user()->associate($user);
+            $amount->save();
+
+            event(new UserClaimEvent($user, $transaction));
+
+            return $amount->amount;
+        });
+
+        //END transaction
     }
 }

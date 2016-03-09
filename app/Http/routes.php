@@ -56,9 +56,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postPayment'   => 'post.payment',
         'deletePayment' => 'delete.payment',
         'postCharge'    => 'post.charge',
+        'getHistory'    => 'payment.history',
     ]);
 
     $router->controller('winning', 'User\WinningController', [
         'postCharge' => 'post.charge',
+        'postClaim'  => 'post.claim',
     ]);
 });

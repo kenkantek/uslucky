@@ -46,8 +46,9 @@ class SettingsController extends Controller
     public function getWinning()
     {
         \JavaScript::put([
-            '_payments' => $this->user->payments,
-            '_amount'   => $this->user->amount ? $this->user->amount->amount : 0,
+            '_payments'       => $this->user->payments,
+            '_amount'         => $this->user->amount ? $this->user->amount->amount : 0,
+            '_minimum_amount' => env('MINIMUM_AMOUNT'),
         ]);
         return view('user.setings.winning');
     }
