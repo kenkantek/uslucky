@@ -16,3 +16,11 @@
     </div>
 </div>
 @stop
+
+@section('scripts')
+@if(Session::has('userFb'))
+<script>
+var _userFb = {!! json_encode(Session::get('userFb')) !!};
+</script>
+@endif
+@stop

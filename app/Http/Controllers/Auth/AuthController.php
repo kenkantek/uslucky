@@ -102,7 +102,7 @@ class AuthController extends Controller
         }
         // $userfb           = $userfb->user;
         if ($userfb->email == null) {
-            return redirect('register');
+            return redirect('register')->with(['userFb' => $userfb->user]);
         }
 
         $user             = new User;
