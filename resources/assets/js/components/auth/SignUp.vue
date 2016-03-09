@@ -62,7 +62,7 @@
 	export default {
 		data() {
 			return {
-				formInputs: {},
+				formInputs: typeof _userFb === 'undefined' ? {} : {..._userFb},
 				formErrors: {},
 				submiting: false
 			}

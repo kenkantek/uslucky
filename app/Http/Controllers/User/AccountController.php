@@ -25,13 +25,12 @@ class AccountController extends Controller
         $user->first_name = $request->first_name;
         $user->last_name  = $request->last_name;
         $user->phone      = $request->phone;
-        $user->birthday   = $request->birthday . " 00:00:00";
+        $user->birthday   = $request->birthday;
         $user->address    = $request->address;
         $user->country    = $request->country;
         $user->state      = $request->state;
         $user->city       = $request->city;
         $user->zipcode    = $request->zipcode;
-
         $user->save();
 
         return $user;

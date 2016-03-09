@@ -26,7 +26,8 @@
         </div>
         <div class="form-group col-md-4" :class="{'has-error': formErrors.birthday}">
             <label>Birthday: <sup class="text-danger">*</sup></label>
-            <input type="date" class="form-control" autocomplete="off" v-model="user.birthday">
+            <datepicker :value.sync = "user.birthday" format="YYYY-MM-DD" autocomplete="off" name="closing_date"></datepicker>
+            <!-- <input type="date" class="form-control" autocomplete="off" v-model="user.birthday"> -->
             <span class="help-block" v-show="formErrors.birthday" v-text="formErrors.birthday"></span>
         </div>
         <div class="form-group col-md-6" :class="{'has-error': formErrors.email}">
@@ -82,6 +83,7 @@
     import laroute from '../../../../laroute';
     import BOX from '../../../../common';
     import Changepass from './Changepass.vue';
+    import Datepicker from '../../../datepicker.vue'
     import _ from 'lodash';
 
     export default {
@@ -200,6 +202,6 @@
                 }
             }
         },
-        components: { Changepass }
+        components: { Changepass, Datepicker }
     }
 </script>
