@@ -79,8 +79,11 @@ class AuthController extends Controller
             'last_name'   => $data['last_name'],
             'email'       => $data['email'],
             'password'    => bcrypt($data['password']),
-            'active_code' => $active_code,
+            'active'      => isset($data['id']) ? 1 : 0,
+            'active_code' => isset($data['id']) ? null : $active_code,
+            'facebook_id' => isset($data['id']) ? $data['id'] : null,
         ]);
+
         $user->assignRole('player');
 
         event(new UserCreated($user));
@@ -95,8 +98,7 @@ class AuthController extends Controller
         }
         $userfb = Socialite::driver('facebook')->user();
 
-        if (User::where('email', '=', $userfb->email)->first()) {
-            $checkUser = User::where('email', '=', $userfb->email)->first();
+        if ($checkUser = User::where('facebook_id', '=', $userfb->id)->first()) {
             Auth::login($checkUser);
             return redirect()->route('front::settings.account');
         }
@@ -105,12 +107,13 @@ class AuthController extends Controller
             return redirect('register')->with(['userFb' => $userfb->user]);
         }
 
-        $user             = new User;
-        $user->first_name = $userfb->user['first_name'];
-        $user->last_name  = $userfb->user['last_name'];
-        $user->email      = $userfb->user['email'];
-        $user->avatar     = $userfb->avatar;
-        $user->active     = 1;
+        $user              = new User;
+        $user->facebook_id = $userfb->id;
+        $user->first_name  = $userfb->user['first_name'];
+        $user->last_name   = $userfb->user['last_name'];
+        $user->email       = $userfb->user['email'];
+        $user->avatar      = $userfb->avatar;
+        $user->active      = 1;
         $user->save();
 
         Auth::login($user);

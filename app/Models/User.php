@@ -16,11 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code',
+        'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
     ];
 
     protected $appends = ['image'];
 
+    protected $dates = ['birthday'];
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -38,6 +39,11 @@ class User extends Authenticatable
     public function getBirthdayAttribute($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
+
+    public function setBirthdayAttribute($date)
+    {
+        return $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');
     }
 
     public function payments()
