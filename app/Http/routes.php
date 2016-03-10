@@ -63,4 +63,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postCharge' => 'post.charge',
         'postClaim'  => 'post.claim',
     ]);
+
+    $router->controller('game', 'GameController', [
+        'getPowerball' => 'game.powerball',
+    ]);
 });

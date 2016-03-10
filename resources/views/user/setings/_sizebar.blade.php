@@ -17,7 +17,9 @@
     </li>
     <li class="divider"></li>
 
-    <li><a href="#">Transaction History <i class="fa fa-history fa-lg pull-right"></i></a></li>
+    <li class="@if($routeName === 'front::payment.history') current @endif">
+        <a href="{{ route('front::payment.history') }}">Transaction History <i class="fa fa-history fa-lg pull-right"></i></a>
+    </li>
     <li class="divider"></li>
 
     <li><a href="/logout">Sign Out <i class="fa fa-sign-out fa-lg pull-right"></i></a></li>

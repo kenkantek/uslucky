@@ -8,6 +8,7 @@ import SignIn from './components/auth/SignIn.vue';
 import SettingAccount from './components/users/settings/accounts/Account.vue';
 import CreditCard from './components/users/settings/Payment/Index.vue';
 import Winning from './components/users/settings/Winning/Index.vue';
+import Powerball from './components/Games/Powerball.vue';
 
 new Vue({
 	el: 'body',
@@ -16,6 +17,7 @@ new Vue({
         SignIn,
         SettingAccount,
         CreditCard,
-        Winning
+        Winning,
+        Powerball
     }
 });

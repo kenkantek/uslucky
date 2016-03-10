@@ -5,3 +5,56 @@ body.winnings {
 		justify-content: space-around;
 	}
 }
+
+body.game-powerball {
+    >main {
+        padding-top: 10px;
+    }
+    .sizebar {
+        .box {
+            padding: 10px 3px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+
+            a{
+                display: inline-block;
+            }
+
+            &:first-child {
+                padding-top: 100px;
+            }
+            
+            &:last-child {
+                border-bottom: none;    
+            }
+        }
+    }
+
+    .game {
+        border-right: 1px solid #ccc;
+        .header {
+            &>h1{
+                color: #4677c4
+            }
+        }
+
+        .main-game {
+            .header-game {
+                width: 100%;
+                min-height: 125px;
+                padding: 5px;
+
+                background: #B30408 url(images/header_powerball.png) no-repeat;
+                background-size: cover;
+
+                color: #fff;
+
+
+                .draw-date {
+                    padding: 10px;
+                }
+            }
+        }
+    }
+
+}

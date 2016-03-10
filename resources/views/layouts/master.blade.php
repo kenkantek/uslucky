@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Home') | {!! env('TITLE') !!}</title>
     <!-- Latest compiled and minified CSS & JS -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     {!! HTML::style('css/font-awesome-4.5.0/css/font-awesome.min.css') !!}
     {!! HTML::style('js/libs/sweetalert/sweetalert.css') !!}
     {!! HTML::style('js/libs/toastr/toastr.min.css') !!}

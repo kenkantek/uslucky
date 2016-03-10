@@ -14,6 +14,7 @@ require('laravel-elixir-vueify');
  */
 
 elixir(function(mix) {
+    mix.copy('public/css/images', 'public/build/css/images');
     mix.sass('app.scss');
 
     mix.browserify('app.js');
