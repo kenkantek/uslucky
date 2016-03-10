@@ -13,6 +13,7 @@ class GameController extends Controller
 
     public function getPowerball()
     {
+        return powerballNextTime();
         return view('games.powerball');
     }
 

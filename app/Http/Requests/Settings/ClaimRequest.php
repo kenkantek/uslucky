@@ -24,8 +24,8 @@ class ClaimRequest extends Request
     public function rules()
     {
         return [
-            'amount'      => 'required|numeric|min:' . env('MINIMUM_AMOUNT'),
-            'description' => 'required|max:255|min:50',
+            'amount'      => 'bail|required|numeric|min:' . env('MINIMUM_AMOUNT'),
+            'description' => 'bail|required|max:255|min:50',
         ];
     }
 
