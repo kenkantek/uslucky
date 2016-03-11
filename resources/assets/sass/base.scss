@@ -150,6 +150,10 @@ a {
   }
 }
 
+.cursor:hover{
+  cursor:pointer;
+}
+
 @keyframes flash {
     0% { background: #CD4B5B; }
     100% { background: none; }
