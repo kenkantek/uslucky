@@ -98,7 +98,7 @@ class AuthController extends Controller
         }
         $userfb = Socialite::driver('facebook')->user();
 
-        if ($checkUser = User::where('facebook_id', '=', $userfb->id)->first()) {
+        if (($checkUser = User::where('facebook_id', '=', $userfb->id)->first()) || (($checkUser = User::where('email', '=', $userfb->email)->first()))) {
             Auth::login($checkUser);
             return redirect()->route('front::settings.account');
         }
