@@ -26,6 +26,9 @@ class CreateUsersTable extends Migration
             $table->string('zipcode');
             $table->string('avatar')->default('https://ssl.gstatic.com/accounts/ui/avatar_1x.png');
             $table->string('password', 60);
+            $table->boolean('active')->default('0');
+            $table->string('active_code')->nullable();
+            $table->string('facebook_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
