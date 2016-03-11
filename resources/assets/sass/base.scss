@@ -1,11 +1,10 @@
 /* Variable, reset, common SCSS */
 $text-color: #3a3a3a;
-$headings-font-family: 'Open Sans', sans-serif;
 
 
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
+$headings-font-family: 'Roboto', sans-serif;
 .clearfix {
   *zoom: 1;
   &:before,

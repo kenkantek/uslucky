@@ -15,13 +15,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav nav-custome">
-                <li @if(Request::route()->getName() == 'front::home') class="active" @endif ><a href="{{url('')}}">HOME</a></li>
-                <li @if(Request::route()->getName() == 'front::about') class="active" @endif><a href="{{route('front::about')}}">ABOUT</a></li>
-                <li><a href="#">GAMES</a></li>
+                <li @if($routeName === 'front::home') class="active" @endif ><a href="{{url('')}}">HOME</a></li>
+                <li @if($routeName === 'front::about') class="active" @endif><a href="{{route('front::about')}}">ABOUT</a></li>
+                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">GAMES <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                	<li><a href="{{route('front::game.powerball')}}" title="">Powerball</a></li>
+                </ul>
+                </li>
                 <li><a href="#">WINNING NUMBER</a></li>
                 <li><a href="#">CONTACT</a></li>
-                @if(Auth::user() != null)
-                <li><span class="dropdown-toggle" data-toggle="dropdown">Welcome</span> <img src="{{Auth::user()->avatar}}" style="max-height: 50px; border-radius: 50px" alt=""><b class="caret"></b>
+                @if($auth)
+                <li><span class="dropdown-toggle" data-toggle="dropdown">Welcome</span> <img src="{{$auth->image}}" style="max-height: 30px; margin-top:9px; border-radius: 50px" alt=""><b class="caret"></b>
 					<ul class="dropdown-menu">
                     	<li><a href="{{route('front::settings.account')}}"><i class="fa fa-cog"></i>  Account Settings</a></li>
                     	<li><a href="{{url('logout')}}"><i class="fa fa-envelope"></i>  Messgages</a></li>
@@ -29,7 +33,7 @@
                     </ul>
                 </li>
                 @else
-                <li @if(Request::route()->getName() == 'front::') class="active" @endif><a href="{{url('login')}}">REGISTER/LOGIN</a></li>
+                <li @if($routeName === 'front::') class="active" @endif><a href="{{url('login')}}">REGISTER/LOGIN</a></li>
                 @endif
             </ul>
         </div><!-- /.navbar-collapse -->

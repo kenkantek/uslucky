@@ -1,12 +1,9 @@
-@import url(//fonts.googleapis.com/css?family=Roboto:300,400,500,700);
-@import url(//fonts.googleapis.com/css?family=Bevan);
-
 .err{
   color: red;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  
   background-color: #dc5e61;
   a {
     text-decoration: none;
@@ -33,6 +30,11 @@ body {
           color: #dc5e61;
           -webkit-transition: 1s;
           transition: 1s;
+        }
+        .caret{
+        	margin: initial;
+			margin-left: 5px;
+			margin-top: 8px
         }
       }
       &:hover {
@@ -632,16 +634,25 @@ p {
   background: #dc5e61;
   color: #eae6e3;
   margin-top: -84px;
-  -webkit-border-radius: 500px;
   border-radius: 500px;
 }
 
-.carousel-control.left {
-  background-image: none;
-}
-
-.carousel-control.right {
-  background-image: none;
+.carousel-control{
+	position:initial;
+	float:right;
+	width:40px;
+	&.left{
+		text-align: center;
+		background-image: none;
+	}
+	&.right{
+		margin:0;
+		text-align: center;
+		background-image: none;
+	}
+	span{
+		font-size:40px
+	}
 }
 
 .list1 {

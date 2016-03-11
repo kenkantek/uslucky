@@ -26,8 +26,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary":disabled="submiting">
+                    <button type="button" class="link" style="opacity:0.5" data-dismiss="modal">Close</button>
+                    <button type="submit" class="link":disabled="submiting">
                         <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Save changes
                     </button>
                 </div>
