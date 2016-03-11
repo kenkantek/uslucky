@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Javascript;
+
 class GameController extends Controller
 {
 
@@ -13,7 +15,9 @@ class GameController extends Controller
 
     public function getPowerball()
     {
-        return powerballNextTime();
+        Javascript::put([
+            '_powerball' => powerballNextTime(),
+        ]);
         return view('games.powerball');
     }
 

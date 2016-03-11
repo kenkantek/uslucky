@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Cache;
 use Illuminate\Console\Command;
 
 class ApiGameNextTime extends Command
@@ -38,7 +39,9 @@ class ApiGameNextTime extends Command
     public function handle()
     {
         $this->info('Begin...');
-
+        Cache::pull('powerball');
+        $powerball = powerballNextTime();
+        print_r($powerball);
         $this->info('End!');
     }
 }

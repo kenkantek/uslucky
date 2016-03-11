@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Javascript;
 
 class SettingsController extends Controller
 {
@@ -15,7 +16,7 @@ class SettingsController extends Controller
 
     public function getAccount()
     {
-        \JavaScript::put([
+        JavaScript::put([
             '_countries'  => file_get_contents(storage_path('countries.json')),
             '_changepass' => route('front::account.put.changepass'),
         ]);
@@ -29,7 +30,7 @@ class SettingsController extends Controller
 
     public function getPayment()
     {
-        \JavaScript::put([
+        JavaScript::put([
             '_stripe'   => [
                 'key' => config('services.stripe.key'),
             ],
@@ -45,7 +46,7 @@ class SettingsController extends Controller
 
     public function getWinning()
     {
-        \JavaScript::put([
+        JavaScript::put([
             '_payments'       => $this->user->payments,
             '_amount'         => $this->user->amount ? $this->user->amount->amount : 0,
             '_minimum_amount' => env('MINIMUM_AMOUNT'),

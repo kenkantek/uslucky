@@ -7,6 +7,42 @@ body.winnings {
 }
 
 body.game-powerball {
+    .header-game {
+        width: 100%;
+        min-height: 125px;
+        padding: 5px;
+
+        background: #B30408 url(images/header_powerball.png) no-repeat;
+        background-size: cover;
+
+        color: #fff;
+
+
+        .jackpot {
+            padding: 10px;
+        }
+
+        .draw-date {
+            clear: both;
+        }
+
+        .tickets {
+            input{
+                color: $text-color;
+                outline: none;
+
+                &[type=text] {
+                    padding: 2px;
+                    text-align: center;
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+/* COMMON */
+body.content-games {
     >main {
         padding-top: 10px;
     }
@@ -39,22 +75,57 @@ body.game-powerball {
         }
 
         .main-game {
-            .header-game {
-                width: 100%;
-                min-height: 125px;
-                padding: 5px;
 
-                background: #B30408 url(images/header_powerball.png) no-repeat;
-                background-size: cover;
+            .view-game {
+                margin-top: 10px;
 
-                color: #fff;
+                .top-controls {
+                    margin-bottom: 10px;
+                }
 
-
-                .draw-date {
+                .tickets {
+                    border: 1px solid #ccc;
                     padding: 10px;
+                    clear: both;
+                    margin-bottom: 20px;
+
+                    .ticket {
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        width: calc(100% / 4);
+                        word-wrap: break-word;
+                        padding: 15px 5px;
+
+                        .numbers {
+                            .choose {
+                                margin: 10px 0px;
+                            }
+
+                            .list-numbers {
+                                background: #F1F0F0;
+
+                                .numner {
+                                    border: 1px solid #ccc;
+                                    margin: 2px 4px;
+                                    padding: 0px 2px;
+                                    display: inline-block;
+                                    width: 24px;
+                                    text-align: center;
+                                    cursor: pointer;
+                                    background: #fff;
+
+                                    
+                                }
+                            }
+
+                            
+                        }
+                    }
                 }
             }
         }
     }
+    
 
+    
 }

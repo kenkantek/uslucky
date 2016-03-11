@@ -4,7 +4,7 @@
 @section('title') US Powerball Tickets Online @stop
 
 
-@section('body-class') game-powerball @stop
+@section('body-class') content-games game-powerball @stop
 
 @section('content')
     <div class="container">
