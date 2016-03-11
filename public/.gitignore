@@ -1,4 +1,5 @@
 /build
-*.map
+/js/*.map
+/css/*.map
 /css/app.css
 /js/app.js
