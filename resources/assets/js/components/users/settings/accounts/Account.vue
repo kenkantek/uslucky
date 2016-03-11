@@ -2,15 +2,13 @@
     <div v-if="$loadingAsyncData">Loading...</div>
     <div class="col-md-4 col-md-offset-8">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Change Password
-        </button>
+            <a href="#" class="link" data-toggle="modal" data-target="#myModal">Change Password</a>
     </div>
     <form  v-if="!$loadingAsyncData" class="" @submit.prevent="onSubmit" novalidate>
-        <div class="form-group">
-            <label>Avatar: <sup class="text-danger">*</sup></label>
+        <div class="form-group col-md-12">
+            <label>Avatar: <sup class="text-danger">*</sup></label><br>
             <img :src="user.image" alt="" @click="getFilePathFromDialog($event)" style="max-width: 200px">
-            <span>Click image to change</span><br />
+            <br><span>Click image to change</span><br />
             <span class="help-block" v-show="formErrors.avatar" v-text="formErrors.avatar"></span><br>
             <input type="file" @change="onChangeAvatar($event)" accept="image/*" v-el:input-avatar class="hidden" />
         </div>

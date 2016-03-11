@@ -23,6 +23,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'uses' => 'PagesController@index',
     ]);
 
+    $router->get('about', [
+        'as'   => 'about',
+        'uses' => 'PagesController@about',
+    ]);
+
     $router->get('auth/facebook', [
         'as'   => 'auth.facebook',
         'uses' => 'Auth\AuthController@redirectToProvider',
