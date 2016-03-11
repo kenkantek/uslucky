@@ -25,7 +25,7 @@
                 <li><a href="#">WINNING NUMBER</a></li>
                 <li><a href="#">CONTACT</a></li>
                 @if($auth)
-                <li><span class="dropdown-toggle" data-toggle="dropdown">Welcome</span> <img src="{{$auth->image}}" style="max-height: 30px; margin-top:9px; border-radius: 50px" alt=""><b class="caret"></b>
+                <li><span class="dropdown-toggle" data-toggle="dropdown">Welcome</span> <img class="dropdown-toggle" data-toggle="dropdown" src="{{$auth->image}}" style="max-height: 30px; margin-top:9px; border-radius: 50px" alt=""><b class="caret"></b>
 					<ul class="dropdown-menu">
                     	<li><a href="{{route('front::settings.account')}}"><i class="fa fa-cog"></i>  Account Settings</a></li>
                     	<li><a href="{{url('logout')}}"><i class="fa fa-envelope"></i>  Messgages</a></li>
@@ -40,7 +40,7 @@
     </nav>
     <div class="col-md-12 header_bg">
         <div class="row">
-            <img src="{{asset('images/logo.png')}}" class="img-responsive" alt="">
+            <img src="{{asset('css/images/logo.png')}}" class="img-responsive" alt="">
 
             <div class="slogan">
                 DON'T WASTE YOUR TIME!<br>

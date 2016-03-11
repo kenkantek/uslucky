@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('body-class','credit')
+
 @section('title') Credit Card Setting @stop
 
 @section('content')

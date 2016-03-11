@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
-@section('title') Acoount Setting @stop
+@section('body-class', 'setting')
+
+@section('title') Account Setting @stop
 
 @section('content')
     <div class="container">
