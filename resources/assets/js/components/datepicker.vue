@@ -112,7 +112,7 @@
                     <tr class="date-head">
                         <th colspan="4">
                             <span class="btn-prev" @click="yearClick(-1)">&lt;</span>
-                            <span class="show-year">{{now.getFullYear()}}</span>
+                            <span @click="changeYear(now)" class="show-year">{{now.getFullYear()}}</span>
                             <span class="btn-next" @click="yearClick(1)">&gt;</span>
                         </th>
                         <th colspan="3">
@@ -225,6 +225,7 @@
                 this.value = this.stringify();
             },
             parse (str) {
+                if(!str) return new Date();
                 var time = new Date(str);
                 return isNaN(time.getTime()) ? null : time;
             },
@@ -245,6 +246,13 @@
                 return format.replace(/Y+|M+|D+/g, function (str) {
                     return map[str];
                 });
+            },
+
+            changeYear(now) {
+                let year = prompt("Input year here", now.getFullYear());
+                now.setFullYear(year);
+                this.now = now;
+                this.update();
             }
         },
         ready () {

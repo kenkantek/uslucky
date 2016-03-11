@@ -2,7 +2,7 @@
 	<form class="form-horizontal" @submit.prevent="onSubmit" novalidate>
 		<div class="form-group" :class="{'has-error': formErrors.email}">
 			<label class="col-md-4 control-label">E-Mail <sup class="text-danger">*</sup></label>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<input type="email" class="form-control" v-model="formInputs.email" autocomplete="off">
 				<span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
 			</div>
@@ -10,18 +10,18 @@
 
 		<div class="form-group" :class="{'has-error': formErrors.password}">
 			<label class="col-md-4 control-label">Password <sup class="text-danger">*</sup></label>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<input type="password" class="form-control" v-model="formInputs.password" autocomplete="off">
 				<span class="help-block" v-show="formErrors.password" v-text="formErrors.password"></span>
 			</div>
 		</div>
 		<div class="form-group" v-show="formErrors.message">
-			<div class="col-md-6 col-md-offset-4">
+			<div class="col-md-4 col-md-offset-4">
 				<span class="help-block err" v-text="formErrors.message"></span>
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-md-6 col-md-offset-4">
+			<div class="col-md-4 col-md-offset-4">
 				<div class="checkbox">
 					<label>
 						<input type="checkbox" v-model="formInputs.remember"> Remember Me
@@ -31,14 +31,15 @@
 		</div>
 
 		<div class="form-group">
-			<div class="col-md-6 col-md-offset-4">
-				<button type="submit" class="btn btn-primary" :disabled="submiting">
+			<div class="col-md-4 col-md-offset-4">
+				<button type="submit" class="link" :disabled="submiting">
 					<i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Sign In
 				</button>
-				<a href="auth/facebook" class="btn btn-primary">
+				<a href="auth/facebook" class="link">
 					<i class="fa fa-facebook"></i> Sign In with Facebook
-				</a>
-				<a href="password/reset" class="btn btn-link" href="">Forgot Your Password?</a>
+				</a><br>
+				<a href="password/reset" class="btn btn-link" href="">Forgot Your Password?</a><br>
+				<a href="register" class="btn btn-link" href="">Or Register new account!</a>
 			</div>
 		</div>
 	</form>

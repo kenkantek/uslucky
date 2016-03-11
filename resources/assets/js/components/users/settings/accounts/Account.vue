@@ -2,15 +2,13 @@
     <div v-if="$loadingAsyncData">Loading...</div>
     <div class="col-md-4 col-md-offset-8">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Change Password
-        </button>
+            <a href="#" class="link" data-toggle="modal" data-target="#myModal">Change Password</a>
     </div>
     <form  v-if="!$loadingAsyncData" class="" @submit.prevent="onSubmit" novalidate>
-        <div class="form-group">
-            <label>Avatar: <sup class="text-danger">*</sup></label>
+        <div class="form-group col-md-12">
+            <label>Avatar: <sup class="text-danger">*</sup></label><br>
             <img :src="user.image" alt="" @click="getFilePathFromDialog($event)" style="max-width: 200px">
-            <span>Click image to change</span><br />
+            <br><span>Click image to change</span><br />
             <span class="help-block" v-show="formErrors.avatar" v-text="formErrors.avatar"></span><br>
             <input type="file" @change="onChangeAvatar($event)" accept="image/*" v-el:input-avatar class="hidden" />
         </div>
@@ -66,7 +64,7 @@
             <span class="help-block" v-show="formErrors.zipcode" v-text="formErrors.zipcode"></span>
         </div>
         <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-primary" :disabled="submiting">
+            <button type="submit" class="link" :disabled="submiting">
                 <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Update Account
             </button>
         </div>

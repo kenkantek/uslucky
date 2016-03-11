@@ -18,9 +18,11 @@
   <body class="@yield('body-class', 'home')">
     @include('_partials.header')
 
-    <main>
+    <div class="content">
       @yield('content')
-    </main>
+    </div>
+
+    </div>
 
     @include('_partials.footer')
     @include('_partials.php2js')
