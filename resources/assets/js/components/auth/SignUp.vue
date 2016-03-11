@@ -46,9 +46,10 @@
 
 	    <div class="form-group">
 	        <div class="col-md-6 col-md-offset-4">
-	            <button type="submit" class="btn btn-primary" :disabled="submiting">
+	            <button type="submit" class="link" :disabled="submiting">
 	                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Sign Up
-	            </button>
+	            </button> 
+	            <a class="link" href="/login">Or Login Here</a>
 	        </div>
 	    </div>
 

@@ -64,7 +64,7 @@
             <span class="help-block" v-show="formErrors.zipcode" v-text="formErrors.zipcode"></span>
         </div>
         <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-primary" :disabled="submiting">
+            <button type="submit" class="link" :disabled="submiting">
                 <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Update Account
             </button>
         </div>

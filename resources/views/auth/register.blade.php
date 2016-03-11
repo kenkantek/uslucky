@@ -3,18 +3,14 @@
 @section('title') Sign Up @stop
 
 @section('content')
-<div class="container">
+<div class="container" style="padding-top:30px; padding-bottom: 20px">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Sign Up for your <strong>{!! env('TITLE') !!}</strong> account below</div>
-                <div class="panel-body">
                     <sign-up></sign-up>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
 @stop
 
 @section('scripts')

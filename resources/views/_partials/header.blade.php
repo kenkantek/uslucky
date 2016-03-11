@@ -20,7 +20,17 @@
                 <li><a href="#">GAMES</a></li>
                 <li><a href="#">WINNING NUMBER</a></li>
                 <li><a href="#">CONTACT</a></li>
+                @if(Auth::user() != null)
+                <li><span class="dropdown-toggle" data-toggle="dropdown">Welcome</span> <img src="{{Auth::user()->avatar}}" style="max-height: 50px; border-radius: 50px" alt=""><b class="caret"></b>
+					<ul class="dropdown-menu">
+                    	<li><a href="{{route('front::settings.account')}}"><i class="fa fa-cog"></i>  Account Settings</a></li>
+                    	<li><a href="{{url('logout')}}"><i class="fa fa-envelope"></i>  Messgages</a></li>
+                    	<li><a href="{{url('logout')}}"><i class="fa fa-sign-out"></i>  SignOut</a></li>
+                    </ul>
+                </li>
+                @else
                 <li @if(Request::route()->getName() == 'front::') class="active" @endif><a href="{{url('login')}}">REGISTER/LOGIN</a></li>
+                @endif
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>

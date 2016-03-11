@@ -39,8 +39,37 @@ body {
         background-color: #e7e7e7;
         -webkit-transition: 1s;
         transition: 1s;
+        span {
+        	color: #dc5e61;
+			transition: 1s;
+        }
+        b{
+        	color:#dc5e61;
+        }
       }
-
+      span{
+        color: #ffffff;
+        margin-right: 10px;
+        margin-left: 10px;
+        padding-top: 14px;
+        float: left;
+        height:50px;
+      }
+      b{
+      	color: #ffffff;
+      	margin-top: 22px;
+        float: right;
+        margin-right:5px;
+      }
+      ul li{
+      	&:hover{
+      		background-color:#c9c9c9;
+      	}
+      	a{
+      		color: indianred;
+			background-color: initial;
+      	}
+      }
     }
 
     display: inline-block;
@@ -57,6 +86,9 @@ body {
   }
 }
 
+button.link{
+	border:none;
+}
 .header_bg {
   background: url("../../images/banner.png") no-repeat center top;
   margin-top: 100px;
@@ -664,7 +696,13 @@ a {
   transition: all 0.4s ease;
   &:hover{
     text-decoration: none;
+  	color: #dc5e61;
+  	cursor: pointer;
   }
+}
+
+.dropdown-menu{
+	background-color: #e7e7e7;
 }
 
 @media screen and (min-width: 994px) {

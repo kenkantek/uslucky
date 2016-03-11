@@ -21,7 +21,7 @@
       @yield('content')
     </div>
 
-    </div>>
+    </div>
 
     @include('_partials.footer')
     @include('_partials.php2js')
