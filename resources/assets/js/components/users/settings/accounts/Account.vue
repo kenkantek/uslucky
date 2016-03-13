@@ -38,9 +38,10 @@
             <input type="number" class="form-control" autocomplete="off" v-model="user.phone">
             <span class="help-block" v-show="formErrors.phone" v-text="formErrors.phone"></span>
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" :class="{'has-error': formErrors.address}">
             <label>Address: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.address">
+            <span class="help-block" v-show="formErrors.address" v-text="formErrors.address"></span>
         </div>
         <div class="form-group col-md-12">
             <label>Country: <sup class="text-danger">*</sup></label>
@@ -54,9 +55,10 @@
                 <option v-for="state in states" v-text="state.name" :value="state.code"></option>
             </select>
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" :class="{'has-error': formErrors.city}">
             <label>City: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.city">
+            <span class="help-block" v-show="formErrors.city" v-text="formErrors.city"></span>
         </div>
         <div class="form-group col-md-12" :class="{'has-error': formErrors.zipcode}">
             <label>Zipcode: <sup class="text-danger">*</sup></label>

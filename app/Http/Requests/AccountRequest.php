@@ -25,17 +25,19 @@ class AccountRequest extends Request
     {
         return [
             'first_name' => 'required',
-            'last_name' => 'required',
-            'birthday' => 'required|date',
-            'phone' => 'required|numeric',
-            'zipcode' => 'numeric'
+            'last_name'  => 'required',
+            'birthday'   => 'required|date',
+            'phone'      => 'required|numeric',
+            'zipcode'    => 'numeric|required',
+            'address'    => 'required',
+            'city'       => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'first_name.required' => 'First Name is required'
+            'first_name.required' => 'First Name is required',
         ];
     }
 }

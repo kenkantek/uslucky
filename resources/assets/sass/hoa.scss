@@ -3,7 +3,6 @@
 }
 
 body {
-  
   background-color: #dc5e61;
   a {
     text-decoration: none;
@@ -11,6 +10,17 @@ body {
       color: red;
     }
   }
+}
+
+.trans{
+  th{
+    background-color:rgba(205, 94, 86, 0.9);
+    color:white;
+  }
+  tr:nth-child(2n)
+    {
+      background:#E7F6FD;
+    }
 }
 
 .navbar-default {

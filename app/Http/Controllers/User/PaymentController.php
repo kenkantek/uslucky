@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\CreditCardRequest;
 use App\Models\Payment;
+use App\Models\Transaction;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 
 class PaymentController extends Controller
@@ -71,6 +72,7 @@ class PaymentController extends Controller
 
     public function getHistory()
     {
-        return 'page history';
+        $histories = Transaction::with('status')->simplePaginate(2);
+        return view('user.setings.history', compact('histories'));
     }
 }
