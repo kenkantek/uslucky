@@ -17,6 +17,8 @@ class GameController extends Controller
     {
         Javascript::put([
             '_powerball' => powerballNextTime(),
+            '_each_per_ticket' => env('EACH_PER_TICKET'),
+            '_extra_per_ticket' => env('EXTRA_PER_TICKET')
         ]);
         return view('games.powerball');
     }

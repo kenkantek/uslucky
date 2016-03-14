@@ -1,55 +1,161 @@
+
 <template>
 
     <section class="main-game">
-        <header-power :powerball="powerball" :total="total" :tickets="tickets"></header-power>
+        <header-power 
+            :powerball="powerball" 
+            :total="total" 
+            :tickets="tickets" 
+            :ticket-template="ticketTemplate"
+            :each-per-ticket="eachPerTicket"
+        >
+        </header-power>
 
         <article class="view-game clearfix">
             <section class="top-controls pull-right">
-                <button class="btn btn-info text-upercase"> Quick Pick</button>
-                <button class="btn btn-danger"><i class="fa fa-trash-o fa-lg"></i></button>
+                <button class="btn btn-info text-upercase" @click="quickPick"> Quick Pick</button>
+                <button class="btn btn-danger" 
+                data-toggle="tooltip" 
+                data-placement="right" 
+                title="Clear all lines"
+                @click="clearAll"
+                :disabled="statusClearAll"
+                :each-per-ticket="eachPerTicket"
+                :extra-per-ticket="extraPerTicket"
+                >
+                    <i class="fa fa-refresh"></i>
+                </button>
             </section>
 
             <section class="tickets">
-                <div class="ticket" v-for="ticket in tickets">
-                    <ticket :ticket.sync="ticket"></ticket>
+                <div class="list-ticket clearfix">
+                    <div class="ticket" v-for="ticket in tickets" track-by="$index" :class="{active: _ticketActive(ticket)}">
+                        <ticket :ticket.sync="ticket" :i="$index" :status-disable="statusDisable"></ticket>
+                    </div>
+                </div>
+
+                <div class="multiplier checkbox">
+                    <label>
+                        <input type="checkbox" v-model="extra"> <strong>For An Extra {{ extraPerTicket | currency }} Per Ticket, Make It A Power Play</strong>
+                    </label>
+                </div>
+
+                <div class="total">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <td>Ticket Price ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ eachPerTicket | currency }})</td>
+                                <td>{{ priceTickets | currency }}</td>
+                                <td></td>
+                            </tr>
+                            <tr v-show="extra">
+                                <td>Extra ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ extraPerTicket | currency }})</td>
+                                <td>{{ priceExtraTickets | currency }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th>Total</th>
+                                <th>{{ total | currency }}</th>
+                                <td class="text-right">
+                                     <button 
+                                        data-toggle="modal" 
+                                        data-target="#squarespaceModal" 
+                                        class="btn btn-primary center-block" 
+                                        data-backdrop="static" 
+                                        :disabled="disabledPlay"
+                                        data-keyboard="false">Play Now
+                                    </button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
                 </div>
             </section>
+
+            
         </article>
     </section>
-
+    <form-modal :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
 </template>
 
 
 <script>
-    import laroute from '../../../laroute';
-    import BOX from '../../../common';
     import HeaderPower from './HeaderPower.vue';
     import Ticket from './Ticket.vue';
+    import FormModal from './FormModal.vue';
     
     export default {
         data() {
             return {
-                ticket: {
-                    numbers: '',
-                    ball: ''
+                ticketTemplate: {
+                    numbers: [],
+                    ball: null
                 },
                 tickets: [],
                 powerball: {..._powerball},
-                multiplier: false
+                eachPerTicket: _each_per_ticket,
+                extraPerTicket: _extra_per_ticket,
+                extra: false,
+                submiting: false
             }
         },
 
         computed: {
+            statusDisable() {
+                return this.tickets.length > 1 ? false : true;
+            },
+            statusClearAll() {
+                return this.tickets.every(ticket => (!ticket.numbers || !ticket.numbers.length) && !ticket.ball);
+            },
+            ticketsActive() {
+                return this.tickets.filter(ticket => this._ticketActive(ticket));
+            },
+            priceTickets() {
+                return this.ticketsActive.length * this.eachPerTicket;
+            },
+            priceExtraTickets() {
+                return this.extra ? this.ticketsActive.length * this.extraPerTicket : 0;
+            },
             total() {
-                return 0
+                return this.priceTickets + this.priceExtraTickets;
+            },
+            disabledPlay() {
+                return this.total < this.eachPerTicket || this.submiting;
             }
         },
 
         ready() {
-            this.tickets.push(this.ticket);
+            this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
         },
 
-        components: { HeaderPower, Ticket }
+        methods: {
+            quickPick() {
+                this.$broadcast('quick-pick');
+            },
+
+            clearAll() {
+                this.tickets.map((ticket) => {
+                    ticket.numbers = [];
+                    ticket.ball = null;
+                    return ticket;
+                });
+            },
+            _ticketActive(ticket) {
+                return !!(ticket.numbers && ticket.numbers.length === 5 && ticket.ball);
+            }
+        },
+
+        events: {
+            'remove-ticket'(ticket) {
+                this.tickets.$remove(ticket);
+            }
+        },
+
+        components: { HeaderPower, Ticket, FormModal }
     }
 
 </script>
