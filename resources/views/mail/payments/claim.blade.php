@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <tr style="height: 35px">
-                    <td>{{$transaction->created_at}}</td>
+                    <td>{{ date('Y-m-d') }}</td>
                     <td>&#36;{{number_format($transaction->amount,2)}}</td>
                     <td>&#36;{{number_format($transaction->amount_total,2)}}</td>
                     <td>Pending</td>

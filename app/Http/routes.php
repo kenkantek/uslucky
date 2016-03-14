@@ -63,12 +63,12 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postCharge'    => 'post.charge',
         'getHistory'    => 'payment.history',
         'getApiHistory' => 'payment.api.history',
-        'putCancel'     => 'payment.put.cancel',
     ]);
 
     $router->controller('winning', 'User\WinningController', [
         'postCharge' => 'post.charge',
         'postClaim'  => 'post.claim',
+        'putCancel'  => 'put.cancel',
     ]);
 
     $router->controller('game', 'GameController', [

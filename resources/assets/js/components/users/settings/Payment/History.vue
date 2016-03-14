@@ -45,25 +45,30 @@
 <script>
 	import laroute from '../../../../laroute';
     import BOX from '../../../../common';
+
     export default {
     data() {
             return {
                 histories: {},
+                total: null
             }
-        },
+    },
 
     asyncData(resolve, reject){
-            this.$http.get(laroute.route('front::payment.api.history')).then(res => {
-                const histories = res.data;
+        this.$http.get(laroute.route('front::payment.api.history')).then(res => {
+            const histories = res.data;
 
-                resolve({
-                    histories
-                });
-
-            }, (res) => {
-                BOX.alertError();
+            resolve({
+                histories
             });
-        },
+
+        }, (res) => {
+            BOX.alertError();
+        });
+    },
+    watch: {
+	    total: 'reloadAsyncData'
+  	},
     methods: {
     	onCancel(index,id) {
 				swal({
@@ -73,10 +78,11 @@
 				    closeOnConfirm: false,
 				    showLoaderOnConfirm: true,
 				}, () => {
-					this.$http.put(laroute.route('front::payment.put.cancel', {one: id})).then(res => {
+					this.$http.put(laroute.route('front::put.cancel', {one: id})).then(res => {
 				    	toastr.success('Your transacsion was canceled.', 'Success!');
 				    	this.histories[index].status.status = 'canceled';
 				    	swal.close();
+				    	this.total = res.data;
 				    }, res => {
 				    	toastr.error('Can not cancel this transacsion. Please try again!', 'Error!');
 				    	swal.close();
