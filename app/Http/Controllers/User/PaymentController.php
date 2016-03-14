@@ -72,7 +72,11 @@ class PaymentController extends Controller
 
     public function getHistory()
     {
-        $histories = Transaction::with('status')->simplePaginate(2);
-        return view('user.setings.history', compact('histories'));
+        return view('user.setings.history');
+    }
+
+    public function getApiHistory()
+    {
+        return $histories = Transaction::with('status')->get();
     }
 }
