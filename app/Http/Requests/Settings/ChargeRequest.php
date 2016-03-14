@@ -24,9 +24,16 @@ class ChargeRequest extends Request
     public function rules()
     {
         return [
-            'amount'      => 'required|numeric',
+            'amount'      => 'required|numeric|max:999999',
             'payment'     => 'required|exists:payments,id',
             'description' => 'required|max:255|min:50',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'amount.max' => 'Amount must be no more than $999,999.99',
         ];
     }
 }

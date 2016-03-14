@@ -15,13 +15,13 @@ class CreateAmountsTable extends Migration
         Schema::create('amounts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('amount')->index();
+            $table->decimal('amount', 19, 4)->index();
             $table->timestamps();
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

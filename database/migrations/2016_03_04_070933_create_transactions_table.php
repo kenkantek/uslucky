@@ -16,9 +16,9 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->boolean('type')->default(0); //0: -    1: +
-            $table->decimal('amount', 10, 6)->default(0);
-            $table->decimal('amount_prev', 10, 6)->default(0);
-            $table->decimal('amount_total', 10, 6)->default(0);
+            $table->decimal('amount', 19, 4)->default(0);
+            $table->decimal('amount_prev', 19, 4)->default(0);
+            $table->decimal('amount_total', 19, 4)->default(0);
 
             $table->morphs('object');
 
@@ -28,9 +28,9 @@ class CreateTransactionsTable extends Migration
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

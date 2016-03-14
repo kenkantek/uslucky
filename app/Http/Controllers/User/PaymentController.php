@@ -4,9 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\CreditCardRequest;
+use App\Models\Amount;
 use App\Models\Payment;
+use App\Models\Status;
 use App\Models\Transaction;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
+use DB;
 
 class PaymentController extends Controller
 {
@@ -72,11 +75,55 @@ class PaymentController extends Controller
 
     public function getHistory()
     {
-        return view('user.setings.history');
+        return view('user.settings.history');
     }
 
     public function getApiHistory()
     {
-        return $histories = Transaction::with('status')->get();
+        return $histories = $this->user->transactions()->with('status')->latest()->get();
+    }
+
+    public function putCancel($id)
+    {
+        $user = $this->user;
+        //Update status transactions
+        $status_transaction                 = $user->transactions()->with('status')->whereId($id)->first();
+        $status_transaction->status->status = 'canceled';
+        $status_transaction->status->save();
+
+        $user_amount = $user->amount;
+        $amount_prev = $user_amount ? $user_amount->amount : 0;
+
+        //BEGIN transaction
+
+        return DB::transaction(function () use ($user, $user_amount, $amount_prev, $status_transaction) {
+            $amount_total = $amount_prev + $status_transaction->amount;
+            //create Transaction
+            $transaction = new Transaction([
+                'type'         => 1,
+                'amount'       => $status_transaction->amount,
+                'amount_prev'  => $amount_prev,
+                'amount_total' => $amount_total,
+                'description'  => "Canceled request payment at " . $status_transaction->created_at,
+            ]);
+
+            $user->transactions()->save($transaction);
+
+            // Transaction add status
+            $status = new Status;
+            $status->withStatus('succeeded')->regarding($transaction)->save();
+            $transaction->status()->save($status);
+
+            // update Amount
+            $amount         = $user_amount ? $user_amount : new Amount;
+            $amount->amount = $amount_total;
+            $amount->user()->associate($user);
+            $amount->save();
+
+            return $amount->amount;
+        });
+
+        //END transaction
+        return $status;
     }
 }

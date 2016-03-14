@@ -10,21 +10,21 @@
     @include('beautymail::templates.sunny.contentStart')
 
         <p>This is transaction history #{{ $transaction->id }}</p>
-        <table class="table table-bordered table-hover" style="border:1px solid #aaa; width: 100%">
-            <thead style="border:1px solid #aaa;">
-                <tr>
-                    <th style="border:1px solid #aaa">Date claim</th>
-                    <th style="border:1px solid #aaa">Money request</th>
-                    <th style="border:1px solid #aaa">Your blance</th>
-                    <th style="border:1px solid #aaa">Status</th>
+        <table border="1" style="border-collapse:collapse; width: 100%; border: 1px solid #aaa;">
+            <thead style="background-color: #D16D66; color: white; font-weight: bold;">
+                <tr style="height: 35px">
+                    <th>Date claim</th>
+                    <th>Money request</th>
+                    <th>Your blance</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td style="border:1px solid #aaa">{{$transaction->created_at}}</td>
-                    <td style="border:1px solid #aaa">{{$transaction->amount}}</td>
-                    <td style="border:1px solid #aaa">{{$transaction->amount_total}}</td>
-                    <td style="border:1px solid #aaa">Pending</td>
+                <tr style="height: 35px">
+                    <td>{{$transaction->created_at}}</td>
+                    <td>&#36;{{number_format($transaction->amount,2)}}</td>
+                    <td>&#36;{{number_format($transaction->amount_total,2)}}</td>
+                    <td>Pending</td>
                 </tr>
             </tbody>
         </table>

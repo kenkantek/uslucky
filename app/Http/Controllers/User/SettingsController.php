@@ -20,7 +20,7 @@ class SettingsController extends Controller
             '_countries'  => file_get_contents(storage_path('countries.json')),
             '_changepass' => route('front::account.put.changepass'),
         ]);
-        return view('user.setings.account');
+        return view('user.settings.account');
     }
 
     public function getApiAccount()
@@ -41,7 +41,7 @@ class SettingsController extends Controller
             '_payments' => $this->user->payments,
         ]);
 
-        return view('user.setings.credit-card');
+        return view('user.settings.credit-card');
     }
 
     public function getWinning()
@@ -51,6 +51,6 @@ class SettingsController extends Controller
             '_amount'         => $this->user->amount ? $this->user->amount->amount : 0,
             '_minimum_amount' => env('MINIMUM_AMOUNT'),
         ]);
-        return view('user.setings.winning');
+        return view('user.settings.winning');
     }
 }
