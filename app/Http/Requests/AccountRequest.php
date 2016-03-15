@@ -31,6 +31,7 @@ class AccountRequest extends Request
             'zipcode'    => 'numeric|required',
             'address'    => 'required',
             'city'       => 'required',
+            'country'    => 'required',
         ];
     }
 
