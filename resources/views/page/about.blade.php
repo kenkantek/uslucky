@@ -3,7 +3,7 @@
 <div class="bg4 p50">
         <div class="container">
             <div class="col-md-12">
-                <h2>a few words about us</h2>
+                <h2>welcome to {{env('TITLE')}}</h2>
 
                 <div class="block1">
                     <div class="left"><img src="{{asset('images/page2_img1.jpg')}}" alt=""></div>

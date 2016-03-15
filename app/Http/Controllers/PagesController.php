@@ -11,13 +11,18 @@ class PagesController extends Controller
         // $this->middleware('auth');
     }
 
-    public function index()
+    public function getIndex()
     {
         return view('home');
     }
 
-    public function about()
+    public function getAbout()
     {
         return view('page.about');
+    }
+
+    public function getContact()
+    {
+        return 'contact';
     }
 }

@@ -20,7 +20,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 
     $router->get('/', [
         'as'   => 'home',
-        'uses' => 'PagesController@index',
+        'uses' => 'PagesController@getIndex',
     ]);
 
     $router->get('about', [
@@ -38,7 +38,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'uses' => 'Auth\AuthController@handleProviderCallback',
     ]);
 
-    $router->controller('page', 'PagesController');
+    $router->controller('page', 'PagesController', [
+        'getAbout'   => 'about',
+        'getContact' => 'contact',
+    ]);
 
     $router->controller('settings', 'User\SettingsController', [
         'getAccount'    => 'settings.account',

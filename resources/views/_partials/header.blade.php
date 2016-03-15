@@ -17,13 +17,13 @@
             <ul class="nav navbar-nav nav-custome">
                 <li @if($routeName === 'front::home') class="active" @endif ><a href="{{url('')}}">HOME</a></li>
                 <li @if($routeName === 'front::about') class="active" @endif><a href="{{route('front::about')}}">ABOUT</a></li>
-                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">GAMES <b class="caret"></b></a>
+                <li @if(starts_with($routeName, 'front::game')) class="active" @endif><a href="#" class="dropdown-toggle" data-toggle="dropdown">GAMES <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                 	<li><a href="{{route('front::game.powerball')}}" title="">Powerball</a></li>
                 </ul>
                 </li>
                 <li><a href="#">WINNING NUMBER</a></li>
-                <li><a href="#">CONTACT</a></li>
+                <li @if($routeName === 'front::contact') class="active" @endif><a href="{{route('front::contact')}}">CONTACT</a></li>
                 @if($auth)
                 <li class="cursor"><span class="dropdown-toggle" data-toggle="dropdown">{{$auth->first_name}}</span> <img class="dropdown-toggle" data-toggle="dropdown" src="{{$auth->image}}" style="max-height: 30px; margin-top:9px; border-radius: 50px" alt=""><b class="caret"></b>
 					<ul class="dropdown-menu">
