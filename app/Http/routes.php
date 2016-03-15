@@ -18,6 +18,13 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         return redirect()->route('front::settings.account');
     });
 
+    $router->group(['prefix' => 'adminpanel'], function () use ($router) {
+        $router->get('/{any?}', [
+            'as' => 'admin',
+            'uses' => 'Admin\DashboardController@getIndex',
+        ])->where('any', '.*');
+    });
+
     $router->get('/', [
         'as'   => 'home',
         'uses' => 'PagesController@getIndex',
