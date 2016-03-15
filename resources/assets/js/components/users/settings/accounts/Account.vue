@@ -42,17 +42,19 @@
             <input type="text" class="form-control" autocomplete="off" v-model="user.address">
             <span class="help-block" v-show="formErrors.address" v-text="formErrors.address"></span>
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12"  :class="{'has-error': formErrors.country}">
             <label>Country: <sup class="text-danger">*</sup></label>
             <select class="form-control" v-model="user.country">
                 <option v-for="country in countries" v-text="country.name" :value="country.code"></option>
             </select>
+            <span class="help-block" v-show="formErrors.city" v-text="formErrors.country"></span>
         </div>
         <div class="form-group col-md-12" v-show="states.length">
             <label>State: <sup class="text-danger">*</sup></label>
             <select class="form-control" v-model="user.state">
                 <option v-for="state in states" v-text="state.name" :value="state.code"></option>
             </select>
+
         </div>
         <div class="form-group col-md-12" :class="{'has-error': formErrors.city}">
             <label>City: <sup class="text-danger">*</sup></label>
