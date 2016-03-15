@@ -31,8 +31,8 @@
     @include('beautymail::templates.sunny.contentEnd')
 
     @include('beautymail::templates.sunny.button', [
-            'title' => 'Click me to Detail',
-            'link' => 'http://google.com'
+            'title' => 'Click me to go to USLUCKY',
+            'link' => env('BASE_URI')
     ])
 
 @stop

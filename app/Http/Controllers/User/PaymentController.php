@@ -74,8 +74,9 @@ class PaymentController extends Controller
         return view('user.settings.history');
     }
 
-    public function getApiHistory()
+    public function getApiHistory($take = 10)
     {
-        return $histories = $this->user->transactions()->with('status')->latest()->get();
+        return $this->user->transactions()->with('status')->latest()->paginate($take);
+        return $histories = $this->user->transactions()->with('status')->latest()->skip($skip)->take($take)->get();
     }
 }

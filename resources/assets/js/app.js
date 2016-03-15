@@ -3,6 +3,8 @@ Vue.use(require('vue-resource'));
 Vue.use(require('vue-async-data'));
 Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
+var Loading = Vue.extend(require('./components/Globals/Loading.vue'));
+Vue.component('loading', Loading);
 import SignUp from './components/auth/SignUp.vue';
 import SignIn from './components/auth/SignIn.vue';
 import SettingAccount from './components/users/settings/accounts/Account.vue';
