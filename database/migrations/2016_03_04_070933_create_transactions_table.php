@@ -21,7 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->decimal('amount_total', 19, 4)->default(0);
             $table->morphs('object');
             $table->text('description')->nullable();
-            $table->timestamp();
+            $table->timestamps();
 
             $table->foreign('user_id')
             ->references('id')

@@ -65,4 +65,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function newTransaction()
+    {
+        $transaction = new Transaction;
+        $transaction->user()->associate($this);
+        return $transaction;
+    }
+
+    public function updateAmount($amount = null)
+    {
+        $amount = $amount instanceof Amount ? $amount : new Amount;
+        $amount->user()->associate($this);
+        return $amount;
+    }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Amount;
-use App\Models\Status;
 use App\Models\Transaction;
 use DB;
 
@@ -23,40 +22,38 @@ class TransactionController extends Controller
 
     public function putCancel($id)
     {
-        $user = $this->user;
-        //Update status transactions
-        $status_transaction                 = $user->transactions()->with('status')->whereId($id)->first();
-        $status_transaction->status->status = 'canceled';
-
+        $user        = $this->user;
         $user_amount = $user->amount;
         $amount_prev = $user_amount ? $user_amount->amount : 0;
 
         //BEGIN transaction
 
-        return DB::transaction(function () use ($user, $user_amount, $amount_prev, $status_transaction) {
-            $status_transaction->status->save();
-            $amount_total = $amount_prev + $status_transaction->amount;
-            //create Transaction
-            $transaction = new Transaction([
-                'type'         => 1,
-                'amount'       => $status_transaction->amount,
-                'amount_prev'  => $amount_prev,
-                'amount_total' => $amount_total,
-                'description'  => "Canceled request of transaction <a href='#transaction-{$status_transaction->id}'>#{$status_transaction->id}</a>.",
-            ]);
+        return DB::transaction(function () use ($id, $user, $user_amount, $amount_prev) {
+            $transaction_need_update = $user->transactions()->with('status')->whereId($id)->first();
+            $amount_total = $amount_prev + $transaction_need_update->amount;
+            //Update status transactions
+            $status = $transaction_need_update->updateOrNewStatus($transaction_need_update->status)
+            ->withStatus('canceled')
+            ->regarding($transaction_need_update)
+            ->publish();
 
-            $user->transactions()->save($transaction);
+            // Create new transaction
+            $transaction = $user->newTransaction()
+            ->withType(1)
+            ->withAmount($transaction_need_update->amount)
+            ->withAmountPrev($amount_prev)
+            ->withAmountTotal($amount_total)
+            ->withDescription("Canceled request of transaction <a href='#transaction-{$transaction_need_update->id}'>#{$transaction_need_update->id}</a>.")
+            ->publish();
 
-            // Transaction add status
-            $status = new Status;
-            $status->withStatus('succeeded')->regarding($transaction)->save();
-            $transaction->status()->save($status);
+            // Transaction add new status
+            $status = $transaction->updateOrNewStatus()
+            ->withStatus('succeeded')
+            ->regarding($transaction)
+            ->publish();
 
             // update Amount
-            $amount = $user_amount ? $user_amount : new Amount;
-            $amount->amount = $amount_total;
-            $amount->user()->associate($user);
-            $amount->save();
+            $amount = $user->updateAmount($user_amount)->withAmount($amount_total)->publish();
 
             return $amount->amount;
         });

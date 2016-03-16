@@ -4,8 +4,8 @@
     }
 
     .modal-footer {
-            padding: 0;
-        }
+        padding: 0;
+    }
         
     .modal-footer .btn-group button {
         height:40px;
@@ -25,36 +25,43 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
+                    <button type="button" class="close" data-dismiss="modal" @click.stop="closeModal">
                         <span>×</span><span class="sr-only">Close</span>
                     </button>
                     <h3 class="modal-title">Purchase {{ total | currency }}</h3>
                 </div>
                 <div class="modal-body">
-                    <!-- content goes here -->
-                    <form class="form-horizontal">
-                        <div class="">
-                            <label for="payment-switch">Choose method payment <sup class="text-danger">*</sup></label>
-                        </div>
-                        <div class="radio">
-                          <label>
-                            <input type="radio" name="methods">
-                            Account balance
-                          </label>
-                        </div>
-                        <div class="radio">
-                          <label>
-                            <input type="radio" name="methods">
-                            By credit card
-                          </label>
-                        </div>
-                        <div class="">
-                            <label for="form-description">Description</label>
-                            <textarea id="form-description" class="form-control"></textarea>
-                        </div>
-                    </form>
+                    <div v-if="$loadingAsyncData">
+                        <div v-if="message">{{{ message }}}</div>
+                        <loading v-else></loading>
+                    </div>
+                    <div v-else>
+                        <form class="form-horizontal" v-else>
+                            <div class="">
+                                <label for="payment-switch">Choose method payment <sup class="text-danger">*</sup></label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" v-model="method" value="1">
+                                Account balance <strong>({{ amount | currency }})</strong>
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" v-model="method" value="2">
+                                By credit card
+                              </label>
+                            </div>
+                            <hr>
+                            <div class="">
+                                <label for="form-description">Description</label>
+                                <textarea id="form-description" class="form-control" v-model="description"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" v-if="!$loadingAsyncData">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-success" data-dismiss="modal">Cancle</button>
@@ -74,7 +81,32 @@
     import BOX from '../../../common';
 
     export default {
-        props: ['ticketsActive', 'total', 'extra'],
+        props: ['ticketsActive', 'total', 'extra', 'submiting'],
+
+        data() {
+            return {
+                message: '',
+                amount: 0,
+                payments: [],
+                method: 1,
+                description: ''
+            }
+        },
+
+        asyncData(resolve, reject) {
+            this.$http.get(laroute.route('front::game.get.payment')).then(res => {
+                const { payments, amount: {amount} }  = res.data;
+                resolve({ amount, payments });
+            }, res => {
+                let message = '';
+                if(res.status === 401) {
+                    message = `You need login to Purchase ticket. Click <a data-dismiss="modal" onClick="window.open('/login')">here</a> and try again.`;
+                } else if(res.status === 500) {
+                    message = 'Something wrong, please try again!';
+                }
+                this.message = message;
+            });
+        },
 
         methods: {
             onSubmit() {
@@ -111,6 +143,13 @@
                         console.warn(res);
                     });
                 });
+            },
+
+            closeModal() {
+                $('#squarespaceModal').modal('hide');
+                if(this.message) {
+                    this.submiting = false;
+                }
             },
 
             comingSoon(m) {
