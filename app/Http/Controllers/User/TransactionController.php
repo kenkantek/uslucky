@@ -53,7 +53,7 @@ class TransactionController extends Controller
             $transaction->status()->save($status);
 
             // update Amount
-            $amount = $user_amount ? $user_amount : new Amount;
+            $amount         = $user_amount ? $user_amount : new Amount;
             $amount->amount = $amount_total;
             $amount->user()->associate($user);
             $amount->save();

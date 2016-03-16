@@ -11,13 +11,8 @@ class AdminController extends Controller
         parent::__construct();
     }
 
-    public function getLogin()
-    {
-        return 'page login';
-    }
-
     public function getDashboard()
     {
-        return 'page dashboard';
+        return view('admin.index');
     }
 }

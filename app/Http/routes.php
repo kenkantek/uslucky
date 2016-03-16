@@ -23,11 +23,6 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'uses' => 'PagesController@getIndex',
     ]);
 
-    $router->get('about', [
-        'as'   => 'about',
-        'uses' => 'PagesController@about',
-    ]);
-
     $router->get('auth/facebook', [
         'as'   => 'auth.facebook',
         'uses' => 'Auth\AuthController@redirectToProvider',
@@ -84,6 +79,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('powerball', 'Games\PowerballController', [
         'postPowerball' => 'post.powerball',
     ]);
+
+    $router->get('sadmin/login',[
+        'as'   => 'admin.auth.login',
+        'uses' => 'Admin\Auth\AuthController@getLogin',
+    ]);
 });
 
 $router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'middleware' => ['web', 'auth', 'active', 'admin']], function () use ($router) {
@@ -91,5 +91,8 @@ $router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'mid
     $router->controller('tickets', 'Admin\TicketsController');
 
     //NOTICE: Only bottom
-    $router->controller('/', 'Admin\AdminController');
+    $router->controller('/', 'Admin\AdminController',[
+        'getDashboard' => 'admin.dashboard'
+    ]);
+
 });
