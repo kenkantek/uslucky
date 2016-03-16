@@ -3,7 +3,7 @@ Vue.use(require('vue-resource'));
 Vue.use(require('vue-async-data'));
 Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
-import SignIn from './components/auth/SignIn.vue';
+import SignIn from './components/Auth/SignIn.vue';
 
 new Vue({
     el: 'body',
