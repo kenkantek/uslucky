@@ -19,18 +19,14 @@ class CreateTransactionsTable extends Migration
             $table->decimal('amount', 19, 4)->default(0);
             $table->decimal('amount_prev', 19, 4)->default(0);
             $table->decimal('amount_total', 19, 4)->default(0);
-
             $table->morphs('object');
-
             $table->text('description')->nullable();
-
-            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp();
 
             $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
         });
     }
 

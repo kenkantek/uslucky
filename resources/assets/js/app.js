@@ -11,7 +11,7 @@ import SettingAccount from './components/users/settings/accounts/Account.vue';
 import CreditCard from './components/users/settings/Payment/Index.vue';
 import Winning from './components/users/settings/Winning/Index.vue';
 import Powerball from './components/Games/Powerball/Index.vue';
-import History from './components/users/settings/Payment/History.vue';
+import Transaction from './components/users/settings/Payment/Transaction.vue';
 
 new Vue({
 	el: 'body',
@@ -22,7 +22,7 @@ new Vue({
         CreditCard,
         Winning,
         Powerball,
-        History,
+        Transaction,
     }
 });
 $('[data-toggle="tooltip"]').tooltip();

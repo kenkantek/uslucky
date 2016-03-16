@@ -16,8 +16,10 @@ require('laravel-elixir-vueify');
 elixir(function(mix) {
     mix.copy('public/css/images', 'public/build/css/images');
     mix.sass('app.scss');
+    mix.sass('admin/admin.scss');
 
     mix.browserify('app.js');
+    mix.browserify('admin/admin.js');
 
     mix.version([
     	'css/app.css',

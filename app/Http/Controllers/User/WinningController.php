@@ -63,7 +63,7 @@ class WinningController extends Controller
                 $transaction->status()->save($status);
 
                 // update Amount
-                $amount         = $user_amount ? $user_amount : new Amount;
+                $amount = $user_amount ? $user_amount : new Amount;
                 $amount->amount = $amount_total;
                 $amount->user()->associate($user);
                 $amount->save();
@@ -108,7 +108,7 @@ class WinningController extends Controller
             $transaction->status()->save($status);
 
             // update Amount
-            $amount         = $user_amount ? $user_amount : new Amount;
+            $amount = $user_amount ? $user_amount : new Amount;
             $amount->amount = $amount_total;
             $amount->user()->associate($user);
             $amount->save();
@@ -119,49 +119,5 @@ class WinningController extends Controller
         });
 
         //END transaction
-    }
-
-    public function putCancel($id)
-    {
-        $user = $this->user;
-        //Update status transactions
-        $status_transaction                 = $user->transactions()->with('status')->whereId($id)->first();
-        $status_transaction->status->status = 'canceled';
-
-        $user_amount = $user->amount;
-        $amount_prev = $user_amount ? $user_amount->amount : 0;
-
-        //BEGIN transaction
-
-        return DB::transaction(function () use ($user, $user_amount, $amount_prev, $status_transaction) {
-            $status_transaction->status->save();
-            $amount_total = $amount_prev + $status_transaction->amount;
-            //create Transaction
-            $transaction = new Transaction([
-                'type'         => 1,
-                'amount'       => $status_transaction->amount,
-                'amount_prev'  => $amount_prev,
-                'amount_total' => $amount_total,
-                'description'  => "Canceled request payment at " . $status_transaction->created_at,
-            ]);
-
-            $user->transactions()->save($transaction);
-
-            // Transaction add status
-            $status = new Status;
-            $status->withStatus('succeeded')->regarding($transaction)->save();
-            $transaction->status()->save($status);
-
-            // update Amount
-            $amount         = $user_amount ? $user_amount : new Amount;
-            $amount->amount = $amount_total;
-            $amount->user()->associate($user);
-            $amount->save();
-
-            return $amount->amount;
-        });
-
-        //END transaction
-        return $status;
     }
 }

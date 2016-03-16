@@ -4,19 +4,20 @@
 		<table style="margin:0" class="table table-bordered table-hover trans" v-if="histories.length">
 		    <thead>
 		        <tr>
-		            <th>Date</th>
+                    <th>#</th>
+		            <th>Updated At</th>
 		            <th>Description</th>
 		            <th>Amount</th>
 		            <th>Blance</th>
 		            <th>Status</th>
 		            <th>Cancel</th>
-		            
 		        </tr>
 		    </thead>
 		    <tbody>
-		        <tr v-for="(index,history) in histories">
-		            <td>{{ history.created_at }}</td>
-		            <td>{{ history.description }}</td>
+		        <tr v-for="(index, history) in histories" id="transaction-{{ history.id }}">
+                    <td>{{ history.id }}</td>
+		            <td>{{ history.updated_at }}</td>
+		            <td>{{{ history.description }}}</td>
 		            <td>
 		            	<span v-if="history.type == 1" style="color:#0062FF;">+{{ history.amount | currency }}</span>
 		            	<span v-else="history.type == 0" style="color:#F00;">-{{ history.amount | currency }}</span>
@@ -42,7 +43,7 @@
 			    </div>
 			</div>
 		</div>
-		<button style="margin:0; width:100%" class="link" @click="nextPa" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
+		<button style="margin:0; width:100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
 		<div v-show="nextPageUrl" style="width:100%; text-align:center; margin-top:10px">
 			Show {{ histories.length }} of {{ totalHistories }} record.
 		</div>
@@ -67,13 +68,12 @@ export default {
         },
 
         asyncData(resolve, reject) {
-        	this._fetchHistory(laroute.route('front::payment.api.history', { one: this.numberMore })).done(histories => {
+        	this._fetchHistory(laroute.route('front::get.transaction', { one: this.numberMore })).done(histories => {
         		resolve({
         		    histories
         		});
         	}, err => {
         		BOX.alertError();
-        		console.log(err);
         	});
         },
         watch: {
@@ -104,7 +104,7 @@ export default {
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true,
                 }, () => {
-                    this.$http.put(laroute.route('front::put.cancel', {
+                    this.$http.put(laroute.route('front::put.cancel.transaction', {
                         one: id
                     })).then(res => {
                         toastr.success('Your transacsion was canceled.', 'Success!');
@@ -112,19 +112,21 @@ export default {
                         swal.close();
                         this.total = res.data;
                     }, res => {
-                        toastr.error('Can not cancel this transacsion. Please try again!', 'Error!');
-                        swal.close();
-                        console.warn(res);
+                        if(res.status === 500) {
+                            BOX.alertError();
+                        }else {
+                            toastr.error('Can not cancel this transacsion. Please try again!', 'Error!');
+                            swal.close();
+                        }
                     });
                 });
             },
 
-            nextPa() {
+            nextPagination() {
             	this._fetchHistory(this.nextPageUrl).done(histories => {
             		this.histories = this.histories.concat(histories);
             	}, err => {
             		BOX.alertError();
-        			console.log(err);
             	});
             }
         },

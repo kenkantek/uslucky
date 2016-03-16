@@ -18,13 +18,6 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         return redirect()->route('front::settings.account');
     });
 
-    $router->group(['prefix' => 'adminpanel'], function () use ($router) {
-        $router->get('/{any?}', [
-            'as' => 'admin',
-            'uses' => 'Admin\DashboardController@getIndex',
-        ])->where('any', '.*');
-    });
-
     $router->get('/', [
         'as'   => 'home',
         'uses' => 'PagesController@getIndex',
@@ -51,10 +44,9 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     ]);
 
     $router->controller('settings', 'User\SettingsController', [
-        'getAccount'    => 'settings.account',
-        'getApiAccount' => 'settings.api.account',
-        'getPayment'    => 'settings.payment',
-        'getWinning'    => 'settings.winning',
+        'getAccount' => 'settings.account',
+        'getPayment' => 'settings.payment',
+        'getWinning' => 'settings.winning',
     ]);
 
     $router->controller('account', 'User\AccountController', [
@@ -64,6 +56,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getReSendEmail'   => 'register.resend.email',
         'getThank'         => 'register.thank',
         'getVerify'        => 'register.verify',
+        'getAccount'       => 'get.account',
     ]);
 
     $router->controller('payment', 'User\PaymentController', [
@@ -72,13 +65,16 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'deletePayment' => 'delete.payment',
         'postCharge'    => 'post.charge',
         'getHistory'    => 'payment.history',
-        'getApiHistory' => 'payment.api.history',
     ]);
 
     $router->controller('winning', 'User\WinningController', [
         'postCharge' => 'post.charge',
         'postClaim'  => 'post.claim',
-        'putCancel'  => 'put.cancel',
+    ]);
+
+    $router->controller('transaction', 'User\TransactionController', [
+        'getTransactions' => 'get.transaction',
+        'putCancel'       => 'put.cancel.transaction',
     ]);
 
     $router->controller('game', 'GameController', [
@@ -88,4 +84,12 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('powerball', 'Games\PowerballController', [
         'postPowerball' => 'post.powerball',
     ]);
+});
+
+$router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'middleware' => ['web', 'auth', 'active', 'admin']], function () use ($router) {
+
+    $router->controller('tickets', 'Admin\TicketsController');
+
+    //NOTICE: Only bottom
+    $router->controller('/', 'Admin\AdminController');
 });

@@ -101,7 +101,7 @@
         },
 
         asyncData(resolve, reject){
-            this.$http.get(laroute.route('front::settings.api.account')).then(res => {
+            this.$http.get(laroute.route('front::get.account')).then(res => {
                 const user = res.data;
 
                 resolve({

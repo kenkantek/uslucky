@@ -15,7 +15,11 @@ class AccountController extends Controller
         parent::__construct();
         $this->middleware('auth');
         $this->middleware('active', ['except' => ['getThank', 'getVerify', 'getReSendEmail']]);
-        // $this->middleware('guest', ['except' => 'getVerify']);
+    }
+
+    public function getAccount()
+    {
+        return $this->user;
     }
 
     public function putEditAccount(AccountRequest $request)

@@ -2,4 +2,6 @@
 /js/*.map
 /css/*.map
 /css/app.css
+/css/admin.css
 /js/app.js
+/js/admin.js

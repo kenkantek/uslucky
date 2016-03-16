@@ -23,11 +23,6 @@ class SettingsController extends Controller
         return view('user.settings.account');
     }
 
-    public function getApiAccount()
-    {
-        return $this->user;
-    }
-
     public function getPayment()
     {
         JavaScript::put([
