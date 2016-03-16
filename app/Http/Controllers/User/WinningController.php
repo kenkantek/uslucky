@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ChargeRequest;
 use App\Http\Requests\Settings\ClaimRequest;
 use App\Models\Amount;
-use App\Models\Status;
 use App\Models\Transaction;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use DB;
@@ -46,27 +45,24 @@ class WinningController extends Controller
             //BEGIN transaction
 
             return DB::transaction(function () use ($user, $charge, $amount_prev, $amount_total, $user_amount, $request) {
-                //create Transaction
-                $transaction = new Transaction([
-                    'type'         => 1,
-                    'amount'       => $charge['amount'] / 100,
-                    'amount_prev'  => $amount_prev,
-                    'amount_total' => $amount_total,
-                    'description'  => $request->description,
-                ]);
 
-                $user->transactions()->save($transaction);
+                // Create new transaction
+                $transaction = $user->newTransaction()
+                ->withType(1)
+                ->withAmount($charge['amount'] / 100)
+                ->withAmountPrev($amount_prev)
+                ->withAmountTotal($amount_total)
+                ->withDescription($request->description)
+                ->publish();
 
                 // Transaction add status
-                $status = new Status;
-                $status->withStatus($charge['status'])->regarding($transaction)->save();
-                $transaction->status()->save($status);
+                $status = $transaction->updateOrNewStatus()
+                ->withStatus($charge['status'])
+                ->regarding($transaction)
+                ->publish();
 
                 // update Amount
-                $amount = $user_amount ? $user_amount : new Amount;
-                $amount->amount = $amount_total;
-                $amount->user()->associate($user);
-                $amount->save();
+                $amount = $user->updateAmount($user_amount)->withAmount($amount_total)->publish();
 
                 event(new UserDepositEvent());
 
@@ -91,27 +87,24 @@ class WinningController extends Controller
 
         return DB::transaction(function () use ($user, $user_amount, $amount_prev, $request) {
             $amount_total = $amount_prev - $request->amount;
-            //create Transaction
-            $transaction = new Transaction([
-                'type'         => 0,
-                'amount'       => $request->amount,
-                'amount_prev'  => $amount_prev,
-                'amount_total' => $amount_total,
-                'description'  => $request->description,
-            ]);
 
-            $user->transactions()->save($transaction);
+            // Create new transaction
+            $transaction = $user->newTransaction()
+            ->withType(0)
+            ->withAmount($request->amount)
+            ->withAmountPrev($amount_prev)
+            ->withAmountTotal($amount_total)
+            ->withDescription($request->description)
+            ->publish();
 
             // Transaction add status
-            $status = new Status;
-            $status->withStatus('pendding')->regarding($transaction)->save();
-            $transaction->status()->save($status);
+            $status = $transaction->updateOrNewStatus()
+            ->withStatus('pendding')
+            ->regarding($transaction)
+            ->publish();
 
             // update Amount
-            $amount = $user_amount ? $user_amount : new Amount;
-            $amount->amount = $amount_total;
-            $amount->user()->associate($user);
-            $amount->save();
+            $amount = $user->updateAmount($user_amount)->withAmount($amount_total)->publish();
 
             event(new UserClaimEvent($user, $transaction));
 

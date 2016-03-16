@@ -74,6 +74,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 
     $router->controller('game', 'GameController', [
         'getPowerball' => 'game.powerball',
+        'getPayment'   => 'game.get.payment',
     ]);
 
     $router->controller('powerball', 'Games\PowerballController', [

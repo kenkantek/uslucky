@@ -15,12 +15,12 @@ class Status extends Model
         return $this->morphTo();
     }
 
+    //BEGIN new Status
     public function withStatus($status)
     {
         $this->status = $status;
         return $this;
     }
-
     public function regarding($object)
     {
         if (is_object($object)) {
@@ -29,4 +29,10 @@ class Status extends Model
         }
         return $this;
     }
+    public function publish()
+    {
+        $this->save();
+        return $this;
+    }
+    //END NEW Status
 }

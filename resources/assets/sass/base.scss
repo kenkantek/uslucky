@@ -1,10 +1,11 @@
 /* Variable, reset, common SCSS */
 $text-color: #3a3a3a;
+$body-bg: #dc5e61;
+$headings-font-family: 'Roboto', sans-serif;
 
 
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-$headings-font-family: 'Roboto', sans-serif;
 .clearfix {
   *zoom: 1;
   &:before,
@@ -28,12 +29,12 @@ textarea {
 
 /* Notice Background  */
 .error-notice {
-  margin: 5px 5px; /* Making sure to keep some distance from all side */
+  margin: 5px 5px;
 }
 
 .oaerror {
-  width: 90%; /* Configure it fit in your design  */
-  background-color: #FFFFFF; /* Default background */
+  width: 90%;
+  background-color: #FFFFFF;
   padding: 20px;
   border: 1px solid #eee;
   border-left-width: 5px;
@@ -43,8 +44,8 @@ textarea {
 }
 
 .danger {
-  border-left-color: #d9534f; /* Left side border color */
-  background-color: rgba(217, 83, 79, 0.1); /* Same color as the left border with reduced alpha to 0.1 */
+  border-left-color: #d9534f; 
+  background-color: rgba(217, 83, 79, 0.1);
 }
 
 .danger strong {

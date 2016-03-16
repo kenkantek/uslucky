@@ -16,7 +16,7 @@
                 <button class="btn btn-info text-upercase" @click="quickPick"> Quick Pick</button>
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 
-                data-placement="right" 
+                data-placement="top" 
                 title="Clear all lines"
                 @click="clearAll"
                 :disabled="statusClearAll"
@@ -66,6 +66,7 @@
                                         class="btn btn-primary center-block" 
                                         data-backdrop="static" 
                                         :disabled="disabledPlay"
+                                        @click="openModal"
                                         data-keyboard="false">Play Now
                                     </button>
                                 </td>
@@ -79,7 +80,7 @@
             
         </article>
     </section>
-    <form-modal :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
+    <form-modal v-if="submiting" :submiting.sync="submiting" :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
 </template>
 
 
@@ -124,12 +125,25 @@
                 return this.priceTickets + this.priceExtraTickets;
             },
             disabledPlay() {
-                return this.total < this.eachPerTicket || this.submiting;
+                return this.total < this.eachPerTicket;
+            }
+        },
+
+        watch: {
+            tickets: {
+                handler(tickets) {
+                    localStorage.tickets = JSON.stringify(tickets);
+                },
+                deep: true
             }
         },
 
         ready() {
-            this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
+            if(localStorage.tickets) {
+                this.tickets = JSON.parse(localStorage.tickets);
+            } else {
+                this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
+            }
         },
 
         methods: {
@@ -146,6 +160,9 @@
             },
             _ticketActive(ticket) {
                 return !!(ticket.numbers && ticket.numbers.length === 5 && ticket.ball);
+            },
+            openModal() {
+                this.submiting = true;
             }
         },
 

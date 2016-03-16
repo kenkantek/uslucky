@@ -43,10 +43,7 @@ class User extends Authenticatable
 
     public function getBirthdayAttribute($date)
     {
-        if ($date == null) {
-            return null;
-        }
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+        return $date ? Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d') : null;
     }
 
     public function setBirthdayAttribute($date)
@@ -67,5 +64,19 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function newTransaction()
+    {
+        $transaction = new Transaction;
+        $transaction->user()->associate($this);
+        return $transaction;
+    }
+
+    public function updateAmount($amount = null)
+    {
+        $amount = $amount instanceof Amount ? $amount : new Amount;
+        $amount->user()->associate($this);
+        return $amount;
     }
 }
