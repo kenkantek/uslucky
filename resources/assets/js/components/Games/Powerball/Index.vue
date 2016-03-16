@@ -16,7 +16,7 @@
                 <button class="btn btn-info text-upercase" @click="quickPick"> Quick Pick</button>
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 
-                data-placement="right" 
+                data-placement="top" 
                 title="Clear all lines"
                 @click="clearAll"
                 :disabled="statusClearAll"
