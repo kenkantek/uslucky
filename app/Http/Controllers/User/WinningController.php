@@ -58,7 +58,6 @@ class WinningController extends Controller
                 // Transaction add status
                 $status = $transaction->updateOrNewStatus()
                 ->withStatus($charge['status'])
-                ->regarding($transaction)
                 ->publish();
 
                 // update Amount
@@ -100,7 +99,6 @@ class WinningController extends Controller
             // Transaction add status
             $status = $transaction->updateOrNewStatus()
             ->withStatus('pendding')
-            ->regarding($transaction)
             ->publish();
 
             // update Amount

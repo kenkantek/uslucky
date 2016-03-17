@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\Payment\UpdatePaymentDefault;
 use App\Events\Payment\UserClaimEvent;
 use App\Events\Payment\UserDepositEvent;
 use Mail;
@@ -24,6 +25,15 @@ class PaymentListener
         });
     }
 
+    public function onChagePaymentDefault($event)
+    {
+        $user    = $event->user;
+        $payment = $event->payment;
+        $user->payments()->update(['default' => 0]);
+        $payment->default = 1;
+        $payment->save();
+    }
+
     public function subscribe($events)
     {
         $events->listen(
@@ -34,6 +44,11 @@ class PaymentListener
         $events->listen(
             UserClaimEvent::class,
             static::class . '@onUserClaim'
+        );
+
+        $events->listen(
+            UpdatePaymentDefault::class,
+            static::class . '@onChagePaymentDefault'
         );
     }
 }

@@ -56,6 +56,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     ]);
 
     $router->controller('payment', 'User\PaymentController', [
+        'getPayments'   => 'get.payments',
         'putPayment'    => 'put.payment',
         'postPayment'   => 'post.payment',
         'deletePayment' => 'delete.payment',

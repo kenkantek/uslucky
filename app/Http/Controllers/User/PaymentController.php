@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\Payment\UpdatePaymentDefault;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\CreditCardRequest;
 use App\Models\Payment;
@@ -13,6 +14,11 @@ class PaymentController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
+    }
+
+    public function getPayments()
+    {
+        return $this->user->payments()->latest()->get();
     }
 
     public function putPayment($id, CreditCardRequest $request)
@@ -32,8 +38,13 @@ class PaymentController extends Controller
         $payment->month_exp      = $request->month_exp;
         $payment->year_exp       = $request->year_exp;
         $payment->card_last_four = substr($request->card_number, -4);
+        $payment->default        = $request->default;
 
         $payment->save();
+
+        if ($request->default) {
+            event(new UpdatePaymentDefault($user, $payment));
+        }
         return $payment;
     }
 
@@ -58,6 +69,9 @@ class PaymentController extends Controller
         ]);
         $user->payments()->save($payment);
 
+        if ($request->default) {
+            event(new UpdatePaymentDefault($user, $payment));
+        }
         return $payment;
     }
 

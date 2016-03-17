@@ -27,7 +27,7 @@ class GameController extends Controller
     public function getPayment()
     {
         return response([
-            'amount'   => $this->user->amount ?: 0,
+            'amount'   => $this->user->balance,
             'payments' => $this->user->payments,
         ]);
     }

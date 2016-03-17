@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Games;
 
 use App\Http\Controllers\Controller;
+use App\Models\Game;
+use DB;
 use Illuminate\Http\Request;
 
 class PowerballController extends Controller
@@ -15,6 +17,21 @@ class PowerballController extends Controller
 
     public function postPowerball(Request $request)
     {
-        return $request->all();
+        // return $request->all();
+        $user = $this->user;
+        return DB::transaction(function () use ($user, $request) {
+            // Save to Order
+            $order = $user->newOrder()
+            ->withGame(Game::find(1))
+            ->withExtra($request->extra)
+            ->publish();
+
+            // Save to Ticket
+            $order->newMultiTicket($request->tickets);
+
+            // Payment it
+
+            return $order;
+        });
     }
 }

@@ -63,6 +63,7 @@ class Transaction extends Model
     {
         $status = $status instanceof Status ? $status : new Status;
         $status->statusable()->associate($this);
+        $status->regarding($this);
         return $status;
     }
 

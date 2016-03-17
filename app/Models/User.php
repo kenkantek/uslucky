@@ -19,7 +19,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
     ];
 
-    protected $appends = ['image', 'fullname'];
+    protected $appends = ['image', 'fullname', 'balance'];
 
     protected $dates = ['birthday'];
     /**
@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');
     }
 
+    public function getBalanceAttribute()
+    {
+        return $this->amount ? $this->amount->amount : 0;
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);
@@ -66,6 +71,11 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function newTransaction()
     {
         $transaction = new Transaction;
@@ -78,5 +88,12 @@ class User extends Authenticatable
         $amount = $amount instanceof Amount ? $amount : new Amount;
         $amount->user()->associate($this);
         return $amount;
+    }
+
+    public function newOrder()
+    {
+        $order = new Order;
+        $order->user()->associate($this);
+        return $order;
     }
 }
