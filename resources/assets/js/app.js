@@ -12,6 +12,7 @@ import CreditCard from './components/users/settings/Payment/Index.vue';
 import Winning from './components/users/settings/Winning/Index.vue';
 import Powerball from './components/Games/Powerball/Index.vue';
 import Transaction from './components/users/settings/Payment/Transaction.vue';
+import Contact from './components/users/Contact.vue';
 
 new Vue({
 	el: 'body',
@@ -23,6 +24,7 @@ new Vue({
         Winning,
         Powerball,
         Transaction,
+        Contact,
     }
 });
 $('[data-toggle="tooltip"]').tooltip();

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
+use App\Models\Contact;
+
 class PagesController extends Controller
 {
 
@@ -23,6 +26,17 @@ class PagesController extends Controller
 
     public function getContact()
     {
-        return 'contact';
+        return view('page.contact');
+    }
+
+    public function putContact(ContactRequest $request)
+    {
+        $contacts          = new Contact();
+        $contacts->name    = $request->name;
+        $contacts->phone   = $request->phone;
+        $contacts->email   = $request->email;
+        $contacts->message = $request->message;
+        $contacts->save();
+        return $contacts;
     }
 }

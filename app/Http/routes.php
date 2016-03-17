@@ -36,6 +36,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('page', 'PagesController', [
         'getAbout'   => 'about',
         'getContact' => 'contact',
+        'putContact' => 'put.contact',
     ]);
 
     $router->controller('settings', 'User\SettingsController', [
@@ -81,7 +82,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postPowerball' => 'post.powerball',
     ]);
 
-    $router->get('sadmin/login',[
+    $router->get('sadmin/login', [
         'as'   => 'admin.auth.login',
         'uses' => 'Admin\Auth\AuthController@getLogin',
     ]);
@@ -92,8 +93,8 @@ $router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'mid
     $router->controller('tickets', 'Admin\TicketsController');
 
     //NOTICE: Only bottom
-    $router->controller('/', 'Admin\AdminController',[
-        'getDashboard' => 'admin.dashboard'
+    $router->controller('/', 'Admin\AdminController', [
+        'getDashboard' => 'admin.dashboard',
     ]);
 
 });
