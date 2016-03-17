@@ -91,7 +91,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 $router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'middleware' => ['web', 'auth', 'active', 'admin']], function () use ($router) {
 
     $router->controller('tickets', 'Admin\TicketsController');
-
+    $router->controller('contacts', 'Admin\ContactController', [
+        'getIndex'   => 'admin.contacts',
+        'getContact' => 'admin.api.contact',
+        'getDetail'  => 'admin.contact.detail',
+    ]);
     //NOTICE: Only bottom
     $router->controller('/', 'Admin\AdminController', [
         'getDashboard' => 'admin.dashboard',

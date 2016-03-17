@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         @include('admin._partials.css')
+        @yield('css')
     </head>
     <!-- END HEAD -->
 
@@ -28,7 +29,14 @@
             @include('admin._partials.sidebar')
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
-                @yield('content')
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <!-- BEGIN PAGE HEADER-->
+                    @include('admin._partials.page_header')
+                    <!-- END PAGE HEADER-->
+                    @yield('content')
+                </div>
+                <!-- END CONTENT BODY -->
             </div>
             <!-- END CONTENT -->
 
@@ -44,7 +52,13 @@
             </div>
         </div>
         <!-- END FOOTER -->
+        @include('_partials.php2js')
         @include('admin._partials.script')
+        {!! HTML::script('js/admin.js') !!}
+        @yield('script')
+
+
+
     </body>
 
 </html>
