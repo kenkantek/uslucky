@@ -55,6 +55,7 @@
                                 Account balance <strong>({{ amount | currency }})</strong>.
                                 <span class="text-danger" v-show="method == 1 && amount < total">
                                     You can not afford to buy it.
+                                    <a @click.stop="closeModal" :href="linkTo.winning" target="_blank">Add now</a>
                                 </span>
                               </label>
                             </div>
@@ -63,7 +64,8 @@
                                 <input type="radio" v-model="method" value="2">
                                 By credit card
                                 <span class="text-danger" v-show="method == 2 && !payments.length">
-                                    No payment methods available
+                                    No payment methods available 
+                                    <a @click.stop="closeModal" :href="linkTo.payment" target="_blank">Add now</a>
                                 </span>
                               </label>
                               <select class="form-control select" v-model="payment" v-show="method == 2 && payments.length">
@@ -117,7 +119,11 @@
                 method: 0,
                 payment: null,
                 description: '',
-                checkLogin: false
+                checkLogin: false,
+                linkTo: {
+                    winning: laroute.route('front::settings.winning'),
+                    payment: laroute.route('front::settings.payment')
+                }
             }
         },
 
@@ -166,7 +172,7 @@
                     this.submiting = true;
                     this.$http.post(laroute.route('front::post.powerball'), { tickets: this.tickets, extra: this.extra, method: this.method, payment: this.payment }).then(res => {
                         swal({
-                            title: "Notice!",
+                            title: "Success!",
                             text: "You has been purchased tickets successfully!",
                             type: "success",
                             showCancelButton: true,
@@ -182,8 +188,8 @@
                             BOX.alertError();
                         } else  {
                             toastr.error('Can not purchase tickets, Please try again!', 'Error!');
+                            swal.close();
                         }
-                        swal.close();
                         this.submiting = false;
                         console.warn(res);
                     });

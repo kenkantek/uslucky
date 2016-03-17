@@ -38,6 +38,7 @@ class PaymentController extends Controller
         $payment->month_exp      = $request->month_exp;
         $payment->year_exp       = $request->year_exp;
         $payment->card_last_four = substr($request->card_number, -4);
+        $payment->default        = $request->default;
 
         $payment->save();
 

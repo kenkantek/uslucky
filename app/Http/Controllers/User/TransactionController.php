@@ -49,7 +49,6 @@ class TransactionController extends Controller
             // Transaction add new status
             $status = $transaction->updateOrNewStatus()
             ->withStatus('succeeded')
-            ->regarding($transaction)
             ->publish();
 
             // update Amount

@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function newTransaction()
     {
         $transaction = new Transaction;
@@ -83,5 +88,12 @@ class User extends Authenticatable
         $amount = $amount instanceof Amount ? $amount : new Amount;
         $amount->user()->associate($this);
         return $amount;
+    }
+
+    public function newOrder()
+    {
+        $order = new Order;
+        $order->user()->associate($this);
+        return $order;
     }
 }
