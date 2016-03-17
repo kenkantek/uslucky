@@ -100,7 +100,7 @@
                 powerball: {..._powerball},
                 eachPerTicket: _each_per_ticket,
                 extraPerTicket: _extra_per_ticket,
-                extra: false,
+                extra: Boolean(Number(localStorage.extra)) || null,
                 submiting: false
             }
         },
@@ -135,6 +135,9 @@
                     localStorage.tickets = JSON.stringify(tickets);
                 },
                 deep: true
+            },
+            extra(val) {
+                localStorage.extra = Number(val);
             }
         },
 

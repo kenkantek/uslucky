@@ -26,14 +26,13 @@ class SettingsController extends Controller
     public function getPayment()
     {
         JavaScript::put([
-            '_stripe'   => [
+            '_stripe' => [
                 'key' => config('services.stripe.key'),
             ],
-            '_date'     => [
+            '_date'   => [
                 'month' => generateMonth(),
                 'year'  => generateYear(15),
             ],
-            '_payments' => $this->user->payments,
         ]);
 
         return view('user.settings.credit-card');
@@ -43,7 +42,7 @@ class SettingsController extends Controller
     {
         JavaScript::put([
             '_payments'       => $this->user->payments,
-            '_amount'         => $this->user->amount ? $this->user->amount->amount : 0,
+            '_amount'         => $this->user->balance,
             '_minimum_amount' => env('MINIMUM_AMOUNT'),
         ]);
         return view('user.settings.winning');

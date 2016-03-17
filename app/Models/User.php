@@ -19,7 +19,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
     ];
 
-    protected $appends = ['image', 'fullname'];
+    protected $appends = ['image', 'fullname', 'balance'];
 
     protected $dates = ['birthday'];
     /**
@@ -49,6 +49,11 @@ class User extends Authenticatable
     public function setBirthdayAttribute($date)
     {
         return $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');
+    }
+
+    public function getBalanceAttribute()
+    {
+        return $this->amount ? $this->amount->amount : 0;
     }
 
     public function payments()

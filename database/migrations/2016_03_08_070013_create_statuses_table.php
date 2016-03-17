@@ -15,7 +15,9 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('statusable');
-            $table->enum('status', ['pendding', 'canceled', 'failed', 'succeeded', 'actived', 'disabled'])->default('pendding');
+            $table->enum('status', [
+                'pendding', 'canceled', 'failed', 'succeeded', 'actived', 'disabled', 'waiting', 'win', 'lost',
+            ])->default('pendding');
         });
     }
 
