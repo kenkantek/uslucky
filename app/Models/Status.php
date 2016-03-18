@@ -21,14 +21,7 @@ class Status extends Model
         $this->status = $status;
         return $this;
     }
-    public function regarding($object)
-    {
-        if (is_object($object)) {
-            $this->statusable_id   = $object->id;
-            $this->statusable_type = get_class($object);
-        }
-        return $this;
-    }
+
     public function publish()
     {
         $this->save();

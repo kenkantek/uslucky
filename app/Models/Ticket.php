@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\StatusTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    use StatusTrait;
+
     protected $casts = [
         'numbers' => 'array',
     ];
@@ -18,6 +21,7 @@ class Ticket extends Model
     //BEGIN NEW TICKET
     public function withNumbers($numbers)
     {
+        sort($numbers);
         $this->numbers = $numbers;
         return $this;
     }
@@ -32,13 +36,4 @@ class Ticket extends Model
         return $this;
     }
     //END NEW TICKET
-
-    public function updateOrNewStatus($status = null)
-    {
-        $status = $status instanceof Status ? $status : new Status;
-        $status->statusable()->associate($this);
-        $status->regarding($this);
-        $status->status = 'waiting'; //default
-        return $status;
-    }
 }

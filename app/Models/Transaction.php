@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\StatusTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    use StatusTrait;
+
     protected $fillable = ['type', 'amount', 'amount_prev', 'amount_total', 'description'];
+
+    public function transactionable()
+    {
+        return $this->morphTo();
+    }
 
     public function user()
     {
@@ -44,27 +52,10 @@ class Transaction extends Model
         $this->description = $description;
         return $this;
     }
-    public function regarding($object)
-    {
-        if (is_object($object)) {
-            $this->object_id   = $object->id;
-            $this->object_type = get_class($object);
-        }
-        return $this;
-    }
     public function publish()
     {
         $this->save();
         return $this;
     }
     //END NEW TRACSACTION
-
-    public function updateOrNewStatus($status = null)
-    {
-        $status = $status instanceof Status ? $status : new Status;
-        $status->statusable()->associate($this);
-        $status->regarding($this);
-        return $status;
-    }
-
 }

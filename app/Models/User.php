@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\TransactionTrait;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -9,6 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasRoles;
+    use TransactionTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -74,13 +76,6 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
-    }
-
-    public function newTransaction()
-    {
-        $transaction = new Transaction;
-        $transaction->user()->associate($this);
-        return $transaction;
     }
 
     public function updateAmount($amount = null)

@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->decimal('amount', 19, 4)->default(0);
             $table->decimal('amount_prev', 19, 4)->default(0);
             $table->decimal('amount_total', 19, 4)->default(0);
-            $table->morphs('object');
+            $table->morphs('transactionable');
             $table->text('description')->nullable();
             $table->timestamps();
 
