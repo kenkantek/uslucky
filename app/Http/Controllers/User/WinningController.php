@@ -44,10 +44,10 @@ class WinningController extends Controller
 
             //BEGIN transaction
 
-            return DB::transaction(function () use ($user, $charge, $amount_prev, $amount_total, $user_amount, $request) {
+            return DB::transaction(function () use ($user, $charge, $amount_prev, $amount_total, $user_amount, $request, $payment) {
 
                 // Create new transaction
-                $transaction = $user->newTransaction()
+                $transaction = $payment->newTransaction()
                 ->withType(1)
                 ->withAmount($charge['amount'] / 100)
                 ->withAmountPrev($amount_prev)
