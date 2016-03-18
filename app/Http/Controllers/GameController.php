@@ -11,6 +11,7 @@ class GameController extends Controller
     {
         parent::__construct();
         $this->middleware('auth', ['only' => 'getPayment']);
+        $this->middleware('game_time');
     }
 
     public function getPowerball()

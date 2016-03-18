@@ -182,7 +182,7 @@
                             <li class="external">
                                 <h3>You have
                                     <span class="bold">7 New</span> Messages</h3>
-                                <a href="app_inbox.html">view all</a>
+                                <a href="{{route('backend::admin.contacts')}}">view all</a>
                             </li>
                             <li>
                                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">

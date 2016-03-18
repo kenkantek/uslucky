@@ -36,12 +36,15 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('page', 'PagesController', [
         'getAbout'   => 'about',
         'getContact' => 'contact',
+        'putContact' => 'put.contact',
     ]);
 
     $router->controller('settings', 'User\SettingsController', [
         'getAccount' => 'settings.account',
         'getPayment' => 'settings.payment',
         'getWinning' => 'settings.winning',
+        'getTicket'  => 'settings.ticket',
+        'getOrder'   => 'settings.order',
     ]);
 
     $router->controller('account', 'User\AccountController', [
@@ -73,6 +76,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'putCancel'       => 'put.cancel.transaction',
     ]);
 
+    $router->controller('orders', 'User\OrderController', [
+        'getIndex' => 'order.list',
+    ]);
+
     $router->controller('game', 'GameController', [
         'getPowerball' => 'game.powerball',
         'getPayment'   => 'game.get.payment',
@@ -91,7 +98,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 $router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'middleware' => ['web', 'auth', 'active', 'admin']], function () use ($router) {
 
     $router->controller('tickets', 'Admin\TicketsController');
-
+    $router->controller('contacts', 'Admin\ContactController', [
+        'getIndex'   => 'admin.contacts',
+        'getContact' => 'admin.api.contact',
+        'getDetail'  => 'admin.contact.detail',
+    ]);
     //NOTICE: Only bottom
     $router->controller('/', 'Admin\AdminController', [
         'getDashboard' => 'admin.dashboard',
