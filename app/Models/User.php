@@ -80,8 +80,10 @@ class User extends Authenticatable
 
     public function updateAmount($amount = null)
     {
-        $amount = $amount instanceof Amount ? $amount : new Amount;
-        $amount->user()->associate($this);
+        if (!$amount instanceof Amount) {
+            $amount = new Amount;
+            $amount->user()->associate($this);
+        }
         return $amount;
     }
 

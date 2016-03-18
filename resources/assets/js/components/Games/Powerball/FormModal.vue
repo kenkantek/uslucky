@@ -170,7 +170,7 @@
                     showLoaderOnConfirm: true,
                 }, () => {
                     this.submiting = true;
-                    this.$http.post(laroute.route('front::post.powerball'), { tickets: this.tickets, extra: this.extra, method: this.method, payment: this.payment }).then(res => {
+                    this.$http.post(laroute.route('front::post.powerball'), { tickets: this.tickets, extra: this.extra, method: this.method, payment: this.payment, description: this.description }).then(res => {
                         swal({
                             title: "Success!",
                             text: "You has been purchased tickets successfully!",

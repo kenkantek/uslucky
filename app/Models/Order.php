@@ -38,6 +38,11 @@ class Order extends Model
         $this->draw_at = Carbon::create($d[2], $d[0], $d[1], 0);
         return $this;
     }
+    public function withDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
     public function publish()
     {
         $this->save();
@@ -78,12 +83,16 @@ class Order extends Model
 
     public function getTicketTotalAttribute()
     {
-        return count(Ticket::whereOrderId($this->id)->get());
+        return count($this->tickets);
     }
 
     public function getPriceAttribute()
     {
-        return ($this->ticket_total * 2) + ($this->extra * $this->ticket_total);
+        $price = $this->ticket_total * env('EACH_PER_TICKET');
+        if ($this->extra) {
+            $price += $this->ticket_total * env('EXTRA_PER_TICKET');
+        }
+        return $price;
     }
 
     public function getUrlAttribute()

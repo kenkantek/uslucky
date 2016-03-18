@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Games;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use DB;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,9 @@ class PowerballController extends Controller
             // Save to Order
             $order = $user->newOrder()
             ->withGame(Game::find(1))
-            ->withExtra($request->extra)
+            ->withExtra((bool) $request->extra)
             ->withDrawAt(powerballNextTime()['time'])
+            ->withDescription($request->description)
             ->publish();
 
             // Save to Ticket
@@ -32,13 +34,85 @@ class PowerballController extends Controller
 
             // Payment it
             if ($request->method == 1) {
-                // Account balance
-
+                $this->chargeFromBalance($user, $request);
+                //event Email
             } else {
-                //Credit card
+                $this->chargeFromCredit($user, $request);
             }
 
             return $order;
         });
+    }
+
+    // Return $amount
+    protected function chargeFromBalance($user, $request)
+    {
+        $balance       = $user->balance; // prev
+        $amount        = $this->calculateAmount($request);
+        $balance_total = $balance - $amount;
+
+        $transaction = $user->newTransaction()
+            ->withType(0)
+            ->withAmount($amount)
+            ->withAmountPrev($balance)
+            ->withAmountTotal($balance_total)
+            ->withDescription($request->description)
+            ->publish();
+
+        // Transaction add status
+        $status = $transaction->updateOrNewStatus()
+            ->withStatus('succeeded')
+            ->publish();
+
+        $amount = $user->updateAmount($user->amount)
+            ->withAmount($balance_total)
+            ->publish();
+
+        return $amount;
+    }
+
+    protected function chargeFromCredit($user, $request)
+    {
+        $balance       = $user->balance; // prev
+        $amount        = $this->calculateAmount($request);
+        $balance_total = $balance - $amount;
+        $payment       = $user->payments()->whereId($request->payment)->first();
+
+        //Charge Stripe
+        $charge = Stripe::charges()->create([
+            'customer'      => $payment->stripe_id,
+            'currency'      => 'USD',
+            'amount'        => $amount,
+            'description'   => $request->description,
+            'receipt_email' => $user->email,
+        ]);
+
+        if (!$charge['failure_code']) {
+            // Transaction
+            $transaction = $payment->newTransaction()
+                ->withType(0)
+                ->withAmount($amount)
+                ->withAmountPrev($balance)
+                ->withAmountTotal($balance_total)
+                ->withDescription($request->description)
+                ->publish();
+
+            // Transaction add status
+            $status = $transaction->updateOrNewStatus()
+                ->withStatus($charge['status'])
+                ->publish();
+        }
+
+        return;
+    }
+
+    // tinh toan Amount from client
+    protected function calculateAmount($request)
+    {
+        $amount = count($request->tickets) * env('EACH_PER_TICKET');
+        if ($request->extra) {
+            $amount += count($request->tickets) * env('EXTRA_PER_TICKET');
+        }
+        return $amount;
     }
 }

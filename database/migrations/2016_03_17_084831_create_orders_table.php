@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('game_id')->unsigned()->index();
             $table->boolean('extra')->default(false);
+            $table->text('description');
             $table->timestamp('draw_at');
             $table->timestamps();
 
