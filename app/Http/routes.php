@@ -43,6 +43,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getAccount' => 'settings.account',
         'getPayment' => 'settings.payment',
         'getWinning' => 'settings.winning',
+        'getTicket'  => 'settings.ticket',
+        'getOrder'   => 'settings.order',
     ]);
 
     $router->controller('account', 'User\AccountController', [
@@ -72,6 +74,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('transaction', 'User\TransactionController', [
         'getTransactions' => 'get.transaction',
         'putCancel'       => 'put.cancel.transaction',
+    ]);
+
+    $router->controller('orders', 'User\OrderController', [
+        'getIndex' => 'order.list',
     ]);
 
     $router->controller('game', 'GameController', [

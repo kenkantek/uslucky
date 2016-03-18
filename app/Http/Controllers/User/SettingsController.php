@@ -47,4 +47,14 @@ class SettingsController extends Controller
         ]);
         return view('user.settings.winning');
     }
+
+    public function getTicket()
+    {
+        return view('user.settings.ticket');
+    }
+
+    public function getOrder()
+    {
+        return view('user.settings.order');
+    }
 }
