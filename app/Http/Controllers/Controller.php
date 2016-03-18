@@ -17,8 +17,9 @@ class Controller extends BaseController
     {
         $this->user = auth()->user();
         \JavaScript::put([
-            '_token' => csrf_token(),
-            '_user'  => ['isLogin' => !!$this->user, 'level' => $this->user ? $this->user->roles : 0],
+            '_token'             => csrf_token(),
+            '_timzone'           => env('TIMEZONE'),
+            'hours_before_close' => env('HOURS_BEFORE_CLOSE'),
         ]);
     }
 }
