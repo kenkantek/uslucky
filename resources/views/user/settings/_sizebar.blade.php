@@ -7,7 +7,9 @@
     <li class="@if($routeName === 'front::settings.winning') current @endif">
         <a href="{{ route('front::settings.winning') }}">Winnings <i class="fa fa-trophy fa-lg pull-right"></i></a></li>
     <li class="divider"></li>
-
+    <li class="@if(($routeName === 'front::settings.order')||($routeName === 'front::settings.ticket')) current @endif">
+        <a href="{{ route('front::settings.order') }}">Your Orders <i class="fa fa-lg fa-shopping-cart pull-right"></i></a></li>
+    <li class="divider"></li>
 
     <li><a href="#">Messages <span class="badge pull-right"> 42 </span></a></li>
     <li class="divider"></li>

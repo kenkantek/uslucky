@@ -66,7 +66,15 @@ export default {
                 nextPageUrl: null
             }
         },
-
+        asyncData(resolve, reject) {
+            this._fetchHistory(laroute.route('front::get.transaction', { one: this.numberMore })).done(histories => {
+                resolve({
+                    histories
+                });
+            }, err => {
+                BOX.alertError();
+            });
+        },
         watch: {
             total: 'reloadAsyncData'
         },

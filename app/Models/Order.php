@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $appends = ['ticket_total', 'price', 'url'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -66,4 +68,20 @@ class Order extends Model
         $this->tickets()->saveMany($newTickets);
         return $this;
     }
+
+    public function getTicketTotalAttribute()
+    {
+        return count(Ticket::whereOrderId($this->id)->get());
+    }
+
+    public function getPriceAttribute()
+    {
+        return ($this->ticket_total * 2) + ($this->extra * $this->ticket_total);
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('front::settings.ticket', $this->id);
+    }
+
 }
