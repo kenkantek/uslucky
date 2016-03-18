@@ -182,6 +182,8 @@
                         }, () => {
                             location.href = laroute.route('front::payment.history');
                         });
+                        localStorage.removeItem("tickets");
+                        localStorage.removeItem("extra");
                         this.closeModal();
                     }, res => {
                         if(res.status === 500) {
