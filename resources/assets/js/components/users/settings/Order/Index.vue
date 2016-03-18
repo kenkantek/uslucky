@@ -27,16 +27,17 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div v-else>
+        <div v-else>
         <div class="error-notice" slot="notice-minimum">
             <div class="oaerror info">
                 <p>
-                    *You have not transacsion!
+                    *You have not order!
                 </p>
             </div>
         </div>
     </div>
+    </div>
+    
     <button style="margin:0; width:100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
     <div v-show="nextPageUrl" style="width:100%; text-align:center; margin-top:10px">
         Show {{ orders.length }} of {{ totalOrders }} record.

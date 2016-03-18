@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     public function getTicket($id, $take = 10)
     {
-        $tickets = Ticket::whereOrderId('id')->get();
+        $tickets = Ticket::whereOrderId($id)->paginate($take);
         return $tickets;
     }
 }
