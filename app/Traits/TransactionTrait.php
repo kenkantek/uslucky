@@ -8,7 +8,7 @@ trait TransactionTrait
     public function newTransaction()
     {
         $transaction = new Transaction;
-        $transaction->user()->associate($this);
+        $transaction->user()->associate(auth()->user());
         $transaction->transactionable()->associate($this);
         return $transaction;
     }
