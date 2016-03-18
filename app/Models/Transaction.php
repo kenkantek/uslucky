@@ -8,6 +8,11 @@ class Transaction extends Model
 {
     protected $fillable = ['type', 'amount', 'amount_prev', 'amount_total', 'description'];
 
+    public function transactionable()
+    {
+        return $this->morphTo();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -44,14 +49,6 @@ class Transaction extends Model
         $this->description = $description;
         return $this;
     }
-    public function regarding($object)
-    {
-        if (is_object($object)) {
-            $this->object_id   = $object->id;
-            $this->object_type = get_class($object);
-        }
-        return $this;
-    }
     public function publish()
     {
         $this->save();
@@ -63,7 +60,6 @@ class Transaction extends Model
     {
         $status = $status instanceof Status ? $status : new Status;
         $status->statusable()->associate($this);
-        $status->regarding($this);
         return $status;
     }
 

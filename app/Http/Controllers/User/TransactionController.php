@@ -34,7 +34,6 @@ class TransactionController extends Controller
             //Update status transactions
             $status = $transaction_need_update->updateOrNewStatus($transaction_need_update->status)
             ->withStatus('canceled')
-            ->regarding($transaction_need_update)
             ->publish();
 
             // Create new transaction

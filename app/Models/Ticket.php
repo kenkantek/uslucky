@@ -18,6 +18,7 @@ class Ticket extends Model
     //BEGIN NEW TICKET
     public function withNumbers($numbers)
     {
+        sort($numbers);
         $this->numbers = $numbers;
         return $this;
     }
@@ -37,7 +38,6 @@ class Ticket extends Model
     {
         $status = $status instanceof Status ? $status : new Status;
         $status->statusable()->associate($this);
-        $status->regarding($this);
         $status->status = 'waiting'; //default
         return $status;
     }

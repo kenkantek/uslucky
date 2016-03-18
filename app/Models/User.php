@@ -80,6 +80,7 @@ class User extends Authenticatable
     {
         $transaction = new Transaction;
         $transaction->user()->associate($this);
+        $transaction->transactionable()->associate($this);
         return $transaction;
     }
 

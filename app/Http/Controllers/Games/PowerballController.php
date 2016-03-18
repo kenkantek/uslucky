@@ -24,6 +24,7 @@ class PowerballController extends Controller
             $order = $user->newOrder()
             ->withGame(Game::find(1))
             ->withExtra($request->extra)
+            ->withDrawAt(powerballNextTime()['time'])
             ->publish();
 
             // Save to Ticket
