@@ -14,7 +14,7 @@
             <div class="col-xs-12 col-md-9">
                 <h2> Your Tickets </h2>
                 <hr>
-                <ticket></ticket>
+                <ticket order-id="{!! $orderId !!}"></ticket>
 
                 <hr>
 

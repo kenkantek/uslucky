@@ -34,27 +34,27 @@
     </table>
 </template>
 
-
 <script>
 import laroute from '../../../../laroute';
 import BOX from '../../../../common';
 import deferred from 'deferred';
 
 export default {
+    props: ['orderId'],
     data() {
             return {
-                orders: [],
+                tickets: [],
                 total: null,
                 numberMore: 10,
                 loading: false,
-                totalOrders: null,
+                totalTickets: null,
                 nextPageUrl: null
             }
         },
         asyncData(resolve, reject) {
-            this._fetchOrder(laroute.route('front::order.ticket', { two: this.numberMore })).done(orders => {
+            this._fetchTicket(laroute.route('front::order.ticket', { one:this.orderId,two: this.numberMore })).done(tickets => {
                 resolve({
-                    orders
+                    tickets
                 });
             }, err => {
                 BOX.alertError();
@@ -62,13 +62,13 @@ export default {
         },
    
         methods: {
-            _fetchOrder(api) {
+            _fetchTicket(api) {
                 this.loading = true;
                 let def = deferred();
                 this.$http.get(api).then(res => {
                     const { data } = res;
                     this.loading = false;
-                    this.totalOrders = data.total;
+                    this.totalTickets = data.total;
                     this.nextPageUrl = data.next_page_url;
                     def.resolve(data.data);
                 }, (res) => {
@@ -78,8 +78,8 @@ export default {
                 return def.promise;
             },
             nextPagination() {
-                this._fetchOrder(this.nextPageUrl).done(orders => {
-                    this.orders = this.orders.concat(orders);
+                this._fetchTicket(this.nextPageUrl).done(tickets => {
+                    this.tickets = this.tickets.concat(tickets);
                 }, err => {
                     BOX.alertError();
                 });
