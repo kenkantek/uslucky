@@ -77,7 +77,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     ]);
 
     $router->controller('orders', 'User\OrderController', [
-        'getIndex' => 'order.list',
+        'getIndex'  => 'order.list',
+        'getTicket' => 'order.ticket',
     ]);
 
     $router->controller('game', 'GameController', [
