@@ -47,8 +47,42 @@ export default {
                 total: null,
                 numberMore: 10,
                 loading: false,
-                totalHistories: null,
+                totalTickets: null,
                 nextPageUrl: null
+            }
+        },
+        asyncData(resolve, reject) {
+            this._fetchTickets(laroute.route('front::order.list', { one: this.numberMore })).done(tickets => {
+                resolve({
+                    tickets
+                });
+            }, err => {
+                BOX.alertError();
+            });
+        },
+   
+        methods: {
+            _fetchTickets(api) {
+                this.loading = true;
+                let def = deferred();
+                this.$http.get(api).then(res => {
+                    const { data } = res;
+                    this.loading = false;
+                    this.totalTickets = data.total;
+                    this.nextPageUrl = data.next_page_url;
+                    def.resolve(data.data);
+                }, (res) => {
+                    def.reject(res);
+                    this.loading = false;
+                });
+                return def.promise;
+            },
+            nextPagination() {
+                this._fetchTickets(this.nextPageUrl).done(tickets => {
+                    this.tickets = this.tickets.concat(tickets);
+                }, err => {
+                    BOX.alertError();
+                });
             }
         },
 }
