@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\StatusTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    use StatusTrait;
+
     protected $fillable = ['type', 'amount', 'amount_prev', 'amount_total', 'description'];
 
     public function transactionable()
@@ -55,12 +58,4 @@ class Transaction extends Model
         return $this;
     }
     //END NEW TRACSACTION
-
-    public function updateOrNewStatus($status = null)
-    {
-        $status = $status instanceof Status ? $status : new Status;
-        $status->statusable()->associate($this);
-        return $status;
-    }
-
 }

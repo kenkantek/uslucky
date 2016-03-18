@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Amount extends Model
 {
+    use TransactionTrait;
+
     public function user()
     {
         return $this->belongsTo(User::class);

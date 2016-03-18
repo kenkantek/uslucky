@@ -31,6 +31,12 @@ class PowerballController extends Controller
             $order->newMultiTicket($request->tickets);
 
             // Payment it
+            if ($request->method == 1) {
+                // Account balance
+
+            } else {
+                //Credit card
+            }
 
             return $order;
         });
