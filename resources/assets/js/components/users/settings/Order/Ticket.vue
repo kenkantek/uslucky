@@ -1,37 +1,45 @@
 <template>
-    <table style="margin:0" class="table table-bordered table-hover trans">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Buy date</th>
-                <th>Your number</th>
-                <th>Price</th>
-                <th>Status</th>
-                <th>Draw date</th>
-                <th>Reward</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>2016-03-17 10:47:43</td>
-                <td>
-                    <ul class="list">
-                        <li>19</li>
-                        <li>24</li>
-                        <li>45</li>
-                        <li>18</li>
-                        <li>36</li>
-                        <li class="powerball">5</li>
-                    </ul>
-                </td>
-                <td>$2</td>
-                <td>Win</td>
-                <td>16-3-2016</td>
-                <td>$1.600.000.000</td>
-            </tr>
-        </tbody>
-    </table>
+    <div v-if="$loadingAsyncData">
+        <loading></loading>
+    </div>
+    <div v-if="!$loadingAsyncData">
+        <table style="margin:0" class="table table-bordered table-hover trans" v-if="tickets.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Buy date</th>
+                    <th>Your number</th>
+                    <th>Status</th>
+                    <th>Draw date</th>
+                    <th>Reward</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="ticket in tickets">
+                    <td>{{ticket.id}}</td>
+                    <td>{{ticket.created_at}}</td>
+                    <td>
+                        <ul class="list">
+                            <li v-for="number in ticket.numbers">{{number}}</li>
+                            <li class="powerball">{{ticket.ball}}</li>
+                        </ul>
+                    </td>
+                    <td>waiting</td>
+                    <td>16-3-2016</td>
+                    <td>$1.600.000.000</td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-else>
+            <div class="error-notice" slot="notice-minimum">
+                <div class="oaerror info">
+                    <p>
+                        *You have not order!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 
@@ -41,14 +49,49 @@ import BOX from '../../../../common';
 import deferred from 'deferred';
 
 export default {
+    props: ['orderId'],
     data() {
             return {
                 tickets: [],
                 total: null,
                 numberMore: 10,
                 loading: false,
-                totalHistories: null,
+                totalTickets: null,
                 nextPageUrl: null
+            }
+        },
+        asyncData(resolve, reject) {
+            this._fetchTicket(laroute.route('front::order.ticket', { one:this.orderId,two: this.numberMore })).done(tickets => {
+                resolve({
+                    tickets
+                });
+            }, err => {
+                BOX.alertError();
+            });
+        },
+   
+        methods: {
+            _fetchTicket(api) {
+                this.loading = true;
+                let def = deferred();
+                this.$http.get(api).then(res => {
+                    const { data } = res;
+                    this.loading = false;
+                    this.totalTickets = data.total;
+                    this.nextPageUrl = data.next_page_url;
+                    def.resolve(data.data);
+                }, (res) => {
+                    def.reject(res);
+                    this.loading = false;
+                });
+                return def.promise;
+            },
+            nextPagination() {
+                this._fetchTicket(this.nextPageUrl).done(tickets => {
+                    this.tickets = this.tickets.concat(tickets);
+                }, err => {
+                    BOX.alertError();
+                });
             }
         },
 }

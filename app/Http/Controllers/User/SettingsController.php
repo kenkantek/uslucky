@@ -48,9 +48,9 @@ class SettingsController extends Controller
         return view('user.settings.winning');
     }
 
-    public function getTicket()
+    public function getTicket($orderId)
     {
-        return view('user.settings.ticket');
+        return view('user.settings.ticket', compact('orderId'));
     }
 
     public function getOrder()

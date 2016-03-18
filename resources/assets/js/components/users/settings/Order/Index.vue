@@ -27,13 +27,13 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div v-else>
-        <div class="error-notice" slot="notice-minimum">
-            <div class="oaerror info">
-                <p>
-                    *You have not transacsion!
-                </p>
+        <div v-else>
+            <div class="error-notice" slot="notice-minimum">
+                <div class="oaerror info">
+                    <p>
+                        *You have not order!
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -42,6 +42,7 @@
         Show {{ orders.length }} of {{ totalOrders }} record.
     </div>
 </template>
+
 
 <script>
 import laroute from '../../../../laroute';

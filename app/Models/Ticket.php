@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    protected $appends = [
+        'status',
+    ];
     use StatusTrait;
 
     protected $casts = [
@@ -36,4 +39,8 @@ class Ticket extends Model
         return $this;
     }
     //END NEW TICKET
+    public function getStatusAttribute()
+    {
+        return $this->with('status');
+    }
 }
