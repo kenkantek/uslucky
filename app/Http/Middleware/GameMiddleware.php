@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 
 class GameMiddleware
@@ -15,7 +16,11 @@ class GameMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (time() > strtotime(powerballNextTime()['time'])) {
+
+        $d = explode('/', powerballNextTime()['time']);
+        (count($d) !== 3) && abort(500, 'Something bad happened');
+        $draw_at = Carbon::create($d[2], $d[0], $d[1], env('HOURS_BEFORE_CLOSE'));
+        if (Carbon::now() > $draw_at) {
             return view('games.middleware');
         }
 

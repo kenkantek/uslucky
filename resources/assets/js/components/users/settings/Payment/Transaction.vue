@@ -8,7 +8,7 @@
 		            <th>Updated At</th>
 		            <th>Description</th>
 		            <th>Amount</th>
-		            <th>Blance</th>
+		            <th>Paid with</th>
 		            <th>Status</th>
 		            <th>Cancel</th>
 		        </tr>
