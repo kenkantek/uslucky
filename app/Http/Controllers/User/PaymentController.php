@@ -5,8 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Events\Payment\UpdatePaymentDefault;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\CreditCardRequest;
+use App\Models\Amount;
 use App\Models\Payment;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -85,6 +87,7 @@ class PaymentController extends Controller
 
     public function getHistory()
     {
-        return view('user.settings.transaction-history');
+        $amount = Amount::whereUserId(Auth::user()->id)->first()->amount;
+        return view('user.settings.transaction-history', compact('amount'));
     }
 }

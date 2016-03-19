@@ -22,7 +22,10 @@
 		            	<span v-if="history.type == 1" style="color:#0062FF;">+{{ history.amount | currency }}</span>
 		            	<span v-else="history.type == 0" style="color:#F00;">-{{ history.amount | currency }}</span>
 		            </td>
-		            <td>{{ history.amount_total | currency }}</td>
+		            <td>
+                        <span v-if="history.transactionable_type=='App\\Models\\Payment'">CreditCard</span>
+                        <span v-else="history.transactionable_type == 'App\\Models\\User'">Account Blance</span>
+                    </td>
 		            <td>	
 						<label class="label label-success" v-if="history.status.status == 'succeeded'">{{ history.status.status }}</label>
 						<label class="label label-danger" v-if="history.status.status == 'canceled'">{{ history.status.status }}</label>
@@ -66,6 +69,7 @@ export default {
                 nextPageUrl: null
             }
         },
+
         asyncData(resolve, reject) {
             this._fetchHistory(laroute.route('front::get.transaction', { one: this.numberMore })).done(histories => {
                 resolve({
