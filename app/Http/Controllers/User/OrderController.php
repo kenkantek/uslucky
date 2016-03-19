@@ -9,15 +9,25 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function getIndex($take = 10)
+    public function getIndex()
+    {
+        return view('user.settings.order');
+    }
+
+    public function getTicket($orderId)
+    {
+        return view('user.settings.ticket', compact('orderId'));
+    }
+
+    public function getApiOrder($take = 10)
     {
         $orders = Order::with('game')->whereUserId(Auth::user()->id)->latest('created_at')->paginate($take);
         return $orders;
     }
 
-    public function getTicket($id, $take = 10)
+    public function getApiTicket($id, $take = 10)
     {
-        $tickets = Ticket::whereOrderId($id)->paginate($take);
-        return $tickets;
+        $ticket = Ticket::with('status')->whereOrderId($id)->paginate($take);
+        return $ticket;
     }
 }

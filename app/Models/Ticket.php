@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-    protected $appends = [
-        'status',
-    ];
     use StatusTrait;
 
     protected $casts = [
@@ -19,6 +16,11 @@ class Ticket extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function status()
+    {
+        return $this->morphOne(Status::class, 'statusable');
     }
 
     //BEGIN NEW TICKET
@@ -39,8 +41,4 @@ class Ticket extends Model
         return $this;
     }
     //END NEW TICKET
-    public function getStatusAttribute()
-    {
-        return $this->with('status');
-    }
 }
