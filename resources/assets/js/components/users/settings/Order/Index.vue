@@ -22,7 +22,7 @@
                     <td>{{order.ticket_total}}</td>
                     <td>{{order.price | currency}}</td>
                     <td>{{order.created_at}}</td>
-                    <td>16-3-2016</td>
+                    <td>{{order.draw_at}}</td>
                     <td><a style="margin-top:0;" class="link" :href="order.url">View details</a></td>
                 </tr>
             </tbody>

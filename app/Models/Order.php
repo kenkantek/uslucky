@@ -35,7 +35,7 @@ class Order extends Model
     {
         $d = explode('/', $draw_at);
         (count($d) !== 3) && abort(500, 'Something bad happened');
-        $this->draw_at = Carbon::create($d[2], $d[0], $d[1], 0);
+        $this->draw_at = Carbon::create($d[2], $d[0], $d[1], env('HOURS_BEFORE_CLOSE'));
         return $this;
     }
     public function withDescription($description)
