@@ -87,7 +87,13 @@ class PaymentController extends Controller
 
     public function getHistory()
     {
-        $amount = Amount::whereUserId(Auth::user()->id)->first()->amount;
+        $amount = Amount::whereUserId(Auth::user()->id)->first();
+        if (!empty($amount)) {
+            $amount = $amount->amount;
+        } else {
+            $amount = 0;
+        }
+
         return view('user.settings.transaction-history', compact('amount'));
     }
 }
