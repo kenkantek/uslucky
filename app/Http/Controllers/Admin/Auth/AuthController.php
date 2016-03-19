@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -17,6 +14,6 @@ class AuthController extends Controller
 
     public function getLogin()
     {
-        return view('admin.Auth.login');
+        return view('admin.auth.login');
     }
 }
