@@ -24,16 +24,13 @@
         <div class="form-actions">
             <button type="submit" class="btn green uppercase" :disabled="submiting">
                 <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Login</button>
-            <label class="rememberme check">
-                <input type="checkbox" v-model="formInputs.remember" value="true" />Remember </label>
-            <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
         </div>
     </form>
 </template>
 
 <script>
     import laroute from '../../../laroute';
-    import BOX from '../../../common';
+    import COMMON from '../../../common';
 
     export default {
         data() {
@@ -68,7 +65,7 @@
                 this.formErrors = {...res.formErrors, ...res.data};
                 this.submiting = false;
                 if(res.status === 500) {
-                    BOX.alertError();
+                    COMMON.alertError();
                 } else if(status === 422)  {
                     toastr.error('Please check input field!.', 'Validate!');
                 }

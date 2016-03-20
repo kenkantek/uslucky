@@ -26,10 +26,12 @@ function powerballNextTime()
         $source = $result['value'][0]['value'][4]['value'][2]['value'];
         preg_match('/[\d]{2}\/[\d]{2}\/[\d]{4}/', $source, $nextTime);
         preg_match('/(?<=\$)[\d,]+/', $source, $amount);
-        return [
-            'time'   => current($nextTime),
-            'amount' => filter_var(current($amount), FILTER_SANITIZE_NUMBER_INT),
-        ];
+        if ($nextTime && $amount) {
+            return [
+                'time'   => current($nextTime),
+                'amount' => filter_var(current($amount), FILTER_SANITIZE_NUMBER_INT),
+            ];
+        }
     });
 
     return $powerball;

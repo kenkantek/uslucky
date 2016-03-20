@@ -74,12 +74,21 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'putCancel'       => 'put.cancel.transaction',
     ]);
 
-    $router->controller('orders', 'User\OrderController', [
-        'getApiOrder'  => 'order.list',
-        'getApiTicket' => 'order.ticket',
-        'getTicket'    => 'settings.ticket',
-        'getIndex'     => 'settings.order',
-    ]);
+    // Orders
+    $router->group(['as' => 'api::', 'prefix' => 'api'], function () use ($router) {
+        $router->get('orders', [
+            'as'   => 'get.orders',
+            'uses' => 'User\OrderController@getOrders',
+        ]);
+        $router->get('orders/{order}', [
+            'as'   => 'get.order',
+            'uses' => 'User\OrderController@getOrder',
+        ]);
+
+    });
+    $router->resource('orders', 'User\OrderController', ['only' => [
+        'index', 'show',
+    ]]);
 
     $router->controller('game', 'GameController', [
         'getPowerball' => 'game.powerball',
@@ -90,23 +99,30 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postPowerball' => 'post.powerball',
     ]);
 
-    $router->get('sadmin/login', [
+});
+
+$router->group([
+    'prefix'     => env('DIR_ADMIN', 'admin'),
+    'as'         => 'back::',
+    'middleware' => ['web']], function () use ($router) {
+
+    $router->get('login', [
         'as'   => 'admin.auth.login',
         'uses' => 'Admin\Auth\AuthController@getLogin',
     ]);
-});
 
-$router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'middleware' => ['web', 'auth', 'active', 'admin']], function () use ($router) {
+    $router->group(['middleware' => ['auth', 'active', 'admin']], function () use ($router) {
+        $router->controller('tickets', 'Admin\TicketsController');
 
-    $router->controller('tickets', 'Admin\TicketsController');
-    $router->controller('contacts', 'Admin\ContactController', [
-        'getIndex'   => 'admin.contacts',
-        'getContact' => 'admin.api.contact',
-        'getDetail'  => 'admin.contact.detail',
-    ]);
-    //NOTICE: Only bottom
-    $router->controller('/', 'Admin\AdminController', [
-        'getDashboard' => 'admin.dashboard',
-    ]);
+        $router->controller('contacts', 'Admin\ContactController', [
+            'getIndex'   => 'admin.contacts',
+            'getContact' => 'admin.api.contact',
+            'getDetail'  => 'admin.contact.detail',
+        ]);
 
+        //NOTICE: Only bottom
+        $router->controller('/', 'Admin\AdminController', [
+            'getDashboard' => 'admin.dashboard',
+        ]);
+    });
 });

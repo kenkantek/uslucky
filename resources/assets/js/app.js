@@ -5,16 +5,16 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
 var Loading = Vue.extend(require('./components/Globals/Loading.vue'));
 Vue.component('loading', Loading);
-import SignUp from './components/auth/SignUp.vue';
-import SignIn from './components/auth/SignIn.vue';
-import SettingAccount from './components/users/settings/accounts/Account.vue';
-import CreditCard from './components/users/settings/Payment/Index.vue';
-import Winning from './components/users/settings/Winning/Index.vue';
+import SignUp from './components/Auth/SignUp.vue';
+import SignIn from './components/Auth/SignIn.vue';
+import SettingAccount from './components/Users/Settings/Accounts/Account.vue';
+import CreditCard from './components/Users/Settings/Payment/Index.vue';
+import Winning from './components/Users/Settings/Winning/Index.vue';
 import Powerball from './components/Games/Powerball/Index.vue';
-import Transaction from './components/users/settings/Payment/Transaction.vue';
-import Order from './components/users/settings/Order/Index.vue';
-import Ticket from './components/users/settings/Order/Ticket.vue'
-import Contact from './components/users/Contact.vue';
+import Transaction from './components/Users/Settings/Payment/Transaction.vue';
+import Order from './components/Users/Settings/Order/Index.vue';
+import ShowOrder from './components/Users/Settings/Order/ShowOrder.vue'
+import Contact from './components/Users/Contact.vue';
 
 new Vue({
 	el: 'body',
@@ -28,7 +28,7 @@ new Vue({
         Transaction,
         Contact,
         Order,
-        Ticket,
+        ShowOrder,
     }
 });
 $('[data-toggle="tooltip"]').tooltip();

@@ -2,8 +2,8 @@
     <div v-if="$loadingAsyncData">
         <loading></loading>
     </div>
-    <div v-if="!$loadingAsyncData">
-        <table style="margin:0" class="table table-bordered table-hover trans" v-if="orders.length">
+    <div v-else>
+        <table class="table table-bordered table-hover trans" v-if="orders.length">
             <thead>
                 <tr>
                     <th>#</th>
@@ -23,22 +23,20 @@
                     <td>{{order.price | currency}}</td>
                     <td>{{order.created_at}}</td>
                     <td>{{order.draw_at}}</td>
-                    <td><a style="margin-top:0;" class="link" :href="order.url">View details</a></td>
+                    <td><a class="link" :href="order.url">View details</a></td>
                 </tr>
             </tbody>
         </table>
         <div v-else>
             <div class="error-notice" slot="notice-minimum">
                 <div class="oaerror info">
-                    <p>
-                        *You have not order!
-                    </p>
+                    <p> *You have not order! </p>
                 </div>
             </div>
         </div>
     </div>
-    <button style="margin:0; width:100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
-    <div v-show="nextPageUrl" style="width:100%; text-align:center; margin-top:10px">
+    <button class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
+    <div v-show="nextPageUrl">
         Show {{ orders.length }} of {{ totalOrders }} record.
     </div>
 </template>
@@ -60,8 +58,9 @@ export default {
                 nextPageUrl: null
             }
         },
+
         asyncData(resolve, reject) {
-            this._fetchOrder(laroute.route('front::order.list', { one: this.numberMore })).done(orders => {
+            this._fetchOrder(laroute.route('front::api::get.orders'), this.numberMore).done(orders => {
                 resolve({
                     orders
                 });
@@ -71,10 +70,10 @@ export default {
         },
    
         methods: {
-            _fetchOrder(api) {
+            _fetchOrder(api, take = 10) {
                 this.loading = true;
                 let def = deferred();
-                this.$http.get(api).then(res => {
+                this.$http.get(api, { take }).then(res => {
                     const { data } = res;
                     this.loading = false;
                     this.totalOrders = data.total;

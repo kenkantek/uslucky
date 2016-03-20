@@ -2,7 +2,7 @@
 
 @section('body-class','order')
 
-@section('title') Your order @stop
+@section('title') Your orders @stop
 
 @section('content')
     <div class="container">
@@ -12,12 +12,10 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2> Your order </h2>
+                <h2> Your orders </h2>
                 <hr>
                 <order></order>
-
                 <hr>
-
             </div>
         </div>
     </div>
