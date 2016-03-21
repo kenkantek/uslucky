@@ -4,10 +4,26 @@
     </div>
     <div v-else>
         <div class="col-md-6">
-            <strong>Bought date:</strong> {{order.created_at}}
+            <div class="col-md-4">
+                <strong>Bought date:</strong>
+            </div>
+            <div class="col-md-8">
+                {{order.created_at}}
+            </div>
+            <div class="col-md-4">
+                <strong>Draw date:</strong>
+            </div>
+            <div class="col-md-8">
+                {{order.draw_at}}
+            </div>
         </div>
         <div class="col-md-6">
-            <strong>Draw date:</strong> {{order.draw_at}}
+            <div class="col-md-4">
+                <strong>Game</strong>
+            </div>
+            <div class="col-md-8">
+                {{order.draw_at}}
+            </div>
         </div>
         <table class="table table-bordered table-hover trans">
             <thead>
