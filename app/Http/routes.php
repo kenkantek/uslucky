@@ -115,20 +115,21 @@ $router->group([
         $router->controller('tickets', 'Admin\TicketsController');
 
 
-    $router->controller('tickets', 'Admin\TicketsController');
-    $router->controller('contacts', 'Admin\ContactController', [
-        'getIndex'   => 'admin.contacts',
-        'getContact' => 'admin.api.contact',
-        'getDetail'  => 'admin.contact.detail',
-    ]);
+        $router->controller('tickets', 'Admin\TicketsController');
 
-    $router->controller('users','Admin\UserController',[
-        'getIndex' => 'admin.users',
-    ]);
-    //NOTICE: Only bottom
-    $router->controller('/', 'Admin\AdminController', [
-        'getDashboard' => 'admin.dashboard',
-    ]);
+        $router->controller('contacts', 'Admin\ContactController', [
+            'getIndex'   => 'admin.contacts',
+            'getContact' => 'admin.api.contact',
+            'getDetail'  => 'admin.contact.detail',
+        ]);
+
+        $router->controller('users','Admin\UserController',[
+            'getIndex' => 'admin.users',
+        ]);
+        //NOTICE: Only bottom
+        $router->controller('/', 'Admin\AdminController', [
+            'getDashboard' => 'admin.dashboard',
+        ]);
 
     });
 });

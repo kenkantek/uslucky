@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $dates   = ['created_at', 'updated_at', 'draw_at'];
-    protected $appends = ['ticket_total', 'price', 'url'];
+    protected $appends = ['ticket_total', 'price', 'url','game_name'];
 
     public function user()
     {
@@ -108,6 +108,10 @@ class Order extends Model
     public function getDrawAtAttribute($date)
     {
         return Carbon::parse($date)->toFormattedDateString();
+    }
+
+    public function getGameNameAttribute(){
+        return $this->game->name;
     }
 
 }
