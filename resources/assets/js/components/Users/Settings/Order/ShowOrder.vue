@@ -16,13 +16,36 @@
             <div class="col-md-8">
                 {{order.draw_at}}
             </div>
+            <div class="col-md-12">
+                <strong>Description:</strong><br>
+                {{order.description}}
+            </div>
         </div>
         <div class="col-md-6">
             <div class="col-md-4">
                 <strong>Game</strong>
             </div>
             <div class="col-md-8">
-                {{order.draw_at}}
+                {{order.game.name}}
+            </div>
+            <div class="col-md-4">
+                <strong>Extra:</strong>
+            </div>
+            <div class="col-md-8">
+                <span v-if="order.extra == '1'">Yes</span>
+                <span v-else>No</span>
+            </div>
+            <div class="col-md-4">
+                <strong>Tickets total:</strong>
+            </div>
+            <div class="col-md-8">
+                {{order.ticket_total}}
+            </div>
+            <div class="col-md-4">
+                <strong>Price total:</strong>
+            </div>
+            <div class="col-md-8">
+                {{order.price | currency}}
             </div>
         </div>
         <table class="table table-bordered table-hover trans">
