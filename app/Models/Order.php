@@ -97,7 +97,17 @@ class Order extends Model
 
     public function getUrlAttribute()
     {
-        return route('front::settings.ticket', $this->id);
+        return route('front::orders.show', $this->id);
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->toFormattedDateString();
+    }
+
+    public function getDrawAtAttribute($date)
+    {
+        return Carbon::parse($date)->toFormattedDateString();
     }
 
 }

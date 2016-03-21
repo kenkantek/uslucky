@@ -84,7 +84,7 @@
     import laroute from '../../../../laroute';
     import BOX from '../../../../common';
     import Changepass from './Changepass.vue';
-    import Datepicker from '../../../datepicker.vue'
+    import Datepicker from '../../../Datepicker.vue'
     import _ from 'lodash';
 
     export default {

@@ -23,7 +23,7 @@ class PowerballController extends Controller
         return DB::transaction(function () use ($user, $request) {
             // Save to Order
             $order = $user->newOrder()
-                ->withGame(Game::find(2))
+                ->withGame(Game::find(1))
                 ->withExtra((bool) $request->extra)
                 ->withDrawAt(powerballNextTime()['time'])
                 ->withDescription($request->description)

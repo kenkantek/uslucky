@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="en">
-    <!--<![endif]-->
-    <!-- BEGIN HEAD -->
-
     <head>
         <meta charset="utf-8" />
         <title>{{env('TITLE')}} | Dashboard</title>
@@ -19,11 +13,7 @@
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
         <!-- BEGIN HEADER -->
         @include('admin._partials.header')
-        <!-- END HEADER -->
-        <!-- BEGIN HEADER & CONTENT DIVIDER -->
         <div class="clearfix"> </div>
-        <!-- END HEADER & CONTENT DIVIDER -->
-        <!-- BEGIN CONTAINER -->
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
             @include('admin._partials.sidebar')
@@ -41,12 +31,8 @@
             <!-- END CONTENT -->
 
         </div>
-        <!-- END CONTAINER -->
-        <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2015 &copy; Metronic by keenthemes.
-                <a href="#" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
-            </div>
+            <div class="page-footer-inner"> {{ date('Y') }} &copy; {{ env('TITLE') }}.</div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
             </div>
@@ -56,9 +42,5 @@
         @include('admin._partials.script')
         {!! HTML::script('js/admin.js') !!}
         @yield('script')
-
-
-
     </body>
-
 </html>

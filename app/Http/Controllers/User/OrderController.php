@@ -4,30 +4,37 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\Ticket;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function getIndex()
+    public function __construct()
     {
-        return view('user.settings.order');
+        parent::__construct();
+        $this->middleware('auth');
     }
 
-    public function getTicket($orderId)
+    public function index()
     {
-        return view('user.settings.ticket', compact('orderId'));
+        return view('user.orders.index');
     }
 
-    public function getApiOrder($take = 10)
+    public function show($id)
     {
-        $orders = Order::with('game')->whereUserId(Auth::user()->id)->latest('created_at')->paginate($take);
-        return $orders;
+        \Javascript::put([
+            'order_id' => $id,
+        ]);
+        return view('user.orders.show');
     }
 
-    public function getApiTicket($id, $take = 10)
+    public function getOrders(Request $request)
     {
-        $ticket = Ticket::with('order')->with('status')->whereOrderId($id)->paginate($take);
-        return $ticket;
+        $take = $request->take;
+        return $this->user->orders()->with('game')->latest()->paginate($take);
+    }
+
+    public function getOrder(Order $order)
+    {
+        return $order->load('tickets.status');
     }
 }
