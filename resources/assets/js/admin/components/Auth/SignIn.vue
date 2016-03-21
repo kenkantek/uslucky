@@ -56,7 +56,7 @@
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true,
             }, () => {
-                location.href = laroute.route('backend::admin.dashboard');
+                location.href = laroute.route('back::admin.dashboard');
             setTimeout(() =>{}, 2000);
         });
 

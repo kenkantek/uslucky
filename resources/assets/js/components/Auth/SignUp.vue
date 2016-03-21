@@ -1,58 +1,31 @@
 <template>
-	<form class="form-horizontal"  @submit.prevent="onSubmit" novalidate>
-
-	    <div class="form-group" :class="{'has-error': formErrors.first_name}">
-	        <label class="col-md-4 control-label">First Name <sup class="text-danger">*</sup></label>
-	        <div class="col-md-6">
-	            <input type="text" class="form-control" v-model="formInputs.first_name" autocomplete="off">
-	            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.first_name"></span>
-	        </div>
-	    </div>
-
-	    <div class="form-group" :class="{'has-error': formErrors.last_name}">
-	        <label class="col-md-4 control-label">Last Name <sup class="text-danger">*</sup></label>
-	        <div class="col-md-6">
-	            <input type="text" class="form-control" v-model="formInputs.last_name" autocomplete="off">
-	            <span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>
-	        </div>
-	    </div>
-
-
-
-	    <hr>
-
-	    <div class="form-group" :class="{'has-error': formErrors.email}">
-	        <label class="col-md-4 control-label">E-Mail <sup class="text-danger">*</sup></label>
-	        <div class="col-md-6">
-	            <input type="email" class="form-control" v-model="formInputs.email" autocomplete="off">
-	            <span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
-	        </div>
-	    </div>
-
-	    <div class="form-group" :class="{'has-error': formErrors.password}">
-	        <label class="col-md-4 control-label">Password <sup class="text-danger">*</sup></label>
-	        <div class="col-md-6">
-	            <input type="password" class="form-control" v-model="formInputs.password" autocomplete="off">
-	            <span class="help-block" v-show="formErrors.password" v-text="formErrors.password"></span>
-	        </div>
-	    </div>
-
-	    <div class="form-group">
-	        <label class="col-md-4 control-label">Re-enter Password <sup class="text-danger">*</sup></label>
-	        <div class="col-md-6">
-	            <input type="password" class="form-control" v-model="formInputs.password_confirmation" autocomplete="off">
-	        </div>
-	    </div>
-
-	    <div class="form-group">
-	        <div class="col-md-6 col-md-offset-4">
+	<form id="contact-form" @submit.prevent="onSubmit" novalidate>
+	    <div v-if="load === true" class="contact-form-loader"></div>
+	    <fieldset>
+	        <label>
+	            <input type="text" v-model="formInputs.name" placeholder="Your Name">
+	            <span class="err" v-show="formErrors.name" v-text="formErrors.name"></span>
+	        </label>
+	        <label>
+	            <input type="text" v-model="formInputs.email" placeholder="Your Email">
+	            <span class="err" v-show="formErrors.email" v-text="formErrors.email"></span>
+	        </label>
+	        <label>
+	            <input type="text" v-model="formInputs.phone" placeholder="Your Phone Number">
+	            <span class="err" v-show="formErrors.phone" v-text="formErrors.phone"></span>
+	        </label>
+	        <label>
+	            <textarea v-model="formInputs.message" placeholder="Message"></textarea>
+	            <span class="err" v-show="formErrors.message" v-text="formErrors.message"></span>
+	        </label>
+	        <!-- <label class="recaptcha"><span class="empty-message">*This field is required.</span></label> -->
+	        <div class="btns">
+	            <button type="reset" class="link">reset</button>
 	            <button type="submit" class="link" :disabled="submiting">
-	                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Sign Up
-	            </button> 
-	            <a class="link" href="/login">Or Login Here</a>
+	                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"> submit
+	            </button>
 	        </div>
-	    </div>
-
+	    </fieldset>
 	</form>
 </template>
 

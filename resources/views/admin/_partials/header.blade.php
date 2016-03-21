@@ -4,7 +4,8 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="index.html">
-                <img src="{{asset('admin/assets/layouts/layout2/img/logo-default.png')}}" alt="logo" class="logo-default" /> </a>
+                {!! HTML::image('admin/assets/layouts/layout2/img/logo-default.png', 'logo', ['class' => 'logo-default']) !!}
+            </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
             </div>
@@ -56,14 +57,14 @@
         <div class="page-top">
             <!-- BEGIN HEADER SEARCH BOX -->
             <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-            <form class="search-form search-form-expanded" action="page_general_search_3.html" method="GET">
+            <form class="search-form search-form-expanded" action="#" method="GET">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search..." name="query">
-                            <span class="input-group-btn">
-                                <a href="javascript:;" class="btn submit">
-                                    <i class="icon-magnifier"></i>
-                                </a>
-                            </span>
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn submit">
+                            <i class="icon-magnifier"></i>
+                        </a>
+                    </span>
                 </div>
             </form>
             <!-- END HEADER SEARCH BOX -->
@@ -88,82 +89,91 @@
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">just now</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-success">
-                                                            <i class="fa fa-plus"></i>
-                                                        </span> New user registered. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-success">
+                                                    <i class="fa fa-plus"></i>
+                                                </span> New user registered.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">3 mins</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> Server #12 overloaded. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-danger">
+                                                <i class="fa fa-bolt"></i>
+                                                </span> Server #12 overloaded.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">10 mins</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-warning">
-                                                            <i class="fa fa-bell-o"></i>
-                                                        </span> Server #2 not responding. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-warning">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </span> Server #2 not responding.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">14 hrs</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-info">
-                                                            <i class="fa fa-bullhorn"></i>
-                                                        </span> Application error. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </span> Application error.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">2 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> Database overloaded 68%. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span> Database overloaded 68%.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">3 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> A user IP blocked. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span> A user IP blocked.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">4 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-warning">
-                                                            <i class="fa fa-bell-o"></i>
-                                                        </span> Storage Server #4 not responding dfdfdfd. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-warning">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </span> Storage Server #4 not responding dfdfdfd.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">5 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-info">
-                                                            <i class="fa fa-bullhorn"></i>
-                                                        </span> System Error. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </span> System Error.
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">9 days</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> Storage server failed. </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span> Storage server failed.
+                                            </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -182,62 +192,67 @@
                             <li class="external">
                                 <h3>You have
                                     <span class="bold">7 New</span> Messages</h3>
-                                <a href="{{route('back::admin.contacts')}}">view all</a>
+                                <a href="{{route('admin.contact.index')}}">view all</a>
                             </li>
                             <li>
                                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                                     <li>
                                         <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{asset('admin/assets/layouts/layout2/img/avatar2.jpg')}}" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from"> Lisa Wong </span>
-                                                        <span class="time">Just Now </span>
-                                                    </span>
+                                            <span class="photo">
+                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar2.jpg', '', ['class' => 'img-circle']) !!}
+                                            </span>
+                                            <span class="subject">
+                                                <span class="from"> Lisa Wong </span>
+                                                <span class="time">Just Now </span>
+                                            </span>
                                             <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{asset('admin/assets/layouts/layout2/img/avatar3.jpg')}}" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from"> Richard Doe </span>
-                                                        <span class="time">16 mins </span>
-                                                    </span>
+                                            <span class="photo">
+                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar3.jpg', '', ['class' => 'img-circle']) !!}
+                                            </span>
+                                            <span class="subject">
+                                                <span class="from"> Richard Doe </span>
+                                                <span class="time">16 mins </span>
+                                            </span>
                                             <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{asset('admin/assets/layouts/layout2/img/avatar1.jpg')}}" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from"> Bob Nilson </span>
-                                                        <span class="time">2 hrs </span>
-                                                    </span>
+                                            <span class="photo">
+                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar1.jpg', '', ['class' => 'img-circle']) !!}
+                                                </span>
+                                            <span class="subject">
+                                                <span class="from"> Bob Nilson </span>
+                                                <span class="time">2 hrs </span>
+                                            </span>
                                             <span class="message"> Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{asset('admin/assets/layouts/layout2/img/avatar2.jpg')}}" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from"> Lisa Wong </span>
-                                                        <span class="time">40 mins </span>
-                                                    </span>
+                                            <span class="photo">
+                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar2.jpg', '', ['class' => 'img-circle']) !!}
+                                            </span>
+                                            <span class="subject">
+                                                <span class="from"> Lisa Wong </span>
+                                                <span class="time">40 mins </span>
+                                            </span>
                                             <span class="message"> Vivamus sed auctor 40% nibh congue nibh... </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{asset('admin/assets/layouts/layout2/img/avatar3.jpg')}}" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from"> Richard Doe </span>
-                                                        <span class="time">46 mins </span>
-                                                    </span>
+                                            <span class="photo">
+                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar3.jpg', '', ['class' => 'img-circle']) !!}
+                                            </span>
+                                            <span class="subject">
+                                                <span class="from"> Richard Doe </span>
+                                                <span class="time">46 mins </span>
+                                            </span>
                                             <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
                                         </a>
                                     </li>
@@ -251,14 +266,13 @@
                     <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" src="{{$auth->image}}" />
+                            {!! HTML::image($auth->image, '', ['class' => 'img-circle']) !!}
                             <span class="username username-hide-on-mobile"> {{$auth->first_name}} </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="{{url('logout')}}">
-                                    <i class="icon-key"></i> Log Out </a>
+                                <a href="/logout"> <i class="icon-key"></i> Log Out </a>
                             </li>
                         </ul>
                     </li>

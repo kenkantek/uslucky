@@ -102,32 +102,33 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 });
 
 $router->group([
-    'prefix'     => env('DIR_ADMIN', 'admin'),
-    'as'         => 'back::',
+    'prefix'     => 'admin',
+    'namespace'  => 'Admin',
     'middleware' => ['web']], function () use ($router) {
 
     $router->get('login', [
         'as'   => 'admin.auth.login',
-        'uses' => 'Admin\Auth\AuthController@getLogin',
+        'uses' => 'Auth\AuthController@getLogin',
     ]);
 
     $router->group(['middleware' => ['auth', 'active', 'admin']], function () use ($router) {
-        $router->controller('tickets', 'Admin\TicketsController');
 
-
-        $router->controller('tickets', 'Admin\TicketsController');
-
-        $router->controller('contacts', 'Admin\ContactController', [
-            'getIndex'   => 'admin.contacts',
-            'getContact' => 'admin.api.contact',
-            'getDetail'  => 'admin.contact.detail',
+        $router->group(['as' => 'admin.', 'prefix' => 'api'], function () use ($router) {
+            $router->get('contacts', [
+                'as'   => 'get.contacts',
+                'uses' => 'ContactController@getContacts',
+            ]);
+        });
+        $router->resource('contact', 'ContactController', [
+            'only' => ['index', 'show'],
         ]);
 
-        $router->controller('users','Admin\UserController',[
-            'getIndex' => 'admin.users',
+        $router->resource('users', 'UserController', [
+            'only' => 'index',
         ]);
+
         //NOTICE: Only bottom
-        $router->controller('/', 'Admin\AdminController', [
+        $router->controller('/', 'AdminController', [
             'getDashboard' => 'admin.dashboard',
         ]);
 

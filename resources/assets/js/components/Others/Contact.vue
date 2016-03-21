@@ -23,7 +23,8 @@
 	        <!-- <label class="recaptcha"><span class="empty-message">*This field is required.</span></label> -->
 	        <div class="btns">
 	          <button type="reset" class="link">reset</button>
-	          <button type="submit" class="link" :disabled="submiting">submit</button>
+	          <button type="submit" class="link" :disabled="submiting">
+                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> submit</button>
 	        </div>
 	    </fieldset>
     </form>
@@ -35,6 +36,7 @@
 	export default{
 		data(){
 			return{
+                submiting: false,
 				formInputs : {},
                 formErrors : {},
                 onSubmmit : false,

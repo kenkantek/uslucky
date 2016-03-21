@@ -1,6 +1,6 @@
 <h3 class="page-title"> Dashboard
-                        <small>dashboard & statistics</small>
-                    </h3>
+    <small>dashboard & statistics</small>
+</h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
