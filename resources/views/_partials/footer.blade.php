@@ -2,7 +2,7 @@
 <div class="footer">
     <div class="container">
         <a href="{{url('')}}">
-            <img src="{{asset('css/images/logo.png')}}" alt="">
+            <img class="img-responsive" style="margin: 0 auto;" src="{{asset('css/images/logo.png')}}" alt="">
         </a>
     </div>
 </div>

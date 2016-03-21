@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div style="padding-top: 50px; padding-bottom: 30px">
+<div style="    padding: 50px 15px 30px 15px;">
     <sign-in></sign-in>
 </div>
 @endsection
