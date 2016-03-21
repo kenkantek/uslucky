@@ -14,6 +14,6 @@ class Contact extends Model
 
     public function getUrlAttribute()
     {
-        return route('backend::admin.contact.detail', $this->id);
+        return route('admin.contact.show', $this->id);
     }
 }

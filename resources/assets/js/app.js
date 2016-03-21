@@ -14,7 +14,7 @@ import Powerball from './components/Games/Powerball/Index.vue';
 import Transaction from './components/Users/Settings/Payment/Transaction.vue';
 import Order from './components/Users/Settings/Order/Index.vue';
 import ShowOrder from './components/Users/Settings/Order/ShowOrder.vue'
-import Contact from './components/Users/Contact.vue';
+import Contact from './components/Others/Contact.vue';
 
 new Vue({
 	el: 'body',

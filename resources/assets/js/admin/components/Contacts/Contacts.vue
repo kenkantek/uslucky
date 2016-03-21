@@ -1,5 +1,5 @@
 <template>
-	<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+	<table class="table table-striped table-bordered table-hover table-checkable order-column">
         <thead>
             <tr>        
                 <th> ID # </th>
@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="contact in contacts">
+            <tr v-for="contact in contacts" track-by="$index">
               <td>
                     <a :href="contact.url">{{contact.id}}</a>
                 </td>
@@ -29,23 +29,23 @@
 
 <script>
 	import laroute from '../../../laroute';
-	 import BOX from '../../../common';
+	 import COMMON from '../../../common';
 
 	export default{
 		data(){
 			return{
-				contacts : {},
+				contacts : [],
 			}
 		},
 
 		asyncData(resolve, reject){
-            this.$http.get(laroute.route('backend::admin.api.contact')).then(res => {
-                const contacts = res.data;
+            this.$http.get(laroute.route('admin.get.contacts')).then(res => {
+                const { data } = res;
                 resolve({
-                    contacts
+                    contacts: data.data
                 });
             }, (res) => {
-                BOX.alertError();
+                COMMON.alertError();
             });
         },
 
