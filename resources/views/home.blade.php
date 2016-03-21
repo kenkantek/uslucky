@@ -371,9 +371,11 @@
             <div class="col-md-3">
                 <h4>Connect with us</h4>
                 <ul class="list1 asd">
-                    <li><a href="#"><i class="fa fa-twitter"></i>twitter</a></li>
-                    <li><a href="#"><i class="fa fa-facebook"></i>facebook</a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i>linkedin</a></li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter-square"></i>  </a>
+                        <a href="#"><i class="fa fa-facebook-square"></i>  </a>
+                        <a href="#"><i class="fa fa-linkedin-square"></i>  </a>
+                    </li>
                 </ul>
             </div>
         </div>

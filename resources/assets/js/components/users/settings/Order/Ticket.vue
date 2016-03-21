@@ -29,7 +29,7 @@
                         <label style="font-size:12px" class="label label-danger" v-if="ticket.status.status == 'lost'">{{ ticket.status.status }}</label>
                         <label style="font-size:12px" class="label label-warning" v-if="ticket.status.status == 'waiting'">{{ ticket.status.status }}</label>
                     </td>
-                    <td>16-3-2016</td>
+                    <td>{{ticket.order.draw_at}}</td>
                     <td>$1.600.000.000</td>
                 </tr>
             </tbody>

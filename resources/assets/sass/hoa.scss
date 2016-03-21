@@ -685,6 +685,10 @@ p {
       &:after {
         display: none;
       }
+      a{
+        font-size: 3em;
+        margin-right: 10px;
+      }
     }
   }
   list-style-type: none;

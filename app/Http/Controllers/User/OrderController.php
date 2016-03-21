@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function getApiTicket($id, $take = 10)
     {
-        $ticket = Ticket::with('status')->whereOrderId($id)->paginate($take);
+        $ticket = Ticket::with('order')->with('status')->whereOrderId($id)->paginate($take);
         return $ticket;
     }
 }
