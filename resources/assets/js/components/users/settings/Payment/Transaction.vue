@@ -8,6 +8,7 @@
 		            <th>Updated At</th>
 		            <th>Description</th>
 		            <th>Amount</th>
+                    <th>Action</th>
 		            <th>Paid with</th>
 		            <th>Status</th>
 		            <th>Cancel</th>
@@ -20,8 +21,13 @@
 		            <td>{{{ history.description }}}</td>
 		            <td>
 		            	<span v-if="history.type == 1" style="color:#0062FF;">+{{ history.amount | currency }}</span>
-		            	<span v-else="history.type == 0" style="color:#F00;">-{{ history.amount | currency }}</span>
+		            	<span v-else style="color:#F00;">-{{ history.amount | currency }}</span>
 		            </td>
+                    <td>
+                        <span v-if="history.type == 0">Claim/Withdraw</span>
+                        <span v-if="history.type == 1">Deposit</span>
+                        <span v-if="history.type == 2">Buy Tickets</span>
+                    </td>
 		            <td>
                         <span v-if="history.transactionable_type=='App\\Models\\Payment'">CreditCard</span>
                         <span v-else="history.transactionable_type == 'App\\Models\\User'">Account Blance</span>

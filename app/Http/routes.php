@@ -104,6 +104,10 @@ $router->group(['prefix' => env('DIR_ADMIN', 'admin'), 'as' => 'backend::', 'mid
         'getContact' => 'admin.api.contact',
         'getDetail'  => 'admin.contact.detail',
     ]);
+
+    $router->controller('users','Admin\UserController',[
+        'getIndex' => 'admin.users',
+    ]);
     //NOTICE: Only bottom
     $router->controller('/', 'Admin\AdminController', [
         'getDashboard' => 'admin.dashboard',

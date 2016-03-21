@@ -23,11 +23,11 @@ class PowerballController extends Controller
         return DB::transaction(function () use ($user, $request) {
             // Save to Order
             $order = $user->newOrder()
-            ->withGame(Game::find(1))
-            ->withExtra((bool) $request->extra)
-            ->withDrawAt(powerballNextTime()['time'])
-            ->withDescription($request->description)
-            ->publish();
+                ->withGame(Game::find(2))
+                ->withExtra((bool) $request->extra)
+                ->withDrawAt(powerballNextTime()['time'])
+                ->withDescription($request->description)
+                ->publish();
 
             // Save to Ticket
             $order->newMultiTicket($request->tickets);
@@ -52,7 +52,7 @@ class PowerballController extends Controller
         $balance_total = $balance - $amount;
 
         $transaction = $user->newTransaction()
-            ->withType(0)
+            ->withType(2)
             ->withAmount($amount)
             ->withAmountPrev($balance)
             ->withAmountTotal($balance_total)
@@ -90,7 +90,7 @@ class PowerballController extends Controller
         if (!$charge['failure_code']) {
             // Transaction
             $transaction = $payment->newTransaction()
-                ->withType(0)
+                ->withType(2)
                 ->withAmount($amount)
                 ->withAmountPrev($balance)
                 ->withAmountTotal($balance_total)

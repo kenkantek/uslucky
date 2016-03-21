@@ -16,7 +16,15 @@
                                 <i class="icon-envelope"></i>
                                 <span class="title">Contacts</span>
                                 <span class="selected"></span>
-                                <span class="arrow @if($routeName === 'backend::admin.contacts') open @endif""></span>
+                                <span class="arrow @if($routeName === 'backend::admin.contacts') open @endif"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item  @if(starts_with($routeName, 'backend::admin.users')) active open @endif">
+                            <a href="{{route('backend::admin.users')}}" class="nav-link nav-toggle">
+                                <i class="icon-user"></i>
+                                <span class="title">Users</span>
+                                <span class="selected"></span>
+                                <span class="arrow @if($routeName === 'backend::admin.users') open @endif"></span>
                             </a>
                         </li>
                     </ul>

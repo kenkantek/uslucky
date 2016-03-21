@@ -29,7 +29,7 @@ class Transaction extends Model
     //BEGIN NEW TRANSACTION
     public function withType($type)
     {
-        $this->type = (bool) $type;
+        $this->type = $type;
         return $this;
     }
     public function withAmount($amount)
