@@ -7,6 +7,8 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         @include('admin._partials.css')
         @yield('css')
+        {!! HTML::style('js/libs/sweetalert/sweetalert.css') !!}
+        {!! HTML::style('js/libs/toastr/toastr.min.css') !!}
     </head>
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -33,6 +35,8 @@
 
         @include('_partials.php2js')
         @include('admin._partials.script')
+        {!! HTML::script('js/libs/sweetalert/sweetalert.min.js') !!}
+        {!! HTML::script('js/libs/toastr/toastr.min.js') !!}
         {!! HTML::script('js/admin.js') !!}
         @yield('script')
     </body>

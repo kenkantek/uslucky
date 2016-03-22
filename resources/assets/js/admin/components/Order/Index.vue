@@ -1,9 +1,7 @@
 <template>
     <div class="portlet light ">
         <header-tools>
-            <div slot="header">
-                <slot name="header"></slot>
-            </div>
+            <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">
             <filter-tools></filter-tools>

@@ -25,7 +25,7 @@
                 <li><a href="#">WINNING NUMBER</a></li>
                 <li @if($routeName === 'front::contact') class="active" @endif><a href="{{route('front::contact')}}">CONTACT</a></li>
                 @if($auth)
-                <li class="cursor"><span class="dropdown-toggle" data-toggle="dropdown">{{$auth->first_name}}</span> <img class="dropdown-toggle" data-toggle="dropdown" src="{{$auth->image}}" style="max-height: 30px; margin-top:9px; border-radius: 50px" alt=""><b class="caret"></b>
+                <li class="cursor"><div class="dropdown-toggle" data-toggle="dropdown"><span>{{$auth->first_name}}</span><div style="margin-top:9px; overflow: hidden; float: left; border-radius: 50px; width: 30px;height: 30px"><img src="{{$auth->image}}" style="width: 100%;" alt=""></div><b class="caret"></b></div>
 					<ul class="dropdown-menu">
                     	<li><a href="{{route('front::settings.account')}}"><i class="fa fa-cog"></i>  Account Settings</a></li>
                     	<li><a href="{{url('logout')}}"><i class="fa fa-envelope"></i>  Messgages</a></li>

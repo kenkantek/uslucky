@@ -3,7 +3,7 @@
         <loading></loading>
     </div>
     <div v-else>
-        <table class="table table-bordered table-hover trans" v-if="orders.length">
+        <table class="table table-bordered table-hover trans" v-if="orders.length" style="margin-bottom: 0px">
             <thead>
                 <tr>
                     <th>#</th>
@@ -35,8 +35,8 @@
             </div>
         </div>
     </div>
-    <button class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
-    <div v-show="nextPageUrl">
+    <button style="width: 100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
+    <div v-show="nextPageUrl" style="width: 100%;text-align: center;margin-top: 15px">
         Show {{ orders.length }} of {{ totalOrders }} record.
     </div>
 </template>

@@ -135,7 +135,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.contact.index')) active open @endif">
+            <li class="nav-item  @if(($routeName == 'admin.contact.index') || ($routeName == 'admin.contact.show')) active open @endif">
                 <a href="{{route('admin.contact.index')}}" class="nav-link nav-toggle">
                     <i class="icon-envelope"></i>
                     <span class="title">Contacts</span>
