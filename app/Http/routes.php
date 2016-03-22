@@ -113,17 +113,31 @@ $router->group([
 
     $router->group(['middleware' => ['auth', 'active', 'admin']], function () use ($router) {
 
+        //API
         $router->group(['as' => 'admin.', 'prefix' => 'api'], function () use ($router) {
             $router->get('contacts', [
                 'as'   => 'get.contacts',
                 'uses' => 'ContactController@getContacts',
             ]);
+            $router->get('orders', [
+                'as'   => 'get.orders',
+                'uses' => 'OrdersController@getOrders',
+            ]);
         });
+
         $router->resource('contact', 'ContactController', [
             'only' => ['index', 'show'],
         ]);
 
         $router->resource('users', 'UserController', [
+            'only' => 'index',
+        ]);
+
+        $router->resource('orders', 'OrdersController', [
+            'only' => 'index',
+        ]);
+
+        $router->resource('tickets', 'TicketsController', [
             'only' => 'index',
         ]);
 

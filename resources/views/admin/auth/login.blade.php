@@ -8,14 +8,14 @@
 
     @include('admin._partials.css')
 
-    {!! HTML::style('admin/assets/pages/css/login.min.css') !!}
+    {!! HTML::style('tadmin/assets/pages/css/login.min.css') !!}
     {!! HTML::style('js/libs/sweetalert/sweetalert.css') !!}
     {!! HTML::style('js/libs/toastr/toastr.min.css') !!}
 
 <body class="login">
     <div class="logo">
         <a href="index.html">
-            {!! HTML::image('admin/assets/pages/img/logo-big.png', '') !!}
+            {!! HTML::image('tadmin/assets/pages/img/logo-big.png', '') !!}
         </a>
     </div>
 

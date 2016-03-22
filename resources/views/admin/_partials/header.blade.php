@@ -4,7 +4,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="index.html">
-                {!! HTML::image('admin/assets/layouts/layout2/img/logo-default.png', 'logo', ['class' => 'logo-default']) !!}
+                {!! HTML::image('tadmin/assets/layouts/layout2/img/logo-default.png', 'logo', ['class' => 'logo-default']) !!}
             </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -199,7 +199,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar2.jpg', '', ['class' => 'img-circle']) !!}
+                                                {!! HTML::image('tadmin/assets/layouts/layout2/img/avatar2.jpg', '', ['class' => 'img-circle']) !!}
                                             </span>
                                             <span class="subject">
                                                 <span class="from"> Lisa Wong </span>
@@ -211,7 +211,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar3.jpg', '', ['class' => 'img-circle']) !!}
+                                                {!! HTML::image('tadmin/assets/layouts/layout2/img/avatar3.jpg', '', ['class' => 'img-circle']) !!}
                                             </span>
                                             <span class="subject">
                                                 <span class="from"> Richard Doe </span>
@@ -223,7 +223,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar1.jpg', '', ['class' => 'img-circle']) !!}
+                                                {!! HTML::image('tadmin/assets/layouts/layout2/img/avatar1.jpg', '', ['class' => 'img-circle']) !!}
                                                 </span>
                                             <span class="subject">
                                                 <span class="from"> Bob Nilson </span>
@@ -235,7 +235,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar2.jpg', '', ['class' => 'img-circle']) !!}
+                                                {!! HTML::image('tadmin/assets/layouts/layout2/img/avatar2.jpg', '', ['class' => 'img-circle']) !!}
                                             </span>
                                             <span class="subject">
                                                 <span class="from"> Lisa Wong </span>
@@ -247,7 +247,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                {!! HTML::image('admin/assets/layouts/layout2/img/avatar3.jpg', '', ['class' => 'img-circle']) !!}
+                                                {!! HTML::image('tadmin/assets/layouts/layout2/img/avatar3.jpg', '', ['class' => 'img-circle']) !!}
                                             </span>
                                             <span class="subject">
                                                 <span class="from"> Richard Doe </span>

@@ -11,8 +11,8 @@ class TicketsController extends Controller
         parent::__construct();
     }
 
-    public function getIndex()
+    public function index()
     {
-        return 'view page tickets';
+        return view('admin.tickets.index');
     }
 }

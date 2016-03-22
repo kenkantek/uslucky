@@ -11,6 +11,11 @@ class AdminController extends Controller
         parent::__construct();
     }
 
+    public function getIndex()
+    {
+        return $this->getDashboard();
+    }
+
     public function getDashboard()
     {
         return view('admin.index');
