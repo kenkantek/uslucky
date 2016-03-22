@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -20,7 +21,26 @@ class OrdersController extends Controller
 
     public function getOrders(Request $request)
     {
-        $take = $request->take ?: 10;
-        return Order::with('user')->latest()->paginate($take);
+        $take    = $request->take ?: 10;
+        $keyword = $request->keyword ?: '';
+        $query   = [null, 'game.name', 'user.first_name', 'user.last_name', 'user.email'];
+        $result  = collect([]);
+
+        foreach ($query as $q) {
+            $tmp = Order::search($keyword, $q ? [$q] : []);
+
+            if (count($tmp->get())) {
+
+                $result->push(
+                    $tmp->with('user')
+                        ->latest()
+                        ->paginate($take)
+                        ->appends(['keyword' => $keyword, 'take' => $take])->toArray()
+                );
+            }
+        }
+
+        return $result->collapse()->unique();
     }
+
 }
