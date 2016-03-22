@@ -21,7 +21,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
     ];
 
-    protected $appends = ['image', 'fullname', 'balance'];
+    protected $appends = ['image', 'fullname', 'balance', 'ticket_total', 'price_total', 'deposit_total', 'withdraw_total'];
 
     protected $dates = ['birthday'];
     /**
@@ -30,7 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'avatar',
+        'password', 'remember_token', 'avatar', 'orders', 'amount', 'transactions',
     ];
 
     public function getFullnameAttribute()
@@ -92,5 +92,45 @@ class User extends Authenticatable
         $order = new Order;
         $order->user()->associate($this);
         return $order;
+    }
+
+    public function getTicketTotalAttribute()
+    {
+        $ticket_total = 0;
+        foreach ($this->orders as $key => $order) {
+            $ticket_total = $order->ticket_total + $ticket_total;
+        }
+        return $ticket_total;
+    }
+
+    public function getPriceTotalAttribute()
+    {
+        $price_total = 0;
+        foreach ($this->orders as $key => $order) {
+            $price_total = $order->price + $price_total;
+        }
+        return $price_total;
+    }
+
+    public function getDepositTotalAttribute()
+    {
+        $deposit_total = 0;
+        foreach ($this->transactions as $key => $transaction) {
+            if ($transaction->type == 1) {
+                $deposit_total = $transaction->amount + $deposit_total;
+            }
+        }
+        return $deposit_total;
+    }
+
+    public function getWithdrawTotalAttribute()
+    {
+        $withdraw_total = 0;
+        foreach ($this->transactions as $key => $transaction) {
+            if ($transaction->type == 0) {
+                $withdraw_total = $transaction->amount + $withdraw_total;
+            }
+        }
+        return $withdraw_total;
     }
 }

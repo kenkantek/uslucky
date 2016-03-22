@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -11,8 +13,9 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
-    public function getUsers()
+    public function getUsers(Request $request)
     {
-        return 'done';
+        $take         = $request->take;
+        return $users = User::latest()->paginate($take);
     }
 }

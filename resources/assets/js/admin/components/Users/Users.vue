@@ -11,63 +11,18 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr v-for="user in users">
             <td class="fit">
-                <img class="user-pic" src=""> </td>
+                <img class="user-pic" :src="user.image"> </td>
             <td>
-                <a href="javascript:;" class="primary-link">Brain</a>
+                <a href="javascript:;" class="primary-link">{{user.fullname}}</a>
             </td>
-            <td> 5 </td>
-            <td> $345 </td>
-            <td> 45 </td>
-            <td> 124 </td>
+            <td> {{user.ticket_total}} </td>
+            <td> {{user.price_total | currency}} </td>
+            <td class="font-blue-madison"> +{{user.deposit_total | currency}} </td>
+            <td class="font-red-mint"> -{{user.withdraw_total | currency}} </td>
             <td>
-                <span class="bold theme-font">80%</span>
-            </td>
-            <td><a href="" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
-        </tr>
-        <tr>
-            <td class="fit">
-                <img class="user-pic" src=""> </td>
-            <td>
-                <a href="javascript:;" class="primary-link">Nick</a>
-            </td>
-            <td> 5 </td>
-            <td> $560 </td>
-            <td> 12 </td>
-            <td> 24 </td>
-            <td>
-                <span class="bold theme-font">67%</span>
-            </td>
-            <td><a href="" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
-        </tr>
-        <tr>
-            <td class="fit">
-                <img class="user-pic" src=""> </td>
-            <td>
-                <a href="javascript:;" class="primary-link">Tim</a>
-            </td>
-            <td> 5 </td>
-            <td> $1,345 </td>
-            <td> 450 </td>
-            <td> 46 </td>
-            <td>
-                <span class="bold theme-font">98%</span>
-            </td>
-            <td><a href="" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
-        </tr>
-        <tr>
-            <td class="fit">
-                <img class="user-pic" src=""> </td>
-            <td>
-                <a href="javascript:;" class="primary-link">Tom</a>
-            </td>
-            <td> 5 </td>
-            <td> $645 </td>
-            <td> 50 </td>
-            <td> 89 </td>
-            <td>
-                <span class="bold theme-font">58%</span>
+                <span class="bold theme-font">{{user.balance | currency}}</span>
             </td>
             <td><a href="" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
         </tr>
@@ -76,15 +31,55 @@
 </template>
 
 <script>
-	import laroute from "../../../laroute";
-	import COMMON from "../../../common";
-	import deferred from 'deferred';
+import laroute from '../../../laroute';
+import COMMON from '../../../common';
+import deferred from 'deferred';
 
-	export default{
-		data() {
-			return {
-				users: [],
-			}
-		},	
-	}
+export default {
+    data() {
+            return {
+                users: [],
+                total: null,
+                numberMore: 10,
+                loading: false,
+                totalUsers: null,
+                nextPageUrl: null
+            }
+        },
+
+        asyncData(resolve, reject) {
+            this._fetchUser(laroute.route('admin.get.users'), this.numberMore).done(users => {
+                resolve({
+                    users
+                });
+            }, err => {
+                COMMON.alertError();
+            });
+        },
+   
+        methods: {
+            _fetchUser(api, take = 10) {
+                this.loading = true;
+                let def = deferred();
+                this.$http.get(api, { take }).then(res => {
+                    const { data } = res;
+                    this.loading = false;
+                    this.totalUsers = data.total;
+                    this.nextPageUrl = data.next_page_url;
+                    def.resolve(data.data);
+                }, (res) => {
+                    def.reject(res);
+                    this.loading = false;
+                });
+                return def.promise;
+            },
+            nextPagination() {
+                this._fetchUser(this.nextPageUrl).done(users => {
+                    this.users = this.users.concat(users);
+                }, err => {
+                    COMMON.alertError();
+                });
+            }
+        },
+}
 </script>

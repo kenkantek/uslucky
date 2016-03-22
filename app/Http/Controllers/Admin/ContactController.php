@@ -34,7 +34,7 @@ class ContactController extends Controller
     public function getContacts(Request $request)
     {
         $take = $request->take;
-        return Contact::paginate($take);
+        return Contact::latest()->paginate($take);
     }
 
     public function update(ReplyContactRequest $request, $id)
