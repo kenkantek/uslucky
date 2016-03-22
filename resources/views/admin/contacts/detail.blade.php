@@ -10,45 +10,40 @@
                 <div class="portlet-title tabbable-line">
                     <div class="caption caption-md">
                         <i class="icon-globe theme-font hide"></i>
-                        <span class="caption-subject font-blue-madison bold uppercase">Contact Details #1123</span>
+                        <span class="caption-subject font-blue-madison bold uppercase">Contact Details #{{$contact->id}}</span>
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="ticket-cust">
-                                <span class="bold">Customer:</span> Jane (
-                                <a href="mailto:customer@gmail.com">customer@gmail.com)</a>
+                                <span class="bold">Customer:</span> {{$contact->name}} (
+                                <a href="mailto:{{$contact->email}}">{{$contact->email}}</a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="ticket-date">
-                                <span class="bold">Entry Date/Time:</span> 10/12/2015 10:15am </div>
+                                <span class="bold">Entry Date/Time:</span> {{$contact->created_at}} </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="ticket-msg">
-                                <h3>
-                                                                <i class="icon-note"></i> Customer Message</h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac purus urna. Nam eu ante orci. Ut sollicitudin tempor dolor a feugiat. Proin sodales molestie nisl ac varius.
-                                    <br/>
-                                    <br/> Morbi volutpat urna at ultrices lacinia. Integer consectetur justo quis luctus congue. Fusce at sem a ipsum efficitur tincidunt cursus sit amet enim. </p>
+                                <h3><i class="icon-note"></i> Customer Message</h3> {{$contact->message}}
                             </div>
                         </div>
                     </div>
                     <div class="ticket-line"></div>
-                    <form class="form-group">
+                    @if($contact->status == 'replied')
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>
-                                                                <i class="icon-action-redo"></i> Ticket Reply</h3>
-                                <textarea class="ticket-reply-msg" row="10"></textarea>
+                                <h3><i class="icon-action-redo"></i> Replied:</h3>
+                                <p>{{$contact->reply_content}}</p>
                             </div>
                         </div>
-
-                        <button class="btn btn-square uppercase bold green" type="submit">Submit</button>
-                    </form>
+                    @else
+                        <reply-contact id="{{$contact->id}}"></reply-contact>
+                    @endif
                 </div>
             </div>
         </div>

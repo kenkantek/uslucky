@@ -118,9 +118,14 @@ $router->group([
                 'as'   => 'get.contacts',
                 'uses' => 'ContactController@getContacts',
             ]);
+
+            $router->get('users', [
+                'as'   => 'get.users',
+                'uses' => 'UserController@getUsers',
+            ]);
         });
         $router->resource('contact', 'ContactController', [
-            'only' => ['index', 'show'],
+            'only' => ['index', 'show', 'update'],
         ]);
 
         $router->resource('users', 'UserController', [
