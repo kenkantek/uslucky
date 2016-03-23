@@ -28,9 +28,12 @@ class OrdersController extends Controller
         return view('admin.orders.show', compact('orders'));
     }
 
-    public function getPrint(Order $order)
+    public function getPrints(Request $request)
     {
-        return view('admin.layouts.print', compact('order'));
+        $orders = Order::whereIn('id', $request->ids)->get();
+        return $orders;
+
+        return view('admin.layouts.print', compact('orders'));
     }
 
     public function getOrders(Request $request)
