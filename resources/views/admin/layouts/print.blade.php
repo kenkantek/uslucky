@@ -183,6 +183,7 @@ button {
 </style>
 </head>
 <body onload="">
+@foreach($orders as $key => $order)
 <div id="page" class="page">
     <div class="header">
         <div class="logo"><img src="{{asset('css/images/logo.png')}}"/></div>
@@ -200,13 +201,21 @@ button {
       <th width="10%">#</th>
       <th>Number</th>
     </tr>
+    @foreach($order->tickets as $key => $ticket)
     <tr>
-      <td align="center">11111</td>
-      <td>222222</td>
+      <td align="center">{{$ticket->id}}</td>
+      <td>
+          <ul>
+          @foreach($ticket->numbers as $key => $number)
+              <li>{{$number}}</li>
+          @endforeach
+          </ul>
+      </td>
     </tr>
+    @endforeach
   </table>
-  <div class="footer-right"> US, {{date_format('m - d - Y', timme())}}<br/>
-    Nhân viên </div>
+  <div class="footer-right"> US, {{time()}} </div>
 </div>
+@endforeach
 </body>
 </html>
