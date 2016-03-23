@@ -18,7 +18,6 @@
                          <option value="50">50</option>
                          <option value="100">100</option>
                          <option value="150">150</option>
-                         <option value="-1">All</option>
                      </select> records
                  </label>
                  <span class="seperator">|</span>Found total {{ data.total }} records
@@ -44,29 +43,19 @@
     export default {
         props: ['data', 'keyword'],
 
-        data() {
-            keyuping: false
-        },
-
         methods: {
             onKeyup() {
                 this.keyword = this.$els.keyword.value.trim();
             },
 
             prevPage() {
-                if(this.data.prev_page_url) {
-                    this.$parent._fetchOrders(this.data.prev_page_url).done(data => {
-                        this.data = data
-                    });
-                }
+                this.data.prev_page_url && 
+                this.$dispatch('go-to-page', this.prev_page_url);
             },
 
             prevNext() {
-                if((this.data.next_page_url)) {
-                    this.$parent._fetchOrders(this.data.next_page_url).done(data => {
-                        this.data = data
-                    });
-                }
+                this.data.next_page_url && 
+                this.$dispatch('go-to-page', this.next_page_url);
             }
         } 
     }

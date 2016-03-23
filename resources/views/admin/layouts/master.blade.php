@@ -7,8 +7,7 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         @include('admin._partials.css')
         @yield('css')
-        {!! HTML::style('js/libs/sweetalert/sweetalert.css') !!}
-        {!! HTML::style('js/libs/toastr/toastr.min.css') !!}
+        {!! HTML::style(elixir('css/admin.css')) !!}
     </head>
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -37,7 +36,7 @@
         @include('admin._partials.script')
         {!! HTML::script('js/libs/sweetalert/sweetalert.min.js') !!}
         {!! HTML::script('js/libs/toastr/toastr.min.js') !!}
-        {!! HTML::script('js/admin.js') !!}
+        {!! HTML::script(elixir('js/admin.js')) !!}
         @yield('script')
     </body>
 </html>

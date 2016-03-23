@@ -20,3 +20,5 @@ module.exports = {
         return start.countdown(end).toString();
     }
 }
+
+$('[data-toggle="tooltip"]').tooltip();
