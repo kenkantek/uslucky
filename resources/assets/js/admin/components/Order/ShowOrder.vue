@@ -2,8 +2,8 @@
     <div class="portlet light ">
         <slot slot="header" name="header"></slot>
         <div class="portlet-body">
-            <div class="row">
-                <div class="col-md-5 well">
+            <div class="row well">
+                <div class="col-md-5">
                     <div class="col-md-4">
                         <strong>Bought date:</strong>
                     </div>
@@ -21,7 +21,7 @@
                         <br> {{order.description}}
                     </div>
                 </div>
-                <div class="col-md-5 well">
+                <div class="col-md-5">
                     <div class="col-md-4">
                         <strong>Game</strong>
                     </div>
@@ -48,22 +48,17 @@
                         {{order.price | currency}}
                     </div>
                 </div>
-                <div class="col-md-2 well">
-                    <a style="margin:0 auto" onclick="this.style.display ='none'; window.print()" href="#"><i class="fa fa-print" style="font-size: 6em;
-    padding: 30px;"></i></a>
+                <div class="col-md-2">
+                    <a href="javascript:;">
+                        <i class="fa fa-print fa-5x margin-top-30"></i>
+                    </a>
                 </div>
             </div>
             <div class="table-scrollable table-scrollable-borderless">
-                <div v-if="$loadingAsyncData" class="move-top"><loading></loading></div>
-                <table v-else class="table table-hover table-light">
+                <div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
+                <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
-                            <th>
-                            <div class="checker">
-                                <span><input type="checkbox" class="group-checkable"></span>
-                            </div>
-                            </th>
-                            <th>#</th>
                             <th>Number</th>
                             <th> Status </th>
                             <th> Bought</th>
@@ -72,12 +67,6 @@
                     </thead>
                     <tbody>
                         <tr v-for="ticket in order.tickets">
-                            <td>
-                                <div class="checker"><span><input type="checkbox" value="1"></span></div>
-                            </td>
-
-                            <td>{{ ticket.id }}</td>
-
                             <td>
                                 <ul class="list">
                                     <li v-for="number in ticket.numbers">{{number}}</li>

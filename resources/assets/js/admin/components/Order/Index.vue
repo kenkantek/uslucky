@@ -1,8 +1,3 @@
-<style scoped>
-    .move-top {
-        transform: translateY(-10px);
-    }
-</style>
 <template>
     <div class="portlet light ">
         <header-tools>
@@ -17,7 +12,7 @@
             </filter-tools>
 
             <div class="table-scrollable table-scrollable-borderless">
-                <div v-if="$loadingAsyncData" class="move-top"><loading></loading></div>
+                <div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
                 <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
@@ -26,8 +21,8 @@
                             <th colspan="2">MEMBER</th>
                             <th> Game Type </th>
                             <th> Total Ticket </th>
-                            <th> Buy date </th>
-                            <th>Draw At</th>
+                            <th> Bought Date </th>
+                            <th>Draw Date</th>
                             <th colspan="2"> Description </th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -56,7 +51,7 @@
                             <td colspan="2">{{ order.description }}</td>
 
                             <td class="text-center">
-                                <a class="label label-default" href="{{url_admin}}/{{order.id}}"><i class="fa fa-eye"></i></a>
+                                <a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a>
                                 <a class="label label-info" href="#"><i class="fa fa-print"></i></a>
                                 <a class="label label-danger" href="#"><i class="fa fa-remove"></i></a>
                             </td>
@@ -82,16 +77,17 @@
     export default {
         data() {
             return {
+                api: laroute.route('admin.get.orders'),
                 data: {
                     per_page: "10",
                 },
-                keyword: '',
-                url_admin: laroute.route('admin.orders.index')
+                keyword: ''
             }
         },
 
         asyncData(resolve, reject) {
-            this._fetchOrders(laroute.route('admin.get.orders')).done(data => {
+            console.log(this.keyword)
+            this._fetchOrders(this.api).done(data => {
                 resolve({ data });
             }, err => {
                 COMMON.alertError();
@@ -125,14 +121,16 @@
             }
         },
 
+        filters: {
+            linkShow(orders) {
+                return laroute.route('admin.orders.show', { orders });
+            }
+        },
+
         events: {
             'go-to-page'(api) {
-                this._fetchOrders(api).done(data => {
-                    this.data = data;
-                }, res => {
-                    COMMON.alertError();
-                    console.warn(err);
-                });
+                this.api = api;
+                this.reloadAsyncData();
             }
         },
 
