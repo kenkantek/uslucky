@@ -30,26 +30,13 @@ class OrdersController extends Controller
 
     public function getOrders(Request $request)
     {
-        $take    = $request->take ?: 10;
         $keyword = $request->keyword ?: '';
-        $query   = [null, 'game.name', 'user.first_name', 'user.last_name', 'user.email'];
-        $result  = collect([]);
-
-        foreach ($query as $q) {
-            $tmp = Order::search($keyword, $q ? [$q] : []);
-
-            if (count($tmp->get())) {
-
-                $result->push(
-                    $tmp->with('user')
-                        ->latest()
-                        ->paginate($take)
-                        ->appends(['keyword' => $keyword, 'take' => $take])->toArray()
-                );
-            }
-        }
-
-        return $result->collapse()->unique();
+        $take    = $request->take ?: 10;
+        return Order::search($keyword)
+            ->with('user')
+            ->latest()
+            ->paginate($take)
+            ->appends(['take' => $take, 'keyword' => $keyword]);
     }
 
     public function getOrder(Order $order)

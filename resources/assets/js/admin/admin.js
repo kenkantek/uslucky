@@ -3,8 +3,7 @@ Vue.use(require('vue-resource'));
 Vue.use(require('vue-async-data'));
 Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
-var Loading = Vue.extend(require('../components/Globals/Loading.vue'));
-Vue.component('loading', Loading);
+Vue.component('loading', Vue.extend(require('../components/Globals/Loading.vue')));
 
 import Order from './components/Order/Index.vue';
 import OrderDetails from './components/Order/ShowOrder.vue';
@@ -24,4 +23,12 @@ new Vue({
         OrderDetails,
     }
 });
-$('[data-toggle="tooltip"]').tooltip();
+
+const sidebar = $('.menu-toggler.sidebar-toggler');
+sidebar.on('click', function() {
+    localStorage.setItem('sidebar-admin', !!$('body').hasClass('page-sidebar-closed'));
+});
+
+window.onload = () => {
+    localStorage.getItem('sidebar-admin') === 'false' && sidebar.trigger('click');
+}

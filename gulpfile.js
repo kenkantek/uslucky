@@ -23,6 +23,8 @@ elixir(function(mix) {
 
     mix.version([
     	'css/app.css',
-    	'js/app.js'
+    	'js/app.js',
+        'css/admin.css',
+        'js/admin.js'
 	]);
 });

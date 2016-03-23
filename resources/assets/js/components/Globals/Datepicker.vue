@@ -101,10 +101,11 @@
           </div>
               <input 
               type="text" 
-              class="form-control"
+              class="form-control {{ class }}"
               :style="styleObj"
               :readonly="readonly"
               :value="value"
+              :placeholder="placeholder"
               @click="show = !show" >
               <div class="picker-wrap" v-show="show">
             <table class="date-picker">
@@ -146,7 +147,9 @@
             width: { type: String, default: '100%' },
             readonly: { type: Boolean, default: false },
             value: { type: String, default: '' },
-            format: { type: String, default: 'MM-DD-YYY' }
+            format: { type: String, default: 'MM-DD-YYY' },
+            placeholder: { type: String, default: '' },
+            class: { type: String, default: '' }
         },
         data () {
             return {

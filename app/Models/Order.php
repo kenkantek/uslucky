@@ -10,9 +10,12 @@ class Order extends Model
 {
     use Eloquence;
 
-    protected $searchableColumns = ['id', 'description', 'draw_at', 'created_at'];
-    protected $dates             = ['created_at', 'updated_at', 'draw_at'];
-    protected $appends           = ['ticket_total', 'price', 'url', 'game_name'];
+    protected $searchableColumns = [
+        'id', 'description', 'draw_at', 'created_at',
+        'user.email', 'user.last_name', 'user.first_name', 'game.name',
+    ];
+    protected $dates   = ['created_at', 'updated_at', 'draw_at'];
+    protected $appends = ['ticket_total', 'price', 'url', 'game_name'];
 
     public function user()
     {
