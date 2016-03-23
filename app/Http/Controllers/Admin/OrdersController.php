@@ -28,6 +28,11 @@ class OrdersController extends Controller
         return view('admin.orders.show', compact('orders'));
     }
 
+    public function getPrint(Order $order)
+    {
+        return view('admin.layouts.print', compact('order'));
+    }
+
     public function getOrders(Request $request)
     {
         $keyword = $request->keyword ?: '';

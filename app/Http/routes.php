@@ -134,6 +134,11 @@ $router->group([
                 'as'   => 'get.users',
                 'uses' => 'UserController@getUsers',
             ]);
+
+            $router->get('print/{order}', [
+                'as'   => 'get.print',
+                'uses' => 'OrdersController@getPrint',
+            ]);
         });
 
         $router->resource('contact', 'ContactController', [
