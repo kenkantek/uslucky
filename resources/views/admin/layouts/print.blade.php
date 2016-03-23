@@ -8,6 +8,32 @@ body {
     font: 12pt "Tohoma";
 }
 
+.col-md-4{
+    width:38%;
+    float:left;
+    padding:5px;
+}
+
+.col-md-8{
+    width:58%;
+    float:left;
+    padding:5px;
+}
+
+.col-md-12{
+    width:100%;
+    padding:5px;
+}
+
+.col{
+    float: left;
+    width: 50%;
+}
+
+h4{
+    font-size: 18px;
+}
+
 ul{
     padding-left:0;
   }
@@ -231,6 +257,48 @@ button {
   </div>
   <br/>
   <br/>
+  <div style="margin-bottom: 20px; float: left;">
+        <div class="col">
+            <div class="col-md-4">
+                        <strong>Bought date:</strong>
+                    </div>
+                    <div class="col-md-8">
+                        {{ $order->created_at}}
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Draw date:</strong>
+                    </div>
+                    <div class="col-md-8">
+                        {{$order->draw_at}}
+                    </div>
+                    <div class="col-md-12">
+                        <strong>Description:</strong>
+                        <br> {{$order->description}}
+                    </div>
+        </div>
+
+        <div class="col">
+            <div class="col-md-4">
+                        <strong>Game</strong>
+                    </div>
+                    <div class="col-md-8">
+                        {{$order->game_name}}
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Extra:</strong>
+                    </div>
+                    <div class="col-md-8">
+                        @if($order->extra == 0) No @else Yes @endif
+                    </div>
+
+                    <div class="col-md-4">
+                        <strong>Price total:</strong>
+                    </div>
+                    <div class="col-md-8">
+                        USD ${{number_format($order->price,2)}}
+                    </div>
+        </div>
+    </div>
   <table class="TableData">
     <tr>
       <th width="10%">#</th>
