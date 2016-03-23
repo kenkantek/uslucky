@@ -13,8 +13,9 @@ class AccountController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('auth');
-        $this->middleware('active', ['except' => ['getThank', 'getVerify', 'getReSendEmail']]);
+        //$this->middleware('guest', ['except' => ['getThank', 'getVerify']]);
+        $this->middleware('auth', ['except' => ['getThank', 'getVerify']]);
+        $this->middleware('active', ['only' => 'getReSendEmail']);
     }
 
     public function getAccount()
@@ -77,8 +78,6 @@ class AccountController extends Controller
         $user = User::whereActiveCode($active_code)->first();
         if (!$user) {
             return redirect()->route('front::settings.account');
-        } elseif ($this->user->active == 1) {
-            return redirect()->route('front::settings.account');
         } else {
             $user->active_code = null;
             $user->active      = 1;
@@ -96,12 +95,8 @@ class AccountController extends Controller
 
     public function getThank()
     {
-        if ($this->user->active == 1) {
-            return redirect()->route('front::settings.account');
-        } else {
-            $flash_mes = 'success';
-            return view('user.verify', compact('flash_mes'));
-        }
+        $flash_mes = 'success';
+        return view('user.verify', compact('flash_mes'));
     }
 
     public function getReSendEmail()

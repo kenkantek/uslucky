@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <a href="javascript:;">
+                    <a target="_blank" :href="order.id | linkPrint">
                         <i class="fa fa-print fa-5x margin-top-30"></i>
                     </a>
                 </div>
@@ -61,7 +61,6 @@
                         <tr class="uppercase">
                             <th>Number</th>
                             <th> Status </th>
-                            <th> Bought</th>
                             <th> Reward </th>
                         </tr>
                     </thead>
@@ -79,7 +78,6 @@
                                 <label class="label label-danger" v-if="ticket.status.status == 'lost'">{{ ticket.status.status }}</label>
                                 <label class="label label-warning" v-if="ticket.status.status == 'waiting'">{{ ticket.status.status }}</label>
                             </td>
-                            <td><i class="fa fa-check"></i></td>
                             <td>$1.600.000.000</td>
                         </tr>
                     </tbody>
@@ -108,6 +106,12 @@ export default {
             }, err => {
                 COMMON.alertError();
             });
+        },
+
+        filters: {
+            linkPrint(ids) {
+                return laroute.route('get.prints') +'/?' + $.param({ ids: [ids] }).replace('%5B%5D', '[]');
+            }
         },
    
         methods: {

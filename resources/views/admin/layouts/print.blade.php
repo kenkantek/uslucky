@@ -8,6 +8,41 @@ body {
     font: 12pt "Tohoma";
 }
 
+ul{
+    padding-left:0;
+  }
+.list{
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      margin: 0;
+      text-align: left;
+
+  }
+
+  .list .powerball{
+          background-color:#F06;
+          color:#ffffff;
+        }
+
+  .list li{
+        position: relative;
+        float: left;
+        text-align: center;
+        background: #FEC732;
+        color: #000000;
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 27px;
+        width: 29px;
+        height: 29px;
+        font-weight: bold;
+        border-radius: 28px;
+        margin-left: 1px;
+        list-style-type:none;
+        margin:10px 5px 10px 5px;
+      }
+
 * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -182,7 +217,7 @@ button {
 }
 </style>
 </head>
-<body onload="">
+<body onload="window.print()">
 @foreach($orders as $key => $order)
 <div id="page" class="page">
     <div class="header">
@@ -204,17 +239,18 @@ button {
     @foreach($order->tickets as $key => $ticket)
     <tr>
       <td align="center">{{$ticket->id}}</td>
-      <td>
-          <ul>
+      <td align="center">
+          <ul class="list">
           @foreach($ticket->numbers as $key => $number)
               <li>{{$number}}</li>
           @endforeach
+                <li class="powerball">{{$ticket->ball}}</li>
           </ul>
       </td>
     </tr>
     @endforeach
   </table>
-  <div class="footer-right"> US, {{time()}} </div>
+  <div class="footer-right"> US, {{date("D - m - Y")}} </div>
 </div>
 @endforeach
 </body>
