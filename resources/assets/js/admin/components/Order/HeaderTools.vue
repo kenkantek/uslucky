@@ -14,6 +14,11 @@
                             <i class="icon-printer"></i> Print
                         </a>
                     </li>
+                    <li>
+                        <a href="javascript:;" data-action="0" class="tool-action">
+                            <i class="icon-trash"></i> Delete
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

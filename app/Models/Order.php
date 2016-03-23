@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\StatusTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Sofa\Eloquence\Eloquence;
 
 class Order extends Model
 {
-    use Eloquence;
+    use Eloquence, StatusTrait;
 
     protected $searchableColumns = [
         'id', 'description', 'draw_at', 'created_at',
@@ -25,6 +26,11 @@ class Order extends Model
     public function game()
     {
         return $this->belongsTo(Game::class);
+    }
+
+    public function status()
+    {
+        return $this->morphOne(Status::class, 'statusable');
     }
 
     //BEGIN NEW ORDER

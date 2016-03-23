@@ -18,7 +18,7 @@ class CreateStatusesTable extends Migration
             $table->enum('status', [
                 'pendding', 'canceled', 'failed', 'succeeded',
                 'actived', 'disabled',
-                'waiting', 'purchased', 'won', 'fail',
+                'waiting', 'wait for purchase', 'purchased', 'won', 'fail',
             ])->default('pendding');
         });
     }

@@ -30,11 +30,11 @@ class OrderController extends Controller
     public function getOrders(Request $request)
     {
         $take = $request->take;
-        return $this->user->orders()->with('game')->latest()->paginate($take);
+        return $this->user->orders()->with(['game', 'status'])->latest()->paginate($take);
     }
 
     public function getOrder(Order $order)
     {
-        return $order->load('tickets.status');
+        return $order->load(['tickets.status', 'status']);
     }
 }

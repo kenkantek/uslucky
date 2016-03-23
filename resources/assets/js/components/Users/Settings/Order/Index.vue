@@ -12,6 +12,7 @@
                     <th>Price total</th>
                     <th>Buy date</th>
                     <th>Draw date</th>
+                    <th>Status</th>
                     <th>View</th>
                 </tr>
             </thead>
@@ -23,7 +24,13 @@
                     <td>{{order.price | currency}}</td>
                     <td>{{order.created_at}}</td>
                     <td>{{order.draw_at}}</td>
-                    <td><a class="link" :href="order.url">View details</a></td>
+                    <td class="text-center">
+                        <span 
+                            class="label"
+                            :class="[order.status.status === 'purchased' ? 'label-success' : 'label-danger']"
+                        >{{order.status.status}}</span>
+                    </td>
+                    <td class="text-center"><a class="link" :href="order.url">View details</a></td>
                 </tr>
             </tbody>
         </table>

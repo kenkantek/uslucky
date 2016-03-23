@@ -23,11 +23,16 @@ class PowerballController extends Controller
         return DB::transaction(function () use ($user, $request) {
             // Save to Order
             $order = $user->newOrder()
-                ->withGame(Game::find(1))
-                ->withExtra((bool) $request->extra)
-                ->withDrawAt(powerballNextTime()['time'])
-                ->withDescription($request->description)
-                ->publish();
+            ->withGame(Game::find(1))
+            ->withExtra((bool) $request->extra)
+            ->withDrawAt(powerballNextTime()['time'])
+            ->withDescription($request->description)
+            ->publish();
+
+            // Add status
+            $order->updateOrNewStatus()
+            ->withStatus('wait for purchase')
+            ->publish();
 
             // Save to Ticket
             $order->newMultiTicket($request->tickets);
