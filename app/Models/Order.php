@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Sofa\Eloquence\Eloquence;
 
 class Order extends Model
 {
-    protected $dates   = ['created_at', 'updated_at', 'draw_at'];
-    protected $appends = ['ticket_total', 'price', 'url','game_name'];
+    use Eloquence;
+
+    protected $searchableColumns = ['id', 'description', 'draw_at', 'created_at'];
+    protected $dates             = ['created_at', 'updated_at', 'draw_at'];
+    protected $appends           = ['ticket_total', 'price', 'url', 'game_name'];
 
     public function user()
     {
@@ -110,7 +114,8 @@ class Order extends Model
         return Carbon::parse($date)->toFormattedDateString();
     }
 
-    public function getGameNameAttribute(){
+    public function getGameNameAttribute()
+    {
         return $this->game->name;
     }
 

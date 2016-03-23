@@ -1,5 +1,7 @@
 @extends('admin.layouts.master')
 
+@section('title') All Users @stop
+
 @section('content')
     <div class="profile-content">
         <div class="row">
@@ -12,10 +14,8 @@
                             <span class="caption-subject font-blue-madison bold uppercase">Your Activity</span>
                             <span class="caption-helper hide">weekly stats...</span>
                         </div>
-
                     </div>
                     <div class="portlet-body">
-
                         <div class="table-scrollable table-scrollable-borderless">
                             <users-list></users-list>
                         </div>
@@ -23,10 +23,6 @@
                 </div>
                 <!-- END PORTLET -->
             </div>
-
         </div>
-
-
     </div>
-
 @stop

@@ -1,0 +1,30 @@
+ul{
+    padding-left:0;
+  }
+.list{
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      margin: 0;
+      text-align: left;
+      li{
+        position: relative;
+        float: left;
+        text-align: center;
+        background: #FEC732;
+        color: #000000;
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 27px;
+        width: 29px;
+        height: 29px;
+        font-weight: bold;
+        border-radius: 28px;
+        margin-left: 1px;
+        list-style-type:none;
+      }
+      .powerball{
+          background-color:#F06;
+          color:#ffffff;
+        }
+  }

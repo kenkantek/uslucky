@@ -95,7 +95,7 @@
                             <div class="mt-comments">
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar1.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar1.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Michael Baker</span>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar6.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar6.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Larisa Maskalyova</span>
@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Natasha Kim</span>
@@ -178,7 +178,7 @@
                                 </div>
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar4.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar4.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Sebastian Davidson</span>
@@ -212,7 +212,7 @@
                             <div class="mt-comments">
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar4.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar4.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Michael Baker</span>
@@ -240,7 +240,7 @@
                                 </div>
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Larisa Maskalyova</span>
@@ -267,7 +267,7 @@
                                 </div>
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar6.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar6.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Natasha Kim</span>
@@ -294,7 +294,7 @@
                                 </div>
                                 <div class="mt-comment">
                                     <div class="mt-comment-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar1.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar1.jpg')}}"/></div>
                                     <div class="mt-comment-body">
                                         <div class="mt-comment-info">
                                             <span class="mt-comment-author">Sebastian Davidson</span>
@@ -349,7 +349,7 @@
                             <div class="mt-actions">
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar10.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar10.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -381,7 +381,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar3.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar3.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -412,7 +412,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar2.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar2.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -444,7 +444,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar7.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar7.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -476,7 +476,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -508,7 +508,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar9.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar9.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -546,7 +546,7 @@
                             <div class="mt-actions">
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar1.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar1.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -578,7 +578,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar8.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -610,7 +610,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar5.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar5.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
@@ -642,7 +642,7 @@
                                 </div>
                                 <div class="mt-action">
                                     <div class="mt-action-img">
-                                        <img src="{{asset('admin/assets/layouts/layout/img/avatar2.jpg')}}"/></div>
+                                        <img src="{{asset('tadmin/assets/layouts/layout/img/avatar2.jpg')}}"/></div>
                                     <div class="mt-action-body">
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
