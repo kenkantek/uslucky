@@ -24,6 +24,7 @@
                             <th> Bought Date </th>
                             <th>Draw Date</th>
                             <th colspan="2"> Description </th>
+                            <th> Status </th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -49,6 +50,14 @@
                             <td>{{ order.draw_at }}</td>
 
                             <td colspan="2">{{ order.description }}</td>
+
+                            <td>
+                                <span 
+                                    class="label"
+                                    :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
+                                >{{ order.status.status }}
+                                </span>
+                            </td>
 
                             <td class="text-center">
                                 <a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a>

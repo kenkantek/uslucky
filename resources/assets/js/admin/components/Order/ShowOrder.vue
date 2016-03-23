@@ -1,5 +1,6 @@
 <template>
-    <div class="portlet light ">
+    <div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
+    <div v-else class="portlet light ">
         <slot slot="header" name="header"></slot>
         <div class="portlet-body">
             <div class="row well">
@@ -32,20 +33,24 @@
                         <strong>Extra:</strong>
                     </div>
                     <div class="col-md-8">
-                        <span v-if="order.extra == '1'">Yes</span>
-                        <span v-else>No</span>
+                        <span class="label label-info" v-text="order.extra ? 'Yes' : 'No'"></span>
                     </div>
-                    <div class="col-md-4">
-                        <strong>Tickets total:</strong>
-                    </div>
-                    <div class="col-md-8">
-                        {{order.ticket_total}}
-                    </div>
+                    
                     <div class="col-md-4">
                         <strong>Price total:</strong>
                     </div>
                     <div class="col-md-8">
                         {{order.price | currency}}
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Status:</strong>
+                    </div>
+                    <div class="col-md-8">
+                        <span 
+                            class="label"
+                            :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
+                        >{{ order.status.status }}
+                        </span>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -55,8 +60,7 @@
                 </div>
             </div>
             <div class="table-scrollable table-scrollable-borderless">
-                <div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
-                <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
+                <table class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
                             <th>Number</th>

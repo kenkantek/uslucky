@@ -41,7 +41,7 @@ class OrdersController extends Controller
         $keyword = $request->keyword ?: '';
         $take    = $request->take ?: 10;
         return Order::search($keyword)
-            ->with('user')
+            ->with(['user', 'status'])
             ->latest()
             ->paginate($take)
             ->appends(['take' => $take, 'keyword' => $keyword]);
@@ -49,7 +49,7 @@ class OrdersController extends Controller
 
     public function getOrder(Order $order)
     {
-        return $order->load('tickets.status');
+        return $order->load(['tickets.status', 'status']);
     }
 
 }

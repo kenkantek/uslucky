@@ -3,49 +3,33 @@
         <loading></loading>
     </div>
     <div v-else>
-        <div class="col-md-6">
-            <div class="col-md-4">
-                <strong>Bought date:</strong>
+        <div class="row">
+            <div class="col-xs-6">
+                <dl class="dl-horizontal">
+                    <dt>Bought date</dt>
+                    <dd>{{order.created_at}}</dd>
+                    <dt>Draw date</dt>
+                    <dd>{{order.draw_at}}</dd>
+                    <dt>Description</dt>
+                    <dd>{{order.description}}</dd>
+                </dl>
             </div>
-            <div class="col-md-8">
-                {{order.created_at}}
-            </div>
-            <div class="col-md-4">
-                <strong>Draw date:</strong>
-            </div>
-            <div class="col-md-8">
-                {{order.draw_at}}
-            </div>
-            <div class="col-md-12">
-                <strong>Description:</strong><br>
-                {{order.description}}
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-4">
-                <strong>Game</strong>
-            </div>
-            <div class="col-md-8">
-                {{order.game.name}}
-            </div>
-            <div class="col-md-4">
-                <strong>Extra:</strong>
-            </div>
-            <div class="col-md-8">
-                <span v-if="order.extra == '1'">Yes</span>
-                <span v-else>No</span>
-            </div>
-            <div class="col-md-4">
-                <strong>Tickets total:</strong>
-            </div>
-            <div class="col-md-8">
-                {{order.ticket_total}}
-            </div>
-            <div class="col-md-4">
-                <strong>Price total:</strong>
-            </div>
-            <div class="col-md-8">
-                {{order.price | currency}}
+            <div class="col-xs-6">
+                <dl class="dl-horizontal">
+                    <dt>Game type</dt>
+                    <dd>{{order.game_name}}</dd>
+                    <dt>Extra</dt>
+                    <dd><span class="label label-info"> {{ order.extra ? 'Yes' : 'No' }} </span></dd>
+                    <dt>Price total</dt>
+                    <dd>{{order.price | currency}}</dd>
+                    <dt>Status</dt>
+                    <dd>
+                        <span 
+                            class="label"
+                            :class="[order.status.status === 'purchased' ? 'label-success' : 'label-danger']"
+                        >{{order.status.status}}</span>
+                    </dd>
+                </dl>
             </div>
         </div>
         <table class="table table-bordered table-hover trans">
