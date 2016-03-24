@@ -1,6 +1,6 @@
 <template>
     <div class="portlet light ">
-        <header-tools>
+        <header-tools :prints-url="printsUrl">
             <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">
@@ -16,7 +16,7 @@
                 <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
-                            <th><input type="checkbox" value="1"></th>
+                            <th><input type="checkbox" v-model="checkAll"></th>
                             <th>#ID</th>
                             <th colspan="2">MEMBER</th>
                             <th> Game Type </th>
@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="order in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
-                            <td><input type="checkbox" value="1"></td>
+                            <td><input type="checkbox" v-model="ids" :value="order.id"></td>
 
                             <td>{{ order.id }}</td>
 
@@ -61,7 +61,7 @@
 
                             <td class="text-center">
                                 <a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a>
-                                <a class="label label-info" href="#"><i class="fa fa-print"></i></a>
+                                <a class="label label-info" :href="order.id | linkPrint"><i class="fa fa-print"></i></a>
                                 <a class="label label-danger" href="#"><i class="fa fa-remove"></i></a>
                             </td>
                         </tr>
@@ -90,9 +90,12 @@
                 data: {
                     per_page: "10",
                 },
-                keyword: ''
+                keyword: '',
+                ids: [],
+                checkAll: false
             }
         },
+
 
         asyncData(resolve, reject) {
             console.log(this.keyword)
@@ -108,12 +111,23 @@
             timeForReload: 'reloadAsyncData',
             'data.per_page'(val, old) {
                 (val && old) && this.reloadAsyncData();
+            },
+            checkAll(val) {
+                this.ids = val ? this.data.data.map(order => { return order.id }) : [];
             }
         },
 
         computed: {
             timeForReload() {
                 return Math.random(this.keyword);
+            },
+
+            // ids(){
+            //     return this.checkAll ? this.data.data.map(order => { return order.id }) : [];
+            // },
+
+            printsUrl() {
+                return this.ids.length ? this.$options.filters.linkPrint(this.ids) : null;
             }
         },
 
@@ -127,12 +141,16 @@
                     def.reject(res);
                 });
                 return  def.promise;
-            }
+            },
+
         },
 
         filters: {
             linkShow(orders) {
                 return laroute.route('admin.orders.show', { orders });
+            },
+            linkPrint(ids){
+                return laroute.route('get.prints')+'/?' + $.param({ids: typeof ids == 'object' ? ids : [ids]}).replace(/%5B%5D/g, '[]');
             }
         },
 

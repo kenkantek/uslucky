@@ -9,8 +9,8 @@
                     <i class="fa fa-angle-down"></i>
                 </a>
                 <ul class="dropdown-menu pull-right" id="datatable_ajax_tools">
-                    <li>
-                        <a href="javascript:;" data-action="0" class="tool-action">
+                    <li :class="{disabled: !printsUrl}">
+                        <a :href="printsUrl" target="_blank" data-action="0" class="tool-action">
                             <i class="icon-printer"></i> Print
                         </a>
                     </li>
@@ -24,3 +24,9 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props: ['printsUrl']
+    }
+</script>
