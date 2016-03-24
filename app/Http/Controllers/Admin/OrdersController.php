@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\Order\UpdateStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -36,8 +37,16 @@ class OrdersController extends Controller
         } else {
             $order->status->status = 'purchased';
         }
+        event(new UpdateStatusEvent($order));
         $order->status->save();
         return $order;
+    }
+
+    public function destroy($id)
+    {
+        $orders = Order::findOrFail($id);
+        $orders->delete($orders);
+        return $orders;
     }
 
     public function getPrints(Request $request)

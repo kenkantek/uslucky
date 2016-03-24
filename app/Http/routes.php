@@ -150,7 +150,7 @@ $router->group([
             'uses' => 'OrdersController@getPrints',
         ]);
         $router->resource('orders', 'OrdersController', [
-            'only' => ['index', 'show', 'update'],
+            'only' => ['index', 'show', 'update', 'destroy'],
         ]);
 
         $router->resource('tickets', 'TicketsController', [

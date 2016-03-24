@@ -54,9 +54,9 @@
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-6">
-                    <a class="btn" :class="[order.status.status == 'purchased' ? 'btn-danger' : 'btn-success']" @click.prevent="onClick" href="#">
-                        Update<br>to<br> {{order.status.status == 'purchased' ? 'Waiting purchase' : 'Purchased'}}
-                    </a>
+                    <button :disabled="submiting" class="btn" :class="[order.status.status == 'purchased' ? 'btn-danger' : 'btn-success']" @click.prevent="onClick" href="#">
+                        <i v-show="submiting" class="fa fa-circle-o-notch fa-spin"></i> Update<br>to<br> {{order.status.status == 'purchased' ? 'Waiting purchase' : 'Purchased'}}
+                    </button>
                 </div>
                 <div class="col-md-2 col-xs-6">
                     <a target="_blank" :href="order.id | linkPrint">
@@ -105,10 +105,12 @@ export default {
     data() {
             return {
                 order: {},
-                reload: false
+                reload: false,
+                submiting: false
             }
         },
         asyncData(resolve, reject) {
+            this.submiting = false;
             this.reload = false;
             this._fetchOrder(laroute.route('admin.get.order', {order: order_id})).done(order => {
                 resolve({
@@ -148,10 +150,9 @@ export default {
             },
 
             onClick(){
+                this.submiting = true;
                 this.$http.put(laroute.route('admin.orders.update',{'orders': this.order.id})).then(res => {
                     this.reload = true;
-                    return res;
-
                 }, (res) => {
                         COMMON.alertError();
                 });

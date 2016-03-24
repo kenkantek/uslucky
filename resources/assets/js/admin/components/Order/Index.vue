@@ -1,6 +1,6 @@
 <template>
     <div class="portlet light ">
-        <header-tools :prints-url="printsUrl">
+        <header-tools :prints-url="printsUrl" :delete-url="deleteUrl">
             <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">
@@ -61,8 +61,8 @@
 
                             <td class="text-center">
                                 <a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a>
-                                <a class="label label-info" :href="order.id | linkPrint"><i class="fa fa-print"></i></a>
-                                <a class="label label-danger" href="#"><i class="fa fa-remove"></i></a>
+                                <a class="label label-info" target="_blank" :href="order.id | linkPrint"><i class="fa fa-print"></i></a>
+                                <a class="label label-danger" @click.prevent="onDelete(order.id)"><i class="fa fa-remove"></i></a>
                             </td>
                         </tr>
                         <tr v-if="!data.data || !data.data.length">
@@ -128,6 +128,10 @@
 
             printsUrl() {
                 return this.ids.length ? this.$options.filters.linkPrint(this.ids) : null;
+            },
+
+            deleteUrl() {
+                return this.ids.length ? this.$options.filters.linkDelete(this.ids) : null;
             }
         },
 
@@ -143,6 +147,33 @@
                 return  def.promise;
             },
 
+            onDelete(ids){
+                swal({
+                        title: "Are you sure delete this order?",
+                        type: "info",
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true
+                    }, (isConfirm) => {
+                        if(isConfirm) {
+                            this.$http.delete(laroute.route('admin.orders.destroy', { 'orders': [ids]})).then(res => {
+                                swal.close();
+                                this.reloadAsyncData();
+                                return res;
+                            }, (res) => {
+                                if(res.status === 500) {
+                                    COMMON.alertError();
+                                }
+                                }
+                            );
+                        } else {
+                            swal.close();
+                        }
+                    });
+            }
+
         },
 
         filters: {
@@ -151,7 +182,7 @@
             },
             linkPrint(ids){
                 return laroute.route('get.prints')+'/?' + $.param({ids: typeof ids == 'object' ? ids : [ids]}).replace(/%5B%5D/g, '[]');
-            }
+            },
         },
 
         events: {

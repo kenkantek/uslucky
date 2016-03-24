@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\OrderListener;
 use App\Listeners\PaymentListener;
 use App\Listeners\UserListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,5 +26,6 @@ class EventServiceProvider extends ServiceProvider
     protected $subscribe = [
         UserListener::class,
         PaymentListener::class,
+        OrderListener::class,
     ];
 }
