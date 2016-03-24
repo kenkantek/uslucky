@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,34 @@ class OrdersController extends Controller
 
     public function getOrder(Order $order)
     {
-        return $order->load(['tickets.status', 'status']);
+        return $order->load(['tickets.status', 'status', 'images' => function ($q) {
+            $q->latest('id');
+        }]);
+    }
+
+    public function postFiles(Order $order, Request $request)
+    {
+        $file = $request->file('file');
+
+        if ($file) {
+            $storeFile = Image::setDir('uploads/orders')->fromForm($file);
+            $image     = $order->newImage()
+                ->withPath($storeFile->name)
+                ->publish();
+
+            return $image;
+        }
+
+    }
+
+    public function deleteFile(Order $order, $id)
+    {
+        $image = $order->images()->whereId($id)->first();
+        if ($image && $image->delete()) {
+            Image::deleteImage(public_path() . '/' . $image->path);
+            return $image;
+        }
+        return response(['message' => 'Can not found image!'], 400);
     }
 
 }

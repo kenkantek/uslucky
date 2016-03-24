@@ -35,9 +35,9 @@
 
         @include('_partials.php2js')
         @include('admin._partials.script')
+        @yield('script')
         {!! HTML::script('js/libs/sweetalert/sweetalert.min.js') !!}
         {!! HTML::script('js/libs/toastr/toastr.min.js') !!}
         {!! HTML::script(elixir('js/admin.js')) !!}
-        @yield('script')
     </body>
 </html>

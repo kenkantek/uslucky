@@ -88,6 +88,49 @@
                 </table>
             </div>
         </div>
+
+        <section id="order-images">
+            <div class="row">   
+                <div class="col-xs-12 col-md-6 col-sm-4">
+                    <h3>
+                        All Images <strong class="text-danger">({{ order.images.length }})</strong>
+                    </h3>
+                </div>
+                <div class="col-xs-12 col-md-6 col-sm-8">
+                    <form class="dropzone" id="dropzone" v-dropzone>
+                        <div class="input-group image-preview margin-top-15">
+                            <input type="text" class="form-control image-preview-filename disabled" readonly>
+                            <span class="input-group-btn">
+                                <div class="btn image-preview-input" :class="{uploading: uploading}">
+                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                    <span class="image-preview-input-title">
+                                        <i class="fa fa-circle-o-notch fa-spin" v-show="uploading"></i> 
+                                        {{ uploading ? 'Uploading...' : 'Upload file' }}
+                                    </span>
+                                    <input type="file" name="file" />
+                                </div>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row" v-if="order.images.length">
+                        <div class="col-xs-12 col-sm-6 col-md-3" v-for="image in order.images">
+                            <div class="image-item">
+                                <a :href="image.image" target="_blank">
+                                    <img class="img-responsive" :src="image.image">
+                                </a>
+                                <span class="label text-danger" @click="deleteImage(image)"><i class="fa fa-trash-o fa-2x"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p v-else class="text-center text-danger">No have image.</p>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 
@@ -95,11 +138,15 @@
 import laroute from '../../../laroute';
 import COMMON from '../../../common';
 import deferred from 'deferred';
+import Dropzone from 'dropzone';
+Dropzone.autoDiscover = false;
 
 export default {
     data() {
             return {
-                order: {}
+                order: {},
+                dropzone: null,
+                uploading: false
             }
         },
         asyncData(resolve, reject) {
@@ -129,7 +176,68 @@ export default {
                     this.loading = false;
                 });
                 return def.promise;
-            }
+            },
+            initDropzone() {
+                const vm = this;
+                this.$nextTick(() => {
+                    this.dropzone = new Dropzone("#dropzone", {
+                        url: laroute.route('admin.post.files.order', { order: this.order.id }),
+                        previewTemplate : '<div style="display:none"></div>',
+                        params: { _token },
+                        maxFilesize: 10,
+                        acceptedFiles: 'image/*',
+                        init() {
+                            this.on('sending', (file, res) => {
+                                console.log('sending');
+                                vm.uploading = true;
+                            });
+                            this.on('success', (file, res) => {
+                                toastr.success(`${file.name} has been upload success.`, '', { positionClass: "toast-bottom-right" });
+                                vm.order.images.unshift(res);
+                            });
+                            this.on('error', (file, res) => {
+                                toastr.error(file.xhr && file.xhr.status === 500 ? 'Somthing wrong, please try again!' : res, '', { positionClass: "toast-bottom-right" });
+                            });
+                            this.on('queuecomplete', () => {
+                                vm.uploading = false;
+                            });
+                        }
+                    });
+                });
+             },
+             deleteImage(image) {
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plx!",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                }, () => {
+                    this.$http.delete(laroute.route('admin.delete.file.order', { order: this.order.id, id: image.id })).then(res => {
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        this.order.images = this.order.images.filter(image => image.id !== res.data.id);
+                    }, res => {
+                        if(res.status === 500) {
+                            COMMON.alertError();
+                        } else {
+                            COMMON.alertError(res.data.message);
+                        }
+                    });
+                });
+
+             }
         },
+
+        directives: {
+            dropzone: {
+                bind() {
+                    this.vm.initDropzone();
+                }
+            }
+        }
 }
 </script>
