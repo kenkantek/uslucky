@@ -4,17 +4,17 @@
         <slot slot="header" name="header"></slot>
         <div class="portlet-body">
             <div class="row well">
-                <div class="col-md-5">
-                    <div class="col-md-4">
+                <div class="col-md-4 col-xs-6">
+                    <div class="col-md-5">
                         <strong>Bought date:</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         {{order.created_at}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <strong>Draw date:</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         {{order.draw_at}}
                     </div>
                     <div class="col-md-12">
@@ -22,30 +22,30 @@
                         <br> {{order.description}}
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="col-md-4">
+                <div class="col-md-4 col-xs-6">
+                    <div class="col-md-5">
                         <strong>Game</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         {{order.game_name}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <strong>Extra:</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <span class="label label-info" v-text="order.extra ? 'Yes' : 'No'"></span>
                     </div>
                     
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <strong>Price total:</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         {{order.price | currency}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <strong>Status:</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <span 
                             class="label"
                             :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
@@ -53,7 +53,12 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-xs-6">
+                    <a class="btn" :class="[order.status.status == 'purchased' ? 'btn-danger' : 'btn-success']" @click.prevent="onClick" href="#">
+                        Update<br>to<br> {{order.status.status == 'purchased' ? 'Waiting purchase' : 'Purchased'}}
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-6">
                     <a target="_blank" :href="order.id | linkPrint">
                         <i class="fa fa-print fa-5x margin-top-30"></i>
                     </a>
@@ -99,10 +104,12 @@ import deferred from 'deferred';
 export default {
     data() {
             return {
-                order: {}
+                order: {},
+                reload: false
             }
         },
         asyncData(resolve, reject) {
+            this.reload = false;
             this._fetchOrder(laroute.route('admin.get.order', {order: order_id})).done(order => {
                 resolve({
                     order
@@ -110,6 +117,15 @@ export default {
             }, err => {
                 COMMON.alertError();
             });
+        },
+        watch: {
+            timeForReload: 'reloadAsyncData',
+        },
+
+        computed: {
+            timeForReload(){
+                return Math.random(this.reload);
+            }
         },
 
         filters: {
@@ -129,6 +145,16 @@ export default {
                     this.loading = false;
                 });
                 return def.promise;
+            },
+
+            onClick(){
+                this.$http.put(laroute.route('admin.orders.update',{'orders': this.order.id})).then(res => {
+                    this.reload = true;
+                    return res;
+
+                }, (res) => {
+                        COMMON.alertError();
+                });
             }
         },
 }

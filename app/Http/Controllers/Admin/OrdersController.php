@@ -28,6 +28,18 @@ class OrdersController extends Controller
         return view('admin.orders.show', compact('orders'));
     }
 
+    public function update(Order $orders)
+    {
+        $order = $orders->load('status');
+        if ($order->status->status == 'purchased') {
+            $order->status->status = 'wait for purchase';
+        } else {
+            $order->status->status = 'purchased';
+        }
+        $order->status->save();
+        return $order;
+    }
+
     public function getPrints(Request $request)
     {
         $orders = Order::whereIn('id', $request->ids)->get();
