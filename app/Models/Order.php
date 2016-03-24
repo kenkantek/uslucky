@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ImageTrait;
 use App\Traits\StatusTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Sofa\Eloquence\Eloquence;
 
 class Order extends Model
 {
-    use Eloquence, StatusTrait;
+    use Eloquence, StatusTrait, ImageTrait;
 
     protected $searchableColumns = [
         'id', 'description', 'draw_at', 'created_at',
@@ -31,6 +32,11 @@ class Order extends Model
     public function status()
     {
         return $this->morphOne(Status::class, 'statusable');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     //BEGIN NEW ORDER

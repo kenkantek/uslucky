@@ -124,10 +124,17 @@ $router->group([
                 'as'   => 'get.orders',
                 'uses' => 'OrdersController@getOrders',
             ]);
-
             $router->get('order/{order}', [
                 'as'   => 'get.order',
                 'uses' => 'OrdersController@getOrder',
+            ]);
+            $router->post('orders/{order}/uploads', [
+                'as'   => 'post.files.order',
+                'uses' => 'OrdersController@postFiles',
+            ]);
+            $router->delete('orders/{order}/{id}', [
+                'as'   => 'delete.file.order',
+                'uses' => 'OrdersController@deleteFile',
             ]);
 
             $router->get('users', [
