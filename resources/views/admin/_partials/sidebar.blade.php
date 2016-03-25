@@ -25,7 +25,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="" class="nav-link ">
+                                <a href="{{ route('admin.results.powerball.index') }}" class="nav-link ">
                                     <span class="title">Daily result input</span>
                                     <span class="selected"></span>
                                 </a>

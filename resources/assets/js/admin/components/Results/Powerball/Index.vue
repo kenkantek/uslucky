@@ -1,13 +1,13 @@
 <template>
     <div class="portlet light ">
-        <header-tools :prints-url="printsUrl" :delete-url="deleteUrl">
+        <header-tools :date.sync="date">
             <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">
             
             <filter-tools 
                 :data.sync="data"
-                :keyword.sync="keyword"
+                :size.sync="size"
             >
             </filter-tools>
 
@@ -16,57 +16,37 @@
                 <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
-                            <th><input type="checkbox" v-model="checkAll"></th>
-                            <th>#ID</th>
-                            <th colspan="2">MEMBER</th>
-                            <th> Game Type </th>
-                            <th> Total Ticket </th>
-                            <th> Bought Date </th>
-                            <th>Draw Date</th>
-                            <th colspan="2"> Description </th>
-                            <th> Status </th>
+                            <th>Date</th>
+                            <th>Winning Numbers</th>
+                            <th>Power Play</th>
+                            <th>Annuity Payout</th>
+                            <th>Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="order in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
-                            <td><input type="checkbox" v-model="ids" :value="order.id"></td>
-
-                            <td>{{ order.id }}</td>
-
-                            <td colspan="2"> 
-                                <img height="50" :src="order.user.image"> 
-                                <a href="javascript:;" class="primary-link">{{ order.user.fullname }}</a>
-                            </td>
-
-                            <td>{{ order.game_name }}</td>
-
-                            <td>{{ order.ticket_total }} (<strong>{{ order.price | currency }}</strong>)</td>
-
+                        <tr v-for="pb in data.draws" :class="[$index % 2 == 0 ? 'odd' : 'even']">
+                            <td>{{ pb.drawTime | timestamp2date}}</td>
                             <td>
-                                {{ order.created_at }}
-                            </td>
-
-                            <td>{{ order.draw_at }}</td>
-
-                            <td colspan="2">{{ order.description }}</td>
-
-                            <td>
-                                <span 
-                                    class="label"
-                                    :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
-                                >{{ order.status.status }}
+                                <span v-if="pb.status === 'OPEN'" class="label label-danger"> waiting</span>
+                                <span v-else v-for="number in pb.results[0].primary">
+                                    <strong v-if="$index < 5" v-text="number"></strong>
                                 </span>
                             </td>
-
+                            <td>
+                                <span v-if="pb.status === 'OPEN'" class="label label-danger"> waiting</span>
+                                <span v-else>{{ pb.results[0].multiplier }}</span>
+                            </td>
+                            <td>{{ pb.estimatedJackpot | remove3CharLast | currency }}</td>
+                            <td>
+                                <span class="label" :class="[pb.status === 'OPEN' ? 'label-danger' : 'label-success']">{{ pb.status }}</span>
+                            </td>
                             <td class="text-center">
-                                <a class="label label-default" :href="order.id"><i class="fa fa-eye"></i></a>
-                                <a class="label label-info" target="_blank" :href="order.id"><i class="fa fa-print"></i></a>
-                                <a class="label label-danger" @click.prevent="onDelete(order.id)"><i class="fa fa-remove"></i></a>
+                                <a class="label label-default" href=""><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
-                        <tr v-if="!data.data || !data.data.length">
-                            <td colspan="12">No records found.</td>
+                        <tr v-if="!data.draws || !data.draws.length">
+                            <td colspan="7">No records found.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -79,27 +59,37 @@
 <script>
     import laroute  from '../../../../laroute.js';
     import deferred from 'deferred';
-    import COMMON from '../../../../common';/*
-    import HeaderTools from './HeaderTools.vue';
-    import FilterTools from './FilterTools.vue';*/
+    import COMMON from '../../../../common';
+    import HeaderTools from '../HeaderTools.vue';
+    import FilterTools from '../FilterTools.vue';
+    import moment from 'moment';
+    import timestamp2date from '../../../../filter/timestamp2date.js';
 
     export default {
         data() {
+            const week = moment().weekday();
+            const dateTo = week >= 3 && week != 6 ? moment().endOf('week') : moment().startOf('week').add(3, 'days');
+            const date = {
+                dateFrom: moment().add(-1, 'months'),
+                dateTo: dateTo, // thứ 4 hoặc thứ 7 tiếp theo
+            };
+            console.log(week, date)
             return {
-                api: laroute.route('admin.get.orders'),
-                data: {
-                    per_page: "10",
+                date,
+                data: {},
+                api: laroute.route('api::get.game.results'),
+                size: 20,
+                params: { 
+                    page: 0,
+                    'game-names': 'Powerball', 
                 },
-                keyword: '',
-                ids: [],
-                checkAll: false
+                checkAll: false,
             }
         },
 
 
         asyncData(resolve, reject) {
-            console.log(this.keyword)
-            this._fetchOrders(this.api).done(data => {
+            this._fetchResults(this.api, {...this.params, size: this.size, 'date-from': this._makeTimestamp(this.date.dateFrom), 'date-to': this._makeTimestamp(this.date.dateTo)}).done(data => {
                 resolve({ data });
             }, err => {
                 COMMON.alertError();
@@ -108,33 +98,18 @@
         },
 
         watch: {
-            timeForReload: 'reloadAsyncData',
-            'data.per_page'(val, old) {
-                (val && old) && this.reloadAsyncData();
+            size() {
+                this.$emit('go-to-page', { page: 0 });
             },
-            checkAll(val) {
-                this.ids = val ? this.data.data.map(order => { return order.id }) : [];
-            }
         },
 
         computed: {
-            timeForReload() {
-                return Math.random(this.keyword);
-            },
-
-            printsUrl() {
-                return this.ids.length ? this.$options.filters.linkPrint(this.ids) : null;
-            },
-
-            deleteUrl() {
-                return this.ids.length ? this.$options.filters.linkDelete(this.ids) : null;
-            }
         },
 
         methods: {
-            _fetchOrders(api, take = this.data.per_page, keyword = this.keyword) {
+            _fetchResults(api, params={}) {
                 const def = deferred();
-                this.$http.get(api, { take, keyword }).then(res => {
+                this.$http.get(api, params).then(res => {
                     const { data } = res;
                     def.resolve(data);
                 }, res => {
@@ -142,46 +117,27 @@
                 });
                 return  def.promise;
             },
-
-            onDelete(ids){
-                swal({
-                        title: "Are you sure delete this order?",
-                        type: "info",
-                        closeOnConfirm: false,
-                        showLoaderOnConfirm: true,
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        showLoaderOnConfirm: true
-                    }, (isConfirm) => {
-                        if(isConfirm) {
-                            this.$http.delete(laroute.route('admin.orders.destroy', { 'orders': [ids]})).then(res => {
-                                swal.close();
-                                this.reloadAsyncData();
-                                return res;
-                            }, (res) => {
-                                if(res.status === 500) {
-                                    COMMON.alertError();
-                                }
-                                }
-                            );
-                        } else {
-                            swal.close();
-                        }
-                    });
+            _makeTimestamp(date) {
+                const d = typeof date === 'string' ? date : date.format('MM/DD/YYYY hh:mm:ss');
+                return new Date(d).getTime();
             }
 
         },
 
         filters: {
+            timestamp2date,
+            remove3CharLast(val) {
+                return String(val).slice(0, -3)
+            }
         },
 
         events: {
-            'go-to-page'(api) {
-                this.api = api;
+            'go-to-page'(params) {
+                Object.assign(this.params, params);
                 this.reloadAsyncData();
             }
         },
 
-        components: { /*HeaderTools, FilterTools*/ }
+        components: { FilterTools, HeaderTools }
     }
 </script>
