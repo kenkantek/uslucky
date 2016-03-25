@@ -5,7 +5,7 @@
                 <a href="#" class="btn btn-sm default prev" @click.prevent="prevPage" :disabled="!data.prev_page_url">
                     <i class="fa fa-angle-left"></i>
                 </a>
-                    <input type="text" class="pagination-panel-input form-control input-sm input-inline input-mini" v-model="data.current_page">
+                    <input type="text" class="pagination-panel-input form-control input-sm input-inline input-mini" v-model="data.current_page" @keyup.enter="onGoPage">
                 <a href="#" class="btn btn-sm default next"  @click.prevent="prevNext" :disabled="!data.next_page_url">
                     <i class="fa fa-angle-right"></i>
                 </a>
@@ -56,6 +56,16 @@
             prevNext() {
                 this.data.next_page_url && 
                 this.$dispatch('go-to-page', this.data.next_page_url);
+            },
+
+            onGoPage() {
+                const page = this.data.current_page;
+                let url = this.data.next_page_url || this.data.prev_page_url || null;
+                if((page > 0 && page <= this.data.last_page) && url) {
+                    return this.$dispatch('go-to-page', url.replace(/page=[\d]+/, `page=${page}`));
+                }
+
+                toastr.warning('Can not go to page number ' + page);
             }
         } 
     }

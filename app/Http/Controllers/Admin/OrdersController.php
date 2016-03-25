@@ -43,11 +43,13 @@ class OrdersController extends Controller
         return $order;
     }
 
-    public function destroy($id)
+    public function destroy($ids)
     {
-        $orders = Order::findOrFail($id);
-        $orders->delete($orders);
-        return $orders;
+        $ids = explode(',', $ids);
+        foreach ($ids as $key => $id) {
+            Order::destroy($id);
+        }
+        return $ids;
     }
 
     public function getPrints(Request $request)
