@@ -17,6 +17,7 @@
         "lord/laroute" : "2.*",
         "snowfire/beautymail": "dev-master",
         "sabre/xml": "^1.4",
+        "ixudra/curl": "6.*",
         "davejamesmiller/laravel-breadcrumbs": "^3.0"
     },
     "require-dev": {

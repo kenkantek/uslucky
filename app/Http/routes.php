@@ -171,3 +171,9 @@ $router->group([
 
     });
 });
+
+$router->group(['as' => 'api::', 'prefix' => 'api'], function () use ($router) {
+    $router->controller('game', 'Api\GameController', [
+        'getResults' => 'get.game.results',
+    ]);
+});

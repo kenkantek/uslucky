@@ -165,6 +165,7 @@ return [
         Lord\Laroute\LarouteServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Ixudra\Curl\CurlServiceProvider::class,
     ],
 
     /*
@@ -215,6 +216,7 @@ return [
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
         'Stripe'      => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Curl'        => Ixudra\Curl\Facades\Curl::class,
     ],
 
 ];
