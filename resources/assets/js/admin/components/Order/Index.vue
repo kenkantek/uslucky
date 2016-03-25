@@ -1,6 +1,6 @@
 <template>
     <div class="portlet light ">
-        <header-tools :prints-url="printsUrl" :delete-url="deleteUrl">
+        <header-tools :prints-url="printsUrl" :ids="ids">
             <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">
@@ -81,7 +81,7 @@
     import deferred from 'deferred';
     import COMMON from '../../../common';
     import HeaderTools from './HeaderTools.vue';
-    import FilterTools from './FilterTools.vue';
+    import FilterTools from '../Globals/FilterTools.vue';
 
     export default {
         data() {
@@ -122,17 +122,10 @@
                 return Math.random(this.keyword);
             },
 
-            // ids(){
-            //     return this.checkAll ? this.data.data.map(order => { return order.id }) : [];
-            // },
-
             printsUrl() {
                 return this.ids.length ? this.$options.filters.linkPrint(this.ids) : null;
             },
 
-            deleteUrl() {
-                return this.ids.length ? this.$options.filters.linkDelete(this.ids) : null;
-            }
         },
 
         methods: {

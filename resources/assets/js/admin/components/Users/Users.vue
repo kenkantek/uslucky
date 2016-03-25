@@ -1,7 +1,17 @@
 <template>	
-<table class="table table-hover table-light">
+<div class="portlet light ">
+        <div class="portlet-body">
+        <filter-tools 
+                :data.sync="data"
+                :keyword.sync="keyword"
+            >
+            </filter-tools>
+            <div class="table-scrollable table-scrollable-borderless">
+                <div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
+<table v-else class="table-striped table-checkable table table-hover table-bordered admin">
     <thead>
         <tr class="uppercase">
+        <th><input type="checkbox" v-model="checkAll"></th>
             <th colspan="2"> MEMBER </th>
             <th colspan="2"> Ticket total bought </th>
             <th> DEPOSIT Total </th>
@@ -11,9 +21,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="user in users">
+        <tr v-for="user in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
+        <td><input type="checkbox" v-model="ids" :value="user.id"></td>
             <td class="fit">
-                <img class="user-pic" :src="user.image"> </td>
+                <img class="user-pic" :src="user.image" width="30px"> </td>
             <td>
                 <a href="javascript:;" class="primary-link">{{user.fullname}}</a>
             </td>
@@ -24,62 +35,106 @@
             <td>
                 <span class="bold theme-font">{{user.balance | currency}}</span>
             </td>
-            <td><a href="" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
+            <td><a href="" @click.prevent="onDelete(user.id)" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
         </tr>
     </tbody>
 </table>
+</div>
+</div>
+</div>
 </template>
 
 <script>
 import laroute from '../../../laroute';
 import COMMON from '../../../common';
 import deferred from 'deferred';
+import FilterTools from '../Globals/FilterTools.vue';
 
 export default {
     data() {
             return {
-                users: [],
-                total: null,
-                numberMore: 10,
-                loading: false,
-                totalUsers: null,
-                nextPageUrl: null
+                api: laroute.route('admin.get.users'),
+                data: {
+                    per_page: "10",
+                },
+                keyword: '',
+                ids: [],
+                checkAll: false,
             }
         },
 
         asyncData(resolve, reject) {
-            this._fetchUser(laroute.route('admin.get.users'), this.numberMore).done(users => {
-                resolve({
-                    users
-                });
+            console.log(this.keyword)
+            this._fetchUsers(this.api).done(data => {
+                resolve({ data });
             }, err => {
                 COMMON.alertError();
+                console.warn(err);
             });
+        },
+
+         watch: {
+            timeForReload: 'reloadAsyncData',
+            'data.per_page'(val, old) {
+                (val && old) && this.reloadAsyncData();
+            },
+            checkAll(val) {
+                this.ids = val ? this.data.data.map(user => { return user.id }) : [];
+            }
+        },
+
+        computed: {
+            timeForReload() {
+            return Math.random(this.keyword);
+            },
         },
    
         methods: {
-            _fetchUser(api, take = 10) {
-                this.loading = true;
-                let def = deferred();
-                this.$http.get(api, { take }).then(res => {
+            _fetchUsers(api, take = this.data.per_page, keyword = this.keyword) {
+                const def = deferred();
+                this.$http.get(api, { take, keyword }).then(res => {
                     const { data } = res;
-                    this.loading = false;
-                    this.totalUsers = data.total;
-                    this.nextPageUrl = data.next_page_url;
-                    def.resolve(data.data);
-                }, (res) => {
+                    def.resolve(data);
+                }, res => {
                     def.reject(res);
-                    this.loading = false;
                 });
-                return def.promise;
+                return  def.promise;
             },
-            nextPagination() {
-                this._fetchUser(this.nextPageUrl).done(users => {
-                    this.users = this.users.concat(users);
-                }, err => {
-                    COMMON.alertError();
-                });
+            onDelete(ids){
+                swal({
+                        title: "Are you sure delete this User?",
+                        type: "info",
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true
+                    }, (isConfirm) => {
+                        if(isConfirm) {
+                            this.$http.delete(laroute.route('admin.users.destroy', { 'users': [ids]})).then(res => {
+                                swal.close();
+                                this.reloadAsyncData();
+                                return res;
+                            }, (res) => {
+                                if(res.status === 500) {
+                                    COMMON.alertError();
+                                }
+                                }
+                            );
+                        } else {
+                            swal.close();
+                        }
+                    });
             }
         },
+
+        events: {
+            'go-to-page'(api) {
+                this.api = api;
+                this.reloadAsyncData();
+            }
+        },
+
+        components: {  FilterTools }
 }
 </script>

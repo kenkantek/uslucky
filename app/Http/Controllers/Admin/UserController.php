@@ -13,6 +13,12 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
+    public function destroy($ids)
+    {
+        $ids = explode(',', $ids);
+        return $ids;
+    }
+
     public function getUsers(Request $request)
     {
         $take         = $request->take;

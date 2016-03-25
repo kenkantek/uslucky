@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-action="0" class="tool-action">
+                        <a href="" @click.prevent="onDelete(ids)" data-action="0" class="tool-action">
                             <i class="icon-trash"></i> Delete
                         </a>
                     </li>
@@ -26,7 +26,38 @@
 </template>
 
 <script>
+    import laroute  from '../../../laroute';
+    import COMMON from '../../../common';
     export default {
-        props: ['printsUrl']
+        props: ['printsUrl', 'ids'],
+
+        methods:{
+            onDelete(ids){
+                swal({
+                    title: "Are you sure delete this order?",
+                    type: "info",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, (isConfirm) => {
+                    if(isConfirm) {
+                        this.$http.delete(laroute.route('admin.orders.destroy', { 'orders': [ids]})).then(res => {
+                            swal.close();
+                            this.$parent.reloadAsyncData();
+                            return res;
+                        }, (res) => {
+                                if(res.status === 500) {
+                                    COMMON.alertError();
+                                }
+                            }
+                        );
+                    } else {
+                        swal.close();
+                    }
+                });
+            }
+        }
     }
 </script>
