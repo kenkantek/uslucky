@@ -19,18 +19,47 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start">
-                        <a href="" class="nav-link ">
-                            <span class="title">Daily result input</span>
+                        <a href="javascript:;" class="nav-link ">
+                            <span class="title">Powerball</span>
                             <span class="selected"></span>
                         </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="" class="nav-link ">
+                                    <span class="title">Daily result input</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="javascript:;" class="nav-link ">
+                                    <span class="title">Award matching module</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item start">
                         <a href="javascript:;" class="nav-link ">
-                            <span class="title">Award matching module</span>
+                            <span class="title">Mega Million</span>
                             <span class="selected"></span>
                         </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="" class="nav-link ">
+                                    <span class="title">Daily result input</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="javascript:;" class="nav-link ">
+                                    <span class="title">Award matching module</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
+
             </li>
 
             <li class="nav-item  @if(starts_with($routeName, 'admin.orders.index'))  @endif">
