@@ -5,12 +5,14 @@ namespace App\Models;
 use App\Traits\TransactionTrait;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Sofa\Eloquence\Eloquence;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasRoles;
     use TransactionTrait;
+    use Eloquence;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,9 @@ class User extends Authenticatable
 
     protected $appends = ['image', 'fullname', 'balance', 'ticket_total', 'price_total', 'deposit_total', 'withdraw_total'];
 
+    protected $searchableColumns = [
+        'id', 'email', 'first_name', 'last_name',
+    ];
     protected $dates = ['birthday'];
     /**
      * The attributes excluded from the model's JSON form.

@@ -11,6 +11,7 @@ import SignIn from './components/Auth/SignIn.vue';
 import Contacts from './components/Contacts/Contacts.vue';
 import ReplyContact from './components/Contacts/Reply.vue';
 import UsersList from './components/Users/Users.vue';
+import ShowUser from './components/Users/ShowUser.vue';
 
 new Vue({
     el: 'body',
@@ -21,6 +22,7 @@ new Vue({
         ReplyContact,
         UsersList,
         OrderDetails,
+        ShowUser
     }
 });
 

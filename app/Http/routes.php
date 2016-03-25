@@ -141,6 +141,10 @@ $router->group([
                 'as'   => 'get.users',
                 'uses' => 'UserController@getUsers',
             ]);
+            $router->get('user/{user}', [
+                'as'   => 'get.user',
+                'uses' => 'UserController@getUser',
+            ]);
 
         });
 
@@ -149,7 +153,7 @@ $router->group([
         ]);
 
         $router->resource('users', 'UserController', [
-            'only' => ['index', 'destroy'],
+            'only' => ['index', 'destroy', 'show'],
         ]);
 
         $router->get('orders/prints', [
