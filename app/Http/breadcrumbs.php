@@ -9,6 +9,11 @@ Breadcrumbs::register('contact', function ($breadcrumbs) {
     $breadcrumbs->push('Contact', route('admin.contacts'));
 });
 
+Breadcrumbs::register('user', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Users', route('admin.users.index'));
+});
+
 Breadcrumbs::register('order', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Orders', route('admin.orders.index'));

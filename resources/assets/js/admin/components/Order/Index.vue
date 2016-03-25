@@ -81,7 +81,7 @@
     import deferred from 'deferred';
     import COMMON from '../../../common';
     import HeaderTools from './HeaderTools.vue';
-    import FilterTools from './FilterTools.vue';
+    import FilterTools from '../Globals/FilterTools.vue';
 
     export default {
         data() {

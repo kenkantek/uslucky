@@ -3,10 +3,10 @@
 @section('title') All Users @stop
 
 @section('content')
- <h3 class="page-title"> Manage Orders
-        <small>Order & statistics</small>
+ <h3 class="page-title"> Manage Users
+        <small>All Users</small>
     </h3>
-    {!! Breadcrumbs::render('order') !!}
+    {!! Breadcrumbs::render('user') !!}
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">

@@ -149,7 +149,7 @@ $router->group([
         ]);
 
         $router->resource('users', 'UserController', [
-            'only' => 'index',
+            'only' => ['index', 'destroy'],
         ]);
 
         $router->get('orders/prints', [

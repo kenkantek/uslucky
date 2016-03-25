@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <tr v-for="user in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
-        <td><input type="checkbox" :value="user.id"></td>
+        <td><input type="checkbox" v-model="ids" :value="user.id"></td>
             <td class="fit">
                 <img class="user-pic" :src="user.image" width="30px"> </td>
             <td>
@@ -35,7 +35,7 @@
             <td>
                 <span class="bold theme-font">{{user.balance | currency}}</span>
             </td>
-            <td><a href="" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
+            <td><a href="" @click.prevent="onDelete(user.id)" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
         </tr>
     </tbody>
 </table>
@@ -48,7 +48,7 @@
 import laroute from '../../../laroute';
 import COMMON from '../../../common';
 import deferred from 'deferred';
-import FilterTools from '../Order/FilterTools.vue';
+import FilterTools from '../Globals/FilterTools.vue';
 
 export default {
     data() {
@@ -78,6 +78,9 @@ export default {
             'data.per_page'(val, old) {
                 (val && old) && this.reloadAsyncData();
             },
+            checkAll(val) {
+                this.ids = val ? this.data.data.map(user => { return user.id }) : [];
+            }
         },
 
         computed: {
@@ -97,12 +100,31 @@ export default {
                 });
                 return  def.promise;
             },
-            nextPagination() {
-                this._fetchUser(this.nextPageUrl).done(users => {
-                    this.users = this.users.concat(users);
-                }, err => {
-                    COMMON.alertError();
-                });
+            onDelete(ids){
+                swal({
+                        title: "Are you sure delete this User?",
+                        type: "info",
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true
+                    }, (isConfirm) => {
+                        if(isConfirm) {
+                            this.$http.delete(laroute.route('admin.users.destroy', { 'users': [ids]})).then(res => {
+                                swal.close();
+                                this.reloadAsyncData();
+                                return res;
+                            }, (res) => {
+                                if(res.status === 500) {
+                                    COMMON.alertError();
+                                }
+                                }
+                            );
+                        } else {
+                            swal.close();
+                        }
+                    });
             }
         },
 
