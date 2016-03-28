@@ -24,34 +24,39 @@
 			        <form role="form" action="#">
 			            <div class="form-group col-md-4">
 			                <label class="control-label">First Name</label>
-			                <input type="text" placeholder="John" class="form-control" /> </div>
+			                <input type="text" placeholder="firt name" v-model="user.first_name" class="form-control" /> </div>
 			            <div class="form-group col-md-4">
 			                <label class="control-label">Last Name</label>
-			                <input type="text" placeholder="Doe" class="form-control" /> </div>
+			                <input type="text" placeholder="last nam" v-model="user.last_name" class="form-control" /> </div>
 			            <div class="form-group col-md-4">
 			                <label class="control-label">Birthday</label>
-			                <input type="text" placeholder="Design, Web etc." class="form-control" /> </div>
+			                <datepicker :value.sync = "user.birthday" format="YYYY-MM-DD" autocomplete="off" name="closing_date"></datepicker> </div>
 			            <div class="form-group col-md-6">
 			                <label class="control-label">Email:</label>
-			                <input type="text" placeholder="example@gmail.com" class="form-control" /> </div>
+			                <input type="text" v-model="user.email" placeholder="example@gmail.com" class="form-control" /> </div>
 			            <div class="form-group col-md-6">
 			                <label class="control-label">Mobile Number</label>
-			                <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control" /> </div>
+			                <input type="text" v-model="user.phone" placeholder="+1 646 580 DEMO (6284)" class="form-control" /> </div>
 			            <div class="form-group col-md-4">
 			                <label class="control-label">Address</label>
-			                <input type="text" placeholder="Address" class="form-control" /> </div>
+			                <input type="text" v-model="user.address" placeholder="Address" class="form-control" /> </div>
 			            <div class="form-group col-md-4">
 			                <label class="control-label">City</label>
-			                <input type="text" placeholder="Address" class="form-control" /> </div>
+			                <input type="text" placeholder="Address" v-model="city" class="form-control" /> </div>
 			            <div class="form-group col-md-4">
 			                <label class="control-label">Zipcode</label>
-			                <input type="text" placeholder="Address" class="form-control" /> </div>   
+			                <input type="text" placeholder="Address" v-model="zipcode" class="form-control" /> </div>   
 			            <div class="form-group col-md-12">
 			                <label class="control-label">Country</label>
-			            	<select name="" id="" class="form-control">
-			            		<option value="">EN</option>
-			            		<option value="">US</option>
+			            	<select name="" id="" v-model="country" class="form-control">
+			            		<option v-for="country in countries" v-text="country.name" :value="country.code"></option>
 			            	</select>    
+			            </div>
+			            <div class="form-group col-md-12" v-show="states.length">
+			                <label class="control-label">States</label>
+			            	<select class="form-control" v-model="user.state">
+				                <option v-for="state in states" v-text="state.name" :value="state.code"></option>
+				            </select> 
 			            </div>
 			            <div class="margiv-top-10">
 			                <a href="javascript:;" class="btn green"> Save Changes </a>
@@ -117,11 +122,14 @@
 	import laroute from '../../../laroute';
 	import COMMON from '../../../common';
 	import deferred from 'deferred';
+	import Datepicker from '../../../components/Globals/Datepicker.vue'
 
 	export default{
 		data(){
 			return{
 				user: {},
+				countries: [],
+                states: []
 			}
 		},
 
@@ -134,6 +142,20 @@
             }, err => {
                 COMMON.alertError();
             });
+        },
+
+        ready(){
+            this.countries = JSON.parse(_countries).result;
+        },
+
+        computed: {
+            states() {
+                if(!this.user.country) return [];
+
+                const country = _.find(this.countries, {code: this.user.country});
+
+                return country.states || [];
+            }
         },
 
         methods: {
@@ -149,5 +171,9 @@
                 return def.promise;
             }
         },
+
+        components: {
+        	Datepicker
+        }
 	}
 </script>

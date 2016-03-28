@@ -17,7 +17,8 @@ class UserController extends Controller
     public function show(User $users)
     {
         \Javascript::put([
-            'user_id' => $users->id,
+            'user_id'    => $users->id,
+            '_countries' => file_get_contents(storage_path('countries.json')),
         ]);
         return view('admin.users.show', compact('users'));
     }
