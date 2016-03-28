@@ -12,7 +12,12 @@
         </header-power>
 
         <article class="view-game clearfix">
+            <section class="pull-left">
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_sharing_toolbox"></div>
+            </section>
             <section class="top-controls pull-right">
+
                 <button class="btn btn-info text-upercase" @click="quickPick"> Quick Pick</button>
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 

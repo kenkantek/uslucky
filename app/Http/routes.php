@@ -145,6 +145,14 @@ $router->group([
                 'as'   => 'get.user',
                 'uses' => 'UserController@getUser',
             ]);
+            $router->post('user/{user}/avatar', [
+                'as'   => 'post.avatar',
+                'uses' => 'UserController@postChangeAvatar',
+            ]);
+            $router->put('user/{user}/password', [
+                'as'   => 'put.password',
+                'uses' => 'UserController@putChangePass',
+            ]);
 
         });
 
@@ -153,7 +161,7 @@ $router->group([
         ]);
 
         $router->resource('users', 'UserController', [
-            'only' => ['index', 'destroy', 'show'],
+            'only' => ['index', 'destroy', 'show', 'update'],
         ]);
 
         $router->get('orders/prints', [

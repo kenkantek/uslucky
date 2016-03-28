@@ -17,6 +17,14 @@
 
   </head>
   <body class="@yield('body-class', 'home')">
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1700699863552929";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
     @include('_partials.header')
 
     <div class="content">
@@ -36,5 +44,7 @@
     @yield('scripts')
 
     {!! HTML::script(elixir('js/app.js')) !!}
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56f8b211183fa62c" async="async"></script>
   </body>
 </html>

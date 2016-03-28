@@ -8,7 +8,8 @@
                 <div class="block1">
                     <div class="left"><img src="{{asset('images/page2_img1.jpg')}}" alt=""></div>
                     <h5><a href="#">Lorem ipsum dolor sit amet consectetuer adipiscin</a></h5>
-
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_sharing_toolbox"></div>
                     <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce
                         suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
                         ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec,
