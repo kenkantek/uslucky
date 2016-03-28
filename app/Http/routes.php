@@ -176,10 +176,22 @@ $router->group([
             'only' => 'index',
         ]);
 
+        $router->group(['prefix' => 'results'], function () use ($router) {
+            $router->resource('powerball', 'Results\PowerballController', [
+                'only' => 'index',
+            ]);
+        });
+
         //NOTICE: Only bottom
         $router->controller('/', 'AdminController', [
             'getDashboard' => 'admin.dashboard',
         ]);
 
     });
+});
+
+$router->group(['as' => 'api::', 'prefix' => 'api'], function () use ($router) {
+    $router->controller('game', 'Api\GameController', [
+        'getResults' => 'get.game.results',
+    ]);
 });

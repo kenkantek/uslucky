@@ -1,4 +1,6 @@
 <?php
+use Carbon\Carbon;
+
 function generateMonth()
 {
     $month = [];
@@ -18,21 +20,34 @@ function generateYear($add = 15)
 
 function powerballNextTime()
 {
+    return getGameNextTime('Powerball');
+}
 
-    $powerball = Cache::rememberForever('powerball', function () {
-        $reader = new \Sabre\Xml\Reader();
-        $reader->xml(file_get_contents('http://feeds.feedblitz.com/PennsylvaniaLottery-WinningNumbers-Powerball'));
-        $result = $reader->parse();
-        $source = $result['value'][0]['value'][4]['value'][2]['value'];
-        preg_match('/[\d]{2}\/[\d]{2}\/[\d]{4}/', $source, $nextTime);
-        preg_match('/(?<=\$)[\d,]+/', $source, $amount);
-        if ($nextTime && $amount) {
-            return [
-                'time'   => current($nextTime),
-                'amount' => filter_var(current($amount), FILTER_SANITIZE_NUMBER_INT),
-            ];
-        }
+function getGameNextTime($game = 'Powerball')
+{
+    $result = Cache::rememberForever($game, function () use ($game) {
+        $params = [
+            'game-names' => $game,
+            'status'     => 'OPEN',
+            'size'       => 0,
+        ];
+        $response = current(json_decode(curlGetUrl($params))->draws);
+        // dd($response);
+        return [
+            'time'   => Carbon::createFromTimestamp(substr($response->drawTime, 0, -3))->format('m/d/Y'),
+            'amount' => substr($response->estimatedJackpot, 0, -2),
+        ];
     });
 
-    return $powerball;
+    return $result;
+}
+
+function curlGetUrl($params = [])
+{
+    $url      = 'https://www.njlottery.com/api/v1/draw-games/draws/page';
+    $response = Curl::to($url)
+        ->withOption('USERAGENT', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13')
+        ->withData(array_merge(['size' => 10, 'page' => 0, 'game-names' => 'Mega Millions'], $params))
+        ->get();
+    return $response;
 }

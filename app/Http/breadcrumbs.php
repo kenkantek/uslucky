@@ -33,3 +33,12 @@ Breadcrumbs::register('ticket', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Tickets', route('admin.tickets.index'));
 });
+
+Breadcrumbs::register('powerball', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Powerball', 'javascript:;');
+});
+Breadcrumbs::register('powerball.result.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('powerball');
+    $breadcrumbs->push('Daily Results', 'javascript:;');
+});
