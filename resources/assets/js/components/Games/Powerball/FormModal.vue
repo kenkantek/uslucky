@@ -177,10 +177,10 @@
                             type: "success",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "Go to Payment History",
+                            confirmButtonText: "Go to Your Orders!",
                             closeOnConfirm: false
                         }, () => {
-                            location.href = laroute.route('front::payment.history');
+                            location.href = laroute.route('front::orders.index');
                         });
                         localStorage.removeItem("tickets");
                         localStorage.removeItem("extra");

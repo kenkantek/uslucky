@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Games;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\ManageGame;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use DB;
 use Illuminate\Http\Request;
@@ -23,16 +24,16 @@ class PowerballController extends Controller
         return DB::transaction(function () use ($user, $request) {
             // Save to Order
             $order = $user->newOrder()
-            ->withGame(Game::find(1))
-            ->withExtra((bool) $request->extra)
-            ->withDrawAt(powerballNextTime()['time'])
-            ->withDescription($request->description)
-            ->publish();
+                ->withGame(Game::find(1))
+                ->withExtra((bool) $request->extra)
+                ->withDrawAt(powerballNextTime()['time'])
+                ->withDescription($request->description)
+                ->publish();
 
             // Add status
             $order->updateOrNewStatus()
-            ->withStatus('wait for purchase')
-            ->publish();
+                ->withStatus('wait for purchase')
+                ->publish();
 
             // Save to Ticket
             $order->newMultiTicket($request->tickets);
@@ -114,9 +115,10 @@ class PowerballController extends Controller
     // tinh toan Amount from client
     protected function calculateAmount($request)
     {
-        $amount = count($request->tickets) * env('EACH_PER_TICKET');
+        $config = ManageGame::getConfig(1)->toArray();
+        $amount = count($request->tickets) * $config['each_per_ticket'];
         if ($request->extra) {
-            $amount += count($request->tickets) * env('EXTRA_PER_TICKET');
+            $amount += count($request->tickets) * $config['extra_per_ticket'];
         }
         return $amount;
     }

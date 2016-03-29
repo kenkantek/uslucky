@@ -103,8 +103,8 @@
                 },
                 tickets: [],
                 powerball: {..._powerball},
-                eachPerTicket: _each_per_ticket,
-                extraPerTicket: _extra_per_ticket,
+                eachPerTicket: each_per_ticket,
+                extraPerTicket: extra_per_ticket,
                 extra: Boolean(Number(localStorage.extra)) || null,
                 submiting: false
             }

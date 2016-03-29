@@ -13,6 +13,7 @@ import ReplyContact from './components/Contacts/Reply.vue';
 import UsersList from './components/Users/Users.vue';
 import ShowUser from './components/Users/ShowUser.vue';
 import ResultsDailyPowerball from './components/Results/Powerball/Index.vue';
+import Powerball from './components/Games/Powerball.vue';
 
 new Vue({
     el: 'body',
@@ -24,7 +25,8 @@ new Vue({
         UsersList,
         OrderDetails,
         ShowUser,
-        ResultsDailyPowerball
+        ResultsDailyPowerball,
+        Powerball
     }
 });
 

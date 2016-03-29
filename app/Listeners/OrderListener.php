@@ -2,7 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Events\Order\OrderDelete;
 use App\Events\Order\UpdateStatusEvent;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,11 +20,25 @@ class OrderListener
         });
     }
 
+    public function onOrderDeleted($event)
+    {
+        $order = $event->order;
+        foreach ($order->images as $k => $image) {
+            $image->delete();
+            Image::deleteImage($image->path);
+        }
+
+    }
+
     public function subscribe($events)
     {
         $events->listen(
             UpdateStatusEvent::class,
             static::class . '@onUpdateStatus'
+        );
+        $events->listen(
+            OrderDelete::class,
+            static::class . '@onOrderDeleted'
         );
     }
 }

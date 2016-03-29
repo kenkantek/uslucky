@@ -1,3 +1,26 @@
+td{
+  span{
+    strong{ 
+      float: left;
+      text-align: center;
+      background: #FEC732;
+      color: #000000;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 27px;
+      width: 29px;
+      height: 29px;
+      font-weight: bold;
+      border-radius: 28px;
+      margin-left: 1px;
+    }
+    .powerball{
+            background-color: #f06;
+            color: #fff;
+      }
+  }
+}
+
 ul{
     padding-left:0;
   }

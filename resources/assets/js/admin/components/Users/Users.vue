@@ -41,7 +41,7 @@
                             <td>
                                 <span class="bold theme-font">{{user.balance | currency}}</span>
                             </td>
-                            <td><a href="" @click.prevent="onDelete(user.id)" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
+                            <td><a class="label label-danger" href="" @click.prevent="onDelete(user.id)"><i class="fa fa-remove"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

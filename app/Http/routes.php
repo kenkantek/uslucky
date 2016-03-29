@@ -154,6 +154,11 @@ $router->group([
                 'uses' => 'UserController@putChangePass',
             ]);
 
+            $router->get('manages/powerball', [
+                'as'   => 'get.powerball',
+                'uses' => 'Games\PowerballController@getKeys',
+            ]);
+
         });
 
         $router->resource('contact', 'ContactController', [
@@ -179,6 +184,12 @@ $router->group([
         $router->group(['prefix' => 'results'], function () use ($router) {
             $router->resource('powerball', 'Results\PowerballController', [
                 'only' => 'index',
+            ]);
+        });
+
+        $router->group(['prefix' => 'games'], function () use ($router) {
+            $router->resource('powerball', 'Games\PowerballController', [
+                'only' => ['index', 'update'],
             ]);
         });
 

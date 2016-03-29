@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\Order\OrderDelete;
 use App\Events\Order\UpdateStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
@@ -47,7 +48,9 @@ class OrdersController extends Controller
     {
         $ids = explode(',', $ids);
         foreach ($ids as $key => $id) {
-            Order::destroy($id);
+            $order = Order::find($id);
+            event(new OrderDelete($order));
+            $order->delete();
         }
         return $ids;
     }
@@ -96,7 +99,7 @@ class OrdersController extends Controller
     {
         $image = $order->images()->whereId($id)->first();
         if ($image && $image->delete()) {
-            Image::deleteImage(public_path() . '/' . $image->path);
+            Image::deleteImage($image->path);
             return $image;
         }
         return response(['message' => 'Can not found image!'], 400);
