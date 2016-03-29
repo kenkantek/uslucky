@@ -159,6 +159,15 @@ $router->group([
                 'uses' => 'Games\PowerballController@getKeys',
             ]);
 
+            $router->post('results/powerball', [
+                'as'   => 'post.powerball.assign.result',
+                'uses' => 'Results\PowerballController@assignToResult',
+            ]);
+            $router->get('results/powerball', [
+                'as'   => 'get.powerball.result',
+                'uses' => 'Results\PowerballController@getResults',
+            ]);
+
         });
 
         $router->resource('contact', 'ContactController', [

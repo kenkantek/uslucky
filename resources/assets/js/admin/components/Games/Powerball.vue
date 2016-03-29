@@ -1,11 +1,12 @@
 <template>
 	<div class="portlet light ">
 	    <slot slot="header" name="header"></slot>
-	    <div class="portlet-body">
+        <loading v-if="$loadingAsyncData"></loading> 
+	    <div v-else class="portlet-body">
 	        <form>
-	        	<div class="form-group" v-for="powerball in games">
-	        		<label class="form-label" v-text="powerball.key"></label>
-	        		<input @change.prevent="onChange(powerball.id)" class="form-control" type="text" v-model="powerball.value" placeholder="1">
+	        	<div class="form-group" v-for="setting in settings">
+	        		<label class="form-label text-capitalize" v-text="setting.key | rmUnderscore"></label>
+	        		<input @change="onChange(setting.id) | debounce 300" class="form-control" type="number" v-model="setting.value" min="1" step="1">
 	        	</div>
 	        </form>
 	    </div>
@@ -17,38 +18,49 @@
 	import COMMON from '../../../common.js';
 
 	export default{
-		data(){
+		data() {
 			return {
-				games: {},
+				settings: [],
 				formErrors: {}
 			}
 		},
 
-		asyncData(resolve, reject){
+		asyncData(resolve, reject) {
             this.$http.get(laroute.route('admin.get.powerball')).then(res => {
-                const games = res.data;
-
+                const settings = res.data;
                 resolve({
-                    games
+                    settings
                 });
-
             }, (res) => {
                 COMMON.alertError();
             });
         },
 
-        methods:{
-        	onChange(id){
-        		for(const game in this.games)
+        methods: {
+        	onChange(id) {
+        		for(let setting in this.settings)
         		{
-        			if(this.games[game].id == id)
-        			{
-        				const value = this.games[game];
-        				this.$http.put(laroute.route('admin.games.powerball.update', {'powerball':id} ),value);
-        				toastr.success('Game setting was changed!');
+        			if(this.settings[setting].id == id) {
+        				const value = this.settings[setting];
+        				this.$http.put(laroute.route('admin.games.powerball.update', {powerball: id} ), value).then(res => {
+                            toastr.success('Game setting was changed!');
+                        }, res => {
+                            if(res.status === 500) {
+                                COMMON.alertError();
+                            } else {
+                                toastr.error(res.value);
+                            }
+                        });
+        				
         			}	
         		}	
         	}
+        },
+
+        filters: {
+            rmUnderscore(val) {
+                return val.replace(/\_/g, ' ');
+            }
         }
 	}
 </script>

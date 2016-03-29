@@ -79,7 +79,7 @@
                         </a>
 
                         <ul class="sub-menu">
-                            <li class="nav-item start">
+                            <li class="hidden nav-item start">
                                 <a href="{{route('admin.orders.index')}}" class="nav-link ">
                                     <span class="title">Orders Today</span>
                                     <span class="selected"></span>
@@ -93,7 +93,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item start">
+                    <li class="hidden nav-item start">
                         <a href="{{route('admin.tickets.index')}}" class="nav-link nav-toggle">
                             <span class="title">Manage Tickets</span>
                             <span class="selected"></span>

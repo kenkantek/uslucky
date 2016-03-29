@@ -13,6 +13,11 @@ class Game extends Model
         return $this->hasMany(ManageGame::class);
     }
 
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
     //newOrUpdate Setting
     public function newOrUpdateSetting($setting = null)
     {
@@ -21,5 +26,13 @@ class Game extends Model
             $setting->game()->associate($this);
         }
         return $setting;
+    }
+
+    //new Assign To results
+    public function newResult()
+    {
+        $result = new Result;
+        $result->game()->associate($this);
+        return $result;
     }
 }

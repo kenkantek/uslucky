@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin\Games;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Settings\PowerballRequest;
 use App\Models\Game;
 use App\Models\ManageGame;
 use Cache;
-use Illuminate\Http\Request;
 
 class PowerballController extends Controller
 {
@@ -15,20 +15,17 @@ class PowerballController extends Controller
         return view('admin.games.powerball');
     }
 
-    public function update(Request $request, $id)
+    public function update($id, PowerballRequest $request)
     {
-
-        $key        = ManageGame::findOrFail($id);
-        $key->value = $request->value;
-        Cache::forget('config-' . $key->game->name);
-        $key->save();
-
-        return $key;
+        $setting        = ManageGame::findOrFail($id);
+        $setting->value = $request->value;
+        $setting->save();
+        Cache::forget('config-' . $setting->game->name);
+        return $setting;
     }
 
     public function getKeys()
     {
-        $keys = Game::find(1);
-        return $keys->settings;
+        return Game::find(1)->settings;
     }
 }

@@ -16,7 +16,7 @@
                 <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
-                            <th>Date</th>
+                            <th>Draw Date</th>
                             <th>Winning Numbers</th>
                             <th>Power Play</th>
                             <th>Annuity Payout</th>
@@ -43,7 +43,12 @@
                                 <span class="label" :class="[pb.status === 'OPEN' ? 'label-danger' : 'label-success']">{{ pb.status }}</span>
                             </td>
                             <td class="text-center">
-                                <a class="label label-default" href=""><i class="fa fa-eye"></i></a>
+                                <button class="btn btn-sm green btn-outline filter-cancel" 
+                                    :disabled="pb.status === 'OPEN' || result.indexOf(parseInt(pb.id)) !== -1"
+                                    @click="assignToResult(pb)"
+                                > 
+                                    <i class="fa fa-location-arrow"></i> Assign to Result
+                                </button>
                             </td>
                         </tr>
                         <tr v-if="!data.draws || !data.draws.length">
@@ -60,6 +65,7 @@
 <script>
     import laroute  from '../../../../laroute.js';
     import deferred from 'deferred';
+    import async from 'async';
     import COMMON from '../../../../common';
     import HeaderTools from '../HeaderTools.vue';
     import FilterTools from '../FilterTools.vue';
@@ -78,6 +84,7 @@
             return {
                 date,
                 data: {},
+                result: [],
                 api: laroute.route('api::get.game.results'),
                 size: 20,
                 params: { 
@@ -90,12 +97,34 @@
 
 
         asyncData(resolve, reject) {
-            this._fetchResults(this.api, {...this.params, size: this.size, 'date-from': this._makeTimestamp(this.date.dateFrom), 'date-to': this._makeTimestamp(this.date.dateTo)}).done(data => {
-                resolve({ data });
-            }, err => {
-                COMMON.alertError();
-                console.warn(err);
+            const vm = this;
+            async.parallel({
+                data(cb) {
+                    vm._fetcDatas(vm.api, {...vm.params, size: vm.size, 'date-from': vm._makeTimestamp(vm.date.dateFrom), 'date-to': vm._makeTimestamp(vm.date.dateTo)}).done(data => {
+                        cb(null, data);
+                    }, err => {
+                        cb(new Error(err));
+                    });
+                },
+                result(cb) {
+                    const date = {
+                        date_from: typeof vm.date.dateFrom === 'string' ? vm.date.dateFrom : vm.date.dateFrom.format('YYYY-MM-DD'), 
+                        date_to: typeof vm.date.dateTo === 'string' ? vm.date.dateTo : vm.date.dateTo.format('YYYY-MM-DD')
+                    };
+                    vm._fetchResults(date).done(data => {
+                        cb(null, data);
+                    }, err => {
+                        cb(new Error(err));
+                    });
+                }
+            }, (err, results) => {
+                if(err) {
+                    COMMON.alertError();
+                } else {
+                    resolve({ ...results });
+                }
             });
+            
         },
 
         watch: {
@@ -104,13 +133,20 @@
             },
         },
 
-        computed: {
-        },
-
         methods: {
-            _fetchResults(api, params={}) {
+            _fetcDatas(api, params={}) {
                 const def = deferred();
                 this.$http.get(api, params).then(res => {
+                    const { data } = res;
+                    def.resolve(data);
+                }, res => {
+                    def.reject(res);
+                });
+                return  def.promise;
+            },
+            _fetchResults(date) {
+                const def = deferred();
+                this.$http.get(laroute.route('admin.get.powerball.result'), date).then(res => {
                     const { data } = res;
                     def.resolve(data);
                 }, res => {
@@ -121,8 +157,19 @@
             _makeTimestamp(date) {
                 const d = typeof date === 'string' ? date : date.format('MM/DD/YYYY hh:mm:ss');
                 return new Date(d).getTime();
+            },
+            assignToResult(powerball) {
+                this.$http.post(laroute.route('admin.post.powerball.assign.result'), powerball).then(res => {
+                    toastr.success('Assign to result success');
+                    this.result.push(res.data);
+                }, res => {
+                    if(res.status === 500) {
+                        COMMON.alertError();
+                    } else {
+                        toastr.error(res.data.message || 'Something wrong');
+                    }
+                });
             }
-
         },
 
         filters: {
