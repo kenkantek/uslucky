@@ -1,6 +1,6 @@
 <template>
     <div class="portlet light ">
-        <header-tools :date.sync="date">
+        <header-tools :date.sync="date" :game.sync="game_id" :games="games">
             <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">
@@ -16,6 +16,7 @@
                 <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
+                            <th>Game Name</th>
                             <th>Draw Date</th>
                             <th>Winning Numbers</th>
                             <th>Power Play</th>
@@ -26,25 +27,26 @@
                     </thead>
                     <tbody>
                         <tr v-for="pb in data.draws" :class="[$index % 2 == 0 ? 'odd' : 'even']">
+                            <td>{{ pb.gameName }}</td>
                             <td>{{ pb.drawTime | timestamp2date}}</td>
                             <td>
-                                <span v-if="pb.status === 'OPEN'" class="label label-danger"> waiting</span>
+                                <span v-if="checkWaiting(pb)" class="label label-danger"> waiting</span>
                                 <span v-else v-for="number in pb.results[0].primary">
                                     <strong v-if="$index < 5" v-text="number"></strong>
                                     <strong class="powerball" v-if="$index == 6" v-text="number.slice(-2)"></strong>
                                 </span>
                             </td>
                             <td>
-                                <span v-if="pb.status === 'OPEN'" class="label label-danger"> waiting</span>
+                                <span v-if="checkWaiting(pb)" class="label label-danger"> waiting</span>
                                 <span v-else>{{ pb.results[0].multiplier }}</span>
                             </td>
                             <td>{{ pb.estimatedJackpot | remove2CharLast | currency }}</td>
                             <td>
-                                <span class="label" :class="[pb.status === 'OPEN' ? 'label-danger' : 'label-success']">{{ pb.status }}</span>
+                                <span class="label" :class="[checkWaiting(pb) ? 'label-danger' : 'label-success']">{{ pb.status }}</span>
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-sm green btn-outline filter-cancel" 
-                                    :disabled="pb.status === 'OPEN' || result.indexOf(parseInt(pb.id)) !== -1"
+                                    :disabled="checkWaiting(pb) || result.indexOf(parseInt(pb.id)) !== -1"
                                     @click="assignToResult(pb)"
                                 > 
                                     <i class="fa fa-location-arrow"></i> Assign to Result
@@ -52,7 +54,7 @@
                             </td>
                         </tr>
                         <tr v-if="!data.draws || !data.draws.length">
-                            <td colspan="7">No records found.</td>
+                            <td colspan="8">No records found.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -63,14 +65,15 @@
 </template>
 
 <script>
-    import laroute  from '../../../../laroute.js';
+    import laroute  from '../../../laroute.js';
     import deferred from 'deferred';
     import async from 'async';
-    import COMMON from '../../../../common';
-    import HeaderTools from '../HeaderTools.vue';
-    import FilterTools from '../FilterTools.vue';
+    import COMMON from '../../../common';
+    import HeaderTools from './HeaderTools.vue';
+    import FilterTools from './FilterTools.vue';
     import moment from 'moment';
-    import timestamp2date from '../../../../filter/timestamp2date.js';
+    import timestamp2date from '../../../filter/timestamp2date.js';
+    import _ from 'lodash';
 
     export default {
         data() {
@@ -82,6 +85,8 @@
             };
             //console.log(week, date)
             return {
+                game_id: 1,
+                games: _games,
                 date,
                 data: {},
                 result: [],
@@ -89,7 +94,6 @@
                 size: 20,
                 params: { 
                     page: 0,
-                    'game-names': 'Powerball', 
                 },
                 checkAll: false,
             }
@@ -100,7 +104,7 @@
             const vm = this;
             async.parallel({
                 data(cb) {
-                    vm._fetcDatas(vm.api, {...vm.params, size: vm.size, 'date-from': vm._makeTimestamp(vm.date.dateFrom), 'date-to': vm._makeTimestamp(vm.date.dateTo)}).done(data => {
+                    vm._fetcDatas(vm.api, {...vm.params, 'game-names': vm.gameName, size: vm.size, 'date-from': vm._makeTimestamp(vm.date.dateFrom), 'date-to': vm._makeTimestamp(vm.date.dateTo)}).done(data => {
                         cb(null, data);
                     }, err => {
                         cb(new Error(err));
@@ -133,6 +137,12 @@
             },
         },
 
+        computed: {
+            gameName() {
+                return _.find(this.games, { id: this.game_id }).name;
+            }
+        },
+
         methods: {
             _fetcDatas(api, params={}) {
                 const def = deferred();
@@ -146,7 +156,7 @@
             },
             _fetchResults(date) {
                 const def = deferred();
-                this.$http.get(laroute.route('admin.get.powerball.result'), date).then(res => {
+                this.$http.get(laroute.route('admin.get.result.nj', {game_id: this.game_id}), date).then(res => {
                     const { data } = res;
                     def.resolve(data);
                 }, res => {
@@ -159,7 +169,7 @@
                 return new Date(d).getTime();
             },
             assignToResult(powerball) {
-                this.$http.post(laroute.route('admin.post.powerball.assign.result'), powerball).then(res => {
+                this.$http.post(laroute.route('admin.post.assign.result', {game_id: this.game_id}), powerball).then(res => {
                     toastr.success('Assign to result success');
                     this.result.push(res.data);
                 }, res => {
@@ -169,6 +179,9 @@
                         toastr.error(res.data.message || 'Something wrong');
                     }
                 });
+            },
+            checkWaiting(pb) {
+                return pb.status === 'OPEN' || !pb.results;
             }
         },
 

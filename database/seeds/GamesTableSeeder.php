@@ -13,6 +13,6 @@ class GamesTableSeeder extends Seeder
     public function run()
     {
         Game::create(['name' => 'Powerball']);
-        Game::create(['name' => 'Mega Mililins']);
+        Game::create(['name' => 'Mega Millions']);
     }
 }

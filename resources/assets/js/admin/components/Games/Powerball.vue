@@ -48,7 +48,7 @@
                             if(res.status === 500) {
                                 COMMON.alertError();
                             } else {
-                                toastr.error(res.value);
+                                toastr.error(res.data.value);
                             }
                         });
         				

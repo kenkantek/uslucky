@@ -34,11 +34,15 @@ Breadcrumbs::register('ticket', function ($breadcrumbs) {
     $breadcrumbs->push('Tickets', route('admin.tickets.index'));
 });
 
-Breadcrumbs::register('powerball', function ($breadcrumbs) {
+Breadcrumbs::register('game.result', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Powerball', 'javascript:;');
+    $breadcrumbs->push('Game Result', 'javascript:;');
 });
-Breadcrumbs::register('powerball.result.index', function ($breadcrumbs) {
-    $breadcrumbs->parent('powerball');
+Breadcrumbs::register('result.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('game.result');
     $breadcrumbs->push('Daily Results', 'javascript:;');
+});
+Breadcrumbs::register('result.award.module', function ($breadcrumbs) {
+    $breadcrumbs->parent('game.result');
+    $breadcrumbs->push('Award Results', 'javascript:;');
 });

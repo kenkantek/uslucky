@@ -24,7 +24,7 @@ class PowerballRequest extends Request
     public function rules()
     {
         return [
-            'value' => 'numeric',
+            'value' => 'required|numeric|min:1',
         ];
     }
 }
