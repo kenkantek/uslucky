@@ -34,9 +34,9 @@ class ManageGame extends Model
 
     public static function getConfig($id)
     {
-        $powerball = Game::find($id);
-        return Cache::rememberForever('config-' . $powerball->name, function () use ($powerball) {
-            return $powerball->settings()->pluck('value', 'key');
+        $game = Game::find($id);
+        return Cache::rememberForever('config-' . $game->name, function () use ($game) {
+            return $game->settings->pluck('value', 'key');
         });
     }
 }
