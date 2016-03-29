@@ -3,23 +3,10 @@
         <slot name="header"></slot>
         <div class="actions">
             <div class="btn-group" v-show="ids.length != 0">
-                <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-share"></i>
-                    <span class="hidden-xs"> Tools </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown-menu pull-right" id="datatable_ajax_tools">
-                    <li :class="{disabled: !printsUrl}">
-                        <a :href="printsUrl" target="_blank" data-action="0" class="tool-action">
-                            <i class="icon-printer"></i> Print
-                        </a>
-                    </li>
-                    <!-- <li>
-                        <a href="" @click.prevent="onDelete(ids)" data-action="0" class="tool-action">
-                            <i class="icon-trash"></i> Delete
-                        </a>
-                    </li> -->
-                </ul>
+                <button class="btn red btn-danger btn-circle" @click.prevent="onDelete(ids)">
+                    <i class="fa fa-trash"></i>
+                    <span class="hidden-xs"> Delete all users </span>
+                </button>
             </div>
         </div>
     </div>
@@ -29,12 +16,12 @@
     import laroute  from '../../../laroute';
     import COMMON from '../../../common';
     export default {
-        props: ['printsUrl', 'ids'],
+        props: ['ids'],
 
         methods:{
             onDelete(ids){
                 swal({
-                    title: "Are you sure delete this order?",
+                    title: "Are you sure delete this users?",
                     type: "info",
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true,
@@ -43,13 +30,13 @@
                     showLoaderOnConfirm: true
                 }, (isConfirm) => {
                     if(isConfirm) {
-                        this.$http.delete(laroute.route('admin.orders.destroy', { 'orders': [ids]})).then(res => {
+                        this.$http.delete(laroute.route('admin.users.destroy', { 'users': [ids]})).then(res => {
                             swal.close();
                             this.$parent.reloadAsyncData();
                             return res;
                         }, (res) => {
                                 if(res.status === 500) {
-                                    COMMON.alertError();
+                                    COMMON.alertError('Don\'t choose yourself!');
                                 }
                             }
                         );

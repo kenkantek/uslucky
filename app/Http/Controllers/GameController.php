@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ManageGame;
 use Javascript;
 
 class GameController extends Controller
@@ -16,11 +17,7 @@ class GameController extends Controller
 
     public function getPowerball()
     {
-        Javascript::put([
-            '_powerball'        => powerballNextTime(),
-            '_each_per_ticket'  => env('EACH_PER_TICKET'),
-            '_extra_per_ticket' => env('EXTRA_PER_TICKET'),
-        ]);
+        Javascript::put(array_add(ManageGame::getConfig(1)->toArray(), '_powerball', powerballNextTime()));
         return view('games.powerball');
     }
 

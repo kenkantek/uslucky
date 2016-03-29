@@ -54,7 +54,7 @@ class Order extends Model
     {
         $d = explode('/', $draw_at);
         (count($d) !== 3) && abort(500, 'Something bad happened');
-        $this->draw_at = Carbon::create($d[2], $d[0], $d[1], env('HOURS_BEFORE_CLOSE'));
+        $this->draw_at = Carbon::create($d[2], $d[0], $d[1], ManageGame::getConfig(1)->toArray()['hours_before_close']);
         return $this;
     }
     public function withDescription($description)
@@ -107,9 +107,10 @@ class Order extends Model
 
     public function getPriceAttribute()
     {
-        $price = $this->ticket_total * env('EACH_PER_TICKET');
+        $config = ManageGame::getConfig(1)->toArray();
+        $price  = $this->ticket_total * $config['each_per_ticket'];
         if ($this->extra) {
-            $price += $this->ticket_total * env('EXTRA_PER_TICKET');
+            $price += $this->ticket_total * $config['extra_per_ticket'];
         }
         return $price;
     }

@@ -31,13 +31,14 @@
                                 <span v-if="pb.status === 'OPEN'" class="label label-danger"> waiting</span>
                                 <span v-else v-for="number in pb.results[0].primary">
                                     <strong v-if="$index < 5" v-text="number"></strong>
+                                    <strong class="powerball" v-if="$index == 6" v-text="number.slice(-2)"></strong>
                                 </span>
                             </td>
                             <td>
                                 <span v-if="pb.status === 'OPEN'" class="label label-danger"> waiting</span>
                                 <span v-else>{{ pb.results[0].multiplier }}</span>
                             </td>
-                            <td>{{ pb.estimatedJackpot | remove3CharLast | currency }}</td>
+                            <td>{{ pb.estimatedJackpot | remove2CharLast | currency }}</td>
                             <td>
                                 <span class="label" :class="[pb.status === 'OPEN' ? 'label-danger' : 'label-success']">{{ pb.status }}</span>
                             </td>
@@ -79,7 +80,7 @@
                 dateFrom: moment().add(-1, 'months'),
                 dateTo: dateTo, // thứ 4 hoặc thứ 7 tiếp theo
             };
-            console.log(week, date)
+            //console.log(week, date)
             return {
                 date,
                 data: {},
@@ -173,8 +174,8 @@
 
         filters: {
             timestamp2date,
-            remove3CharLast(val) {
-                return String(val).slice(0, -3)
+            remove2CharLast(val) {
+                return String(val).slice(0, -2)
             }
         },
 

@@ -10,7 +10,7 @@
                 </a>
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.users.index'))  @endif">
+            <li class="nav-item  @if(starts_with($routeName, 'admin.results.powerball.index')) active open  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>
                     <span class="title">Game result</span>
@@ -62,7 +62,7 @@
 
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.orders.index'))  @endif">
+            <li class="nav-item  @if(starts_with($routeName, 'admin.orders.index')) active open  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-list"></i>
                     <span class="title">Orders / Tickets</span>
@@ -141,7 +141,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.users.index'))  @endif">
+            <li class="nav-item @if(starts_with($routeName, 'admin.games.powerball.index')) active open @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-game-controller"></i>
                     <span class="title">Manage Games</span>
@@ -150,7 +150,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start">
-                        <a href="{{route('admin.users.index')}}" class="nav-link ">
+                        <a href="{{route('admin.games.powerball.index')}}" class="nav-link ">
                             <span class="title">Powerball</span>
                             <span class="selected"></span>
                         </a>

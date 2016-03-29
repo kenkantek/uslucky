@@ -141,6 +141,23 @@ $router->group([
                 'as'   => 'get.users',
                 'uses' => 'UserController@getUsers',
             ]);
+            $router->get('user/{user}', [
+                'as'   => 'get.user',
+                'uses' => 'UserController@getUser',
+            ]);
+            $router->post('user/{user}/avatar', [
+                'as'   => 'post.avatar',
+                'uses' => 'UserController@postChangeAvatar',
+            ]);
+            $router->put('user/{user}/password', [
+                'as'   => 'put.password',
+                'uses' => 'UserController@putChangePass',
+            ]);
+
+            $router->get('manages/powerball', [
+                'as'   => 'get.powerball',
+                'uses' => 'Games\PowerballController@getKeys',
+            ]);
 
             $router->post('results/powerball', [
                 'as'   => 'post.powerball.assign.result',
@@ -158,7 +175,7 @@ $router->group([
         ]);
 
         $router->resource('users', 'UserController', [
-            'only' => ['index', 'destroy'],
+            'only' => ['index', 'destroy', 'show', 'update'],
         ]);
 
         $router->get('orders/prints', [
@@ -176,6 +193,12 @@ $router->group([
         $router->group(['prefix' => 'results'], function () use ($router) {
             $router->resource('powerball', 'Results\PowerballController', [
                 'only' => 'index',
+            ]);
+        });
+
+        $router->group(['prefix' => 'games'], function () use ($router) {
+            $router->resource('powerball', 'Games\PowerballController', [
+                'only' => ['index', 'update'],
             ]);
         });
 

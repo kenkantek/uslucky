@@ -62,7 +62,7 @@
                             <td class="text-center">
                                 <a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a>
                                 <a class="label label-info" target="_blank" :href="order.id | linkPrint"><i class="fa fa-print"></i></a>
-                                <a class="label label-danger" @click.prevent="onDelete(order.id)"><i class="fa fa-remove"></i></a>
+                                <!-- <a class="label label-danger" @click.prevent="onDelete(order.id)"><i class="fa fa-remove"></i></a> -->
                             </td>
                         </tr>
                         <tr v-if="!data.data || !data.data.length">

@@ -12,7 +12,12 @@
         </header-power>
 
         <article class="view-game clearfix">
+            <section class="pull-left">
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_sharing_toolbox"></div>
+            </section>
             <section class="top-controls pull-right">
+
                 <button class="btn btn-info text-upercase" @click="quickPick"> Quick Pick</button>
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 
@@ -98,8 +103,8 @@
                 },
                 tickets: [],
                 powerball: {..._powerball},
-                eachPerTicket: _each_per_ticket,
-                extraPerTicket: _extra_per_ticket,
+                eachPerTicket: each_per_ticket,
+                extraPerTicket: extra_per_ticket,
                 extra: Boolean(Number(localStorage.extra)) || null,
                 submiting: false
             }

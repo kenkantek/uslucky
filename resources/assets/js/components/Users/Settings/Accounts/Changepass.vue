@@ -43,7 +43,8 @@
             return{
                 formInputs : {},
                 formErrors : {},
-                onSubmmit : false
+                onSubmmit : false,
+                submiting: false,
             }
         },
 

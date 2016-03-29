@@ -10,7 +10,12 @@
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
-                            <users-list></users-list>
+                            <users-list>
+                                <div class="caption" slot="header">
+                                    <i class="icon-user font-dark"></i>
+                                    <span class="caption-subject font-dark sbold uppercase">All Users</span>
+                                </div>
+                            </users-list>
                         </div>
                     </div>
                 </div>

@@ -1,52 +1,59 @@
-<template>	
-<div class="portlet light ">
+<template>
+    <div class="portlet light ">
+        <header-tools :ids="ids">
+            <slot slot="header" name="header"></slot>
+        </header-tools>
         <div class="portlet-body">
-        <filter-tools 
-                :data.sync="data"
-                :keyword.sync="keyword"
-            >
+            <filter-tools :data.sync="data" :keyword.sync="keyword">
             </filter-tools>
             <div class="table-scrollable table-scrollable-borderless">
-                <div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
-<table v-else class="table-striped table-checkable table table-hover table-bordered admin">
-    <thead>
-        <tr class="uppercase">
-        <th><input type="checkbox" v-model="checkAll"></th>
-            <th colspan="2"> MEMBER </th>
-            <th colspan="2"> Ticket total bought </th>
-            <th> DEPOSIT Total </th>
-            <th> WITHDRAW/CLAIM Total </th>
-            <th> Blance </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr v-for="user in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
-        <td><input type="checkbox" v-model="ids" :value="user.id"></td>
-            <td class="fit">
-                <img class="user-pic" :src="user.image" width="30px"> </td>
-            <td>
-                <a href="javascript:;" class="primary-link">{{user.fullname}}</a>
-            </td>
-            <td> {{user.ticket_total}} </td>
-            <td> {{user.price_total | currency}} </td>
-            <td class="font-blue-madison"> +{{user.deposit_total | currency}} </td>
-            <td class="font-red-mint"> -{{user.withdraw_total | currency}} </td>
-            <td>
-                <span class="bold theme-font">{{user.balance | currency}}</span>
-            </td>
-            <td><a href="" @click.prevent="onDelete(user.id)" style="color: #f60000"><i class="fa fa-trash"></i></a></td>
-        </tr>
-    </tbody>
-</table>
-</div>
-</div>
-</div>
+                <div v-if="$loadingAsyncData" class="move-top-10">
+                    <loading></loading>
+                </div>
+                <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
+                    <thead>
+                        <tr class="uppercase">
+                            <th>
+                                <input type="checkbox" v-model="checkAll">
+                            </th>
+                            <th colspan="2"> MEMBER </th>
+                            <th colspan="2"> Ticket total bought </th>
+                            <th> DEPOSIT Total </th>
+                            <th> WITHDRAW/CLAIM Total </th>
+                            <th> Blance </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="user in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
+                            <td>
+                                <input type="checkbox" v-model="ids" :value="user.id">
+                            </td>
+                            <td class="fit">
+                                <img class="user-pic" :src="user.image" width="30px"> </td>
+                            <td>
+                                <a :href="user.id | linkShow" class="primary-link">{{user.fullname}}</a>
+                            </td>
+                            <td> {{user.ticket_total}} </td>
+                            <td> {{user.price_total | currency}} </td>
+                            <td class="font-blue-madison"> +{{user.deposit_total | currency}} </td>
+                            <td class="font-red-mint"> -{{user.withdraw_total | currency}} </td>
+                            <td>
+                                <span class="bold theme-font">{{user.balance | currency}}</span>
+                            </td>
+                            <td><a class="label label-danger" href="" @click.prevent="onDelete(user.id)"><i class="fa fa-remove"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 import laroute from '../../../laroute';
 import COMMON from '../../../common';
+import HeaderTools from './HeaderTool.vue';
 import deferred from 'deferred';
 import FilterTools from '../Globals/FilterTools.vue';
 
@@ -117,7 +124,7 @@ export default {
                                 return res;
                             }, (res) => {
                                 if(res.status === 500) {
-                                    COMMON.alertError();
+                                    COMMON.alertError('Can not delete yourself!');
                                 }
                                 }
                             );
@@ -128,6 +135,12 @@ export default {
             }
         },
 
+        filters:{
+            linkShow(users) {
+                return laroute.route('admin.users.show', { users });
+            },
+        },
+
         events: {
             'go-to-page'(api) {
                 this.api = api;
@@ -135,6 +148,6 @@ export default {
             }
         },
 
-        components: {  FilterTools }
+        components: { HeaderTools, FilterTools }
 }
 </script>

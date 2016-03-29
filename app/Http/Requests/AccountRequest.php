@@ -32,13 +32,7 @@ class AccountRequest extends Request
             'address'    => 'required',
             'city'       => 'required',
             'country'    => 'required',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'first_name.required' => 'First Name is required',
+            'email'      => 'required|email',
         ];
     }
 }
