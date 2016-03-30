@@ -10,7 +10,7 @@
                 </a>
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.results.powerball.index')) active open  @endif">
+            <li class="nav-item  @if(starts_with($routeName, 'admin.results.index')) active open  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>
                     <span class="title">Game result</span>
@@ -25,13 +25,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="{{ route('admin.results.powerball.index') }}" class="nav-link ">
+                                <a href="{{ route('admin.results.index') }}" class="nav-link ">
                                     <span class="title">Daily result input</span>
                                     <span class="selected"></span>
                                 </a>
                             </li>
                             <li class="nav-item start">
-                                <a href="javascript:;" class="nav-link ">
+                                <a href="{{ route('get.results.awards') }}" class="nav-link ">
                                     <span class="title">Award matching module</span>
                                     <span class="selected"></span>
                                 </a>
@@ -45,7 +45,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="" class="nav-link ">
+                                <a href="javascript:;" class="nav-link ">
                                     <span class="title">Daily result input</span>
                                     <span class="selected"></span>
                                 </a>

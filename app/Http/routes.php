@@ -165,16 +165,22 @@ $router->group([
                 'uses' => 'Games\PowerballController@getKeys',
             ]);
 
-            $router->post('results/powerball', [
-                'as'   => 'post.powerball.assign.result',
-                'uses' => 'Results\PowerballController@assignToResult',
-            ]);
-            $router->get('results/powerball', [
-                'as'   => 'get.powerball.result',
-                'uses' => 'Results\PowerballController@getResults',
+            $router->post('results/{game_id}/assign', [
+                'as'   => 'post.assign.result',
+                'uses' => 'Results\ResultController@assignToResult',
             ]);
 
-        });
+            $router->get('results/{game_id}/nj', [
+                'as'   => 'get.result.nj',
+                'uses' => 'Results\ResultController@getResultsNj',
+            ]);
+
+            $router->get('results/results', [ // for Search
+                'as'   => 'get.results',
+                'uses' => 'Results\ResultController@getResults',
+            ]);
+
+        }); //END API
 
         $router->resource('contact', 'ContactController', [
             'only' => ['index', 'show', 'update'],
@@ -196,11 +202,17 @@ $router->group([
             'only' => 'index',
         ]);
 
-        $router->group(['prefix' => 'results'], function () use ($router) {
-            $router->resource('powerball', 'Results\PowerballController', [
-                'only' => 'index',
-            ]);
-        });
+        $router->resource('results', 'Results\ResultController', [
+            'only' => 'index',
+        ]);
+        $router->get('results/awards', [
+            'as'   => 'get.results.awards',
+            'uses' => 'Results\ResultController@awards',
+        ]);
+        $router->get('results/award/{result}', [
+            'as'   => 'get.award.result.detailt',
+            'uses' => 'Results\ResultController@awardDetail',
+        ]);
 
         $router->group(['prefix' => 'games'], function () use ($router) {
             $router->resource('powerball', 'Games\PowerballController', [

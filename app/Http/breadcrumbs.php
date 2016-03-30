@@ -34,11 +34,20 @@ Breadcrumbs::register('ticket', function ($breadcrumbs) {
     $breadcrumbs->push('Tickets', route('admin.tickets.index'));
 });
 
-Breadcrumbs::register('powerball', function ($breadcrumbs) {
+Breadcrumbs::register('game.result', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Powerball', 'javascript:;');
+    $breadcrumbs->push('Game Result', 'javascript:;');
 });
-Breadcrumbs::register('powerball.result.index', function ($breadcrumbs) {
-    $breadcrumbs->parent('powerball');
+Breadcrumbs::register('result.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('game.result');
     $breadcrumbs->push('Daily Results', 'javascript:;');
+});
+Breadcrumbs::register('result.award.module', function ($breadcrumbs) {
+    $breadcrumbs->parent('game.result');
+    $breadcrumbs->push('Award Matching Module', route('get.results.awards'));
+});
+
+Breadcrumbs::register('result.award.detail', function ($breadcrumbs, $result) {
+    $breadcrumbs->parent('result.award.module');
+    $breadcrumbs->push("Award Detail Result # {$result->id}", route('get.award.result.detailt', $result->id));
 });

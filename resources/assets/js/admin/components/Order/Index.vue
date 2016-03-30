@@ -98,7 +98,6 @@
 
 
         asyncData(resolve, reject) {
-            console.log(this.keyword)
             this._fetchOrders(this.api).done(data => {
                 resolve({ data });
             }, err => {

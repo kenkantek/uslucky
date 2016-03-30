@@ -17,7 +17,9 @@ class CreateStatusesTable extends Migration
             $table->morphs('statusable');
             $table->enum('status', [
                 'pendding', 'canceled', 'failed', 'succeeded',
+                'processing', 'done',
                 'actived', 'disabled',
+                'unpaid', 'paid',
                 'waiting', 'wait for purchase', 'purchased', 'won', 'fail',
             ])->default('pendding');
         });

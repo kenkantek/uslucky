@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(GamesTableSeeder::class);
         $this->call(ManageGameTableSeeder::class);
+        $this->call(LevelTableSeeder::class);
 
         Model::reguard();
     }

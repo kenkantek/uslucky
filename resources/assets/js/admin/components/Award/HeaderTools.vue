@@ -5,11 +5,11 @@
             <div class="row">
                 <div class="col-xs-12 col-md-3">
                     <label>Draw Date From:</label>
-                    <datepicker :value.sync="date.dateFrom | formatDate" format="MM/DD/YYYY" name="closing_date"><datepicker>
+                    <datepicker :value.sync="date.dateFrom" format="YYYY/MM/DD" name="closing_date"><datepicker>
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <label>Draw Date To:</label>
-                    <datepicker :value.sync="date.dateTo | formatDate" format="MM/DD/YYYY" name="closing_date"><datepicker>
+                    <datepicker :value.sync="date.dateTo" format="YYYY/MM/DD" name="closing_date"><datepicker>
                 </div>
                 <div class="col-xs-12 col-md-2">
                     <label>Game Type:</label>
@@ -31,17 +31,11 @@
     import Datepicker from '../../../components/Globals/Datepicker.vue';
 
     export default {
-        props: ['date', 'game', 'games'],
+        props: ['date', 'games', 'game'],
 
         methods: {
             onSearch() {
-                this.$dispatch('go-to-page', {page: 0});
-            }
-        },
-
-        filters: {
-            formatDate(val) {
-                return typeof val === 'string' ? val : val.format('MM/DD/YYYY');
+                this.$parent.reloadAsyncData();
             }
         },
 
