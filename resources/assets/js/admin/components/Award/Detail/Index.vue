@@ -24,10 +24,10 @@
                     </div>
                     <div class="col-xs-6">
                         <dl class="dl-horizontal">
-                            <dt>POWER PLAY</dt>
+                            <dt>Power play</dt>
                             <dd>{{ result.multiplier }}</dd>
 
-                            <dt>ANNUITY PAYOUT</dt>
+                            <dt>Annuity payout</dt>
                             <dd>{{ result.annuity | currency }}</dd>
 
                             <dt>Status</dt>
@@ -41,8 +41,12 @@
             <div class="row">
                 <hr>
                 <div class="col-md-6 col-md-offset-5">
-                    <button class="btn btn-info" v-if="result.apply_module">Update status</button>
-                    <button class="btn btn-danger" v-else>Calculate Winning</button>
+                    <button class="btn btn-info" v-if="result.apply_module">
+                        Update status
+                    </button>
+                    <button class="btn btn-danger" v-else @click="onCalculate" :disabled="calculating">
+                        <i class="fa fa-circle-o-notch fa-spin" v-show="calculating"></i> Calculate Winning
+                    </button>
                 </div>
             </div>
             <div class="row" v-if="result.apply_module">
@@ -60,7 +64,24 @@
     export default {
         data() {
             return {
-                result: _result
+                result: _result,
+                calculating: false
+            }
+        },
+
+        methods: {
+            onCalculate() {
+                this.calculating = true;
+                this.$http.post(laroute.route('admin.post.award.result.calculate', {result: this.result.id})).then(res => {
+                    toastr.success('Calculated successfuly and Reload page now');
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2000);
+                    this.calculating = false;
+                }, res => {
+                    this.calculating = false;
+                    COMMON.alertError();
+                });
             }
         }
     }

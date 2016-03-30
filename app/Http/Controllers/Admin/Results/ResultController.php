@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\Result;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -97,5 +98,17 @@ class ResultController extends Controller
             '_result' => $result->load('game', 'status'),
         ]);
         return view('admin.results.award-detailt', compact('result'));
+    }
+
+    public function onCalculate(Result $result)
+    {
+        return DB::transaction(function () use ($result) {
+            $final = $result->calculateWinning();
+
+            $result->apply_module = true;
+            $result->save();
+
+            return $final;
+        });
     }
 }

@@ -25,7 +25,7 @@ class CreateAwardsTable extends Migration
             ->onDelete('cascade');
             $table->foreign('level_id')
             ->references('id')
-            ->on('tickets')
+            ->on('levels')
             ->onDelete('cascade');
         });
     }

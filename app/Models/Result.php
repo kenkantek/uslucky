@@ -81,4 +81,87 @@ class Result extends Model
     {
         return $query->where('game_id', $type);
     }
+
+    public function calculateWinning()
+    {
+        return $this->verifyTickets($this->getTickets());
+    }
+
+    protected function getTickets()
+    {
+        $draw_at = Carbon::createFromFormat('Y-m-d', $this->draw_at)->toDateString();
+        return Ticket::whereHas('order', function ($q) use ($draw_at) {
+            $q->whereDate('draw_at', '=', $draw_at);
+        })->get();
+    }
+
+    protected function verifyTickets($tickets)
+    {
+        $final = [];
+        foreach ($tickets as $ticket) {
+            $verify = $this->verifyTicket($ticket);
+            if ($verify) {
+                // verify là ticket có chiến thắng
+                $award = $verify->newAward()
+                    ->withLevel($verify->level)
+                    ->withAddAward($verify->add_award)
+                    ->publish();
+                //status for award
+                $status = $award->updateOrNewStatus()
+                    ->withStatus('unpaid')
+                    ->publish();
+
+                //trigger event Email
+
+                array_push($final, $status);
+            }
+        }
+        return $final; //tickets trúng thưởng
+    }
+
+    protected function verifyTicket($ticket)
+    {
+
+        $match_numbers = collect($ticket->numbers)->intersect($this->numbers)->count();
+        $ball          = $ticket->ball == $this->ball;
+
+        $prize = 0;
+        if ($match_numbers == 5) {
+            if ($ball) {
+                //jackpot = Prize 1
+                $prize = 1;
+            } else {
+                // Prize 2
+                $prize = 2;
+            }
+        } elseif ($match_numbers == 4) {
+            if ($ball) {
+                //Prize 3
+                $prize = 3;
+            } else {
+                // Prize 4
+                $prize = 4;
+            }
+        } elseif ($match_numbers == 3) {
+            if ($ball) {
+                //Prize 5
+                $prize = 5;
+            } else {
+                // Prize 6
+                $prize = 6;
+            }
+        } elseif ($match_numbers == 2 && $ball) {
+            //Prize 7
+            $prize = 7;
+        } elseif ($match_numbers == 1 && $ball) {
+            //Prize 8
+            $prize = 8;
+        } elseif ($match_numbers == 0 && $ball) {
+            //Prize 9
+            $prize = 9;
+        }
+        $ticket->level     = $prize;
+        $ticket->add_award = $prize === 1 ? $this->annuity : 0;
+        return $prize ? $ticket : false;
+    }
 }

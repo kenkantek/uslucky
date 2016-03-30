@@ -41,4 +41,11 @@ class Ticket extends Model
         return $this;
     }
     //END NEW TICKET
+
+    public function newAward()
+    {
+        $award = new Award;
+        $award->ticket()->associate($this);
+        return $award;
+    }
 }
