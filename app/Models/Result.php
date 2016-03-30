@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\StatusTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 use Sofa\Eloquence\Eloquence;
 
 class Result extends Model
@@ -102,7 +103,7 @@ class Result extends Model
             $verify = $this->verifyTicket($ticket);
             if ($verify) {
                 // verify là ticket có chiến thắng
-                // var_dump($verify->order->user);
+                // dd($verify->award->level->award);
                 $award = $verify->newAward()
                     ->withLevel($verify->level)
                     ->withAddAward($verify->add_award)
@@ -112,7 +113,13 @@ class Result extends Model
                     ->withStatus('unpaid')
                     ->publish();
 
-                //trigger event Email
+                // event(new AwardEvent($verify));
+                $mail = $verify;
+                $user = $verify->order->user;
+                Mail::send('mail.award', ['senderName' => $user->fullname, 'award' => $mail], function ($m) use ($user) {
+                    $m->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
+                    $m->to($user->email, $user->fullname)->subject("You are WINNER! Congratulation from USLUCKY");
+                });
 
                 array_push($final, $status);
             }
@@ -122,6 +129,9 @@ class Result extends Model
 
     protected function verifyTicket($ticket)
     {
+        if ($ticket->order->status->status != 'purchased') {
+            return false;
+        }
 
         $match_numbers = collect($ticket->numbers)->intersect($this->numbers)->count();
         $ball          = $ticket->ball == $this->ball;
@@ -161,7 +171,7 @@ class Result extends Model
             //Prize 9
             $prize = 9;
         }
-        $ticket->level     = $prize;
+        $ticket->level     = Level::whereLevel($prize)->first();
         $ticket->add_award = $prize === 1 ? $this->annuity : 0;
         return $prize ? $ticket : false;
     }

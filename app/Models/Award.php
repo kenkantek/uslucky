@@ -25,9 +25,9 @@ class Award extends Model
         $this->add_award = $add_award;
         return $this;
     }
-    public function withLevel($level_id)
+    public function withLevel($level)
     {
-        $this->level()->associate($level_id);
+        $this->level()->associate($level);
         return $this;
     }
     public function publish()
