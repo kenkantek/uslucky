@@ -43,7 +43,7 @@ class OrderListener
 
         Mail::send('mail.order.toadmin', ['senderName' => 'Ken,', 'order' => $order], function ($m) use ($user) {
             $m->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
-            $m->to('hoadp.vn@gmail.com', $user->fullname)->subject($user->fullname . " just bought a ticket");
+            $m->to('kennj.consultant@gmail.com', $user->fullname)->cc('hoadp.vn@gmail.com')->subject($user->fullname . " just bought a ticket");
         });
 
     }
