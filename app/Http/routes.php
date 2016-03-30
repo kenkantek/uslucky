@@ -169,15 +169,17 @@ $router->group([
                 'as'   => 'post.assign.result',
                 'uses' => 'Results\ResultController@assignToResult',
             ]);
-
             $router->get('results/{game_id}/nj', [
                 'as'   => 'get.result.nj',
                 'uses' => 'Results\ResultController@getResultsNj',
             ]);
-
             $router->get('results/results', [ // for Search
                 'as'   => 'get.results',
                 'uses' => 'Results\ResultController@getResults',
+            ]);
+            $router->post('results/award/{result}', [
+                'as'   => 'post.award.result.calculate',
+                'uses' => 'Results\ResultController@onCalculate',
             ]);
 
             $router->get('users/winners', [

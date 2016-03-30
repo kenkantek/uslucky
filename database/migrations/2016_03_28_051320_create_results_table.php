@@ -20,14 +20,14 @@ class CreateResultsTable extends Migration
             $table->tinyInteger('ball')->index();
             $table->boolean('multiplier')->default(0);
             $table->decimal('annuity', 19, 4);
-            $table->timestamp('draw_at');
+            $table->timestamp('draw_at')->nullable();
             $table->boolean('apply_module')->default(false);
             $table->timestamps();
 
             $table->foreign('game_id')
-            ->references('id')
-            ->on('games')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('games')
+                ->onDelete('cascade');
         });
     }
 
