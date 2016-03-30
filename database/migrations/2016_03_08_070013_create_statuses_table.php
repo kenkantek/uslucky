@@ -19,6 +19,7 @@ class CreateStatusesTable extends Migration
                 'pendding', 'canceled', 'failed', 'succeeded',
                 'processing', 'done',
                 'actived', 'disabled',
+                'unpaid', 'paid',
                 'waiting', 'wait for purchase', 'purchased', 'won', 'fail',
             ])->default('pendding');
         });

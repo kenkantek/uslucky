@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAwardsTable extends Migration
 {
@@ -14,7 +14,19 @@ class CreateAwardsTable extends Migration
     {
         Schema::create('awards', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('ticket_id')->unsigned()->index();
+            $table->integer('level_id')->unsigned()->index();
+            $table->decimal('add_award', 19, 4)->default(0); // Tiền trúng cộng thêm vào, giành cho giải jackpot
             $table->timestamps();
+
+            $table->foreign('ticket_id')
+            ->references('id')
+            ->on('tickets')
+            ->onDelete('cascade');
+            $table->foreign('level_id')
+            ->references('id')
+            ->on('tickets')
+            ->onDelete('cascade');
         });
     }
 
@@ -25,6 +37,6 @@ class CreateAwardsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('awards');
+        Schema::dropIfExists('awards');
     }
 }

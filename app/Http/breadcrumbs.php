@@ -44,5 +44,10 @@ Breadcrumbs::register('result.index', function ($breadcrumbs) {
 });
 Breadcrumbs::register('result.award.module', function ($breadcrumbs) {
     $breadcrumbs->parent('game.result');
-    $breadcrumbs->push('Award Results', 'javascript:;');
+    $breadcrumbs->push('Award Matching Module', route('get.results.awards'));
+});
+
+Breadcrumbs::register('result.award.detail', function ($breadcrumbs, $result) {
+    $breadcrumbs->parent('result.award.module');
+    $breadcrumbs->push("Award Detail Result # {$result->id}", route('get.award.result.detailt', $result->id));
 });

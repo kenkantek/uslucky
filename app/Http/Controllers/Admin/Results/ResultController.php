@@ -90,4 +90,12 @@ class ResultController extends Controller
             ->paginate($take)
             ->appends(['take' => $take, 'keyword' => $keyword]);
     }
+
+    public function awardDetail(Result $result)
+    {
+        \JavaScript::put([
+            '_result' => $result->load('game', 'status'),
+        ]);
+        return view('admin.results.award-detailt', compact('result'));
+    }
 }

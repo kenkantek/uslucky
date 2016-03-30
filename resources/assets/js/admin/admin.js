@@ -14,6 +14,7 @@ import UsersList from './components/Users/Users.vue';
 import ShowUser from './components/Users/ShowUser.vue';
 import ResultsDaily from './components/Results/Index.vue';
 import AwardPowerball from './components/Award/Index.vue';
+import AwardDetail from './components/Award/Detail/Index.vue';
 import Powerball from './components/Games/Powerball.vue';
 
 new Vue({
@@ -28,6 +29,7 @@ new Vue({
         ShowUser,
         ResultsDaily,
         AwardPowerball,
+        AwardDetail,
         Powerball
     }
 });

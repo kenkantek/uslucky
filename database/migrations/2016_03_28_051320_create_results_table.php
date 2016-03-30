@@ -21,6 +21,7 @@ class CreateResultsTable extends Migration
             $table->boolean('multiplier')->default(0);
             $table->decimal('annuity', 19, 4);
             $table->timestamp('draw_at');
+            $table->boolean('apply_module')->default(false);
             $table->timestamps();
 
             $table->foreign('game_id')

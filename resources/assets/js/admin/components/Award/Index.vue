@@ -37,7 +37,7 @@
                                 <span class="label" :class="[result.status.status === 'pendding' ? 'label-danger' : 'label-info']">{{ result.status.status }}</span>
                             </td>
                             <td class="text-center">
-                                <a class="label label-default" href="/admin/orders/1"><i class="fa fa-eye"></i></a>
+                                <a class="label label-default" :href="result | linkDetail"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         <tr v-if="!data.data || !data.data.length">
@@ -102,6 +102,12 @@
                     def.reject(res);
                 });
                 return  def.promise;
+            }
+        },
+
+        filters: {
+            linkDetail(val) {
+                return laroute.route('get.award.result.detailt', {result: val.id})
             }
         },
 

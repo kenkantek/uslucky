@@ -203,6 +203,10 @@ $router->group([
             'as'   => 'get.results.awards',
             'uses' => 'Results\ResultController@awards',
         ]);
+        $router->get('results/award/{result}', [
+            'as'   => 'get.award.result.detailt',
+            'uses' => 'Results\ResultController@awardDetail',
+        ]);
 
         $router->group(['prefix' => 'games'], function () use ($router) {
             $router->resource('powerball', 'Games\PowerballController', [
