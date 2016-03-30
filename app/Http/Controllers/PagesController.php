@@ -29,6 +29,11 @@ class PagesController extends Controller
         return view('page.contact');
     }
 
+    public function getWinning()
+    {
+        return view('page.winnumber');
+    }
+
     public function putContact(ContactRequest $request)
     {
         $contacts          = new Contact();

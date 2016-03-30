@@ -59,6 +59,20 @@
                 </tr>
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row" v-if="order.images.length">
+                    <div class="col-xs-12 col-sm-6 col-md-3" v-for="image in order.images">
+                        <div class="image-item">
+                            <a :href="image.image" target="_blank">
+                                <img class="img-responsive" :src="image.image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <p v-else class="text-center text-danger">No have image.</p>
+            </div>
+        </div>
     </div>
 </template>
 

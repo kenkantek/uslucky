@@ -15,6 +15,7 @@ import Transaction from './components/Users/Settings/Payment/Transaction.vue';
 import Order from './components/Users/Settings/Order/Index.vue';
 import ShowOrder from './components/Users/Settings/Order/ShowOrder.vue'
 import Contact from './components/Others/Contact.vue';
+import Winnumber from './components/Games/Winnumber.vue';
 
 new Vue({
 	el: 'body',
@@ -29,6 +30,7 @@ new Vue({
         Contact,
         Order,
         ShowOrder,
+        Winnumber,
     }
 });
 $('[data-toggle="tooltip"]').tooltip();

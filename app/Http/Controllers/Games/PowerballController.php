@@ -124,4 +124,10 @@ class PowerballController extends Controller
         }
         return $amount;
     }
+
+    public function getResults(Request $request)
+    {
+        $powerball = Game::find(1);
+        return curlGetUrl();
+    }
 }

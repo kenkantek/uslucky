@@ -35,6 +35,8 @@ class OrderController extends Controller
 
     public function getOrder(Order $order)
     {
-        return $order->load(['tickets.status', 'status']);
+        return $order->load(['tickets.status', 'status', 'images' => function ($q) {
+            $q->latest('id');
+        }]);
     }
 }

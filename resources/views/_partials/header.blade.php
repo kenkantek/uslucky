@@ -22,7 +22,7 @@
                 	<li><a href="{{route('front::game.powerball')}}" title="">Powerball</a></li>
                 </ul>
                 </li>
-                <li><a href="#">WINNING NUMBER</a></li>
+                <li @if($routeName === 'front::get.winning.numbers') class="active" @endif><a href="{{route('front::get.winning.numbers')}}">WINNING NUMBER</a></li>
                 <li @if($routeName === 'front::contact') class="active" @endif><a href="{{route('front::contact')}}">CONTACT</a></li>
                 @if($auth)
                 <li class="cursor"><div class="dropdown-toggle" data-toggle="dropdown"><span>{{$auth->first_name}}</span><div style="margin-top:9px; overflow: hidden; float: left; border-radius: 50px; width: 30px;height: 30px"><img src="{{$auth->image}}" style="width: 100%;" alt=""></div><b class="caret"></b></div>

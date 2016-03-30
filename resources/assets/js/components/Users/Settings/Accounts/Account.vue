@@ -6,7 +6,7 @@
     <form v-if="!$loadingAsyncData" class="" @submit.prevent="onSubmit" novalidate>
         <div class="form-group col-md-12">
             <label>Avatar: <sup class="text-danger">*</sup></label><br>
-            <div style="height:200px; width:200px; overflow:hidden"><img :src="user.image" alt="" @click="getFilePathFromDialog($event)" style="max-width: 200px"></div>
+            <div style="height:200px; width:200px; overflow:hidden"><img :src="user.image" alt="" @click="getFilePathFromDialog($event)" style="width: 200px"></div>
             <br><span>Click image to change</span><br />
             <span class="help-block" v-show="formErrors.avatar" v-text="formErrors.avatar"></span><br>
             <input type="file" @change="onChangeAvatar($event)" accept="image/*" v-el:input-avatar class="hidden" />

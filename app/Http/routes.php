@@ -37,6 +37,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getAbout'   => 'about',
         'getContact' => 'contact',
         'putContact' => 'put.contact',
+        'getWinning' => 'get.winning.numbers',
     ]);
 
     $router->controller('settings', 'User\SettingsController', [
@@ -83,6 +84,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         $router->get('orders/{order}', [
             'as'   => 'get.order',
             'uses' => 'User\OrderController@getOrder',
+        ]);
+
+        $router->get('results', [
+            'as'   => 'get.results',
+            'uses' => 'Games\PowerballController@getResults',
         ]);
 
     });

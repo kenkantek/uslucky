@@ -419,6 +419,114 @@ h3 {
   margin-bottom: -6px;
 }
 
+.p8{
+  padding: 50px 0 8px;
+  .link2{
+    color: #dc5e61;
+    font-weight: bold;
+  }
+  .table{
+    border-collapse: separate;
+    border-spacing: 2px;
+    width: 100%;
+    margin: 35px 0 60px;
+    th{
+      border-collapse: separate;
+      border-spacing: 0px;
+      background: #eae6e3;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      padding: 5px;
+      border: none !important;
+      color: #bfac9d;
+      overflow: hidden;
+      word-break: normal;
+      text-align: center;
+    }
+    .c1{
+      font-family: 'Bevan';
+      font-size: 28px;
+      color: #2e3e4b;
+      text-align: center;
+      width: 49px;
+    }
+    .c2{
+      font-family: 'Roboto', sans-serif;
+      font-size: 24px;
+      color: #dc5e61;
+      font-weight: 500;
+      letter-spacing: 1px;
+      width: 346px;
+    }
+    a{
+      margin-left: 19px;
+    }
+    time{
+      color: #ad9480;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      display: block;
+      text-align: center;
+      br{
+        display: none;
+      }
+    }
+    td{
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      padding: 0;
+      color: #eae6e3;
+      border-collapse: separate;
+      border-spacing: 2px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border: 1px solid #d9d6d3;
+      height: 48px;
+      line-height: 48px;
+      .list {
+        margin: 10px 0 0 8px;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        text-align: left;
+        -webkit-padding-start: 0px;
+        padding-start: 0px;
+        list-style-type: none;
+        .powerball{
+          background-color: #F06;
+          color: #ffffff;
+        }
+        li {
+          position: relative;
+          float: left;
+          text-align: center;
+          background: #eae6e3;
+          color: #dc5e61;
+          text-decoration: none;
+          font-size: 14px;
+          line-height: 27px;
+          width: 29px;
+          height: 29px;
+          font-weight: bold;
+          border-radius: 28px;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  table{
+    td{
+      padding: 0;
+      border: none;
+      border-collapse: collapse;
+    }
+  }
+}
+
 img {
   vertical-align: top;
 }
