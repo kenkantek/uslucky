@@ -20,13 +20,13 @@ class CreateAwardsTable extends Migration
             $table->timestamps();
 
             $table->foreign('ticket_id')
-            ->references('id')
-            ->on('tickets')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tickets')
+                ->onDelete('cascade');
             $table->foreign('level_id')
-            ->references('id')
-            ->on('tickets')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('levels')
+                ->onDelete('cascade');
         });
     }
 

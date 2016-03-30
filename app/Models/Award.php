@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Awards extends Model
+class Award extends Model
 {
     //
 }

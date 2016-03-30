@@ -23,6 +23,11 @@ class Ticket extends Model
         return $this->morphOne(Status::class, 'statusable');
     }
 
+    public function award()
+    {
+        return $this->hasOne(Award::class);
+    }
+
     //BEGIN NEW TICKET
     public function withNumbers($numbers)
     {
