@@ -14,6 +14,11 @@ Breadcrumbs::register('user', function ($breadcrumbs) {
     $breadcrumbs->push('Users', route('admin.users.index'));
 });
 
+Breadcrumbs::register('winner', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Winners', route('admin.users.winners.index'));
+});
+
 Breadcrumbs::register('user.show', function ($breadcrumbs, $users) {
     $breadcrumbs->parent('user');
     $breadcrumbs->push('User details', route('admin.users.show', $users->id));

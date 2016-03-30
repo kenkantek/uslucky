@@ -126,14 +126,14 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start @if(starts_with($routeName, 'admin.users.index')) active open @endif">
+                    <li class="nav-item start @if(starts_with($routeName, 'admin.users')) active open @endif">
                         <a href="{{route('admin.users.index')}}" class="nav-link ">
                             <span class="title">All Users</span>
                             <span class="selected"></span>
                         </a>
                     </li>
                     <li class="nav-item start">
-                        <a href="javascript:;" class="nav-link ">
+                        <a href="{{route('admin.users.winners.index')}}" class="nav-link ">
                             <span class="title">Winner User</span>
                             <span class="selected"></span>
                         </a>

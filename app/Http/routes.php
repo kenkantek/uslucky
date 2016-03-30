@@ -180,12 +180,20 @@ $router->group([
                 'uses' => 'Results\ResultController@getResults',
             ]);
 
+            $router->get('users/winners', [
+                'as'   => 'get.winners',
+                'uses' => 'WinnerController@getWinners',
+            ]);
+
         }); //END API
 
         $router->resource('contact', 'ContactController', [
             'only' => ['index', 'show', 'update'],
         ]);
 
+        $router->resource('users/winners', 'WinnerController', [
+            'only' => 'index',
+        ]);
         $router->resource('users', 'UserController', [
             'only' => ['index', 'destroy', 'show', 'update'],
         ]);

@@ -16,6 +16,7 @@ import ResultsDaily from './components/Results/Index.vue';
 import AwardPowerball from './components/Award/Index.vue';
 import AwardDetail from './components/Award/Detail/Index.vue';
 import Powerball from './components/Games/Powerball.vue';
+import WinnerList from './components/Users/Winners/Winners.vue';
 
 new Vue({
     el: 'body',
@@ -30,7 +31,8 @@ new Vue({
         ResultsDaily,
         AwardPowerball,
         AwardDetail,
-        Powerball
+        Powerball,
+        WinnerList,
     }
 });
 

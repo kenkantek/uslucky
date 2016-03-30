@@ -15,7 +15,7 @@ import Transaction from './components/Users/Settings/Payment/Transaction.vue';
 import Order from './components/Users/Settings/Order/Index.vue';
 import ShowOrder from './components/Users/Settings/Order/ShowOrder.vue'
 import Contact from './components/Others/Contact.vue';
-import Winnumber from './components/Games/Winnumber.vue';
+import Winnumber from './components/Games/Results/Winnumber.vue';
 
 new Vue({
 	el: 'body',

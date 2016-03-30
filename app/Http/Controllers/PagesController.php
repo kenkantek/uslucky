@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
+use App\Models\Game;
 
 class PagesController extends Controller
 {
@@ -12,6 +13,9 @@ class PagesController extends Controller
     {
         parent::__construct();
         // $this->middleware('auth');
+        \JavaScript::put([
+            '_games' => Game::all(),
+        ]);
     }
 
     public function getIndex()
