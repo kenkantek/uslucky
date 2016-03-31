@@ -1,6 +1,6 @@
 <template>
     <div class="portlet light ">
-        <header-tools :date.sync="date" :game.sync="game_id" :games="games">
+        <header-tools :dates.sync="data" :game.sync="game_id" :games="games">
             <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">

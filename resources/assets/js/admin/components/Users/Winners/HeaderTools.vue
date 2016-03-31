@@ -7,7 +7,7 @@
                     <label>Draw Date:</label>
                     <div class="datetime-picker">
                         <select class="form-control" v-model="game">
-                            <option v-for="day in date" :value="game.id" v-text="day | formatDate"></option>
+                            <option v-for="date in dates" v-text="date.drawTime"></option>
                         </select>
                     </div>
                 </div>
@@ -32,18 +32,7 @@ import moment from 'moment';
 
     export default {
         
-        props: ['game', 'games'],
-
-        data(){
-            const week = moment().weekday();
-            const dateTo = week >= 3 && week != 6 ? moment().endOf('week') : moment().startOf('week').add(3, 'days');
-            const date = {
-                dateTo,
-            };
-            return {
-                date,
-            }
-        },
+        props: ['game', 'games', 'dates'],
 
         methods: {
             onSearch() {
