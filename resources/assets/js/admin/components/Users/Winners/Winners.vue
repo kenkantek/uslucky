@@ -43,6 +43,9 @@
                             </td>
                             <td><a class="label label-primary" href=""><i class="fa fa-info"></i></a></td>
                         </tr>
+                        <tr v-if="!data.data || !data.data.length">
+                            <td colspan="9">No have record.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

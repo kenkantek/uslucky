@@ -14,19 +14,26 @@ class CreateAwardsTable extends Migration
     {
         Schema::create('awards', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('result_id')->unsigned()->index();
             $table->integer('ticket_id')->unsigned()->index();
             $table->integer('level_id')->unsigned()->index();
             $table->decimal('add_award', 19, 4)->default(0); // Tiền trúng cộng thêm vào, giành cho giải jackpot
             $table->timestamps();
 
+            $table->foreign('result_id')
+            ->references('id')
+            ->on('results')
+            ->onDelete('cascade');
+
             $table->foreign('ticket_id')
-                ->references('id')
-                ->on('tickets')
-                ->onDelete('cascade');
+            ->references('id')
+            ->on('tickets')
+            ->onDelete('cascade');
+
             $table->foreign('level_id')
-                ->references('id')
-                ->on('levels')
-                ->onDelete('cascade');
+            ->references('id')
+            ->on('levels')
+            ->onDelete('cascade');
         });
     }
 

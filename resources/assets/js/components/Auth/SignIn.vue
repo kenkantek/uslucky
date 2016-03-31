@@ -47,7 +47,7 @@
 
 <script>
 	import laroute from '../../laroute';
-	import BOX from '../../common';
+	import COMMOM from '../../common';
 
 	export default {
 		data() {
@@ -68,12 +68,14 @@
 					swal({
 					    title: "Sign In Successful!",
 						timer: 2000,
-					    text: "Auto redirect to profile",
+					    text: "Please wait auto redirect page.",
 					    type: "info",
 					    closeOnConfirm: false,
 					    showLoaderOnConfirm: true,
 					}, () => {
-						location.href = laroute.route('front::settings.account');
+						const redirect = COMMOM.getQuerystring('redirect');
+						const route = redirect ? redirect : 'front::settings.account';
+						location.href = laroute.route(route);
 						setTimeout(() =>{}, 2000);
 					});
 
@@ -82,7 +84,7 @@
 					this.formErrors = {...res.formErrors, ...res.data};
 					this.submiting = false;
 					if(res.status === 500) {
-						BOX.alertError();
+						COMMOM.alertError();
 					} else if(status === 422)  {
 						toastr.error('Please check input field!.', 'Validate!');
 					}

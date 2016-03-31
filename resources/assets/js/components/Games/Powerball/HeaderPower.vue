@@ -9,7 +9,7 @@
     <article class="header-game clearfix">
         <div class="jackpot pull-right text-center">
             <span><strong>ESTIMATED JACKPOT</strong></span>
-            <h1><strong>{{ powerball.amount | currency }}</strong></h1>
+            <h1><strong>{{ powerball.amount }}</strong></h1>
         </div>
         <div class="draw-date clearfix">
             <div class="col-xs-4 col-md-offset-2">
@@ -17,7 +17,7 @@
             </div>
             <div class="col-xs-6">
                 <h5 class="text-right">
-                    <time class="time" :title="powerball.time">{{ downTime | countdown}}</time>
+                    Next Draw: <time class="time" :title="powerball.time">{{ powerball.time }}</time>
                 </h5>
             </div>
         </div>
@@ -49,10 +49,10 @@
         },
 
         ready() {
-            let date_draw = new Date(this.powerball.time);
+            /*let date_draw = new Date(this.powerball.time);
             this.timeOutId = setInterval(() => {
                 this.downTime = countDown(date_draw);
-            }, 1000);
+            }, 1000);*/
         },
 
         methods: {

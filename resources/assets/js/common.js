@@ -17,6 +17,17 @@ module.exports = {
             start = moment(String(now).replace('T', ' ').substr(0, 19)),
             end = `${date_draw.getFullYear()}-${end_month >= 10 ? end_month : '0' + end_month}-${date_draw.getDate()} ${addHour}:00:00`;
         return start.countdown(end).toString();
+    },
+
+    getQuerystring(name, url) {
+        if (!url) url = window.location.href;
+        url = url.toLowerCase();
+        name = name.replace(/[\[\]]/g, "\\$&").toLowerCase();
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 }
 

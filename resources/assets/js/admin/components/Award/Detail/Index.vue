@@ -41,8 +41,8 @@
             <div class="row">
                 <hr>
                 <div class="col-md-6 col-md-offset-5">
-                    <button class="btn btn-info" @click.prevent="onFinish" v-if="result.status.status == 'processing'">
-                        Update status
+                    <button class="btn btn-info" @click.prevent="onFinish" v-if="checkDoneAward">
+                        Change to done
                     </button>
                     <button class="btn btn-danger" v-if="result.status.status == 'pendding'" @click="onCalculate" :disabled="calculating">
                         <i class="fa fa-circle-o-notch fa-spin" v-show="calculating"></i> Calculate Winning
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="row" v-if="result.apply_module">
-                list ket qua trung
+                <table-value :result="result" :check-done-award.sync="checkDoneAward"></table-value>
             </div>
         </div>
     </div>
@@ -63,12 +63,13 @@
 <script>
     import laroute  from '../../../../laroute.js';
     import COMMON from '../../../../common';
-    import moment from 'moment';
+    import TableValue from './Table.vue';
 
     export default {
         data() {
             return {
                 result: _result,
+                checkDoneAward: false,
                 calculating: false
             }
         },
@@ -99,6 +100,10 @@
                     COMMON.alertError();
                 });
             }
+        },
+
+        components: {
+            TableValue
         }
     }
 </script>

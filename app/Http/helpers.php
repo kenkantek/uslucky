@@ -1,4 +1,5 @@
 <?php
+use App\Models\Game;
 use Carbon\Carbon;
 
 function generateMonth()
@@ -26,6 +27,7 @@ function powerballNextTime()
 function getGameNextTime($game = 'Powerball')
 {
     $result = Cache::rememberForever($game, function () use ($game) {
+        $config = Game::whereName($game)->first()->settings->pluck('value', 'key');
         $params = [
             'game-names' => $game,
             'status'     => 'OPEN',
@@ -33,9 +35,24 @@ function getGameNextTime($game = 'Powerball')
         ];
         $response = current(json_decode(curlGetUrl($params))->draws);
         // dd($response);
+        $time = Carbon::createFromTimestamp(substr($response->drawTime, 0, -3))->addHours($config['hours_before_close']);
+        $amount = substr($response->estimatedJackpot, 0, -2);
+        // Kiểm tra $time nếu nhỏ hơn ngày hiện tại thì lấy Next
+        $now = Carbon::now();
+        $thu4 = $now->copy()->next(Carbon::WEDNESDAY);
+        $thu7 = $now->copy()->next(Carbon::SATURDAY);
+
+        var_dump($time->diffInDays($now, false));
+        var_dump($time->diffInHours($now, false));
+        if ($time->diffInDays($now, false) < 0 ||
+            ($time->diffInDays($now, false) == 0 && $time->diffInHours($now, false) >= 0)) {
+            $time = $thu4->diffInDays($thu7, false) <= 0 ? $thu7 : $thu4;
+            $amount = 'Not Published';
+        }
         return [
-            'time'   => Carbon::createFromTimestamp(substr($response->drawTime, 0, -3))->format('m/d/Y'),
-            'amount' => substr($response->estimatedJackpot, 0, -2),
+            'time'   => $time->format('m/d/Y'),
+            'now'    => $now->format('m/d/Y'),
+            'amount' => $amount,
         ];
     });
 

@@ -181,7 +181,16 @@ $router->group([
                 'as'   => 'post.award.result.finish',
                 'uses' => 'Results\ResultController@onFinish',
             ]);
-            $router->post('results/award/{result}', [
+            $router->get('results/award/{result}/detail', [
+                'as'   => 'get.award.result.detail',
+                'uses' => 'Results\ResultController@getTicketAward',
+            ]);
+            $router->put('results/award/{award}', [
+                'as'   => 'put.award.changestatus',
+                'uses' => 'Results\ResultController@putStatusTicket',
+            ]);
+
+            $router->post('results/calculate/{result}', [
                 'as'   => 'post.award.result.calculate',
                 'uses' => 'Results\ResultController@onCalculate',
             ]);
