@@ -29,3 +29,11 @@ table.admin {
 .w200 {
     width: 200px;
 }
+tr.assigned {
+    pointer-events: none;
+    background: #EEF1F5!important;
+    td button.assigned {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}

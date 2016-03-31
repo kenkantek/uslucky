@@ -44,7 +44,7 @@
                     <button class="btn btn-info" @click.prevent="onFinish" v-if="checkDoneAward">
                         Change to done
                     </button>
-                    <button class="btn btn-danger" v-if="result.status.status == 'pendding'" @click="onCalculate" :disabled="calculating">
+                    <button class="btn btn-danger" v-if="!result.apply_module" @click="onCalculate" :disabled="calculating">
                         <i class="fa fa-circle-o-notch fa-spin" v-show="calculating"></i> Calculate Winning
                     </button>
 
