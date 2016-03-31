@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Traits\StatusTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Mail;
 use Sofa\Eloquence\Eloquence;
 
 class Result extends Model
@@ -113,13 +112,7 @@ class Result extends Model
                     ->withStatus('unpaid')
                     ->publish();
 
-                // event(new AwardEvent($verify));
-                $mail = $verify;
-                $user = $verify->order->user;
-                Mail::send('mail.award', ['senderName' => $user->fullname, 'award' => $mail], function ($m) use ($user) {
-                    $m->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
-                    $m->to($user->email, $user->fullname)->subject("You are WINNER! Congratulation from USLUCKY");
-                });
+                event(new AwardEvent($verify));
 
                 array_push($final, $status);
             }

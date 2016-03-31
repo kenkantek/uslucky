@@ -17,7 +17,7 @@ class AwardListener
         });
     }
 
-    public subscribe($events)
+    public function subscribe($events)
     {
         $events->listen(
             AwardEvent::class,
