@@ -13,8 +13,8 @@ class Order extends Model
     use Eloquence, StatusTrait, ImageTrait;
 
     protected $searchableColumns = [
-        'id', 'description', 'draw_at', 'created_at',
-        'user.email', 'user.last_name', 'user.first_name', 'game.name',
+        'id', 'draw_at',
+        'user.email', 'user.last_name', 'user.first_name',
     ];
     protected $dates   = ['created_at', 'updated_at', 'draw_at'];
     protected $appends = ['ticket_total', 'price', 'url', 'game_name'];

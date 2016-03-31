@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\AwardEvent;
 use App\Traits\StatusTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -113,7 +114,6 @@ class Result extends Model
                     ->publish();
 
                 event(new AwardEvent($verify));
-
                 array_push($final, $status);
             }
         }

@@ -254,6 +254,9 @@ button {
         ORDER DETAILS #{{$order->id}}
         <br/>
         -------oOo-------
+        <br>
+        {{$order->user->fullname}}<br>
+        {{$order->user->email}}
   </div>
   <br/>
   <br/>

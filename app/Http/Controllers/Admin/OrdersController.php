@@ -57,7 +57,7 @@ class OrdersController extends Controller
 
     public function getPrints(Request $request)
     {
-        $orders = Order::whereIn('id', $request->ids)->get();
+        $orders = Order::with('user')->whereIn('id', $request->ids)->get();
         // return $orders;
         return view('admin.layouts.print', compact('orders'));
     }

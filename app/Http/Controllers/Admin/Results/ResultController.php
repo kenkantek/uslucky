@@ -106,8 +106,11 @@ class ResultController extends Controller
             $final = $result->calculateWinning();
 
             $result->apply_module = true;
+            // $result->status->status = 'processing';
+            $status         = $result->status;
+            $status->status = 'processing';
             $result->save();
-
+            $status->save();
             return $final;
         });
     }
