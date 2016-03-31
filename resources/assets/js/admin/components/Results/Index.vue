@@ -26,7 +26,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="pb in data.draws" :class="[$index % 2 == 0 ? 'odd' : 'even']">
+                        <tr v-for="pb in data.draws" :class="[$index % 2 == 0 ? 'odd' : 'even', checkAssigned(pb) ? 'assigned': '']">
                             <td>{{ pb.gameName }}</td>
                             <td>{{ pb.drawTime | timestamp2date}}</td>
                             <td>
@@ -42,14 +42,15 @@
                             </td>
                             <td>{{ pb.estimatedJackpot | remove2CharLast | currency }}</td>
                             <td>
-                                <span class="label" :class="[checkWaiting(pb) ? 'label-danger' : 'label-success']">{{ pb.status }}</span>
+                                <span class="label" :class="[checkWaiting(pb) ? 'label-danger' : 'label-default']">{{ pb.status }}</span>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm green btn-outline filter-cancel" 
-                                    :disabled="checkWaiting(pb) || result.indexOf(parseInt(pb.id)) !== -1"
+                                <button v-if="!checkWaiting(pb)" class="assigned btn btn-sm green btn-outline filter-cancel" 
+                                    :disabled="checkWaiting(pb) || checkAssigned(pb)"
                                     @click="assignToResult(pb)"
                                 > 
-                                    <i class="fa fa-location-arrow"></i> Assign to Result
+                                    <i class="fa fa-location-arrow"></i> 
+                                    {{ checkAssigned(pb) ? 'Assigned' : 'Assign to Result' }}
                                 </button>
                             </td>
                         </tr>
@@ -182,6 +183,9 @@
             },
             checkWaiting(pb) {
                 return pb.status === 'OPEN' || !pb.results;
+            },
+            checkAssigned(pb) {
+                return this.result.indexOf(parseInt(pb.id)) !== -1;
             }
         },
 

@@ -15,7 +15,8 @@
                             <th>Winning Numbers</th>
                             <th>Power Play</th>
                             <th>Annuity Payout</th>
-                            <th>Status</th>
+                            <th class="text-center">Total Winner</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -34,14 +35,18 @@
                             <td>{{ result.multiplier }}</td>
                             <td>{{ result.annuity | currency }}</td>
                             <td class="text-center">
-                                <span class="label" :class="[result.status.status === 'pendding' ? 'label-danger' : 'label-info']">{{ result.status.status }}</span>
+                                <strong v-if="result.awards.length">{{ result.awards.length }}</strong>
+                                <strong v-else>N/A</strong>
+                            </td>
+                            <td class="text-center">
+                                <span class="label" :class="[result.status.status === 'done' ? 'label-info' : 'label-danger']">{{ result.status.status }}</span>
                             </td>
                             <td class="text-center">
                                 <a class="label label-default" :href="result | linkDetail"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         <tr v-if="!data.data || !data.data.length">
-                            <td colspan="5">No records found.</td>
+                            <td colspan="8">No records found.</td>
                         </tr>
                     </tbody>
                 </table>

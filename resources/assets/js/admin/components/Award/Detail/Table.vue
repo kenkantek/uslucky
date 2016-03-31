@@ -61,7 +61,7 @@
                             </td>
                         </tr>
                         <tr v-if="!data || !data.length">
-                            <td colspan="8">No records found.</td>
+                            <td colspan="8">No Winner.</td>
                         </tr>
                     </tbody>
                 </table>
