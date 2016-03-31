@@ -14,6 +14,11 @@ class Award extends Model
         return $this->belongsTo(Ticket::class);
     }
 
+    public function result()
+    {
+        return $this->belongsTo(Result::class);
+    }
+
     public function level()
     {
         return $this->belongsTo(Level::class);
@@ -23,6 +28,12 @@ class Award extends Model
     public function withAddAward($add_award)
     {
         $this->add_award = $add_award;
+        return $this;
+    }
+
+    public function withResult($result)
+    {
+        $this->result()->associate($result);
         return $this;
     }
     public function withLevel($level)

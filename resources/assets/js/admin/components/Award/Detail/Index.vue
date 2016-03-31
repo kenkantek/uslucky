@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="row" v-if="result.apply_module">
-                list ket qua trung
+                <table-value></table-value>
             </div>
         </div>
     </div>
@@ -60,6 +60,7 @@
     import laroute  from '../../../../laroute.js';
     import COMMON from '../../../../common';
     import moment from 'moment';
+    import TableValue from './Table.vue';
 
     export default {
         data() {
@@ -82,6 +83,10 @@
                     COMMON.alertError();
                 });
             }
+        },
+
+        components: {
+            TableValue
         }
     }
 </script>

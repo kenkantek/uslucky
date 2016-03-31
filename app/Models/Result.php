@@ -29,6 +29,11 @@ class Result extends Model
         return $this->morphOne(Status::class, 'statusable');
     }
 
+    public function awards()
+    {
+        return $this->hasMany(Award::class);
+    }
+
     // BEGIN new Result
     public function withNj($nj)
     {
@@ -106,6 +111,7 @@ class Result extends Model
                 // dd($verify->award->level->award);
                 $award = $verify->newAward()
                     ->withLevel($verify->level)
+                    ->withResult($this)
                     ->withAddAward($verify->add_award)
                     ->publish();
                 //status for award
