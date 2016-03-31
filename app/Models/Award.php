@@ -24,6 +24,11 @@ class Award extends Model
         return $this->belongsTo(Level::class);
     }
 
+    public function status()
+    {
+        return $this->morphOne(Status::class, 'statusable');
+    }
+
     // BEGIN NEW AWARD
     public function withAddAward($add_award)
     {

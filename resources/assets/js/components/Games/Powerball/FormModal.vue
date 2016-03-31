@@ -39,7 +39,7 @@
                         <div v-if="message">
                             {{{ message }}}
                             <span v-show="!checkLogin">
-                                Click <a  @click.stop="closeModal" href="/login" target="_blank">here</a> and try again.
+                                Click <a  @click.stop="closeModal" href="/login?redirect=front::game.powerball">here</a> and try again.
                             </span>
                         </div>
                         <loading v-else></loading>

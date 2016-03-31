@@ -39,7 +39,7 @@ class ApiGameNextTime extends Command
     public function handle()
     {
         $this->info('Begin...');
-        Cache::pull('powerball');
+        Cache::forget('Powerball');
         $powerball = powerballNextTime();
         print_r($powerball);
         $this->info('End!');

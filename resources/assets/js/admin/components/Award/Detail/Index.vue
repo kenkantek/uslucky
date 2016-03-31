@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="row" v-if="result.apply_module">
-                <table-value></table-value>
+                <table-value :result="result"></table-value>
             </div>
         </div>
     </div>

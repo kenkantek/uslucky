@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Results;
 
 use App\Http\Controllers\Controller;
+use App\Models\Award;
 use App\Models\Game;
 use App\Models\Result;
 use Carbon\Carbon;
@@ -110,5 +111,18 @@ class ResultController extends Controller
 
             return $final;
         });
+    }
+
+    public function getTicketAward(Result $result)
+    {
+        return $result->awards()->with('status', 'level', 'ticket.order.user')->get();
+    }
+
+    public function putStatusTicket(Award $award)
+    {
+        $status = $award->updateOrNewStatus($award->status)
+            ->withStatus('paid')
+            ->publish();
+        return $status;
     }
 }
