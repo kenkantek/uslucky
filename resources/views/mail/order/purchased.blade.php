@@ -72,7 +72,7 @@ ul{
         padding-top:5px;
       }
 </style>
-        <p>Your order #{{ $order->id }} was @if($order->status->status == 'purchased') <span style="color: green; font-weight: bold;">purchased</span> @else change to <span style="color: red; font-weight: bold;">wait for purchase</span> @endif!</p>
+        <p>Your order #{{ $order->id }} was @if($order->status->status == 'purchased') <span style="color: green; font-weight: bold;">purchased</span> @elseif($order->status->status == 'canceled') <span style="color: red; font-weight: bold;">canceled</span> @else change to <span style="color: red; font-weight: bold;">wait for purchase</span> @endif!</p>
         <div style="margin-bottom: 20px; float: left;">
             <div class="col">
                 <div class="col-md-4">

@@ -54,9 +54,17 @@
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-6">
-                    <button :disabled="submiting" class="btn" :class="[order.status.status == 'purchased' ? 'btn-danger' : 'btn-success']" @click.prevent="onClick" href="#">
+                    <!-- <button :disabled="submiting" class="btn" :class="[order.status.status == 'purchased' ? 'btn-danger' : 'btn-success']" @click.prevent="onClick" href="#">
                         <i v-show="submiting" class="fa fa-circle-o-notch fa-spin"></i> Update<br>to<br> {{order.status.status == 'purchased' ? 'Waiting purchase' : 'Purchased'}}
-                    </button>
+                    </button> -->
+                    <label class="form-label">Change to ...</label>
+                    <select :disabled="submiting" @change.prevent="onClick" v-model="order.status.status" class="form-control status">
+
+                        <option value="canceled">Cancel</option>
+                        <option value="purchased">Purchased</option>
+                        <option value="wait for purchase">Waiting purchase</option>
+                    </select>
+                    <div v-if="submiting"><loading></loading></div>
                 </div>
                 <div class="col-md-2 col-xs-6">
                     <a target="_blank" :href="order.id | linkPrint">
@@ -150,7 +158,6 @@ export default {
     data() {
             return {
                 order: {},
-
                 reload: false,
                 submiting: false,
 
@@ -202,7 +209,7 @@ export default {
 
             onClick(){
                 this.submiting = true;
-                this.$http.put(laroute.route('admin.orders.update',{'orders': this.order.id})).then(res => {
+                this.$http.put(laroute.route('admin.orders.update',{'orders': this.order.id}),this.order).then(res => {
                     this.reload = true;
                 }, (res) => {
                         COMMON.alertError();

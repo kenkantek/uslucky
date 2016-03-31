@@ -41,12 +41,16 @@
             <div class="row">
                 <hr>
                 <div class="col-md-6 col-md-offset-5">
-                    <button class="btn btn-info" v-if="result.apply_module">
+                    <button class="btn btn-info" @click.prevent="onFinish" v-if="result.status.status == 'processing'">
                         Update status
                     </button>
-                    <button class="btn btn-danger" v-else @click="onCalculate" :disabled="calculating">
+                    <button class="btn btn-danger" v-if="result.status.status == 'pendding'" @click="onCalculate" :disabled="calculating">
                         <i class="fa fa-circle-o-notch fa-spin" v-show="calculating"></i> Calculate Winning
                     </button>
+
+                </div>
+                <div class="col-md-12">
+                    <div v-show="calculating"><loading></loading></div>
                 </div>
             </div>
             <div class="row" v-if="result.apply_module">
@@ -74,6 +78,19 @@
                 this.calculating = true;
                 this.$http.post(laroute.route('admin.post.award.result.calculate', {result: this.result.id})).then(res => {
                     toastr.success('Calculated successfuly and Reload page now');
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2000);
+                }, res => {
+                    this.calculating = false;
+                    COMMON.alertError();
+                });
+            },
+
+            onFinish(){
+                this.calculating = true;
+                this.$http.post(laroute.route('admin.post.award.result.finish', {result: this.result.id})).then(res => {
+                    toastr.success('All tickets was paid!');
                     setTimeout(() => {
                         window.location.reload()
                     }, 2000);

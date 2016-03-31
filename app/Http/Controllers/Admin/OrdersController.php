@@ -31,17 +31,13 @@ class OrdersController extends Controller
         return view('admin.orders.show', compact('orders'));
     }
 
-    public function update(Order $orders)
+    public function update(Request $request, Order $orders)
     {
-        $order = $orders->load('status');
-        if ($order->status->status == 'purchased') {
-            $order->status->status = 'wait for purchase';
-        } else {
-            $order->status->status = 'purchased';
-        }
-        event(new UpdateStatusEvent($order));
-        $order->status->save();
-        return $order;
+        $orders->updateOrNewStatus($orders->status)
+            ->withStatus($request->status['status'])
+            ->publish();
+        event(new UpdateStatusEvent($orders));
+        return $orders;
     }
 
     public function destroy($ids)

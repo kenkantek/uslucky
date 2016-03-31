@@ -114,4 +114,10 @@ class ResultController extends Controller
             return $final;
         });
     }
+
+    public function onFinish(Result $result)
+    {
+        return $result->updateOrNewStatus($result->status)
+            ->withStatus('done')->publish();
+    }
 }

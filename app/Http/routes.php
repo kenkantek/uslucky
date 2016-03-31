@@ -177,6 +177,10 @@ $router->group([
                 'as'   => 'get.results',
                 'uses' => 'Results\ResultController@getResults',
             ]);
+            $router->post('results/award/{result}/finish', [
+                'as'   => 'post.award.result.finish',
+                'uses' => 'Results\ResultController@onFinish',
+            ]);
             $router->post('results/award/{result}', [
                 'as'   => 'post.award.result.calculate',
                 'uses' => 'Results\ResultController@onCalculate',

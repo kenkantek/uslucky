@@ -1,15 +1,15 @@
 <template>
     <div class="portlet-title">
         <slot name="header"></slot>
-        <div class="table-group-actions pull-right">
+        <div class="table-group-actions" style="clear:both; margin-bottom:25px">
             <div class="row">
                 <div class="col-xs-12 col-md-3">
-                    <label>Draw Date From:</label>
-                    <datepicker :value.sync="date.dateFrom | formatDate" format="MM/DD/YYYY" name="closing_date"><datepicker>
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    <label>Draw Date To:</label>
-                    <datepicker :value.sync="date.dateTo | formatDate" format="MM/DD/YYYY" name="closing_date"><datepicker>
+                    <label>Draw Date:</label>
+                    <div class="datetime-picker">
+                        <select class="form-control" v-model="game">
+                            <option v-for="day in date" :value="game.id" v-text="day | formatDate"></option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-xs-12 col-md-2">
                     <label>Game Type:</label>
@@ -28,10 +28,22 @@
 </template>
 
 <script>
-    import Datepicker from '../../../../components/Globals/Datepicker.vue';
+import moment from 'moment';
 
     export default {
-        props: ['date', 'game', 'games'],
+        
+        props: ['game', 'games'],
+
+        data(){
+            const week = moment().weekday();
+            const dateTo = week >= 3 && week != 6 ? moment().endOf('week') : moment().startOf('week').add(3, 'days');
+            const date = {
+                dateTo,
+            };
+            return {
+                date,
+            }
+        },
 
         methods: {
             onSearch() {
@@ -44,7 +56,5 @@
                 return typeof val === 'string' ? val : val.format('MM/DD/YYYY');
             }
         },
-
-        components: { Datepicker }
     }
 </script>
