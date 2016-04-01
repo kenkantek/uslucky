@@ -15,7 +15,7 @@
                             <th>Winning Numbers</th>
                             <th>Power Play</th>
                             <th>Annuity Payout</th>
-                            <th class="text-center">Total Winner</th>
+                            <th class="text-center">Total Win Tickets</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -36,7 +36,9 @@
                             <td>{{ result.annuity | currency }}</td>
                             <td class="text-center">
                                 <strong v-if="result.awards.length">{{ result.awards.length }}</strong>
-                                <strong v-else>N/A</strong>
+                                <strong v-else>
+                                    {{ result.status.status === 'pendding' ? 'N/A' : 0 }}
+                                </strong>
                             </td>
                             <td class="text-center">
                                 <span class="label" :class="[result.status.status === 'done' ? 'label-info' : 'label-danger']">{{ result.status.status }}</span>

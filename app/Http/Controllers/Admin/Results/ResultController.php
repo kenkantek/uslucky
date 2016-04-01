@@ -86,7 +86,7 @@ class ResultController extends Controller
 
         return Result::search($keyword)
             ->with('game', 'status', 'awards')
-            ->latest()
+            ->latest('draw_at')
             ->whereBetween('draw_at', $request->only(['dateFrom', 'dateTo']))
             ->gameId($game_id)
             ->paginate($take)
@@ -108,7 +108,7 @@ class ResultController extends Controller
 
             $result->apply_module = true;
             // $result->status->status = 'processing';
-            $status = $result->status;
+            $status         = $result->status;
             $status->status = 'processing';
             $result->save();
             $status->save();
