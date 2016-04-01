@@ -17,10 +17,8 @@
                                 No.
                             </th>
                             <th colspan="2"> MEMBER </th>
-                            <th colspan="2"> Ticket total bought </th>
-                            <th> DEPOSIT Total </th>
-                            <th> WITHDRAW/CLAIM Total </th>
-                            <th> Blance </th>
+                            <th> Ticket number </th>
+                            <th>Ticket status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -34,13 +32,17 @@
                             <td>
                                 <a :href="user.id | linkShow" class="primary-link">{{user.fullname}}</a>
                             </td>
-                            <td> {{user.ticket_total}} </td>
-                            <td> {{user.price_total | currency}} </td>
-                            <td class="font-blue-madison"> +{{user.deposit_total | currency}} </td>
-                            <td class="font-red-mint"> -{{user.withdraw_total | currency}} </td>
-                            <td>
-                                <span class="bold theme-font">{{user.balance | currency}}</span>
+                            <td> 
+                                <ul class="list">
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li class="powerball">6</li>
+                                </ul>
                             </td>
+                            <td> <span class="label label-danger">unpaid</span> </td>
                             <td><a class="label label-primary" href=""><i class="fa fa-info"></i></a></td>
                         </tr>
                         <tr v-if="!data.data || !data.data.length">
