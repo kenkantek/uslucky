@@ -35,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'avatar', 'orders', 'amount', 'transactions',
+        'password', 'remember_token', 'avatar', 'amount', 'transactions', 'orders2',
     ];
 
     public function getFullnameAttribute()
@@ -83,6 +83,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function orders2()
+    {
+        return $this->orders();
+    }
+
     public function updateAmount($amount = null)
     {
         if (!$amount instanceof Amount) {
@@ -101,8 +106,9 @@ class User extends Authenticatable
 
     public function getTicketTotalAttribute()
     {
+        // return 0;
         $ticket_total = 0;
-        foreach ($this->orders as $key => $order) {
+        foreach ($this->orders2 as $key => $order) {
             $ticket_total = $order->ticket_total + $ticket_total;
         }
         return $ticket_total;
@@ -111,7 +117,7 @@ class User extends Authenticatable
     public function getPriceTotalAttribute()
     {
         $price_total = 0;
-        foreach ($this->orders as $key => $order) {
+        foreach ($this->orders2 as $key => $order) {
             $price_total = $order->price + $price_total;
         }
         return $price_total;

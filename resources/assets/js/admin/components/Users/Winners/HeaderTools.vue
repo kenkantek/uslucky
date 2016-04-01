@@ -19,12 +19,6 @@
                         </option>
                     </select>
                 </div>
-                
-                <div class="col-xs-12 col-md-3">
-                    <button class="btn btn-sm green table-group-action-submit move-top--25" @click="onSearch">
-                        <i class="fa fa-check"></i> Search
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -44,12 +38,6 @@
 
         ready() {
             this.results = _results;
-        },
-
-        methods: {
-            onSearch() {
-                this.$dispatch('go-to-page');
-            }
         },
 
         filters: {

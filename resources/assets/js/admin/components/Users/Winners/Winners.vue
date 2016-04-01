@@ -18,8 +18,6 @@
                             </th>
                             <th colspan="2"> MEMBER </th>
                             <th> Ticket number </th>
-                            <th>Ticket status</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,20 +31,12 @@
                                 <a :href="user.id | linkShow" class="primary-link">{{user.fullname}}</a>
                             </td>
                             <td> 
-                                <ul class="list">
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                    <li>5</li>
-                                    <li class="powerball">6</li>
-                                </ul>
+                                <win-tickets :user="user.id" :game="game_id" :result="drawAt"></win-tickets>
                             </td>
-                            <td> <span class="label label-danger">unpaid</span> </td>
-                            <td><a class="label label-primary" href=""><i class="fa fa-info"></i></a></td>
                         </tr>
-                        <tr v-if="!data.data || !data.data.length">
-                            <td colspan="9">No have record.</td>
+                        <tr v-if="!drawAt || !data.data || !data.data.length">
+                            <td colspan="9" v-if="!drawAt">Please choose Draw Date and search.</td>
+                            <td colspan="9" v-else>No have record.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -62,6 +52,8 @@ import HeaderTools from './HeaderTools.vue';
 import deferred from 'deferred';
 import moment from 'moment';
 import FilterTools from '../../Globals/FilterTools.vue';
+import WinTickets from './WinTickets.vue';
+import async from 'async';
 
 export default {
     data() {
@@ -79,13 +71,27 @@ export default {
         },
 
         asyncData(resolve, reject) {
-            console.log(this.keyword)
-            this._fetchUsers(this.api).done(data => {
-                resolve({ data });
-            }, err => {
-                COMMON.alertError();
-                console.warn(err);
-            });
+            const vm = this;
+            if(this.drawAt) {
+                async.waterfall([
+                    (cb) => {
+                        vm._fetchUsers(vm.api).done(data => {
+                            cb(null, data);
+                        }, err => {
+                            cb(new Error(err));
+                        });
+                    },
+                    (data, cb) => {
+                        cb(null, data);
+                    }
+                ], (err, data) => {
+                    resolve({data});
+                });
+            } else {
+                resolve();
+            }
+            
+            
         },
 
          watch: {
@@ -97,7 +103,7 @@ export default {
 
         computed: {
             timeForReload() {
-            return Math.random(this.keyword);
+                return Math.random(this.keyword + this.drawAt + this.game_id);
             },
         },
    
@@ -127,6 +133,6 @@ export default {
             }
         },
 
-        components: { HeaderTools, FilterTools }
+        components: { HeaderTools, FilterTools, WinTickets }
 }
 </script>

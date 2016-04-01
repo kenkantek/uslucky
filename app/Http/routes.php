@@ -200,6 +200,11 @@ $router->group([
                 'uses' => 'WinnerController@getWinners',
             ]);
 
+            $router->get('users/winners/tickets', [
+                'as'   => 'get.winners.tickets',
+                'uses' => 'WinnerController@getTicketWin',
+            ]);
+
         }); //END API
 
         $router->resource('contact', 'ContactController', [
