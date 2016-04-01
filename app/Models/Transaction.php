@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\StatusTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
@@ -58,4 +59,9 @@ class Transaction extends Model
         return $this;
     }
     //END NEW TRACSACTION
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('g:ia \o\n d F Y');
+    }
 }

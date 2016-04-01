@@ -3,73 +3,70 @@
     <div v-else class="portlet light ">
         <slot slot="header" name="header"></slot>
         <div class="portlet-body">
-            <div class="row well">
-                <div class="col-md-4 col-xs-6">
-                    <div class="col-md-5">
-                        <strong>Bought date:</strong>
-                    </div>
-                    <div class="col-md-7">
-                        {{order.created_at}}
-                    </div>
-                    <div class="col-md-5">
-                        <strong>Draw date:</strong>
-                    </div>
-                    <div class="col-md-7">
-                        {{order.draw_at}}
-                    </div>
-                    <div class="col-md-12">
-                        <strong>Description:</strong>
-                        <br> {{order.description}}
-                    </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Member</dt>
+                        <dd class="text-uppercase">
+                            <strong>{{ order.user.fullname }}</strong>
+                        </dd>
+
+                        <dt>Bought date:</dt>
+                        <dd>{{order.created_at}}</dd>
+
+                        <dt>Draw date:</dt>
+                        <dd>{{order.draw_at}}</dd>
+
+                        <dt>Description:</dt>
+                        <dd>{{order.description}}</dd>
+                    </dl>
                 </div>
-                <div class="col-md-4 col-xs-6">
-                    <div class="col-md-5">
-                        <strong>Game</strong>
-                    </div>
-                    <div class="col-md-7">
-                        {{order.game_name}}
-                    </div>
-                    <div class="col-md-5">
-                        <strong>Extra:</strong>
-                    </div>
-                    <div class="col-md-7">
-                        <span class="label label-info" v-text="order.extra ? 'Yes' : 'No'"></span>
+
+                <div class="col-xs-6 col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Game</dt>
+                        <dd>{{order.game_name}}</dd>
+
+                        <dt>Extra:</dt>
+                        <dd><span class="label label-info" v-text="order.extra ? 'Yes' : 'No'"></span></dd>
+
+                        <dt>Price total:</dt>
+                        <dd>{{order.price | currency}}</dd>
+
+                        <dt>Status:</dt>
+                        <dd>
+                            <span 
+                                class="label"
+                                :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
+                            >{{ order.status.status }}
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="col-xs-6 col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Change status to ...</label>
+                            <select 
+                                :disabled="submiting" 
+                                @change.prevent="onChangeStatus" 
+                                v-model="order.status.status" 
+                                class="form-control status"
+                            >
+                                <option value="canceled">Cancel</option>
+                                <option v-if="order.status.status != 'canceled'" value="purchased">Purchased</option>
+                                <option v-if="order.status.status != 'canceled'" value="wait for purchase">Waiting purchase</option>
+                            </select>
+                            <div v-if="submiting"><loading></loading></div>
+                        </div>
+                        <div class="col-md-6">
+                            <a target="_blank" :href="order.id | linkPrint">
+                                <i class="fa fa-print fa-5x margin-top-30"></i>
+                            </a>
+                        </div>
                     </div>
                     
-                    <div class="col-md-5">
-                        <strong>Price total:</strong>
-                    </div>
-                    <div class="col-md-7">
-                        {{order.price | currency}}
-                    </div>
-                    <div class="col-md-5">
-                        <strong>Status:</strong>
-                    </div>
-                    <div class="col-md-7">
-                        <span 
-                            class="label"
-                            :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
-                        >{{ order.status.status }}
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-2 col-xs-6">
-                    <!-- <button :disabled="submiting" class="btn" :class="[order.status.status == 'purchased' ? 'btn-danger' : 'btn-success']" @click.prevent="onClick" href="#">
-                        <i v-show="submiting" class="fa fa-circle-o-notch fa-spin"></i> Update<br>to<br> {{order.status.status == 'purchased' ? 'Waiting purchase' : 'Purchased'}}
-                    </button> -->
-                    <label class="form-label">Change to ...</label>
-                    <select :disabled="submiting" @change.prevent="onClick" v-model="order.status.status" class="form-control status">
-
-                        <option value="canceled">Cancel</option>
-                        <option value="purchased">Purchased</option>
-                        <option value="wait for purchase">Waiting purchase</option>
-                    </select>
-                    <div v-if="submiting"><loading></loading></div>
-                </div>
-                <div class="col-md-2 col-xs-6">
-                    <a target="_blank" :href="order.id | linkPrint">
-                        <i class="fa fa-print fa-5x margin-top-30"></i>
-                    </a>
                 </div>
             </div>
             <div class="table-scrollable table-scrollable-borderless">
@@ -160,124 +157,119 @@ export default {
                 order: {},
                 reload: false,
                 submiting: false,
-
                 dropzone: null,
                 uploading: false
-
             }
         },
-        asyncData(resolve, reject) {
-            this.submiting = false;
-            this.reload = false;
-            this._fetchOrder(laroute.route('admin.get.order', {order: order_id})).done(order => {
-                resolve({
-                    order
-                });
-            }, err => {
+
+    asyncData(resolve, reject) {
+        this.submiting = false;
+        this._fetchOrder(laroute.route('admin.get.order', {order: order_id})).done(order => {
+            resolve({
+                order
+            });
+        }, err => {
+            COMMON.alertError();
+        });
+    },
+
+    watch: {
+        timeForReload: 'reloadAsyncData',
+    },
+
+    computed: {
+        timeForReload(){
+            return Math.random(this.reload);
+        }
+    },
+
+    filters: {
+        linkPrint(ids) {
+            return laroute.route('get.prints') +'/?' + $.param({ ids: [ids] }).replace('%5B%5D', '[]');
+        }
+    },
+
+    methods: {
+        _fetchOrder(api) {
+            this.loading = true;
+            let def = deferred();
+            this.$http.get(api).then(res => {
+                def.resolve(res.data);
+            }, (res) => {
+                def.reject(res);
+                this.loading = false;
+            });
+            return def.promise;
+        },
+
+        onChangeStatus(){
+            this.submiting = true;
+            this.$http.put(laroute.route('admin.orders.update', {orders: this.order.id}), this.order).then(res => {
+                this.reload = true;
+            }, (res) => {
                 COMMON.alertError();
             });
         },
-        watch: {
-            timeForReload: 'reloadAsyncData',
-        },
 
-        computed: {
-            timeForReload(){
-                return Math.random(this.reload);
-            }
-        },
-
-        filters: {
-            linkPrint(ids) {
-                return laroute.route('get.prints') +'/?' + $.param({ ids: [ids] }).replace('%5B%5D', '[]');
-            }
-        },
-   
-        methods: {
-            _fetchOrder(api) {
-                this.loading = true;
-                let def = deferred();
-                this.$http.get(api).then(res => {
-                    def.resolve(res.data);
-                }, (res) => {
-                    def.reject(res);
-                    this.loading = false;
+        initDropzone() {
+            const vm = this;
+            this.$nextTick(() => {
+                this.dropzone = new Dropzone("#dropzone", {
+                    url: laroute.route('admin.post.files.order', { order: this.order.id }),
+                    previewTemplate : '<div style="display:none"></div>',
+                    params: { _token },
+                    maxFilesize: 10,
+                    acceptedFiles: 'image/*',
+                    init() {
+                        this.on('sending', (file, res) => {
+                            vm.uploading = true;
+                        });
+                        this.on('success', (file, res) => {
+                            toastr.success(`${file.name} has been upload success.`, '', { positionClass: "toast-bottom-right" });
+                            vm.order.images.unshift(res);
+                        });
+                        this.on('error', (file, res) => {
+                            toastr.error(file.xhr && file.xhr.status === 500 ? 'Somthing wrong, please try again!' : res, '', { positionClass: "toast-bottom-right" });
+                        });
+                        this.on('queuecomplete', () => {
+                            vm.uploading = false;
+                        });
+                    }
                 });
-                return def.promise;
-            },
-
-
-            onClick(){
-                this.submiting = true;
-                this.$http.put(laroute.route('admin.orders.update',{'orders': this.order.id}),this.order).then(res => {
-                    this.reload = true;
-                }, (res) => {
+            });
+         },
+         deleteImage(image) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+            }, () => {
+                this.$http.delete(laroute.route('admin.delete.file.order', { order: this.order.id, id: image.id })).then(res => {
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                    this.order.images = this.order.images.filter(image => image.id !== res.data.id);
+                }, res => {
+                    if(res.status === 500) {
                         COMMON.alertError();
+                    } else {
+                        COMMON.alertError(res.data.message);
+                    }
                 });
-            },
+            });
+         },
+    },
 
-            initDropzone() {
-                const vm = this;
-                this.$nextTick(() => {
-                    this.dropzone = new Dropzone("#dropzone", {
-                        url: laroute.route('admin.post.files.order', { order: this.order.id }),
-                        previewTemplate : '<div style="display:none"></div>',
-                        params: { _token },
-                        maxFilesize: 10,
-                        acceptedFiles: 'image/*',
-                        init() {
-                            this.on('sending', (file, res) => {
-                                console.log('sending');
-                                vm.uploading = true;
-                            });
-                            this.on('success', (file, res) => {
-                                toastr.success(`${file.name} has been upload success.`, '', { positionClass: "toast-bottom-right" });
-                                vm.order.images.unshift(res);
-                            });
-                            this.on('error', (file, res) => {
-                                toastr.error(file.xhr && file.xhr.status === 500 ? 'Somthing wrong, please try again!' : res, '', { positionClass: "toast-bottom-right" });
-                            });
-                            this.on('queuecomplete', () => {
-                                vm.uploading = false;
-                            });
-                        }
-                    });
-                });
-             },
-             deleteImage(image) {
-                swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this imaginary file!",
-                    type: "warning",
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel plx!",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                }, () => {
-                    this.$http.delete(laroute.route('admin.delete.file.order', { order: this.order.id, id: image.id })).then(res => {
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                        this.order.images = this.order.images.filter(image => image.id !== res.data.id);
-                    }, res => {
-                        if(res.status === 500) {
-                            COMMON.alertError();
-                        } else {
-                            COMMON.alertError(res.data.message);
-                        }
-                    });
-                });
-
-             },
-
-        },
-
-        directives: {
-            dropzone: {
-                bind() {
-                    this.vm.initDropzone();
-                }
+    directives: {
+        dropzone: {
+            bind() {
+                this.vm.initDropzone();
             }
         }
+    }
 }
 </script>

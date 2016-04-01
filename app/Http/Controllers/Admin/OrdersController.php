@@ -7,6 +7,7 @@ use App\Events\Order\UpdateStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Order;
+use DB;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -33,11 +34,23 @@ class OrdersController extends Controller
 
     public function update(Request $request, Order $orders)
     {
-        $orders->updateOrNewStatus($orders->status)
-            ->withStatus($request->status['status'])
+        return DB::transaction(function () use ($request, $orders) {
+
+            $status = $request->status['status'];
+
+            $orders->updateOrNewStatus($orders->status)
+            ->withStatus($status)
             ->publish();
-        event(new UpdateStatusEvent($orders));
-        return $orders;
+
+            if ($status === 'canceled') {
+                // trả tiền lại nếu là cancled
+                $orders->refundOrder();
+            }
+
+            event(new UpdateStatusEvent($orders));
+            return $orders;
+        });
+
     }
 
     public function destroy($ids)
@@ -71,7 +84,7 @@ class OrdersController extends Controller
 
     public function getOrder(Order $order)
     {
-        return $order->load(['tickets.status', 'status', 'images' => function ($q) {
+        return $order->load(['tickets.status', 'status', 'user', 'images' => function ($q) {
             $q->latest('id');
         }]);
     }
