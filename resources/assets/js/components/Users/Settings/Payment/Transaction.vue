@@ -1,13 +1,15 @@
 <template>
 	<div v-if="$loadingAsyncData"><loading></loading></div>
 	<div  v-if="!$loadingAsyncData">
-		<table style="margin:0" class="table table-bordered table-hover trans" v-if="histories.length">
+		<table class="table table-bordered table-hover trans" v-if="histories.length">
 		    <thead>
 		        <tr>
                     <th>#</th>
 		            <th>Updated At</th>
-		            <th>Description</th>
-		            <th>Amount</th>
+		            <th width="250">Description</th>
+                    <th>Amount Prev</th>
+                    <th>Amount</th>
+                    <th>Amount Next</th>
                     <th>Action</th>
 		            <th>Paid with</th>
 		            <th>Status</th>
@@ -18,18 +20,27 @@
 		        <tr v-for="(index, history) in histories" id="transaction-{{ history.id }}">
                     <td>{{ history.id }}</td>
 		            <td>{{ history.updated_at }}</td>
-		            <td>{{{ history.description.trim() ? history.description : 'N/A' }}}</td>
+		            <td width="250">{{{ history.description.trim() ? history.description : 'N/A' }}}</td>
+                    <td>{{ history.amount_prev | currency }}</td>
 		            <td>
-		            	<span v-if="history.type == 1" style="color:#0062FF;">+{{ history.amount | currency }}</span>
-		            	<span v-else style="color:#F00;">-{{ history.amount | currency }}</span>
+		            	<span :class="[history.type == 1 ? 'text-primary' : 'text-danger']">
+                            <strong>+{{ history.amount | currency }}</strong>
+                        </span>
 		            </td>
+                    <td>{{ history.amount_total | currency }}</td>
                     <td>
-                        <span v-if="history.type == 0">Claim/Withdraw</span>
-                        <span v-if="history.type == 1">Winning/Deposit</span>
-                        <span v-if="history.type == 2">Buy Tickets</span>
+                        <strong v-if="history.transactionable_type=='App\\Models\\Order'">
+                            Refund
+                        </strong>
+                        <strong v-else>
+                            <span v-if="history.type == 0">Claim/Withdraw</span>
+                            <span v-if="history.type == 1">Winning/Deposit</span>
+                            <span v-if="history.type == 2">Buy Tickets</span>
+                        </strong>
+                        
                     </td>
 		            <td>
-                        <span v-if="history.transactionable_type=='App\\Models\\Payment'">CreditCard</span>
+                        <span v-if="history.transactionable_type=='App\\Models\\Payment'">Credit Card</span>
                         <span v-else="history.transactionable_type == 'App\\Models\\User'">Account Blance</span>
                     </td>
 		            <td>	

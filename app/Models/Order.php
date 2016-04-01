@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Traits\ImageTrait;
 use App\Traits\StatusTrait;
+use App\Traits\TransactionTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Sofa\Eloquence\Eloquence;
 
 class Order extends Model
 {
-    use Eloquence, StatusTrait, ImageTrait;
+    use Eloquence, StatusTrait, ImageTrait, TransactionTrait;
 
     protected $searchableColumns = [
         'id', 'draw_at',
@@ -133,6 +134,30 @@ class Order extends Model
     public function getGameNameAttribute()
     {
         return $this->game->name;
+    }
+
+    public function refundOrder()
+    {
+        $user    = $this->user;
+        $price   = $this->price;
+        $balance = $user->balance;
+
+        $transaction = $this->newTransaction($user)
+            ->withType(1)
+            ->withAmount($price)
+            ->withAmountPrev($balance)
+            ->withAmountTotal($price + $balance)
+            ->withDescription("Account Refund money of order #{$this->id}")
+            ->publish();
+        // Transaction add status
+        $status = $transaction->updateOrNewStatus()
+            ->withStatus('succeeded')
+            ->publish();
+
+        // update Amount
+        $user->updateAmount($user->amount)
+            ->withAmount($price + $balance)
+            ->publish();
     }
 
 }
