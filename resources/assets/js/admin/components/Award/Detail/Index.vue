@@ -80,7 +80,7 @@
                 this.$http.post(laroute.route('admin.post.award.result.calculate', {result: this.result.id})).then(res => {
                     toastr.success('Calculated successfuly and Reload page now');
                     setTimeout(() => {
-                        window.location.reload()
+                        window.location.reload();
                     }, 2000);
                 }, res => {
                     this.calculating = false;
@@ -93,7 +93,7 @@
                 this.$http.post(laroute.route('admin.post.award.result.finish', {result: this.result.id})).then(res => {
                     toastr.success('All tickets was paid!');
                     setTimeout(() => {
-                        window.location.reload()
+                        // window.location.reload();
                     }, 2000);
                 }, res => {
                     this.calculating = false;
