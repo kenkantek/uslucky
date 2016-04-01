@@ -1,6 +1,6 @@
 <template>
     <div class="portlet light ">
-        <header-tools :date.sync="date" :game.sync="game_id" :games="games">
+        <header-tools :game.sync="game_id" :games="games" :draw-at.sync="drawAt">
             <slot slot="header" name="header"></slot>
         </header-tools>
         <div class="portlet-body">
@@ -63,22 +63,16 @@ import FilterTools from '../../Globals/FilterTools.vue';
 
 export default {
     data() {
-        const week = moment().weekday();
-            const dateTo = week >= 3 && week != 6 ? moment().endOf('week') : moment().startOf('week').add(3, 'days');
-            const date = {
-                dateFrom: moment().add(-1, 'months'),
-                dateTo: dateTo, // thứ 4 hoặc thứ 7 tiếp theo
-            };
             return {
                 api: laroute.route('admin.get.winners'),
                 data: {
                     per_page: "10",
                 },
-                date,
                 keyword: '',
                 ids: [],
                 game_id: 1,
-                games: _games
+                games: _games,
+                drawAt: null
             }
         },
 
@@ -106,9 +100,9 @@ export default {
         },
    
         methods: {
-            _fetchUsers(api, take = this.data.per_page, keyword = this.keyword, game_id= this.game_id) {
+            _fetchUsers(api, take = this.data.per_page, keyword = this.keyword, game_id = this.game_id, result_id = this.drawAt) {
                 const def = deferred();
-                this.$http.get(api, { take, keyword, game_id }).then(res => {
+                this.$http.get(api, { take, keyword, game_id, result_id }).then(res => {
                     const { data } = res;
                     def.resolve(data);
                 }, res => {

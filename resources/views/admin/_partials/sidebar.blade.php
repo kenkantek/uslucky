@@ -19,44 +19,16 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start">
-                        <a href="javascript:;" class="nav-link ">
-                            <span class="title">Powerball</span>
+                        <a href="{{ route('admin.results.index') }}" class="nav-link ">
+                            <span class="title">Daily result input</span>
                             <span class="selected"></span>
                         </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item start">
-                                <a href="{{ route('admin.results.index') }}" class="nav-link ">
-                                    <span class="title">Daily result input</span>
-                                    <span class="selected"></span>
-                                </a>
-                            </li>
-                            <li class="nav-item start">
-                                <a href="{{ route('get.results.awards') }}" class="nav-link ">
-                                    <span class="title">Award matching module</span>
-                                    <span class="selected"></span>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item start">
-                        <a href="javascript:;" class="nav-link ">
-                            <span class="title">Mega Million</span>
+                        <a href="{{ route('get.results.awards') }}" class="nav-link ">
+                            <span class="title">Award matching module</span>
                             <span class="selected"></span>
                         </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item start">
-                                <a href="javascript:;" class="nav-link ">
-                                    <span class="title">Daily result input</span>
-                                    <span class="selected"></span>
-                                </a>
-                            </li>
-                            <li class="nav-item start">
-                                <a href="javascript:;" class="nav-link ">
-                                    <span class="title">Award matching module</span>
-                                    <span class="selected"></span>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
 
