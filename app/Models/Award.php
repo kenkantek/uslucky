@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Traits\StatusTrait;
+use App\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Award extends Model
 {
-    use StatusTrait;
+    use StatusTrait, TransactionTrait;
 
     public function ticket()
     {

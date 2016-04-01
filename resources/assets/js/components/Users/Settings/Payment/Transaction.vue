@@ -18,14 +18,14 @@
 		        <tr v-for="(index, history) in histories" id="transaction-{{ history.id }}">
                     <td>{{ history.id }}</td>
 		            <td>{{ history.updated_at }}</td>
-		            <td>{{{ history.description }}}</td>
+		            <td>{{{ history.description.trim() ? history.description : 'N/A' }}}</td>
 		            <td>
 		            	<span v-if="history.type == 1" style="color:#0062FF;">+{{ history.amount | currency }}</span>
 		            	<span v-else style="color:#F00;">-{{ history.amount | currency }}</span>
 		            </td>
                     <td>
                         <span v-if="history.type == 0">Claim/Withdraw</span>
-                        <span v-if="history.type == 1">Deposit</span>
+                        <span v-if="history.type == 1">Winning/Deposit</span>
                         <span v-if="history.type == 2">Buy Tickets</span>
                     </td>
 		            <td>

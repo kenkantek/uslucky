@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\AwardEvent;
 use App\Traits\StatusTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -108,25 +107,32 @@ class Result extends Model
             $verify = $this->verifyTicket($ticket);
             if ($verify) {
                 // verify là ticket có chiến thắng
-                // dd($verify->award->level->award);
+
+                //Add  new Award
                 $award = $verify->newAward()
                     ->withLevel($verify->level)
                     ->withResult($this)
                     ->withAddAward($verify->add_award)
                     ->publish();
+
                 //status for award
                 $status = $award->updateOrNewStatus()
                     ->withStatus('unpaid')
                     ->publish();
 
+                //Transaction
+                $this->newTraction($verify, $award);
+
+                //event send mail
                 event(new AwardEvent($verify));
+
                 array_push($final, $status);
             }
         }
         return $final; //tickets trúng thưởng
     }
 
-    protected function verifyTicket($ticket)
+    protected function verifyTicket(Ticket $ticket)
     {
         if ($ticket->order->status->status != 'purchased') {
             return false;
@@ -173,5 +179,39 @@ class Result extends Model
         $ticket->level     = Level::whereLevel($prize)->first();
         $ticket->add_award = $prize === 1 ? $this->annuity : 0;
         return $prize ? $ticket : false;
+    }
+
+    protected function newTraction(Ticket $ticket, Award $award)
+    {
+        $prizeMoney = $this->makePrizeMoney($ticket);
+        $order      = $ticket->order;
+        $user       = $order->user;
+        $balance    = $user->balance;
+
+        // var_dump($award);
+        $transaction = $award->newTransaction($user)
+            ->withType(1)
+            ->withAmount($prizeMoney)
+            ->withAmountPrev($balance)
+            ->withAmountTotal($prizeMoney + $balance)
+            ->withDescription("Winning money is added to your account. Order #{$order->id}")
+            ->publish();
+
+        // Transaction add status
+        $status = $transaction->updateOrNewStatus()
+            ->withStatus('succeeded')
+            ->publish();
+
+        // update Amount
+        $user->updateAmount($user->amount)
+            ->withAmount($prizeMoney + $balance)
+            ->publish();
+    }
+
+    protected function makePrizeMoney(Ticket $ticket)
+    {
+        $prizeMoney = $ticket->add_award + $ticket->level->award;
+        $extra      = $ticket->order->extra;
+        return $extra ? $this->multiplier * $prizeMoney : $prizeMoney;
     }
 }
