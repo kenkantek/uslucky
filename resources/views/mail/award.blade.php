@@ -27,7 +27,8 @@
                                 <td>
                                     <h2>Congratulation {{ $senderName }},</h2>
                                     <h4>YOUR ARE WINNER!</h4>
-                                    <p>Your are winner in {{$award->order->game->name}}.</p>
+                                    <p>Your are winner in {{$award->order->game->name}}. Ticket was bought at {{$award->order->created_at}}.</p>
+                                    <p>Draw date at: {{$award->order->draw_at}}. Order #{{$award->order->id}}</p>
                                     <table cellspacing="0" style="padding:0;font-family:Arial;color:#505050;font-size:14px;border:1px solid #e3e3e3;width:250px">
                                         <tbody>
                                             <tr>
@@ -63,7 +64,10 @@
                                         </tbody>
                                     </table>
                                     <p></p>
-                                    <p><h2>Your award value: ${{number_format(($award->add_award + $award->level->award),2)}}</h2></p>
+
+                                    <p><h2>Your award value: ${{number_format($prizeMoney, 2)}}</h2>
+
+                                    </p>
                                     <p>{{$award->level->label}}</p>
                                     <p></p>
                                     <p>For more details about this transaction, please visit <a href="{{env('BASE_URI')}}" target="_blank">My Account</a>.</p>

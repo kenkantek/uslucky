@@ -41,7 +41,7 @@
                                 </span>
                             </td>
                             <td>
-                                <strong>{{ prizeMoney(award.level.award, award.add_award, award.ticket.order.extra) | currency }}</strong>
+                                <strong>{{ prizeMoney(award) | currency }}</strong>
                             </td>
                             <td>
                                 <span class="label" :class="[award.status.status == 'paid' ? 'label-success' : 'label-danger']">
@@ -109,8 +109,9 @@
         },
 
         methods: {
-            prizeMoney(award, add_award, extra) {
-                let prize = parseFloat(award) + parseFloat(add_award);
+            prizeMoney(award) {
+                let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
+                const extra = award.level.level == 1 ? false : award.ticket.order.extra;
                 return extra ? prize * this.result.multiplier : prize;
             },
             changeToPaid(award) {

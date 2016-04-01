@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\AwardEvent;
 use App\Traits\StatusTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -123,8 +124,7 @@ class Result extends Model
                 //Transaction
                 $this->newTraction($verify, $award);
 
-                //event send mail
-                event(new AwardEvent($verify));
+                event(new AwardEvent($verify, $this->makePrizeMoney($verify)));
 
                 array_push($final, $status);
             }
@@ -210,8 +210,9 @@ class Result extends Model
 
     protected function makePrizeMoney(Ticket $ticket)
     {
-        $prizeMoney = $ticket->add_award + $ticket->level->award;
-        $extra      = $ticket->order->extra;
+        $level      = $ticket->level;
+        $prizeMoney = $ticket->add_award + $level->award;
+        $extra      = $level->level == 1 ? false : $ticket->order->extra;
         return $extra ? $this->multiplier * $prizeMoney : $prizeMoney;
     }
 }

@@ -93,7 +93,7 @@
                 this.$http.post(laroute.route('admin.post.award.result.finish', {result: this.result.id})).then(res => {
                     toastr.success('All tickets was paid!');
                     setTimeout(() => {
-                        // window.location.reload();
+                        window.location.reload();
                     }, 2000);
                 }, res => {
                     this.calculating = false;
