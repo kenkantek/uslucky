@@ -34,19 +34,22 @@ function getGameNextTime($game = 'Powerball')
             'size'       => 0,
         ];
         $response = current(json_decode(curlGetUrl($params))->draws);
-        // dd($response);
+        try {
+            $amount = substr($response->estimatedJackpot, 0, -2);
+        } catch (Exception $e) {
+            $amount = 'Not Published';
+        }
+
         $time = Carbon::createFromTimestamp(substr($response->drawTime, 0, -3))->addHours($config['hours_before_close']);
-        $amount = substr($response->estimatedJackpot, 0, -2);
+
         // Kiểm tra $time nếu nhỏ hơn ngày hiện tại thì lấy Next
-        $now = Carbon::now();
+        $now  = Carbon::now();
         $thu4 = $now->copy()->next(Carbon::WEDNESDAY);
         $thu7 = $now->copy()->next(Carbon::SATURDAY);
 
-        var_dump($time->diffInDays($now, false));
-        var_dump($time->diffInHours($now, false));
         if ($time->diffInDays($now, false) < 0 ||
             ($time->diffInDays($now, false) == 0 && $time->diffInHours($now, false) >= 0)) {
-            $time = $thu4->diffInDays($thu7, false) <= 0 ? $thu7 : $thu4;
+            $time   = $thu4->diffInDays($thu7, false) <= 0 ? $thu7 : $thu4;
             $amount = 'Not Published';
         }
         return [
