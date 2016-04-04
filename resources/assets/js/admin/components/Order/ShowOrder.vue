@@ -75,6 +75,7 @@
                         <tr class="uppercase">
                             <th>Number</th>
                             <th> Status </th>
+                            <th> Prize </th>
                             <th> Reward </th>
                         </tr>
                     </thead>
@@ -86,13 +87,15 @@
                                     <li class="powerball">{{ticket.ball}}</li>
                                 </ul>
                             </td>
-
                             <td>
                                 <label class="label label-success" v-if="ticket.status.status == 'won'">{{ ticket.status.status }}</label>
                                 <label class="label label-danger" v-if="ticket.status.status == 'fail'">{{ ticket.status.status }}</label>
                                 <label class="label label-warning" v-if="ticket.status.status == 'waiting'">{{ ticket.status.status }}</label>
                             </td>
-                            <td>$1.600.000.000</td>
+                            <td v-if="ticket.award">{{ticket.award.level.label}}</td>
+                            <td v-else>N/A</td>
+                            <td v-if="ticket.award">{{ prizeMoney(ticket.award) | currency }}</td>
+                            <td v-else>N/A</td>
                         </tr>
                     </tbody>
                 </table>
@@ -190,6 +193,11 @@ export default {
     },
 
     methods: {
+        prizeMoney(award) {
+                let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
+                const extra = award.level.level == 1 ? false : award.ticket.order.extra;
+                return extra ? prize * this.result.multiplier : prize;
+            },
         _fetchOrder(api) {
             this.loading = true;
             let def = deferred();

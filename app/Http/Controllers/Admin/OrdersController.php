@@ -39,8 +39,8 @@ class OrdersController extends Controller
             $status = $request->status['status'];
 
             $orders->updateOrNewStatus($orders->status)
-            ->withStatus($status)
-            ->publish();
+                ->withStatus($status)
+                ->publish();
 
             if ($status === 'canceled') {
                 // trả tiền lại nếu là cancled
@@ -84,7 +84,9 @@ class OrdersController extends Controller
 
     public function getOrder(Order $order)
     {
-        return $order->load(['tickets.status', 'status', 'user', 'images' => function ($q) {
+        return $order->load(['tickets' => function ($q) {
+            $q->with('status', 'award.level');
+        }, 'status', 'user', 'images' => function ($q) {
             $q->latest('id');
         }]);
     }
