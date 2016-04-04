@@ -3,25 +3,53 @@
 		<h2>Payment on account:</h2>
 		<hr>
 
-		<div class="form-group" :class="{'has-error': formErrors.payment}">
-			<label>Select Credit card: <sup class="text-danger">*</sup></label>
-	        <select class="form-control" v-model="formInputs.payment">
-	        	<option 
-	        		v-for="payment in payments" 
-	        		v-text="payment.card_brand + ' **** ' + payment.card_last_four + ' ' + payment.card_name" 
-	        		:value="payment.id"></option>
-	        </select>
-            <span class="help-block" v-show="formErrors.payment" v-text="formErrors.payment"></span>
+		<div class="form-group" :class="{'has-error': formErrors.number}">
+			<label>CARD NUMBER: <sup class="text-danger">*</sup></label>
+	        <div class="input-group">
+                <input type="text" class="form-control" placeholder="Valid Card Number" data-stripe="number" autofocus v-model="formInputs.number">
+                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+            </div>
+            <span class="help-block" v-show="formErrors.number" v-text="formErrors.number"></span>
 		</div>
 
+        <div class="row">
+            <div class="col-xs-7 col-md-7">
+                
+                <div class="form-group" :class="{'has-error': formErrors.exp}">
+                    <label><span class="hidden-xs">EXPIRATION</span>
+                    <span class="visible-xs-inline">EXP</span> DATE  <sup class="text-danger">*</sup></label>
+                    <div class="row">
+                        <div class="col-xs-8">                  
+                            <select class="form-control" data-stripe="exp-month" v-model="formInputs.month">
+                                <option v-for="val in date.month" v-text="val" :value="$index + 1"></option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="form-control" data-stripe="exp-year" v-model="formInputs.year">
+                                <option v-for="val in date.year" v-text="val" :value="val"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <span class="help-block" v-show="formErrors.exp" v-text="formErrors.exp"></span>
+                </div>
+            </div>
+            <div class="col-xs-5 col-md-5 pull-right">
+                <div class="form-group" :class="{'has-error': formErrors.cvc}">
+                    <label>CVC <sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" data-stripe="cvc" placeholder="CVC" v-model="formInputs.cvc">
+                    <span class="help-block" v-show="formErrors.cvc" v-text="formErrors.cvc"></span>
+                </div>
+            </div>
+        </div>
+
 		<div class="form-group" :class="{'has-error': formErrors.amount}">
-	        <label>The money transfer (USD): <sup class="text-danger">*</sup></label>
+	        <label>THE MONEY TRANSFER (USD): <sup class="text-danger">*</sup></label>
 	        <input type="text" class="form-control" autocomplete="off" v-model="formInputs.amount">
             <span class="help-block" v-show="formErrors.amount" v-text="formErrors.amount"></span>
 	    </div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.description}">
-	        <label>Description: <sup class="text-danger">*</sup></label>
+	        <label>DESCRIPTION: <sup class="text-danger">*</sup></label>
 	        <textarea class="form-control" maxlength="255" v-model="formInputs.description"></textarea>
             <span class="help-block" v-show="formErrors.description" v-text="formErrors.description"></span>
 	    </div>
@@ -54,16 +82,12 @@
 			return {
 				submiting: false,
 				message: '',
-				formInputs: {},
-                formErrors: {}
-			}
-		},
-
-		watch: {
-			payments(payments, o) {
-				let payment = _.find(payments, { default: 1 });
-				payment = payment ? payment : payments[0];
-				this.$set('formInputs.payment', payment.id);
+				formInputs: {
+                    month: 1,
+                    year: new Date().getFullYear(),
+                },
+                formErrors: {},
+                date: _date
 			}
 		},
 
@@ -83,31 +107,43 @@
 
                     if(isConfirm) {
                         this.submiting = true;
-                        this.$http.post(laroute.route('front::post.charge'), this.formInputs).then(res => {
-                            if(res && typeof res.data === 'number') {
-                                this.amount = res.data;
-                                this.$set('statusForm.deposit', false);
-                                form.reset();
-                            }
-                            this.submiting = false;
-                            swal("Charged!", "Charged successfully!", "success");
-                        }, res => {
-                            this.submiting = false;
-                            if(res.status === 500) {
-                                BOX.alertError('Ooop!', "Something wrong! Plesae check your credit card.");
-                            } else if(res.status === 422) { // validate
+                        Stripe.card.createToken($('form'), (status, res) => {
+                            if (res.error) {
+                                this.submiting = false;
+                                this.message = res.error.message;
+                                toastr.error(this.message, 'Error');
                                 swal.close();
-                                this.formErrors = res.data;
-                                toastr.error('Please check input field!.', 'Validate!');
-                            } else { // 401 error payment
-                                swal.close();
-                                this.message = res.data.message;
+                            } else {
+                                this.onCharge(res.id);
                             }
-                        });    
+                        });
                     }
                     
                 });
 			},
+            onCharge(source) {
+                this.$http.post(laroute.route('front::post.charge'), {...this.formInputs, source}).then(res => {
+                    if(res && typeof res.data === 'number') {
+                        this.amount = res.data;
+                        this.$set('statusForm.deposit', false);
+                    }
+                    this.submiting = false;
+                    swal("Charged!", "Charged successfully!", "success");
+                }, res => {
+                    this.submiting = false;
+                    if(res.status === 500) {
+                        BOX.alertError();
+                    } else if(res.status === 422) { // validate
+                        swal.close();
+                        this.formErrors = res.data;
+                        toastr.warning('Please check input field!.', 'Validate!');
+                    } else { // 400 error payment
+                        swal.close();
+                        toastr.error(res.data.message);
+                        this.message = res.data.message;
+                    }
+                });
+            },
 			onCancle() {
 				this.$set('statusForm.deposit', false);
 			}

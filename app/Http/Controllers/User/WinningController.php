@@ -11,6 +11,7 @@ use App\Models\Amount;
 use App\Models\Transaction;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use DB;
+use Exception;
 
 class WinningController extends Controller
 {
@@ -22,55 +23,67 @@ class WinningController extends Controller
 
     public function postCharge(ChargeRequest $request)
     {
-        $user    = $this->user;
-        $payment = $user->payments()->find($request->payment);
+        $user = $this->user;
 
-        if (!$payment) {
-            return response(['message' => 'Payment failed!'], 402);
+        try {
+            $charge = Stripe::charges()->create([
+                'source'        => $request->source,
+                'currency'      => 'USD',
+                'amount'        => $request->amount,
+                'description'   => $request->description,
+                'receipt_email' => $user->email,
+            ]);
+
+            if (!$charge['failure_code']) {
+                $user_amount  = $user->amount;
+                $amount_prev  = $user_amount ? $user_amount->amount : 0;
+                $amount_total = $amount_prev + ($charge['amount'] / 100);
+
+                //BEGIN transaction
+
+                return DB::transaction(function () use ($user, $charge, $amount_prev, $amount_total, $user_amount, $request) {
+
+                    // Create new transaction
+                    $transaction = $user->newTransaction()
+                    ->withType(1)
+                    ->withAmount($charge['amount'] / 100)
+                    ->withAmountPrev($amount_prev)
+                    ->withAmountTotal($amount_total)
+                    ->withDescription($request->description)
+                    ->publish();
+
+                    // Transaction add status
+                    $status = $transaction->updateOrNewStatus()
+                    ->withStatus($charge['status'])
+                    ->publish();
+
+                    // update Amount
+                    $amount = $user->updateAmount($user_amount)->withAmount($amount_total)->publish();
+
+                    event(new UserDepositEvent());
+
+                    return $amount->amount;
+                });
+
+                //END transaction
+            }
+        } catch (Cartalyst\Stripe\Exception\BadRequestException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\UnauthorizedException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\InvalidRequestException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\NotFoundException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\CardErrorException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\ServerErrorException $e) {
+            $message = $e->getMessage();
+        } catch (Exception $e) {
+            $message = $e->getMessage();
         }
 
-        $charge = Stripe::charges()->create([
-            'customer'      => $payment->stripe_id,
-            'currency'      => 'USD',
-            'amount'        => $request->amount,
-            'description'   => $request->description,
-            'receipt_email' => $user->email,
-        ]);
-
-        if (!$charge['failure_code']) {
-            $user_amount  = $user->amount;
-            $amount_prev  = $user_amount ? $user_amount->amount : 0;
-            $amount_total = $amount_prev + ($charge['amount'] / 100);
-
-            //BEGIN transaction
-
-            return DB::transaction(function () use ($user, $charge, $amount_prev, $amount_total, $user_amount, $request, $payment) {
-
-                // Create new transaction
-                $transaction = $payment->newTransaction()
-                ->withType(1)
-                ->withAmount($charge['amount'] / 100)
-                ->withAmountPrev($amount_prev)
-                ->withAmountTotal($amount_total)
-                ->withDescription($request->description)
-                ->publish();
-
-                // Transaction add status
-                $status = $transaction->updateOrNewStatus()
-                ->withStatus($charge['status'])
-                ->publish();
-
-                // update Amount
-                $amount = $user->updateAmount($user_amount)->withAmount($amount_total)->publish();
-
-                event(new UserDepositEvent());
-
-                return $amount->amount;
-            });
-
-            //END transaction
-        }
-        return response(['message' => $charge['failure_message']], 402);
+        return response(['message' => $message], 400);
     }
 
     public function postClaim(ClaimRequest $request)

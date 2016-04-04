@@ -75,10 +75,6 @@
 			random_for_reload: 'reloadAsyncData'
 		},
 
-		ready() {
-			Stripe.setPublishableKey(_stripe.key);
-		},
-
 		methods: {
 			onOpenEdit(id) {
 				this.$broadcast('change-status', id);

@@ -24,8 +24,12 @@ class ChargeRequest extends Request
     public function rules()
     {
         return [
+            'source'      => 'required',
             'amount'      => 'required|numeric|max:999999',
-            'payment'     => 'required|exists:payments,id',
+            'number'      => 'required',
+            'month'       => 'required',
+            'year'        => 'required',
+            'cvc'         => 'required|digits:3',
             'description' => 'required|max:255|min:50',
         ];
     }

@@ -36,3 +36,6 @@
         </div>
     </div>
 @stop
+@section('scripts')
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56f8b211183fa62c" async="async"></script>
+@stop
