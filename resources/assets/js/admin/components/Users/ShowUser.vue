@@ -13,7 +13,10 @@
 	                <a href="#tab_1_2" data-toggle="tab">Change Password</a>
 	            </li>
 	            <li>
-	                <a href="#tab_1_3" data-toggle="tab">Transacsion history</a>
+	                <a href="#tab_1_3" @click="onTransacsion()" data-toggle="tab">Transacsion history</a>
+	            </li>
+	            <li>
+	                <a href="#tab_1_4" @click="onOrder()" data-toggle="tab">Orders list</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -96,7 +99,12 @@
 			    <!-- END CHANGE PASSWORD TAB -->
 			    <!-- CHANGE PASSWORD TAB -->
 			    <div class="tab-pane" id="tab_1_3">
-			        <transacsion :id="user.id"></transacsion>
+			        <transacsion :id="user.id" v-if="transacsion"></transacsion>
+			    </div>
+			    <!-- END CHANGE PASSWORD TAB -->
+			    <!-- CHANGE PASSWORD TAB -->
+			    <div class="tab-pane" id="tab_1_4">
+			        <orders :id="user.id" v-if="order"></orders>
 			    </div>
 			    <!-- END CHANGE PASSWORD TAB -->
 			</div>
@@ -113,6 +121,7 @@
 	import _ from 'lodash';
 	import AccountBlance from '../Users/AccountBlance.vue';
 	import Transacsion from './Transacsions.vue';
+	import Orders from './Orders.vue';
 
 	export default{
 		data(){
@@ -122,6 +131,8 @@
                 formErrors: {},
                 countries: [],
                 states: [],
+                transacsion: false,
+                order: false,
 			}
 		},
 
@@ -163,6 +174,14 @@
                 return def.promise;
             },
 
+            onTransacsion(){
+            	this.transacsion = true;
+            },
+
+            onOrder(){
+            	this.order = true;
+            },
+
             onSubmit(){
             	    const user = this.user;
             	    this.submiting = true;
@@ -188,7 +207,7 @@
         },
 
         components: {
-        	Datepicker, ChangePassword, AccountBlance, Transacsion
+        	Datepicker, ChangePassword, AccountBlance, Transacsion, Orders
         }
 	}
 </script>

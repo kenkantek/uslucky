@@ -71,6 +71,27 @@ class UserController extends Controller
         return $user;
     }
 
+    public function getTransactions(Request $request)
+    {
+        // return $this->user->transactions()->with('status')->latest('updated_at')->paginate($take);
+        $take = $request->take ?: 10;
+        return User::find($request->id)
+            ->transactions()->with('status')
+            ->latest('updated_at')
+            ->paginate($take)
+            ->appends(['take' => $take]);
+    }
+
+    public function getOrders(Request $request)
+    {
+        $take = $request->take ?: 10;
+        return User::find($request->id)
+            ->orders()->with('status')
+            ->latest()
+            ->paginate($take)
+            ->appends(['take' => $take]);
+    }
+
     public function postChangeAvatar(AvatarRequest $request, $id)
     {
         $avatar     = User::findOrFail($id);

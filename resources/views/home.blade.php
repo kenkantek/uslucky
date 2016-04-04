@@ -3,28 +3,32 @@
 <!--homepage-->
             <div class="unit">
                 <div class="title1">
-                    Saturday, May 31 Jackpot:
+                    {{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%A, %B %d')}} Jackpot:
                 </div>
                 <div class="title2">
-                    173 million
+                    {{nice_number($powerball['amount'])}}
                 </div>
                 <div class="col-md-6 left">
                     <p>
-                        <time datetime="2014-01-11">wednesday, may 28</time>
+                        <time datetime="{{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))}}">{{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))->formatLocalized('%A, %B %d')}}</time>
                         &nbsp;|&nbsp;Winning Numbers:
                     </p>
                 </div>
                 <div class="col-md-6 right">
                     <ul class="list">
-                        <li>19</li>
-                        <li>24</li>
-                        <li>45</li>
-                        <li>18</li>
-                        <li>36</li>
-                        <li>5</li>
+                        @if($result)
+                            @forelse($result->numbers as $number)
+                                <li>{{$number}}</li>
+                            @empty
+                                <li>No result</li>
+                            @endforelse
+                                <li>{{$result->ball}}</li>
+                        @else
+                            <li>No result</li>
+                        @endif
                     </ul>
                     <div class="ticket">
-                        <a href="#">see current winning <br>ticket results</a>
+                        <a href="{{route('front::get.winning.numbers')}}">see current winning <br>ticket results</a>
                     </div>
                 </div>
 
@@ -37,19 +41,26 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6">
                     <div class="game">
-                        <h3>Powerball <br>$173.0 <span>Million</span></h3>
+                        <h3>Powerball <br><span style="text-transform: capitalize;">${{nice_number($powerball['amount'])}}</span></h3>
 
-                        <p>Cash Option: $102.0 <span>Million</span></p>
+                        <p>Cash Option: ${{nice_number($powerball['cash_option'])}}</p>
 
-                        <p>NEXT DRAW: <span>MAY 31</span></p>
+                        <p>NEXT DRAW: <span>{{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%B %d')}}</span></p>
                         <ul class="list">
-                            <li>19</li>
-                            <li>24</li>
-                            <li>45</li>
-                            <li>18</li>
-                            <li>36</li>
-                            <li>5</li>
+                            @if($result)
+                                @forelse($result->numbers as $number)
+                                    <li>{{$number}}</li>
+                                @empty
+                                    <li>No result</li>
+                                @endforelse
+                                    <li>{{$result->ball}}</li>
+                            @else
+                                <li>No result</li>
+                            @endif
                         </ul>
+                        <p>
+                            <a class="link home_page" href="{{route('front::game.powerball')}}">play now</a>
+                        </p>
                     </div>
                 </div>
 
@@ -68,6 +79,9 @@
                             <li>36</li>
                             <li>5</li>
                         </ul>
+                        <p>
+                            <a class="link home_page" href="#">play now</a>
+                        </p>
                     </div>
                 </div>
             </div>

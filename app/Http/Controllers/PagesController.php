@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Models\Game;
+use App\Models\Result;
 
 class PagesController extends Controller
 {
@@ -20,7 +21,9 @@ class PagesController extends Controller
 
     public function getIndex()
     {
-        return view('home');
+        $result    = Result::whereGameId(1)->latest('draw_at')->first();
+        $powerball = powerballNextTime();
+        return view('home', compact('powerball', 'result'));
     }
 
     public function getAbout()

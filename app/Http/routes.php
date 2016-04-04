@@ -164,6 +164,14 @@ $router->group([
                 'as'   => 'put.password',
                 'uses' => 'UserController@putChangePass',
             ]);
+            $router->get('user/{user}/transaction', [
+                'as'   => 'get.user.transaction',
+                'uses' => 'UserController@getTransactions',
+            ]);
+            $router->get('user/{user}/orders', [
+                'as'   => 'get.user.orders',
+                'uses' => 'UserController@getOrders',
+            ]);
 
             $router->get('manages/powerball', [
                 'as'   => 'get.powerball',

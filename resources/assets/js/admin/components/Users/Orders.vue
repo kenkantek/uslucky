@@ -5,26 +5,29 @@
 		<table v-else class="table-striped table-checkable table table-hover table-bordered admin">
 			<thead>
                 <tr class="uppercase">
-                	<th>#ID</th>
-                	<th>Update At</th>
-                	<th> Description </th>
-                	<th> Amount Prev </th>
-                	<th> Amount </th>
-                	<th>Amount Next</th>
-                	<th> Status </th>
+                    <th>#ID</th>
+                    <th> Game Type </th>
+                    <th colspan="2"> Total Ticket </th>
+                    <th> Bought Date </th>
+                    <th>Draw Date</th>
+                    <th> Description </th>
+                    <th> Status </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-            	<tr v-for="transaction in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
-            		<td v-text="transaction.id"></td>
-            		<td v-text="transaction.created_at"></td>
-            		<td v-text="transaction.description"></td>
-            		<td v-text="transaction.amount_prev | currency"></td>
-            		<td v-text="transaction.amount | currency"></td>
-            		<td v-text="transaction.amount_total | currency"></td>
-            		<td><span class="label" :class="{'label-success':transaction.status.status == 'succeeded', 
-            		'label-warning':transaction.status.status == 'pendding', 
-            		'label-danger':transaction.status.status=='canceled'}" v-text="transaction.status.status"></span></td>
+            	<tr v-for="order in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
+            		<td v-text="order.id"></td>
+            		<td v-text="order.game_name"></td>
+            		<td v-text="order.ticket_total"></td>
+                    <td v-text="order.price | currency"></td>
+            		<td v-text="order.created_at"></td>
+            		<td v-text="order.draw_at"></td>
+                    <td v-text="order.description"></td>
+            		<td><span class="label" :class="{'label-success':order.status.status == 'purchased', 
+            		'label-warning':order.status.status == 'wait for purchase', 
+            		'label-danger':order.status.status=='canceled'}" v-text="order.status.status"></span></td>
+                    <td><a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a></td>
             	</tr>
             </tbody>
 		</table>
@@ -42,7 +45,7 @@
 
 		data(){
 			return{
-				api: laroute.route('admin.get.user.transaction',{'user': this.id}),
+				api: laroute.route('admin.get.user.orders',{'user': this.id}),
                 data: {
                     per_page: "10",
                 },
@@ -50,7 +53,7 @@
 		},
 
 		asyncData(resolve, reject) {
-            this._fetchTransacsions(this.api).done(data => {
+            this._fetchOrders(this.api).done(data => {
                 resolve({ data });
             }, err => {
                 COMMON.alertError();
@@ -59,7 +62,7 @@
         },
 
 		methods: {
-			_fetchTransacsions(api, take = this.data.per_page, id = this.id) {
+			_fetchOrders(api, take = this.data.per_page, id = this.id) {
                 const def = deferred();
                 this.$http.get(api, { take, id }).then(res => {
                     const { data } = res;
@@ -70,6 +73,12 @@
                 return  def.promise;
             },
 		},
+
+        filters: {
+            linkShow(orders) {
+                return laroute.route('admin.orders.show', { orders });
+            },
+        },
 
 		events: {
             'go-to-page'(api) {
