@@ -131,16 +131,16 @@
                     swal("Charged!", "Charged successfully!", "success");
                 }, res => {
                     this.submiting = false;
-                    if(res.status === 500) {
-                        BOX.alertError();
-                    } else if(res.status === 422) { // validate
+                    if(res.status === 422) { // validate
                         swal.close();
                         this.formErrors = res.data;
                         toastr.warning('Please check input field!.', 'Validate!');
-                    } else { // 400 error payment
+                    } else if(res.status === 400) { // 400 error payment
                         swal.close();
                         toastr.error(res.data.message);
                         this.message = res.data.message;
+                    } else {
+                        BOX.alertError();
                     }
                 });
             },
