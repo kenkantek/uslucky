@@ -1,10 +1,7 @@
-
 <template>
-
     <section class="main-game">
         <header-power 
-            :powerball="powerball" 
-            :total="total" 
+            :powerball="powerball"
             :tickets="tickets" 
             :ticket-template="ticketTemplate"
             :each-per-ticket="eachPerTicket"
@@ -13,7 +10,6 @@
 
         <article class="view-game clearfix">
             <section class="pull-left">
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_sharing_toolbox"></div>
             </section>
             <section class="top-controls pull-right">
@@ -33,6 +29,12 @@
             </section>
 
             <section class="tickets">
+                <choose-line 
+                    :tickets="tickets" 
+                    :line-default.sync="lineDefault"
+                    :ticket-template="ticketTemplate">
+                </choose-line>
+
                 <div class="list-ticket clearfix">
                     <div class="ticket" v-for="ticket in tickets" track-by="$index" :class="{active: _ticketActive(ticket)}">
                         <ticket :ticket.sync="ticket" :i="$index" :status-disable="statusDisable"></ticket>
@@ -93,6 +95,7 @@
     import HeaderPower from './HeaderPower.vue';
     import Ticket from './Ticket.vue';
     import FormModal from './FormModal.vue';
+    import ChooseLine from './ChooseLine.vue';
     
     export default {
         data() {
@@ -106,11 +109,15 @@
                 eachPerTicket: each_per_ticket,
                 extraPerTicket: extra_per_ticket,
                 extra: Boolean(Number(localStorage.extra)) || null,
-                submiting: false
+                submiting: false,
+                numberLineDefault: 3
             }
         },
 
         computed: {
+            lineDefault() {
+                return this.tickets.length || 3;
+            },
             statusDisable() {
                 return this.tickets.length > 1 ? false : true;
             },
@@ -150,7 +157,9 @@
             if(localStorage.tickets) {
                 this.tickets = JSON.parse(localStorage.tickets);
             } else {
-                this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
+                for(let i = 0; i < this.numberLineDefault; i++) {
+                    this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
+                }
             }
         },
 
@@ -180,7 +189,7 @@
             }
         },
 
-        components: { HeaderPower, Ticket, FormModal }
+        components: { HeaderPower, Ticket, FormModal, ChooseLine }
     }
 
 </script>

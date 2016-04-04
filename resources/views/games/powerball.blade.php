@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="game col-xs-12 col-md-9">
+            <div class="game col-xs-12 col-md-10">
                 <section class="header">
                     <h1>Buy Official Tickets for U.S. Powerball Lottery Online</h1>
                     <p>
@@ -18,10 +18,9 @@
                     <hr>
                 </section>
 
-                <powerball>
-                </powerball>
+                <powerball></powerball>
             </div>
-            <div class="sizebar col-xs-12 col-md-3">
+            <div class="sizebar col-xs-12 col-md-2">
                 <div class="box">
                     <a href="#">
                         <img class="img-responsive" src="https://s4.thelotter.com/images/9ddac69a079eafd126ef2f4fccd5858e.png">

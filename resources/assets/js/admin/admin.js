@@ -5,6 +5,10 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
 Vue.component('loading', Vue.extend(require('../components/Globals/Loading.vue')));
 
+Vue.filter('currency', function (value, currency) {
+  return require('../filter/currency.js')(value, currency);
+});
+
 import Order from './components/Order/Index.vue';
 import OrderDetails from './components/Order/ShowOrder.vue';
 import SignIn from './components/Auth/SignIn.vue';
