@@ -99,6 +99,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     $router->controller('game', 'GameController', [
         'getPowerball' => 'game.powerball',
         'getPayment'   => 'game.get.payment',
+        'getIndex'     => 'game.get.index',
     ]);
 
     $router->controller('powerball', 'Games\PowerballController', [
@@ -150,6 +151,10 @@ $router->group([
             $router->get('user/{user}', [
                 'as'   => 'get.user',
                 'uses' => 'UserController@getUser',
+            ]);
+            $router->post('user/{user}', [
+                'as'   => 'post.user.deposit',
+                'uses' => 'UserController@postDeposit',
             ]);
             $router->post('user/{user}/avatar', [
                 'as'   => 'post.avatar',
@@ -213,6 +218,10 @@ $router->group([
 
         $router->resource('users/winners', 'WinnerController', [
             'only' => 'index',
+        ]);
+        $router->put('users/{users}/active', [
+            'as'   => 'user.post.active',
+            'uses' => 'UserController@putActive',
         ]);
         $router->resource('users', 'UserController', [
             'only' => ['index', 'destroy', 'show', 'update'],

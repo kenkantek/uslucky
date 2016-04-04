@@ -19,7 +19,7 @@
                             @elseif($flash_mes == 'resent')
                                 Your email verify was sent! Thank you!
                             @elseif($flash_mes == 'verify')
-                                Thank you! Your email was verified! <a href="{{url(route('front::settings.account'))}}">Click here to go to your profile.</a>!
+                                Thank you! Your email was verified! <a href="{{url(route('front::game.get.index'))}}">Click here Choose games play..</a>!
                             @endif
                         @endif
 

@@ -1,10 +1,5 @@
 <template>
 	<form @submit.prevent="onSubmit" novalidate>
-	    <div class="form-group" :class="{'has-error' : formErrors.old_password}">
-	        <label class="control-label">Current Password</label>
-	        <input type="password" v-model="formInputs.old_password" class="form-control" /> 
-			<span class="help-block" v-show="formErrors.old_password" v-text="formErrors.old_password"></span>
-	    </div>
 	    <div class="form-group" :class="{'has-error' : formErrors.password}">
 	        <label class="control-label">New Password</label>
 	        <input type="password" v-model="formInputs.password" class="form-control" />

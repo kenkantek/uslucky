@@ -88,8 +88,8 @@
                             </td>
 
                             <td>
-                                <label class="label label-success" v-if="ticket.status.status == 'win'">{{ ticket.status.status }}</label>
-                                <label class="label label-danger" v-if="ticket.status.status == 'lost'">{{ ticket.status.status }}</label>
+                                <label class="label label-success" v-if="ticket.status.status == 'won'">{{ ticket.status.status }}</label>
+                                <label class="label label-danger" v-if="ticket.status.status == 'fail'">{{ ticket.status.status }}</label>
                                 <label class="label label-warning" v-if="ticket.status.status == 'waiting'">{{ ticket.status.status }}</label>
                             </td>
                             <td>$1.600.000.000</td>

@@ -421,6 +421,27 @@ h3 {
 
 .p8{
   padding: 50px 0 8px;
+  .thumbs{
+    position: relative;
+    overflow: hidden;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    img{
+      vertical-align: top;
+    }
+    .capture{
+      background: #eae6e3;
+      padding: 17px 20px 15px;
+    }
+    h5{
+      color: #ad9480;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: bold;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+  }
   button{    
       margin-top:27px
   }
@@ -839,6 +860,9 @@ p {
 }
 
 @media screen and (min-width: 994px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
   .left {
     text-align: right;
     margin-bottom: 20px;
@@ -856,7 +880,7 @@ p {
   }
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 990px) { 
   .content {
     .game {
       margin-top: 30px;

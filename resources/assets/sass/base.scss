@@ -165,3 +165,19 @@ a {
     0% { background: #CD4B5B; }
     100% { background: none; }
 }
+
+@media screen and (max-width: 768px) {
+  ul.nav ul.dropdown-menu {
+    display: block;
+    width:100%;
+    a{
+      text-align:center;
+    }
+  }
+}
+
+@media screen and (min-width: 994px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
+}
