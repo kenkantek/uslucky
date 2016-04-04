@@ -43,14 +43,17 @@ function getGameNextTime($game = 'Powerball')
         $time = Carbon::createFromTimestamp(substr($response->drawTime, 0, -3))->addHours($config['hours_before_close']);
 
         // Kiểm tra $time nếu nhỏ hơn ngày hiện tại thì lấy Next
-        $now  = Carbon::now();
+        $now = Carbon::now();
         $thu4 = $now->copy()->next(Carbon::WEDNESDAY);
         $thu7 = $now->copy()->next(Carbon::SATURDAY);
 
-        if ($time->diffInDays($now, false) < 0 ||
+        // var_dump($time);
+        // var_dump($now);
+
+        if ($time->diffInDays($now, false) > 0 ||
             ($time->diffInDays($now, false) == 0 && $time->diffInHours($now, false) >= 0)) {
-            $time   = $thu4->diffInDays($thu7, false) <= 0 ? $thu7 : $thu4;
-            $amount = 'Not Published';
+            $time = $thu4->diffInDays($thu7, false) <= 0 ? $thu7 : $thu4;
+            $amount = 'Not Published.';
         }
         return [
             'time'   => $time->format('m/d/Y'),

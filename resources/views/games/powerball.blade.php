@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="game col-xs-12 col-md-9">
+            <div class="game col-xs-12 col-md-10">
                 <section class="header">
                     <h1>Buy Official Tickets for U.S. Powerball Lottery Online</h1>
                     <p>
@@ -18,10 +18,9 @@
                     <hr>
                 </section>
 
-                <powerball>
-                </powerball>
+                <powerball></powerball>
             </div>
-            <div class="sizebar col-xs-12 col-md-3">
+            <div class="sizebar col-xs-12 col-md-2">
                 <div class="box">
                     <a href="#">
                         <img class="img-responsive" src="https://s4.thelotter.com/images/9ddac69a079eafd126ef2f4fccd5858e.png">
@@ -36,4 +35,11 @@
             </div>
         </div>
     </div>
+@stop
+@section('scripts')
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56f8b211183fa62c" async="async"></script>
+{!! HTML::script('https://js.stripe.com/v2/') !!}
+<script type="text/javascript">
+    Stripe.setPublishableKey(_stripe.key);
+</script>
 @stop

@@ -34,4 +34,7 @@
 
 @section('scripts')
 {!! HTML::script('https://js.stripe.com/v2/') !!}
+<script type="text/javascript">
+    Stripe.setPublishableKey(_stripe.key);
+</script>
 @stop

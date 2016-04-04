@@ -2,7 +2,7 @@
     <section class="numbers">
         <div class="controls clearfix">
             <button class="btn btn-info btn-xs pull-left" @click="quickPick">Quick Pick</button>
-            <button class="btn btn-danger btn-xs pull-right" @click="removeTicket" :disabled="statusDisable">
+            <button class="hidden btn btn-danger btn-xs pull-right" @click="removeTicket" :disabled="statusDisable">
                 <i class="fa fa-trash-o fa-lg"></i>
             </button>
         </div>

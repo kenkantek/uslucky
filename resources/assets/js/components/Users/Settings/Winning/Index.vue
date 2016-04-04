@@ -45,7 +45,7 @@
 
 		methods: {
 			openDeposit(e) {
-				if(this.payments.length) {
+				if(true || this.payments.length) {
 					this.statusForm = {
 						deposit: true,
 						claim: false

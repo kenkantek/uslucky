@@ -8,6 +8,7 @@ use App\Models\Game;
 use App\Models\ManageGame;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use DB;
+use Exception;
 use Illuminate\Http\Request;
 
 class PowerballController extends Controller
@@ -20,7 +21,6 @@ class PowerballController extends Controller
 
     public function postPowerball(Request $request)
     {
-        // return $request->all();
         $user = $this->user;
         return DB::transaction(function () use ($user, $request) {
             // Save to Order
@@ -41,14 +41,14 @@ class PowerballController extends Controller
 
             // Payment it
             if ($request->method == 1) {
-                $this->chargeFromBalance($user, $request);
+                $res = $this->chargeFromBalance($user, $request);
                 //event Email
             } else {
-                $this->chargeFromCredit($user, $request);
+                $res = $this->chargeFromCredit($user, $request);
             }
             //event Mail
             event(new EmailEvent($order));
-            return $order;
+            return $res === true ? $order : response(['message' => $res], 400);
         });
     }
 
@@ -59,45 +59,8 @@ class PowerballController extends Controller
         $amount        = $this->calculateAmount($request);
         $balance_total = $balance - $amount;
 
-        $transaction = $user->newTransaction()
-            ->withType(2)
-            ->withAmount($amount)
-            ->withAmountPrev($balance)
-            ->withAmountTotal($balance_total)
-            ->withDescription($request->description)
-            ->publish();
-
-        // Transaction add status
-        $status = $transaction->updateOrNewStatus()
-            ->withStatus('succeeded')
-            ->publish();
-
-        $amount = $user->updateAmount($user->amount)
-            ->withAmount($balance_total)
-            ->publish();
-
-        return $amount;
-    }
-
-    protected function chargeFromCredit($user, $request)
-    {
-        $balance       = $user->balance; // prev
-        $amount        = $this->calculateAmount($request);
-        $balance_total = $balance - $amount;
-        $payment       = $user->payments()->whereId($request->payment)->first();
-
-        //Charge Stripe
-        $charge = Stripe::charges()->create([
-            'customer'      => $payment->stripe_id,
-            'currency'      => 'USD',
-            'amount'        => $amount,
-            'description'   => $request->description,
-            'receipt_email' => $user->email,
-        ]);
-
-        if (!$charge['failure_code']) {
-            // Transaction
-            $transaction = $payment->newTransaction()
+        try {
+            $transaction = $user->newTransaction()
                 ->withType(2)
                 ->withAmount($amount)
                 ->withAmountPrev($balance)
@@ -107,11 +70,68 @@ class PowerballController extends Controller
 
             // Transaction add status
             $status = $transaction->updateOrNewStatus()
-                ->withStatus($charge['status'])
+                ->withStatus('succeeded')
                 ->publish();
-        }
 
-        return;
+            $amount = $user->updateAmount($user->amount)
+                ->withAmount($balance_total)
+                ->publish();
+            return true;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    protected function chargeFromCredit($user, $request)
+    {
+        $balance       = $user->balance; // prev
+        $amount        = $this->calculateAmount($request);
+        $balance_total = $balance - $amount;
+
+        try {
+            //Charge Stripe
+            $charge = Stripe::charges()->create([
+                'source'        => $request->source,
+                'currency'      => 'USD',
+                'amount'        => $amount,
+                'description'   => $request->description,
+                'receipt_email' => $user->email,
+            ]);
+
+            if (!$charge['failure_code']) {
+                // Transaction
+                $transaction = $user->newTransaction()
+                    ->withType(2)
+                    ->withAmount($amount)
+                    ->withAmountPrev($balance)
+                    ->withAmountTotal($balance_total)
+                    ->withDescription($request->description)
+                    ->publish();
+
+                // Transaction add status
+                $status = $transaction->updateOrNewStatus()
+                    ->withStatus($charge['status'])
+                    ->publish();
+            }
+            return true;
+
+        } catch (Cartalyst\Stripe\Exception\BadRequestException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\UnauthorizedException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\InvalidRequestException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\NotFoundException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\CardErrorException $e) {
+            $message = $e->getMessage();
+        } catch (Cartalyst\Stripe\Exception\ServerErrorException $e) {
+            $message = $e->getMessage();
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+        }
+        return $message;
     }
 
     // tinh toan Amount from client

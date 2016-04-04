@@ -62,16 +62,11 @@
 
 		data() {
 			return {
-				date: {},
+				date: _date,
 				submiting: false,
 				card: {...this.payment},
 				message: ''
 			}
-		},
-
-		ready() {
-			this.date = _date;
-			Stripe.setPublishableKey(_stripe.key);
 		},
 
 		methods: {

@@ -63,17 +63,8 @@
                               <label>
                                 <input type="radio" v-model="method" value="2">
                                 By credit card
-                                <span class="text-danger" v-show="method == 2 && !payments.length">
-                                    No payment methods available 
-                                    <a @click.stop="closeModal" :href="linkTo.payment" target="_blank">Add now</a>
-                                </span>
                               </label>
-                              <select class="form-control select" v-model="payment" v-show="method == 2 && payments.length">
-                                <option v-for="p in payments"
-                                    v-text="p.card_brand + ' **** ' + p.card_last_four + ' ' + p.card_name" 
-                                    :value="p.id"
-                                ></option>
-                              </select>
+                              <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
                             </div>
                             <hr>
                             <div class="">
@@ -107,6 +98,8 @@
 <script>
     import laroute from '../../../laroute';
     import BOX from '../../../common';
+    import FormCard from './FormCard.vue';
+    import async from 'async';
 
     export default {
         props: ['tickets', 'total', 'extra', 'submiting'],
@@ -123,20 +116,18 @@
                 linkTo: {
                     winning: laroute.route('front::settings.winning'),
                     payment: laroute.route('front::settings.payment')
-                }
-            }
-        },
-
-        watch :{
-            payments(payments) {
-                const payment = _.find(payments, { default: 1 });
-                this.$set('payment', payment ? payment.id : (payments.length ? payments[0].id : null));
+                },
+                source: null,
+                formInputs: {
+                    exp_month: 1,
+                    exp_year: new Date().getFullYear()
+                },
             }
         },
 
         computed: {
             readySubmit() {
-                if((this.method == 2 && this.payment) || (this.method == 1 && this.amount >= this.total)) {
+                if((this.method == 2) || (this.method == 1 && this.amount >= this.total)) {
                     return true;
                 }
 
@@ -169,32 +160,55 @@
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true,
                 }, () => {
+                    const vm = this;
                     this.submiting = true;
-                    this.$http.post(laroute.route('front::post.powerball'), { tickets: this.tickets, extra: this.extra, method: this.method, payment: this.payment, description: this.description }).then(res => {
-                        swal({
-                            title: "Success!",
-                            text: "You has been purchased tickets successfully!",
-                            type: "success",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "Go to Your Orders!",
-                            closeOnConfirm: false
-                        }, () => {
-                            location.href = laroute.route('front::orders.index');
-                        });
-                        localStorage.removeItem("tickets");
-                        localStorage.removeItem("extra");
-                        this.closeModal();
-                    }, res => {
-                        if(res.status === 500) {
-                            BOX.alertError();
-                        } else  {
-                            toastr.error('Can not purchase tickets, Please try again!', 'Error!');
-                            swal.close();
+                    this.message = '';
+                    async.waterfall([
+                        (cb) => {
+                            if(vm.method == 2) {
+                                Stripe.card.createToken(this.formInputs, (status, res) => {
+                                    if(res.error) {
+                                        cb(new Error(res.error.message));
+                                    } else {
+                                        cb(null, res.id);
+                                    }
+                                });
+                            } else {
+                                cb(null, null);
+                            }
                         }
-                        this.submiting = false;
-                        console.warn(res);
+                    ], (err, result) => {
+                        if(err) {
+                            swal("Payment Invalid", err.message, "error");
+                        } else {
+                            vm.$http.post(laroute.route('front::post.powerball'), { tickets: vm.tickets, extra: vm.extra, method: vm.method, payment: vm.payment, description: vm.description, source: result }).then(res => {
+                                swal({
+                                    title: "Success!",
+                                    text: "You has been purchased tickets successfully!",
+                                    type: "success",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Go to Your Orders!",
+                                    closeOnConfirm: false
+                                }, () => {
+                                    location.href = laroute.route('front::orders.index');
+                                });
+                                localStorage.removeItem("tickets");
+                                localStorage.removeItem("extra");
+                                vm.closeModal();
+                            }, res => {
+                                if(res.status === 400)  {
+                                    swal.close();
+                                    swal("Payment Invalid", res.data.message, "error");
+                                } else {
+                                    BOX.alertError();
+                                }
+                                vm.submiting = false;
+                            });
+                        }
+                        
                     });
+                    
                 });
             },
 
@@ -202,6 +216,8 @@
                 $('#squarespaceModal').modal('hide');
                 this.submiting = false;
             }
-        }
+        },
+
+        components: { FormCard }
     }
 </script>
