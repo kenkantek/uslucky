@@ -10,8 +10,6 @@
                     <th>Amount Prev</th>
                     <th>Amount</th>
                     <th>Amount Next</th>
-                    <th>Action</th>
-		            <th>Paid with</th>
 		            <th>Status</th>
 		            <th>Cancel</th>
 		        </tr>
@@ -24,25 +22,10 @@
                     <td>{{ history.amount_prev | currency }}</td>
 		            <td>
 		            	<span :class="[history.type == 1 ? 'text-primary' : 'text-danger']">
-                            <strong>+{{ history.amount | currency }}</strong>
+                            <strong>{{ history.type == 1 ? '+' : '-' }}{{ history.amount | currency }}</strong>
                         </span>
 		            </td>
                     <td>{{ history.amount_total | currency }}</td>
-                    <td>
-                        <strong v-if="history.transactionable_type=='App\\Models\\Order'">
-                            Refund
-                        </strong>
-                        <strong v-else>
-                            <span v-if="history.type == 0">Claim/Withdraw</span>
-                            <span v-if="history.type == 1">Winning/Deposit</span>
-                            <span v-if="history.type == 2">Buy Tickets</span>
-                        </strong>
-                        
-                    </td>
-		            <td>
-                        <span v-if="history.transactionable_type=='App\\Models\\Payment'">Credit Card</span>
-                        <span v-else="history.transactionable_type == 'App\\Models\\User'">Account Blance</span>
-                    </td>
 		            <td>	
 						<label class="label label-success" v-if="history.status.status == 'succeeded'">{{ history.status.status }}</label>
 						<label class="label label-danger" v-if="history.status.status == 'canceled'">{{ history.status.status }}</label>
