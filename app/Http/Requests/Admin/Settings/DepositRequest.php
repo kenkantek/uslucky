@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Settings;
 
 use App\Http\Requests\Request;
 
-class PasswordRequest extends Request
+class DepositRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class PasswordRequest extends Request
     public function rules()
     {
         return [
-            'password'     => 'required|min:6|confirmed',
-            'old_password' => 'min:6,',
+            'amount'      => 'bail|required|numeric|min:' . env('MINIMUM_AMOUNT'),
+            'description' => 'bail|required|max:255|min:50',
         ];
     }
 }

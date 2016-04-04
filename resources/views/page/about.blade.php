@@ -1,4 +1,7 @@
 @extends('layouts.master')
+
+@section('title', 'About Us')
+
 @section('content')
 <div class="bg4 p50">
         <div class="container">

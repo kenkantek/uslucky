@@ -15,6 +15,11 @@ class GameController extends Controller
         $this->middleware('game_time');
     }
 
+    public function getIndex()
+    {
+        return view('games.index');
+    }
+
     public function getPowerball()
     {
         Javascript::put(array_add(ManageGame::getConfig(1)->toArray(), '_powerball', powerballNextTime()));

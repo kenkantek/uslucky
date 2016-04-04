@@ -3,6 +3,10 @@
         <slot name="header"></slot>
         <div class="actions">
             <div class="btn-group" v-show="ids.length != 0">
+                <button class="btn green btn-success btn-circle" @click.prevent="onActive(ids)">
+                    <i class="fa fa-check"></i>
+                    <span class="hidden-xs"> Active all users </span>
+                </button>
                 <button class="btn red btn-danger btn-circle" @click.prevent="onDelete(ids)">
                     <i class="fa fa-trash"></i>
                     <span class="hidden-xs"> Delete all users </span>
@@ -44,7 +48,28 @@
                         swal.close();
                     }
                 });
-            }
+            },
+
+            onActive(ids){
+                this.$http.put(laroute.route('user.post.active',{ 'users': [ids]})).then(res => {
+                    this.$parent.reloadAsyncData();
+                    swal({
+                        title: "All choose users was activated!",
+                        type: "info",
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: false,
+                    }, function() {
+                        swal.close();
+                    });
+
+                },(res) => {
+                    if(res.status === 500) {
+                        COMMON.alertError();
+                    } else  {
+                        toastr.error('Please check input field!.', 'Validate!');
+                    }
+                });
+            },
         }
     }
 </script>

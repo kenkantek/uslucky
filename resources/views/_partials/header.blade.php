@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav nav-custome">
                 <li @if($routeName === 'front::home') class="active" @endif ><a href="{{url('')}}">HOME</a></li>
                 <li @if($routeName === 'front::about') class="active" @endif><a href="{{route('front::about')}}">ABOUT</a></li>
-                <li @if(starts_with($routeName, 'front::game')) class="active" @endif><a href="#" class="dropdown-toggle" data-toggle="dropdown">GAMES <b class="caret"></b></a>
+                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a href="{{route('front::game.get.index')}}">GAMES <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                 	<li><a href="{{route('front::game.powerball')}}" title="">Powerball</a></li>
                 </ul>

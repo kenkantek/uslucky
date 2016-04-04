@@ -41,7 +41,7 @@
                             <td>
                                 <span class="bold theme-font">{{user.balance | currency}}</span>
                             </td>
-                            <td><a class="label label-danger" href="" @click.prevent="onDelete(user.id)"><i class="fa fa-remove"></i></a></td>
+                            <td><a v-if="user.active == 0" class="label label-success" href="" @click.prevent="onActive(user.id)" title="Active user"><i class="fa fa-check"></i></a> <a class="label label-danger" href="" @click.prevent="onDelete(user.id)" title="Delete user"><i class="fa fa-remove"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -132,7 +132,28 @@ export default {
                             swal.close();
                         }
                     });
-            }
+            },
+
+            onActive(ids){
+                this.$http.put(laroute.route('user.post.active',{ 'users': [ids]})).then(res => {
+                    this.reloadAsyncData();
+                    swal({
+                        title: "This user was activated!",
+                        type: "info",
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: false,
+                    }, function() {
+                        swal.close();
+                    });
+
+                },(res) => {
+                    if(res.status === 500) {
+                        COMMON.alertError();
+                    } else  {
+                        toastr.error('Please check input field!.', 'Validate!');
+                    }
+                });
+            },
         },
 
         filters:{

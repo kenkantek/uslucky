@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountRequest;
+use App\Http\Requests\Admin\Settings\DepositRequest;
 use App\Http\Requests\AvatarRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Models\User;
@@ -90,16 +91,49 @@ class UserController extends Controller
 
     public function putChangePass(PasswordRequest $request, $id)
     {
-        $password = User::findOrFail($id);
-        if (\Hash::check($request->old_password, $password->password)) {
-            $password->password = bcrypt($request->password);
-            $password->save();
-
-            return $password;
-
-        } else {
-            return response(['old_password' => 'Your old password incorrect!'], 401);
-        }
+        $password           = User::findOrFail($id);
+        $password->password = bcrypt($request->password);
+        $password->save();
+        return $password;
     }
 
+    public function putActive($ids)
+    {
+        $ids = explode(',', $ids);
+        foreach ($ids as $key => $id) {
+            $user              = User::find($id);
+            $user->active_code = null;
+            $user->active      = 1;
+            $user->save();
+        }
+        return $ids;
+    }
+
+    public function postDeposit(DepositRequest $request, $id)
+    {
+        $user          = User::findOrFail($id);
+        $balance       = $user->balance; // prev
+        $amount        = $request->amount;
+        $balance_total = $balance + $amount;
+
+        $transaction = $user->newTransaction($user)
+            ->withType(1)
+            ->withAmount($amount)
+            ->withAmountPrev($balance)
+            ->withAmountTotal($balance_total)
+            ->withDescription($request->description)
+            ->publish();
+
+        // Transaction add status
+        $status = $transaction->updateOrNewStatus()
+            ->withStatus('succeeded')
+            ->publish();
+
+        $amount = $user->updateAmount($user->amount)
+            ->withAmount($balance_total)
+            ->publish();
+
+        return $amount;
+
+    }
 }
