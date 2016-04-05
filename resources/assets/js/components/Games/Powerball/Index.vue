@@ -13,8 +13,20 @@
                 <div class="addthis_sharing_toolbox"></div>
             </section>
             <section class="top-controls pull-right">
-
-                <button class="btn btn-info text-upercase" @click="quickPick"> Quick Pick</button>
+                <span class="lucky-numbers">
+                    <button class="btn" type="button" 
+                    :disabled="isDisabledLuckyBtn"
+                    @click="applyLucky"
+                    >
+                    MY LUCKY NUMBERS</button>
+                    <strong 
+                        @click="saveLucky"
+                        data-toggle="tooltip" 
+                        data-placement="top" 
+                        title="Save lucky numbers"
+                    ><i class="fa fa-floppy-o fa-lg"></i></strong>
+                </span>
+                <button class="btn btn-info text-uppercase" @click="quickPick"> Quick Pick</button>
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 
                 data-placement="top" 
@@ -96,10 +108,14 @@
     import Ticket from './Ticket.vue';
     import FormModal from './FormModal.vue';
     import ChooseLine from './ChooseLine.vue';
+    import laroute from '../../../laroute';
+    import COMMON from '../../../common';
+    import _ from 'lodash';
     
     export default {
         data() {
             return {
+                isLogin: _isLogin,
                 ticketTemplate: {
                     numbers: [],
                     ball: null
@@ -110,7 +126,8 @@
                 extraPerTicket: extra_per_ticket,
                 extra: Boolean(Number(localStorage.extra)) || null,
                 submiting: false,
-                numberLineDefault: 3
+                numberLineDefault: 3,
+                luckys: _.mapValues(_luckys, lucky => JSON.parse(lucky))
             }
         },
 
@@ -138,6 +155,9 @@
             },
             disabledPlay() {
                 return this.total < this.eachPerTicket;
+            },
+            isDisabledLuckyBtn() {
+                return !this.isLogin || !this.luckys[this.lineDefault];
             }
         },
 
@@ -158,7 +178,7 @@
                 this.tickets = JSON.parse(localStorage.tickets);
             } else {
                 for(let i = 0; i < this.numberLineDefault; i++) {
-                    this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
+                    this.tickets.push({...this.ticketTemplate, uuid: Math.random()});
                 }
             }
         },
@@ -167,7 +187,6 @@
             quickPick() {
                 this.$broadcast('quick-pick');
             },
-
             clearAll() {
                 this.tickets.map((ticket) => {
                     ticket.numbers = [];
@@ -180,6 +199,24 @@
             },
             openModal() {
                 this.submiting = true;
+            },
+            saveLucky() {
+                if(!this.isLogin) {
+                    return toastr.warning('Login to play this lottery with your lucky numbers');
+                }
+                this.$http.put(laroute.route('front::put.luckys'), {
+                    line: this.lineDefault,
+                    tickets: this.tickets
+                }).then(res => {
+                    this.luckys[this.lineDefault] = _.cloneDeep(this.tickets);
+                    toastr.success('Numbers saved!');
+                }, res => {
+                    COMMON.alertError();
+                });
+            },
+            applyLucky() {
+                this.tickets = _.cloneDeep(this.luckys[this.lineDefault]);
+                toastr.success('Apply lucky numbers success!');
             }
         },
 

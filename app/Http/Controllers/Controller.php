@@ -19,6 +19,7 @@ class Controller extends BaseController
         \JavaScript::put([
             '_token'   => csrf_token(),
             '_timzone' => env('TIMEZONE'),
+            '_isLogin' => $this->user ? true : false,
         ]);
     }
 }

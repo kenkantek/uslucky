@@ -14,11 +14,6 @@ class User extends Authenticatable
     use TransactionTrait;
     use Eloquence;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
     ];
@@ -28,40 +23,12 @@ class User extends Authenticatable
     protected $searchableColumns = [
         'id', 'email', 'first_name', 'last_name',
     ];
+
     protected $dates = ['birthday'];
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+
     protected $hidden = [
         'password', 'remember_token', 'avatar', 'amount', 'transactions', 'orders2',
     ];
-
-    public function getFullnameAttribute()
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
-
-    public function getImageAttribute()
-    {
-        return asset($this->avatar);
-    }
-
-    public function getBirthdayAttribute($date)
-    {
-        return $date ? Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d') : null;
-    }
-
-    public function setBirthdayAttribute($date)
-    {
-        return $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');
-    }
-
-    public function getBalanceAttribute()
-    {
-        return $this->amount ? $this->amount->amount : 0;
-    }
 
     public function payments()
     {
@@ -86,6 +53,36 @@ class User extends Authenticatable
     public function orders2()
     {
         return $this->orders();
+    }
+
+    public function luckys()
+    {
+        return $this->hasMany(LuckyNumber::class);
+    }
+
+    public function getFullnameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getImageAttribute()
+    {
+        return asset($this->avatar);
+    }
+
+    public function getBirthdayAttribute($date)
+    {
+        return $date ? Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d') : null;
+    }
+
+    public function setBirthdayAttribute($date)
+    {
+        return $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');
+    }
+
+    public function getBalanceAttribute()
+    {
+        return $this->amount ? $this->amount->amount : 0;
     }
 
     public function updateAmount($amount = null)
@@ -143,5 +140,14 @@ class User extends Authenticatable
             }
         }
         return $withdraw_total;
+    }
+
+    public function newOrUpdateLuckys($lucky = null)
+    {
+        if (!$lucky instanceof LuckyNumber) {
+            $lucky = new LuckyNumber;
+            $lucky->user()->associate($this);
+        }
+        return $lucky;
     }
 }

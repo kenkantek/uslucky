@@ -82,6 +82,24 @@ body.content-games {
 
                 .top-controls {
                     margin-bottom: 10px;
+
+                    .lucky-numbers {
+                        background: #31B0D5;
+                        display: inline-block;
+                        color: #fff;
+                        button {
+                            border-radius: 0px;
+                            background: #615F5F;
+                            &:hover {
+                                color: #E0E0E0;
+                            }
+                        }
+                        strong {
+                            padding: 0px 5px;
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+                    }
                 }
 
                 .tickets {
