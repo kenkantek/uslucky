@@ -1,6 +1,7 @@
 var digitsRE = /(\d{3})(?=\d)/g;
 
 module.exports = function(value, currency) {
+    if(isNaN(value)) return value;
     value = parseFloat(value);
     if (!isFinite(value) || (!value && value !== 0)) return '';
     currency = currency != null ? currency : '$';

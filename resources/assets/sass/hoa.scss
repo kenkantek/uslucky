@@ -197,6 +197,14 @@
 }
 
 .home{
+  .home_page{
+    width: 60%;
+    margin-top: 30px;
+    background-color:#DC5E61;
+    &:hover{
+      color:#2e3e4b;
+    }
+  }
 .content {
   background: #ffffff;
   .p29 {
