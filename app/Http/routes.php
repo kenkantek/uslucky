@@ -104,6 +104,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 
     $router->controller('powerball', 'Games\PowerballController', [
         'postPowerball' => 'post.powerball',
+        'putLuckys'     => 'put.luckys',
     ]);
 
 });

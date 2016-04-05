@@ -21,7 +21,7 @@
                 const deviation = Math.abs(line - this.tickets.length);
                 for(let i = 0; i < deviation; i++) {
                     if(line > this.lineDefault) {
-                        this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
+                        this.tickets.push({...this.ticketTemplate, uuid: Math.random()});
                     } else {
                         this.tickets.pop();
                     }

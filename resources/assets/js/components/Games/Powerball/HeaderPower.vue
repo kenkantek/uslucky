@@ -54,7 +54,7 @@
 
         methods: {
             addTicket() {
-                this.tickets.push({...this.ticketTemplate, uudi: Math.random()});
+                this.tickets.push({...this.ticketTemplate, uuid: Math.random()});
             }
         },
 

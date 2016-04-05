@@ -31,6 +31,7 @@ class GameController extends Controller
                 'month' => generateMonth(),
                 'year'  => generateYear(15),
             ],
+            '_luckys' => $this->user ? $this->user->luckys()->whereGameId(1)->pluck('numbers', 'line') : [],
         ]);
         return view('games.powerball');
     }

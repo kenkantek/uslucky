@@ -145,9 +145,28 @@ class PowerballController extends Controller
         return $amount;
     }
 
-    public function getResults(Request $request)
+    public function putLuckys(Request $request)
     {
-        $powerball = Game::find(1);
+        $tickets = $request->tickets;
+
+        $lucky1 = $this->user->luckys()
+            ->whereGameId(1) // 1 = Powerball
+            ->whereLine($request->line)
+            ->first();
+
+        $lucky = $this->user->newOrUpdateLuckys($lucky1);
+
+        $lucky1 || $lucky = $lucky->withGame(1);
+
+        $lucky = $lucky->withLine($request->line)
+            ->withNumbers($tickets)
+            ->publish();
+
+        return $lucky;
+    }
+
+    public function getResults()
+    {
         return curlGetUrl();
     }
 }
