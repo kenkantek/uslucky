@@ -54,7 +54,7 @@
                             <td>
                                 <span 
                                     class="label"
-                                    :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
+                                    :class="[order.status.status == 'wait for purchase' ? 'label-danger' : 'label-success']"
                                 >{{ order.status.status }}
                                 </span>
                             </td>
@@ -62,7 +62,7 @@
                             <td class="text-center">
                                 <a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a>
                                 <a class="label label-info" target="_blank" :href="order.id | linkPrint"><i class="fa fa-print"></i></a>
-                                <!-- <a class="label label-danger" @click.prevent="onDelete(order.id)"><i class="fa fa-remove"></i></a> -->
+                                <a class="hidden label label-danger" @click.prevent="onDelete(order.id)"><i class="fa fa-remove"></i></a>
                             </td>
                         </tr>
                         <tr v-if="!data.data || !data.data.length">
@@ -95,7 +95,6 @@
                 checkAll: false
             }
         },
-
 
         asyncData(resolve, reject) {
             this._fetchOrders(this.api).done(data => {

@@ -53,6 +53,19 @@
                     <div v-show="calculating"><loading></loading></div>
                 </div>
             </div>
+            <div class="row" v-if="orders.length">
+                <div class="note note-danger margin-top-25">
+                    <h4 class="block">There are <em>{{ orders.length }}</em> orders have not been processed are: 
+                        <a :href="order | linkOrder" v-for="order in orders" target="_blank">
+                            <strong>{{ order }}</strong> 
+                            {{ $index == orders.length - 1 ? '.' : ',' }}
+                        </a>
+                    </h4>
+                    <p>Click on it to handle then try again.</p>
+                </div>
+                
+                
+            </div>
             <div class="row" v-if="result.apply_module">
                 <table-value :result="result" :check-done-award.sync="checkDoneAward"></table-value>
             </div>
@@ -64,42 +77,90 @@
     import laroute  from '../../../../laroute.js';
     import COMMON from '../../../../common';
     import TableValue from './Table.vue';
+    import async from 'async';
+    import deferred from 'deferred';
 
     export default {
         data() {
             return {
                 result: _result,
                 checkDoneAward: false,
-                calculating: false
+                calculating: false,
+                orders: []
             }
         },
 
         methods: {
             onCalculate() {
-                this.calculating = true;
-                this.$http.post(laroute.route('admin.post.award.result.calculate', {result: this.result.id})).then(res => {
-                    toastr.success('Calculated successfuly and Reload page now');
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
-                }, res => {
-                    this.calculating = false;
-                    COMMON.alertError();
+                const vm = this;
+                vm.calculating = true;
+                async.parallel({
+                    orders(cb) {
+                        vm._validateCal().done(data => {
+                            cb(null, data);
+                        }, err => {
+                            cb(null, new Error(err));
+                        });
+                    }
+                }, (err, {orders}) => {
+                    if(err) {
+                        COMMON.alertError();
+                    } else {
+                        if(!!orders.length) {
+                            // warn order chưa được xử lý.
+                            vm.orders = orders;
+                            vm.calculating = false;
+                        } else {
+                            vm._calculate().done((data) => {
+                                toastr.success('Calculated successfuly and Reload page now');
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1000);
+                            }, err => {
+                                vm.calculating = false;
+                                COMMON.alertError();
+                            });
+                        }
+                    }
+                    
                 });
             },
-
+            _validateCal() {
+                const def = deferred();
+                this.$http.post(laroute.route('admin.post.award.result.validate', {result: this.result.id})).then(res => {
+                    def.resolve(res.data);
+                }, res => {
+                    def.reject(res);
+                });
+                return def.promise;
+            },
+            _calculate() {
+                const def = deferred();
+                this.$http.post(laroute.route('admin.post.award.result.calculate', {result: this.result.id})).then(res => {
+                    def.resolve(res);
+                }, res => {
+                    def.reject(res);
+                });
+                return def.promise;
+            },
             onFinish(){
                 this.calculating = true;
                 this.$http.post(laroute.route('admin.post.award.result.finish', {result: this.result.id})).then(res => {
                     toastr.success('All tickets was paid!');
                     setTimeout(() => {
                         window.location.reload();
-                    }, 2000);
+                    }, 1000);
                 }, res => {
                     this.calculating = false;
                     COMMON.alertError();
                 });
             }
+        },
+
+        filters: {
+            linkOrder(orders) {
+                return laroute.route('admin.orders.show', { orders });
+            },
         },
 
         components: {

@@ -50,7 +50,7 @@
                                     @click="assignToResult(pb)"
                                 > 
                                     <i class="fa fa-location-arrow"></i> 
-                                    {{ checkAssigned(pb) ? 'Assigned' : 'Assign to Result' }}
+                                    {{ checkAssigned(pb) ? 'Assigned' : 'Assign to Module' }}
                                 </button>
                             </td>
                         </tr>

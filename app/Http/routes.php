@@ -196,6 +196,11 @@ $router->group([
                 'uses' => 'Results\ResultController@putStatusTicket',
             ]);
 
+            $router->post('results/validate/{result}', [
+                'as'   => 'post.award.result.validate',
+                'uses' => 'Results\ResultController@validateCal',
+            ]);
+
             $router->post('results/calculate/{result}', [
                 'as'   => 'post.award.result.calculate',
                 'uses' => 'Results\ResultController@onCalculate',
