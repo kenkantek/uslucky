@@ -87,6 +87,7 @@ body.content-games {
                         background: #31B0D5;
                         display: inline-block;
                         color: #fff;
+                        margin-right: 5px;
                         button {
                             border-radius: 0px;
                             background: #615F5F;
@@ -230,4 +231,22 @@ body.content-games {
     
 
     
+}
+
+.my-acccount {
+    .wrap-avatar {
+        margin-top:9px; 
+        overflow: hidden; 
+        float: left; 
+        border-radius: 50%; 
+        width: 30px;height: 30px
+    }
+
+    .number-notify {
+        background: #777777;
+        color: #272525;
+        border-radius: 15px;
+        padding: 0px 4px;
+        color: #fff;
+    }
 }

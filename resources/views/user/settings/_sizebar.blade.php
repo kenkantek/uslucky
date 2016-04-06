@@ -16,7 +16,7 @@
     </li>
     <li class="divider"></li>
 
-    <li><a href="#">Messages <span class="badge pull-right"> 42 </span></a></li>
+    <li><a href="#">Notifications <span class="badge pull-right"> {{ $auth->notification_not_read }} </span></a></li>
     <li class="divider"></li>
 
     <li class="hidden @if($routeName === 'front::settings.payment') current @endif">

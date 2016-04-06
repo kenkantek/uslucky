@@ -59,5 +59,5 @@ Breadcrumbs::register('result.award.detail', function ($breadcrumbs, $result) {
 
 Breadcrumbs::register('withdraw', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Withdraws Request', route('admin.request-list.index'));
+    $breadcrumbs->push('Withdraws Request', route('admin.claim-winning.index'));
 });

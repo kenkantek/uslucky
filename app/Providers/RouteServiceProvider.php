@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Routing\Router;
+use App\Models\Transaction;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -24,9 +25,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
-
         parent::boot($router);
+        $router->model('claim_winning', Transaction::class);
     }
 
     /**
