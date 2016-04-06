@@ -266,7 +266,7 @@ $router->group([
         ]);
 
         $router->resource('request-list', 'RequestList\WithDrawController', [
-            'only' => 'index',
+            'only' => ['index', 'update'],
         ]);
 
         $router->group(['prefix' => 'games'], function () use ($router) {

@@ -27,9 +27,7 @@
 		            </td>
                     <td>{{ history.amount_total | currency }}</td>
 		            <td>	
-						<label class="label label-success" v-if="history.status.status == 'succeeded'">{{ history.status.status }}</label>
-						<label class="label label-danger" v-if="history.status.status == 'canceled'">{{ history.status.status }}</label>
-						<label class="label label-warning" v-if="history.status.status == 'pendding'">{{ history.status.status }}</label>
+						<label class="label" :class="{'label-success': history.status.status == 'succeeded', 'label-danger':history.status.status == 'canceled', 'label-warning': history.status.status == 'pendding', 'label-primary':history.status.status == 'processing'}">{{ history.status.status }}</label>
 						
 		            </td>
 		            <td v-if="history.status.status == 'pendding'"><a @click.prevent="onCancel(index,history.id)" class="link" style="opacity:0.5; background-color:#F00"	>Cancel</a></td>

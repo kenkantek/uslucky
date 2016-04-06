@@ -19,7 +19,7 @@ class PaymentListener
         $user        = $event->user;
         $transaction = $event->transaction;
 
-        Mail::send('mail.payments.claim', ['senderName' => $user->fullname, 'transaction' => $transaction, 'logo' => ['path' => 'http://www.dadafest.co.uk/wp-content/uploads/2011/12/big-lottery-fund-logo.gif', 'width' => 150, 'height' => 150]], function ($m) use ($user, $transaction) {
+        Mail::send('mail.payments.paid', ['senderName' => $user->fullname, 'transaction' => $transaction, 'logo' => ['path' => 'http://www.dadafest.co.uk/wp-content/uploads/2011/12/big-lottery-fund-logo.gif', 'width' => 150, 'height' => 150]], function ($m) use ($user, $transaction) {
             $m->from(env('MAIL_FROM'), env('MAIL_NAME'));
             $m->to($user->email, $user->fullname)->subject("US Lucky Preview Payment transaction #{$transaction->id}");
         });
