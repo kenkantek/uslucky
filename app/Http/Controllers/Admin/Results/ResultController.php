@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Results;
 use App\Http\Controllers\Controller;
 use App\Models\Award;
 use App\Models\Game;
+use App\Models\Order;
 use App\Models\Result;
 use Carbon\Carbon;
 use DB;
@@ -101,14 +102,20 @@ class ResultController extends Controller
         return view('admin.results.award-detailt', compact('result'));
     }
 
+    public function validateCal(Result $result)
+    {
+        return Order::whereDate('draw_at', '=', $result->draw_at)->whereHas('status', function ($q) {
+            $q->whereStatus('wait for purchase');
+        })->pluck('id');
+    }
+
     public function onCalculate(Result $result)
     {
         return DB::transaction(function () use ($result) {
             $final = $result->calculateWinning();
 
             $result->apply_module = true;
-            // $result->status->status = 'processing';
-            $status         = $result->status;
+            $status = $result->status;
             $status->status = 'processing';
             $result->save();
             $status->save();
