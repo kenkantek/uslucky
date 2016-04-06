@@ -9,7 +9,7 @@
 		<div class="portlet-body">
 			<div class="table-scrollable table-scrollable-borderless">
 			<div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
-			<filter-tools :data.sync="data"></filter-tools>
+			<filter-tools :data.sync="data" :status.sync="status"></filter-tools>
 				<table v-else class="table-striped table-checkable table table-hover table-bordered admin">
 					<thead>
 						<tr>
@@ -57,7 +57,7 @@
 	import laroute from '../../../laroute';
 	import COMMON from '../../../common';
 	import deferred from 'deferred';
-	import FilterTools from '../Users/Filters/FilterTools.vue';
+	import FilterTools from './Filters/FilterTools.vue';
 
 	export default{
 		data(){
@@ -67,6 +67,7 @@
 					'per_page': "10",
 				},
 				submitting: false,
+				status: 'pendding'
 			}
 		},
 
@@ -79,10 +80,19 @@
 			});
 		},
 
+		watch: {
+			'data.per_page'(val, old) {
+                (val && old) && this.reloadAsyncData();
+            },
+            'status'(val, old){
+            	(val && old) && this.reloadAsyncData();
+            }
+		},
+
 		methods: {
-			_fetchRequests(api, take = this.data.per_page) {
+			_fetchRequests(api, take = this.data.per_page, status= this.status) {
                 const def = deferred();
-                this.$http.get(api, { take }).then(res => {
+                this.$http.get(api, { take, status }).then(res => {
                     const { data } = res;
                     def.resolve(data);
                 }, res => {

@@ -29,11 +29,15 @@ class WithDrawController extends Controller
     public function getTransacsions(Request $request)
     {
         $take         = $request->take ?: 10;
-        $transactions = Transaction::with('user')->with('status')
+        $status       = $request->status;
+        $transactions = Transaction::with('user')->with('status')->whereHas('status', function ($q) use ($status) {
+            $q->where('status', $status);
+        })
             ->whereType(0)
             ->latest('updated_at')
             ->paginate($take)
-            ->appends(['take' => $take]);
+            ->appends(['take' => $take, 'status' => $status]);
+
         return $transactions;
     }
 }
