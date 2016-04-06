@@ -260,6 +260,10 @@ $router->group([
             'uses' => 'Results\ResultController@awardDetail',
         ]);
 
+        $router->resource('request-list', 'RequestList\WithDrawController', [
+            'only' => 'index',
+        ]);
+
         $router->group(['prefix' => 'games'], function () use ($router) {
             $router->resource('powerball', 'Games\PowerballController', [
                 'only' => ['index', 'update'],
