@@ -3,10 +3,12 @@
 @section('title') All Withdraws request @stop
 
 @section('content')
- <h3 class="page-title"> Manage Withdraw request
+    <h3 class="page-title"> Manage Withdraw request
         <small>All request</small>
     </h3>
+
     {!! Breadcrumbs::render('withdraw') !!}
+
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
@@ -14,6 +16,4 @@
             </div>
         </div>
     </div>
-                <!-- END PORTLET -->
-
 @stop

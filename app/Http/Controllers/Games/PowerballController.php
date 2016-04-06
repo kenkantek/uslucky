@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Games;
 
-use App\Events\Order\EmailEvent;
+use App\Events\Order\UserPurchasedTicket;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\ManageGame;
@@ -47,7 +47,7 @@ class PowerballController extends Controller
                 $res = $this->chargeFromCredit($user, $request);
             }
             //event Mail
-            event(new EmailEvent($order));
+            event(new UserPurchasedTicket($order));
             return $res === true ? $order : response(['message' => $res], 400);
         });
     }

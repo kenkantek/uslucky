@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\Order\EmailEvent;
 use App\Events\Order\OrderDelete;
 use App\Events\Order\UpdateStatusEvent;
+use App\Events\Order\UserPurchasedTicket;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -55,7 +55,7 @@ class OrderListener
             static::class . '@onUpdateStatus'
         );
         $events->listen(
-            EmailEvent::class,
+            UserPurchasedTicket::class,
             static::class . '@onOrderEmail'
         );
         $events->listen(

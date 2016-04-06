@@ -113,10 +113,10 @@
                 </ul>
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.request-list.index')) active open @endif">
-                <a href="{{route('admin.request-list.index')}}" class="nav-link nav-toggle">
+            <li class="nav-item  @if(starts_with($routeName, 'admin.claim-winning.index')) active open @endif">
+                <a href="{{route('admin.claim-winning.index')}}" class="nav-link nav-toggle">
                     <i class="icon-wallet"></i>
-                    <span class="title">Requests List</span>
+                    <span class="title">Claim Winning</span>
                     <span class="selected"></span>
                     <span class="arrow"></span>
                 </a>
