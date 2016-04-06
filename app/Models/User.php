@@ -10,25 +10,26 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasRoles;
-    use TransactionTrait;
-    use Eloquence;
+    use HasRoles, TransactionTrait, Eloquence;
 
     protected $fillable = [
         'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
     ];
 
-    protected $appends = ['image', 'fullname', 'balance', 'ticket_total', 'price_total', 'deposit_total', 'withdraw_total'];
+    protected $appends = [
+        'image', 'fullname', 'balance', 'ticket_total', 'price_total',
+        'deposit_total', 'withdraw_total', 'notification_not_read',
+    ];
 
     protected $searchableColumns = [
         'id', 'email', 'first_name', 'last_name',
     ];
 
-    protected $dates = ['birthday'];
-
     protected $hidden = [
-        'password', 'remember_token', 'avatar', 'amount', 'transactions', 'orders2',
+        'password', 'remember_token', 'avatar', 'amount',
     ];
+
+    protected $dates = ['birthday'];
 
     public function payments()
     {
@@ -50,14 +51,14 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function orders2()
-    {
-        return $this->orders();
-    }
-
     public function luckys()
     {
         return $this->hasMany(LuckyNumber::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 
     public function getFullnameAttribute()
@@ -85,6 +86,11 @@ class User extends Authenticatable
         return $this->amount ? $this->amount->amount : 0;
     }
 
+    public function getNotificationNotReadAttribute()
+    {
+        return $this->notifications()->whereIsRead(0)->count();
+    }
+
     public function updateAmount($amount = null)
     {
         if (!$amount instanceof Amount) {
@@ -105,7 +111,7 @@ class User extends Authenticatable
     {
         // return 0;
         $ticket_total = 0;
-        foreach ($this->orders2 as $key => $order) {
+        foreach ($this->orders() as $key => $order) {
             $ticket_total = $order->ticket_total + $ticket_total;
         }
         return $ticket_total;
@@ -114,7 +120,7 @@ class User extends Authenticatable
     public function getPriceTotalAttribute()
     {
         $price_total = 0;
-        foreach ($this->orders2 as $key => $order) {
+        foreach ($this->orders() as $key => $order) {
             $price_total = $order->price + $price_total;
         }
         return $price_total;
@@ -122,24 +128,23 @@ class User extends Authenticatable
 
     public function getDepositTotalAttribute()
     {
-        $deposit_total = 0;
-        foreach ($this->transactions as $key => $transaction) {
-            if ($transaction->type == 1) {
-                $deposit_total = $transaction->amount + $deposit_total;
-            }
-        }
-        return $deposit_total;
+        return $this->depositWithdrawTotal(1);
     }
 
     public function getWithdrawTotalAttribute()
     {
-        $withdraw_total = 0;
-        foreach ($this->transactions as $key => $transaction) {
-            if ($transaction->type == 0) {
-                $withdraw_total = $transaction->amount + $withdraw_total;
+        return $this->depositWithdrawTotal(0);
+    }
+
+    private function depositWithdrawTotal($type = 1)
+    {
+        $total = 0;
+        foreach ($this->transactions() as $key => $transaction) {
+            if ($transaction->type == $type) {
+                $total = $transaction->amount + $total;
             }
         }
-        return $withdraw_total;
+        return $total;
     }
 
     public function newOrUpdateLuckys($lucky = null)
@@ -149,5 +154,12 @@ class User extends Authenticatable
             $lucky->user()->associate($this);
         }
         return $lucky;
+    }
+
+    public function newNotification()
+    {
+        $notification = new Notification;
+        $notification->user()->associate($this);
+        return $notification;
     }
 }

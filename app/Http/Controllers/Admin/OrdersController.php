@@ -39,8 +39,8 @@ class OrdersController extends Controller
             $status = $request->status['status'];
 
             $orders->updateOrNewStatus($orders->status)
-                ->withStatus($status)
-                ->publish();
+            ->withStatus($status)
+            ->publish();
 
             if ($status === 'canceled') {
                 // trả tiền lại nếu là cancled
