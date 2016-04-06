@@ -224,7 +224,7 @@ $router->group([
                 'uses' => 'WinnerController@getTicketWin',
             ]);
 
-            $router->get('request-list', [
+            $router->get('claim-winning', [
                 'as'   => 'get.transactions',
                 'uses' => 'RequestList\WithDrawController@getTransacsions',
             ]);
@@ -270,7 +270,7 @@ $router->group([
             'uses' => 'Results\ResultController@awardDetail',
         ]);
 
-        $router->resource('request-list', 'RequestList\WithDrawController', [
+        $router->resource('claim-winning', 'RequestList\WithDrawController', [
             'only' => ['index', 'update'],
         ]);
 

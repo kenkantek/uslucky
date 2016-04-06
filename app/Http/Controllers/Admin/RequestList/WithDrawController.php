@@ -14,25 +14,26 @@ class WithDrawController extends Controller
         return view('admin.withdraws.index');
     }
 
-    public function update(Request $request, $id)
+    public function update($transaction, Request $request)
     {
-        $trans                 = Transaction::with('status')->find($id);
-        $trans->status->status = $request->status;
-        $user                  = $trans->user;
+        $transaction->updateOrNewStatus($transaction->status)
+            ->withStatus($request->status)
+            ->publish();
+
         if ($request->status == 'succeeded') {
-            event(new PaidRequestEvent($trans, $user));
+            event(new PaidRequestEvent($transaction, $transaction->user));
         }
-        $trans->status->save();
-        return $trans;
+        return $transaction->load('status');
     }
 
     public function getTransacsions(Request $request)
     {
         $take         = $request->take ?: 10;
         $status       = $request->status;
-        $transactions = Transaction::with('user')->with('status')->whereHas('status', function ($q) use ($status) {
-            $q->where('status', $status);
-        })
+        $transactions = Transaction::with('user')->with('status')
+            ->whereHas('status', function ($q) use ($status) {
+                $q->where('status', $status);
+            })
             ->whereType(0)
             ->latest('updated_at')
             ->paginate($take)
