@@ -56,3 +56,8 @@ Breadcrumbs::register('result.award.detail', function ($breadcrumbs, $result) {
     $breadcrumbs->parent('result.award.module');
     $breadcrumbs->push("Award Detail Result # {$result->id}", route('get.award.result.detailt', $result->id));
 });
+
+Breadcrumbs::register('withdraw', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Withdraws Request', route('admin.request-list.index'));
+});

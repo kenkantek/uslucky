@@ -113,6 +113,15 @@
                 </ul>
             </li>
 
+            <li class="nav-item  @if(starts_with($routeName, 'admin.request-list.index')) active open @endif">
+                <a href="{{route('admin.request-list.index')}}" class="nav-link nav-toggle">
+                    <i class="icon-wallet"></i>
+                    <span class="title">Requests List</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+            </li>
+
             <li class="nav-item @if(starts_with($routeName, 'admin.games.powerball.index')) active open @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-game-controller"></i>

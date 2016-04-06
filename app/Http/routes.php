@@ -224,6 +224,11 @@ $router->group([
                 'uses' => 'WinnerController@getTicketWin',
             ]);
 
+            $router->get('request-list', [
+                'as'   => 'get.transactions',
+                'uses' => 'RequestList\WithDrawController@getTransacsions',
+            ]);
+
         }); //END API
 
         $router->resource('contact', 'ContactController', [
@@ -263,6 +268,10 @@ $router->group([
         $router->get('results/award/{result}', [
             'as'   => 'get.award.result.detailt',
             'uses' => 'Results\ResultController@awardDetail',
+        ]);
+
+        $router->resource('request-list', 'RequestList\WithDrawController', [
+            'only' => ['index', 'update'],
         ]);
 
         $router->group(['prefix' => 'games'], function () use ($router) {
