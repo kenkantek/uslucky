@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\RequestList;
 
-use App\Events\Payment\UserClaimEvent;
+use App\Events\PaidRequestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class WithDrawController extends Controller
         $trans->status->status = $request->status;
         $user                  = $trans->user;
         if ($request->status == 'succeeded') {
-            event(new UserClaimEvent($user, $trans));
+            event(new PaidRequestEvent($trans, $user));
         }
         $trans->status->save();
         return $trans;
