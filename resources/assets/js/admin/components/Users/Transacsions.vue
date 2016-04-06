@@ -24,7 +24,7 @@
             		<td v-text="transaction.amount_total | currency"></td>
             		<td><span class="label" :class="{'label-success':transaction.status.status == 'succeeded', 
             		'label-warning':transaction.status.status == 'pendding', 
-            		'label-danger':transaction.status.status=='canceled'}" v-text="transaction.status.status"></span></td>
+            		'label-danger':transaction.status.status=='canceled','label-primary':transaction.status.status == 'processing'}" v-text="transaction.status.status"></span></td>
             	</tr>
             </tbody>
 		</table>
