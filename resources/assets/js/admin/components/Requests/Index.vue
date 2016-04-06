@@ -36,8 +36,6 @@
                             	<div class="btn-group btn-group-circle">
 	                                <button type="button" class="btn btn-outline green btn-sm">Appove
 	                                </button>
-	                                <button type="button" class="btn btn-outline red btn-sm">Reject
-	                                </button>
 	                            </div>
                             </td>
 						</tr>
@@ -53,6 +51,21 @@
 	import COMMON from '../../../common';
 
 	export default{
-		
+		data(){
+			return{
+				api: laroute.route('admin.get.user.transaction'),
+				data: {
+					'per_page': "10",
+				},
+			}
+		},
+
+		asyncData(resolve, reject){
+
+		},
+
+		methods:{
+
+		}
 	}
 </script>

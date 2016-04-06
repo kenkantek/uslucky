@@ -219,6 +219,11 @@ $router->group([
                 'uses' => 'WinnerController@getTicketWin',
             ]);
 
+            $router->get('request-list', [
+                'as'   => 'get.transactions',
+                'uses' => 'RequestList\WithDrawController@getTransacsions',
+            ]);
+
         }); //END API
 
         $router->resource('contact', 'ContactController', [
