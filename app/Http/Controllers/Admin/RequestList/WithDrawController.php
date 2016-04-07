@@ -23,7 +23,7 @@ class WithDrawController extends Controller
         if ($request->status == 'succeeded') {
             event(new PaidRequestEvent($transaction, $transaction->user));
         }
-        return $transaction->load('status');
+        return $transaction;
     }
 
     public function getTransacsions(Request $request)

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Notification;
 use App\Models\Transaction;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
@@ -27,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
         $router->model('claim_winning', Transaction::class);
+        $router->model('notification', Notification::class);
     }
 
     /**

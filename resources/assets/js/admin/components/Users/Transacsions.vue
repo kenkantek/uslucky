@@ -1,5 +1,5 @@
 <template>
-	<div class="table-scrollable table-scrollable-borderless">
+	<div class="table-scrollable-borderless">
 		<div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
         <filter-tools :data.sync="data"></filter-tools>
 		<table v-else class="table-striped table-checkable table table-hover table-bordered admin">
@@ -20,7 +20,11 @@
             		<td v-text="transaction.created_at"></td>
             		<td v-text="transaction.description"></td>
             		<td v-text="transaction.amount_prev | currency"></td>
-            		<td v-text="transaction.amount | currency"></td>
+            		<td>
+                        <small :class="[transaction.type == 1 ? 'text-primary' : 'text-danger']">
+                            <strong>{{ transaction.type == 1 ? '+' : '-' }}{{ transaction.amount | currency }}</strong>
+                        </small>
+                    </td>
             		<td v-text="transaction.amount_total | currency"></td>
             		<td><span class="label" :class="{'label-success':transaction.status.status == 'succeeded', 
             		'label-warning':transaction.status.status == 'pendding', 

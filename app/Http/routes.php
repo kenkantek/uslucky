@@ -41,9 +41,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     ]);
 
     $router->controller('settings', 'User\SettingsController', [
-        'getAccount' => 'settings.account',
-        'getPayment' => 'settings.payment',
-        'getWinning' => 'settings.winning',
+        'getAccount'       => 'settings.account',
+        'getPayment'       => 'settings.payment',
+        'getWinning'       => 'settings.winning',
+        'getNotifications' => 'settings.notifications',
     ]);
 
     $router->controller('account', 'User\AccountController', [
@@ -89,6 +90,19 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         $router->get('results', [
             'as'   => 'get.results',
             'uses' => 'Games\PowerballController@getResults',
+        ]);
+
+        $router->get('notifications', [
+            'as'   => 'get.notifications',
+            'uses' => 'User\NotificationController@getNotifications',
+        ]);
+        $router->put('notifications/{notification}', [
+            'as'   => 'put.isread.notification',
+            'uses' => 'User\NotificationController@putIsRead',
+        ]);
+        $router->delete('notifications/{notification}', [
+            'as'   => 'delete.notification',
+            'uses' => 'User\NotificationController@deleteNotify',
         ]);
 
     });

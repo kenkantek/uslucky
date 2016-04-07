@@ -57,4 +57,9 @@ class SettingsController extends Controller
         ]);
         return view('user.settings.winning');
     }
+
+    public function getNotifications()
+    {
+        return view('user.settings.notification');
+    }
 }
