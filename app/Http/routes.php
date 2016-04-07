@@ -41,9 +41,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     ]);
 
     $router->controller('settings', 'User\SettingsController', [
-        'getAccount' => 'settings.account',
-        'getPayment' => 'settings.payment',
-        'getWinning' => 'settings.winning',
+        'getAccount'       => 'settings.account',
+        'getPayment'       => 'settings.payment',
+        'getWinning'       => 'settings.winning',
+        'getNotifications' => 'settings.notifications',
     ]);
 
     $router->controller('account', 'User\AccountController', [

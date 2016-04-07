@@ -2,6 +2,38 @@
   color: red;
 }
 
+.notifications{
+  padding-left:0px;
+  li{
+    vertical-align: middle;
+    height: 60px;
+    padding-bottom: 10px;
+    border-bottom: 1px #e5e5e5 solid;
+    margin-bottom: 10px;
+    padding-left: 60px;
+    p{
+      height: 50px;
+      vertical-align: middle;
+      display: table-cell;
+      small{
+        color: #999;
+      }
+    }
+  }
+  .refund{
+      background: url('./images/refund.gif') no-repeat;
+    }
+  .purchased{
+    background: url('./images/purchased.png') no-repeat;
+  }
+  .paid{
+    background: url('./images/paid.png') no-repeat;
+  }
+  .reward{
+    background: url('./images/medal-512.png') no-repeat;
+  }
+}
+
 .trans{
   th{
     background-color:rgba(205, 94, 86, 0.9);
