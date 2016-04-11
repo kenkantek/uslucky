@@ -13,6 +13,7 @@
     padding-left: 60px;
     position: relative;
     background-repeat: no-repeat;
+
     &.unread{
       background-color: #EFEFEF;
     }
@@ -42,18 +43,6 @@
     }
   }
   .refund{
-<<<<<<< HEAD
-      background: url('./images/refund.gif') no-repeat;
-    }
-  .purchased{
-    background: url('./images/purchased.png') no-repeat;
-  }
-  .paid{
-    background: url('./images/paid.png') no-repeat;
-  }
-  .reward{
-    background: url('./images/medal-512.png') no-repeat;
-=======
       background-image: url('./images/refund.gif');
     }
   .purchased{
@@ -64,7 +53,6 @@
   }
   .reward{
     background-image: url('./images/medal-512.png');
->>>>>>> 0283225c80ce78f01e175ff29c105ff6d06423a2
   }
 }
 

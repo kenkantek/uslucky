@@ -6,7 +6,11 @@
             {{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%A, %B %d')}} Jackpot:
         </div>
         <div class="title2">
-            {{niceNumber($powerball['amount'])}}
+            @if($powerball['amount'] == "Not Published")
+                {{$powerball['amount']}}
+            @else
+                {{niceNumber($powerball['amount'])}}
+            @endif
         </div>
         @if($result)
         <div class="col-md-6 left">
@@ -46,9 +50,20 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6">
                     <div class="game">
-                        <h3>Powerball <br><span style="text-transform: capitalize;">${{niceNumber($powerball['amount'])}}</span></h3>
-
-                        <p>Cash Option: ${{niceNumber($powerball['cash_option'])}}</p>
+                        <h3>Powerball <br><span style="text-transform: capitalize;">
+                            @if($powerball['amount'] == "Not Published")
+                                {{$powerball['amount']}}
+                            @else
+                                ${{niceNumber($powerball['amount'])}}
+                            @endif
+                            </span></h3>
+                        <p>Cash Option:
+                            @if($powerball['amount'] == "Not Published")
+                                {{$powerball['amount']}}
+                            @else
+                                ${{niceNumber($powerball['cash_option'])}}
+                            @endif
+                        </p>
 
                         <p>NEXT DRAW: <span>{{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%B %d')}}</span></p>
                         <ul class="list">
