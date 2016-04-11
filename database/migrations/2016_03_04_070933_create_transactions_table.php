@@ -16,9 +16,9 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->boolean('type')->default(0); //0: -    1: +
-            $table->decimal('amount', 19, 4)->default(0);
-            $table->decimal('amount_prev', 19, 4)->default(0);
-            $table->decimal('amount_total', 19, 4)->default(0);
+            $table->decimal('amount', 19, 4)->unsigned()->default(0);
+            $table->decimal('amount_prev', 19, 4)->unsigned()->default(0);
+            $table->decimal('amount_total', 19, 4)->unsigned()->default(0);
             $table->morphs('transactionable');
             $table->text('description')->nullable();
             $table->timestamps();

@@ -92,6 +92,19 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'uses' => 'Games\PowerballController@getResults',
         ]);
 
+        $router->get('notifications', [
+            'as'   => 'get.notifications',
+            'uses' => 'User\NotificationController@getNotifications',
+        ]);
+        $router->put('notifications/{notification}', [
+            'as'   => 'put.isread.notification',
+            'uses' => 'User\NotificationController@putIsRead',
+        ]);
+        $router->delete('notifications/{notification}', [
+            'as'   => 'delete.notification',
+            'uses' => 'User\NotificationController@deleteNotify',
+        ]);
+
     });
     $router->resource('orders', 'User\OrderController', ['only' => [
         'index', 'show',

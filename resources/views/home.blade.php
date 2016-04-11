@@ -1,49 +1,54 @@
 @extends('layouts.master')
-@section('extends_content')
-<!--homepage-->
-            <div class="unit">
-                <div class="title1">
-                    {{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%A, %B %d')}} Jackpot:
-                </div>
-                <div class="title2">
-                    {{nice_number($powerball['amount'])}}
-                </div>
-                <div class="col-md-6 left">
-                    <p>
-                        <time datetime="{{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))}}">{{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))->formatLocalized('%A, %B %d')}}</time>
-                        &nbsp;|&nbsp;Winning Numbers:
-                    </p>
-                </div>
-                <div class="col-md-6 right">
-                    <ul class="list">
-                        @if($result)
-                            @forelse($result->numbers as $number)
-                                <li>{{$number}}</li>
-                            @empty
-                                <li>No result</li>
-                            @endforelse
-                                <li>{{$result->ball}}</li>
-                        @else
-                            <li>No result</li>
-                        @endif
-                    </ul>
-                    <div class="ticket">
-                        <a href="{{route('front::get.winning.numbers')}}">see current winning <br>ticket results</a>
-                    </div>
-                </div>
 
+@section('extends_content')
+    <div class="unit">
+        <div class="title1">
+            {{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%A, %B %d')}} Jackpot:
+        </div>
+        <div class="title2">
+            {{niceNumber($powerball['amount'])}}
+        </div>
+        @if($result)
+        <div class="col-md-6 left">
+            <p>
+                <time datetime="{{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))}}">
+                    {{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))->formatLocalized('%A, %B %d')}}
+                </time>
+                &nbsp;|&nbsp;Winning Numbers:
+            </p>
+        </div>
+        @endif
+        <div class="col-md-6 right">
+            <ul class="list">
+                @if($result)
+                    @forelse($result->numbers as $number)
+                        <li>{{$number}}</li>
+                    @empty
+                        <li>No</li>
+                    @endforelse
+                        <li>{{$result->ball}}</li>
+                @endif
+            </ul>
+            @if($result)
+            <div class="ticket">
+                <a href="{{route('front::get.winning.numbers')}}">see current winning <br>ticket results</a>
             </div>
-            <!--homepage-->
+            @endif
+        </div>
+
+    </div>
+
 @stop
+
 @section('content')
 <div class="bg2 p29">
         <div class="container">
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6">
                     <div class="game">
-                        <h3>Powerball <br><span style="text-transform: capitalize;">${{nice_number($powerball['amount'])}}</span></h3>
+                        <h3>Powerball <br><span style="text-transform: capitalize;">${{niceNumber($powerball['amount'])}}</span></h3>
 
-                        <p>Cash Option: ${{nice_number($powerball['cash_option'])}}</p>
+                        <p>Cash Option: ${{niceNumber($powerball['cash_option'])}}</p>
 
                         <p>NEXT DRAW: <span>{{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%B %d')}}</span></p>
                         <ul class="list">
@@ -51,11 +56,11 @@
                                 @forelse($result->numbers as $number)
                                     <li>{{$number}}</li>
                                 @empty
-                                    <li>No result</li>
+                                    <li>No</li>
                                 @endforelse
                                     <li>{{$result->ball}}</li>
                             @else
-                                <li>No result</li>
+                                <li>No</li>
                             @endif
                         </ul>
                         <p>

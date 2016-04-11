@@ -4,13 +4,34 @@
 
 .notifications{
   padding-left:0px;
-  li{
+  &>li{
     vertical-align: middle;
     height: 60px;
     padding-bottom: 10px;
     border-bottom: 1px #e5e5e5 solid;
     margin-bottom: 10px;
     padding-left: 60px;
+    position: relative;
+    background-repeat: no-repeat;
+    &.unread{
+      background-color: #EFEFEF;
+    }
+
+    &>.controls {
+      position:absolute;
+      top: 5px;
+      right: 5px;
+
+      span{
+        display: block;
+        cursor: pointer;
+        opacity: 0.5;
+        margin-bottom: 6px;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
     p{
       height: 50px;
       vertical-align: middle;
@@ -21,6 +42,7 @@
     }
   }
   .refund{
+<<<<<<< HEAD
       background: url('./images/refund.gif') no-repeat;
     }
   .purchased{
@@ -31,6 +53,18 @@
   }
   .reward{
     background: url('./images/medal-512.png') no-repeat;
+=======
+      background-image: url('./images/refund.gif');
+    }
+  .purchased{
+    background-image: url('./images/purchased.png');
+  }
+  .paid{
+    background-image: url('./images/paid.png');
+  }
+  .reward{
+    background-image: url('./images/medal-512.png');
+>>>>>>> 0283225c80ce78f01e175ff29c105ff6d06423a2
   }
 }
 
@@ -50,17 +84,14 @@
   border-color: #df797b;
   .navbar-nav {
     li {
-      -webkit-transition: 0.5s;
       transition: 0.5s;
       a {
         color: #eae6e3;
         padding-left: 30px;
         padding-right: 30px;
-        -webkit-transition: 0.5s;
         transition: 0.5s;
         &:hover {
           color: #dc5e61;
-          -webkit-transition: 1s;
           transition: 1s;
         }
         .caret{

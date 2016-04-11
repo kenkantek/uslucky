@@ -44,7 +44,8 @@
 			    </div>
 			</div>
 		</div>
-		<button style="margin:0; width:100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
+		<button style="margin:0; width:100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">
+            <i class="fa fa-circle-o-notch fa-spin" v-show="loading"></i> Load more {{ numberMore }} record</button>
 		<div v-show="nextPageUrl" style="width:100%; text-align:center; margin-top:10px">
 			Show {{ histories.length }} of {{ totalHistories }} record.
 		</div>
@@ -83,7 +84,7 @@ export default {
         methods: {
         	_fetchHistory(api) {
         		this.loading = true;
-        		let def = deferred();
+        		const def = deferred();
         		this.$http.get(api).then(res => {
         		    const { data } = res;
         		    this.loading = false;

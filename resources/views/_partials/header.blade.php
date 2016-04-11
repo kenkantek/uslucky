@@ -38,7 +38,7 @@
                     </div>
 					<ul class="dropdown-menu">
                     	<li>
-                            <a href="#">
+                            <a href="{{ route('front::settings.notifications') }}">
                                 <i class="fa fa-envelope"></i> Notifications
                                 <strong class="number-notify">
                                     {{ $auth->notification_not_read }}

@@ -73,7 +73,7 @@
                 <table class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
-                            <th>Number</th>
+                            <th> Number </th>
                             <th> Status </th>
                             <th> Prize </th>
                             <th> Reward </th>
@@ -181,7 +181,7 @@ export default {
     },
 
     computed: {
-        timeForReload(){
+        timeForReload() {
             return Math.random(this.reload);
         }
     },
@@ -210,11 +210,12 @@ export default {
             return def.promise;
         },
 
-        onChangeStatus(){
+        onChangeStatus() {
             this.submiting = true;
             this.$http.put(laroute.route('admin.orders.update', {orders: this.order.id}), this.order).then(res => {
-                this.reload = true;
+                this.submiting = false;
             }, (res) => {
+                this.submiting = false;
                 COMMON.alertError();
             });
         },
@@ -224,7 +225,7 @@ export default {
             this.$nextTick(() => {
                 this.dropzone = new Dropzone("#dropzone", {
                     url: laroute.route('admin.post.files.order', { order: this.order.id }),
-                    previewTemplate : '<div style="display:none"></div>',
+                    previewTemplate : '<div class="display:none"></div>',
                     params: { _token },
                     maxFilesize: 10,
                     acceptedFiles: 'image/*',

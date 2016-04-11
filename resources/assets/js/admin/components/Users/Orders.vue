@@ -1,5 +1,5 @@
 <template>
-	<div class="table-scrollable table-scrollable-borderless">
+	<div class="table-scrollable-borderless">
 		<div v-if="$loadingAsyncData" class="move-top-10"><loading></loading></div>
         <filter-tools :data.sync="data"></filter-tools>
 		<table v-else class="table-striped table-checkable table table-hover table-bordered admin">

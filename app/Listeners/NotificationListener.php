@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\AwardEvent;
 use App\Events\Order\UpdateStatusEvent;
 use App\Events\PaidRequestEvent;
+use App\Models\User;
 
 class NotificationListener
 {
@@ -12,42 +13,31 @@ class NotificationListener
     {
         $order = $event->order;
         if ($order->status->status == 'purchased') {
-            $notify = $order->user->newNotification()
-                ->withSubject('purchased')
-                ->withBody('Your order #' . $order->id . ' at ' . $order->created_at . ' was purchased. Please check by Your order menu.')
-                ->withObjectType($order)
-                ->publish();
+            $subject = 'purchased';
+            $body    = "Your order #{$order->id} at  {$order->created_at}  was purchased. Please check by Your order menu.";
+
         } else if ($order->status->status == 'canceled') {
-            $notify = $order->user->newNotification()
-                ->withSubject('canceled')
-                ->withBody('Because your order #' . $order->id . ' at ' . $order->created_at . ' was canceled. We refund to you. Total amount: $' . number_format($order->price) . '.')
-                ->withObjectType($order)
-                ->publish();
+            $subject = 'canceled';
+            $body    = "Because your order #{$order->id} at {$order->created_at} was canceled. We refund to you. Total amount: $ " . number_format($order->price) . " .";
         }
+
+        isset($subject) && $order->user->makeNotification($subject, $body, $order);
     }
 
     public function onClaimRequest($event)
     {
-        $trans  = $event->trans;
-        $notify = $trans->user->newNotification()
-            ->withSubject('claimrequest')
-            ->withBody('Your claim request #' . $trans->id . ' at ' . $trans->created_at . ' was paid. Total amount: $' . number_format($trans->amount) . '.')
-            ->withObjectType($trans)
-            ->publish();
+        $trans = $event->trans;
+        $body  = "Your claim request #{$trans->id} at {$trans->created_at} was paid. Total amount: $ " . number_format($trans->amount) . ".";
+
+        $trans->user->makeNotification('claimrequest', $body, $trans);
     }
 
     public function onWinner($event)
     {
-        $winner = $event->ticket;
-        $number = "";
-        foreach ($winner->numbers as $value) {
-            $number = $number . $value . " ";
-        }
-        $notify = $winner->order->user->newNotification()
-            ->withSubject('award')
-            ->withBody('You are WINNER with ticket number: <b>' . $number . ' <span style="color: red">' . $winner->ball . '</span></b>. Prize: ' . $winner->level->label . ' with $' . number_format($event->prizeMoney) . '.')
-            ->withObjectType($winner)
-            ->publish();
+        $ticket = $event->ticket;
+        $body   = "You are WINNER with ticket number: <strong> " . join(" ", $ticket->numbers) . "  <span style='color: red'>{$ticket->ball}</span></strong>. Prize: {$ticket->level->label} with $ " . number_format($event->prizeMoney) . " .";
+
+        $ticket->order->user->makeNotification('award', $body, $ticket);
     }
 
     public function subscribe($events)

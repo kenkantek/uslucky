@@ -178,11 +178,9 @@ class Result extends Model
         }
         $ticket->level     = Level::whereLevel($prize)->first();
         $ticket->add_award = $prize === 1 ? $this->annuity : 0;
-        if ($prize) {
-            $this->updateStatusTicket($ticket, 'won');
-        } else {
-            $this->updateStatusTicket($ticket);
-        }
+
+        $this->updateStatusTicket($ticket, $prize ? 'won' : 'fail');
+
         return $prize ? $ticket : false;
     }
 

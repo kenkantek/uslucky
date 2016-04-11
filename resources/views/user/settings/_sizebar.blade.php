@@ -16,7 +16,9 @@
     </li>
     <li class="divider"></li>
 
-    <li><a href="#">Notifications <span class="badge pull-right"> {{ $auth->notification_not_read }} </span></a></li>
+    <li class="@if($routeName === 'front::settings.notifications') current @endif">
+        <a href="{{ route('front::settings.notifications') }}">Notifications <span class="badge pull-right"> {{ $auth->notification_not_read }} </span></a>
+    </li>
     <li class="divider"></li>
 
     <li class="hidden @if($routeName === 'front::settings.payment') current @endif">

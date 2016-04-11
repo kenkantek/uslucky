@@ -162,4 +162,13 @@ class User extends Authenticatable
         $notification->user()->associate($this);
         return $notification;
     }
+
+    public function makeNotification($subject, $body, $object)
+    {
+        $this->newNotification()
+            ->withSubject($subject)
+            ->withBody($body)
+            ->withObjectType($object)
+            ->publish();
+    }
 }

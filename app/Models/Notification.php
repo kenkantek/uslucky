@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
+    protected $appends = ['url'];
 
     public function user()
     {
@@ -49,5 +51,19 @@ class Notification extends Model
     {
         $this->is_read = true;
         return $this->publish();
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->diffForHumans();
+    }
+
+    public function getUrlAttribute()
+    {
+        $object = $this->notificationable()->first();
+        if ($object instanceof Order) {
+            return $object->url;
+        }
+        return 'javascript:;';
     }
 }
