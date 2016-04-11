@@ -41,12 +41,12 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td height="10" align="left">Please follow the link below to verify your email address
-    {{ route('front::register.verify', $event->active_code) }}</td>
+    <a href="{{ route('front::register.verify', $event->active_code) }}">{{ route('front::register.verify', $event->active_code) }}</a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left">
                                                                         <p>Welcome to a new world! Get ready to play the most exciting lotteries on the planet!
-                                                                            <br>Your email to login site is as follows: {{$event->email}}
+                                                                            <br>Your email to login site is as follows: <a href="mailto?{{$event->email}}">{{$event->email}}</a>
                                                                             <br>
                                                                         </p>
                                                                     </td>
