@@ -307,21 +307,48 @@ button {
       <th width="10%">#</th>
       <th>Number</th>
     </tr>
-    @foreach($order->tickets as $key => $ticket)
+    @foreach($order->tickets as $index => $ticket)
+    <?php
+++$index;
+$page       = ceil($index / 10);
+$total_page = ceil(count($order->tickets) / 10);
+?>
     <tr>
-      <td align="center">{{$ticket->id}}</td>
+      <td align="center">{{$index}}</td>
       <td align="center">
           <ul class="list">
           @foreach($ticket->numbers as $key => $number)
               <li>{{$number}}</li>
           @endforeach
-                <li class="powerball">{{$ticket->ball}}</li>
+                <li class="powerball">{{$ticket->ball  }}</li>
           </ul>
       </td>
     </tr>
+    @if($index % 10 == 0)
+        </table>
+        <div class="footer-right"> US, {{date("D - m - Y") . " Page ".$page." of ".$total_page }} </div>
+        </div>
+        <div id="page" class="page">
+        <div class="header">
+        <div class="logo"><img src="{{asset('css/images/logo.png')}}"/></div>
+    </div><br>
+    <div class="title">
+        ORDER DETAILS #{{$order->id}}
+        <br/>
+        -------oOo-------
+        <br>
+        {{$order->user->fullname}}<br>
+        {{$order->user->email}}
+  </div>
+  <table class="TableData">
+  <tr>
+      <th width="10%">#</th>
+      <th>Number</th>
+    </tr>
+    @endif
     @endforeach
   </table>
-  <div class="footer-right"> US, {{date("D - m - Y")}} </div>
+  <div class="footer-right"> US, {{date("D - m - Y") . " Page ".$page." of ".$total_page}} </div>
 </div>
 @endforeach
 </body>
