@@ -99,7 +99,9 @@
             
         </article>
     </section>
+    <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog">
     <form-modal v-if="submiting" :submiting.sync="submiting" :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
+    </div>
 </template>
 
 
