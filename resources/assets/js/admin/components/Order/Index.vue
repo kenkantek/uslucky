@@ -54,7 +54,10 @@
                             <td>
                                 <span 
                                     class="label"
-                                    :class="[order.status.status == 'wait for purchase' ? 'label-danger' : 'label-success']"
+                                    :class="{
+                                        'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
+                                        'label-danger': order.status.status == 'Order Placed' || order.status.status == 'Pending Purchase'
+                                    }"
                                 >{{ order.status.status }}
                                 </span>
                             </td>

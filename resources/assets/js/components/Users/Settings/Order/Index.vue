@@ -27,7 +27,10 @@
                     <td class="text-center">
                         <span 
                             class="label"
-                            :class="[order.status.status === 'purchased' ? 'label-success' : 'label-danger']"
+                            :class="{
+                                'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
+                                'label-danger': order.status.status == 'Order Placed' || order.status.status == 'Pending Purchase'
+                            }"
                         >{{order.status.status}}</span>
                     </td>
                     <td class="text-center"><a class="link" :href="order.url">View details</a></td>

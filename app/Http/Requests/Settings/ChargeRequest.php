@@ -30,7 +30,7 @@ class ChargeRequest extends Request
             'month'       => 'required',
             'year'        => 'required',
             'cvc'         => 'required|digits:3',
-            'description' => 'required|max:255|min:50',
+            'description' => 'required|max:255',
         ];
     }
 

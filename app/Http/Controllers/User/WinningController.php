@@ -91,7 +91,7 @@ class WinningController extends Controller
         $user        = $this->user;
         $user_amount = $user->amount;
         $amount_prev = $user_amount ? $user_amount->amount : 0;
-        if ($amount_prev <= $request->amount) {
+        if ($amount_prev < $request->amount) {
             return response(['message' => "Your currenttly $amount_prev is less than {$request->amount}."], 400);
         }
 

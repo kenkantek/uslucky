@@ -37,7 +37,10 @@
                         <dd>
                             <span 
                                 class="label"
-                                :class="[order.status.status == 'purchased' ? 'label-success' : 'label-danger']"
+                                :class="{
+                                    'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
+                                    'label-danger': order.status.status == 'Order Placed' || order.status.status == 'Pending Purchase'
+                                }"
                             >{{ order.status.status }}
                             </span>
                         </dd>
@@ -54,9 +57,10 @@
                                 v-model="order.status.status" 
                                 class="form-control status"
                             >
-                                <option value="canceled">Cancel</option>
-                                <option v-if="order.status.status != 'canceled'" value="purchased">Purchased</option>
-                                <option v-if="order.status.status != 'canceled'" value="wait for purchase">Waiting purchase</option>
+                                <option v-if="statusShowBtn.canceled" value="canceled">Cancel</option>
+                                <option v-if="statusShowBtn.order_placed" value="Order Placed">Order Placed</option>
+                                <option v-if="statusShowBtn.pending_purchase" value="Pending Purchase">Pending Purchase</option>
+                                <option v-if="statusShowBtn.purchased" value="purchased">Purchased</option>
                             </select>
                             <div v-if="submiting"><loading></loading></div>
                         </div>
@@ -115,9 +119,9 @@
                             <input type="text" class="form-control image-preview-filename disabled" readonly>
                             <span class="input-group-btn">
                                 <div class="btn image-preview-input" :class="{uploading: uploading}">
-                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                    <i class="fa fa-circle-o-notch fa-spin" v-show="uploading"></i> 
+                                    <span v-else class="glyphicon glyphicon-folder-open"></span>
                                     <span class="image-preview-input-title">
-                                        <i class="fa fa-circle-o-notch fa-spin" v-show="uploading"></i> 
                                         {{ uploading ? 'Uploading...' : 'Upload file' }}
                                     </span>
                                     <input type="file" name="file" />
@@ -152,8 +156,9 @@ import laroute from '../../../laroute';
 import COMMON from '../../../common';
 import deferred from 'deferred';
 import Dropzone from 'dropzone';
-Dropzone.autoDiscover = false;
+import _ from 'lodash';
 
+Dropzone.autoDiscover = false;
 export default {
     data() {
             return {
@@ -183,6 +188,27 @@ export default {
     computed: {
         timeForReload() {
             return Math.random(this.reload);
+        },
+        statusShowBtn() {
+            const status =  {
+                'order_placed': false,
+                'pending_purchase': false,
+                purchased: false,
+                canceled: false
+            };
+            const s = this.order.status.status;
+            if(s === 'canceled') {
+                status.canceled = true;
+            } else if(s === 'Pending Purchase') {
+                status.pending_purchase = true;
+                status.purchased = true;
+            } else if(s === 'purchased'){
+                status.purchased = true;
+            } else {
+                //true All
+                return _.mapValues(status, (s) => true);
+            }
+            return status;
         }
     },
 

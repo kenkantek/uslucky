@@ -25,14 +25,14 @@ class ClaimRequest extends Request
     {
         return [
             'amount'      => 'bail|required|numeric|min:' . env('MINIMUM_AMOUNT'),
-            'description' => 'bail|required|max:255|min:50',
+            'description' => 'bail|required|max:255',
         ];
     }
 
     public function messages()
     {
         return [
-            'amount.min' => 'Minimum one claim $25',
+            'amount.min' => 'Minimum one claim $' . env('MINIMUM_AMOUNT'),
         ];
     }
 }

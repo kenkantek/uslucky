@@ -24,9 +24,17 @@
             		<td v-text="order.created_at"></td>
             		<td v-text="order.draw_at"></td>
                     <td v-text="order.description"></td>
-            		<td><span class="label" :class="{'label-success':order.status.status == 'purchased', 
-            		'label-warning':order.status.status == 'wait for purchase', 
-            		'label-danger':order.status.status=='canceled'}" v-text="order.status.status"></span></td>
+            		<td>
+                    <span 
+                        class="label" 
+                        :class="{
+                            'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
+                            'label-danger': order.status.status == 'Order Placed' || order.status.status == 'Pending Purchase'
+                        }"
+                        v-text="order.status.status"
+                    >
+                    </span>
+                    </td>
                     <td><a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a></td>
             	</tr>
             </tbody>

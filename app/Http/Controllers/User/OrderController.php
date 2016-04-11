@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\Order\UpdateStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use DB;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -40,5 +42,20 @@ class OrderController extends Controller
         }, 'status', 'user', 'images' => function ($q) {
             $q->latest('id');
         }]);
+    }
+
+    public function cancleOrder(Order $order)
+    {
+        return DB::transaction(function () use ($order) {
+
+            $order->updateOrNewStatus($order->status)
+            ->withStatus('canceled')
+            ->publish();
+
+            $order->refundOrder();
+            event(new UpdateStatusEvent($order));
+            return "Account Refund \${$order->price}";
+        });
+
     }
 }

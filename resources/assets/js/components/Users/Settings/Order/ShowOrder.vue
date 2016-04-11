@@ -6,28 +6,41 @@
         <div class="row">
             <div class="col-xs-6">
                 <dl class="dl-horizontal">
+                    <dt>Game type</dt>
+                    <dd>{{order.game_name}}</dd>
+
                     <dt>Bought date</dt>
                     <dd>{{order.created_at}}</dd>
+
                     <dt>Draw date</dt>
                     <dd>{{order.draw_at}}</dd>
+
                     <dt>Description</dt>
-                    <dd>{{order.description}}</dd>
+                    <dd>{{order.description.trim() ? order.description : 'N/A'}}</dd>
                 </dl>
             </div>
             <div class="col-xs-6">
                 <dl class="dl-horizontal">
-                    <dt>Game type</dt>
-                    <dd>{{order.game_name}}</dd>
                     <dt>Extra</dt>
                     <dd><span class="label label-info"> {{ order.extra ? 'Yes' : 'No' }} </span></dd>
+
                     <dt>Price total</dt>
                     <dd>{{order.price | currency}}</dd>
+
                     <dt>Status</dt>
                     <dd>
                         <span 
                             class="label"
-                            :class="[order.status.status === 'purchased' ? 'label-success' : 'label-danger']"
+                            :class="{
+                                'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
+                                'label-danger': order.status.status == 'Order Placed' || order.status.status == 'Pending Purchase'
+                            }"
                         >{{order.status.status}}</span>
+                    </dd>
+
+                    <dt></dt>
+                    <dd class="margin-top-10" v-if="order.status.status == 'Order Placed'">
+                        <button class="btn btn-primary" @click="onCancle">Cancle</button>
                     </dd>
                 </dl>
             </div>
@@ -118,6 +131,28 @@ export default {
                 const extra = award.level.level == 1 ? false : award.ticket.order.extra;
                 return extra ? prize * this.result.multiplier : prize;
             },
+
+            onCancle() {
+                swal({
+                    title: "Are you sure?",
+                    text: "Cancle order",
+                    type: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, cancle it!",
+                    cancelButtonText: "No, cancel plx!",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                }, () => {
+                    this.$http.put(laroute.route('front::api::put.order.cancel', {order: this.order.id})).then(res => {
+                        this.order.status.status = 'canceled';
+                        swal.close();
+                        toastr.success(res.data);
+                    }, res => {
+                        BOX.alertError();
+                    });
+                });
+            }
         },
 }
 </script>

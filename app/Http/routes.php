@@ -87,6 +87,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'uses' => 'User\OrderController@getOrder',
         ]);
 
+        $router->put('orders/{order}/cancel', [
+            'as'   => 'put.order.cancel',
+            'uses' => 'User\OrderController@cancleOrder',
+        ]);
+
         $router->get('results', [
             'as'   => 'get.results',
             'uses' => 'Games\PowerballController@getResults',
