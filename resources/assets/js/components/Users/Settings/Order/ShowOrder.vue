@@ -128,7 +128,7 @@ export default {
 
             prizeMoney(award) {
                 let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-                const extra = award.level.level == 1 ? false : award.ticket.order.extra;
+                const extra = award.level.level == 1 ? false : this.order.extra;
                 return extra ? prize * this.result.multiplier : prize;
             },
 

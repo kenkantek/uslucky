@@ -103,7 +103,7 @@ class Order extends Model
 
     public function getTicketTotalAttribute()
     {
-        return count($this->tickets);
+        return count($this->tickets());
     }
 
     public function getPriceAttribute()
@@ -133,7 +133,7 @@ class Order extends Model
 
     public function getGameNameAttribute()
     {
-        return $this->game->name;
+        return $this->game()->first()->name;
     }
 
     public function refundOrder()

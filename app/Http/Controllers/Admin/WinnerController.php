@@ -53,6 +53,6 @@ class WinnerController extends Controller
             });
         })->whereHas('award', function ($q) use ($result_id) {
             $q->whereResultId($result_id);
-        })->get();
+        })->with('order', 'award.level')->get();
     }
 }

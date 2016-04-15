@@ -220,10 +220,10 @@ export default {
 
     methods: {
         prizeMoney(award) {
-                let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-                const extra = award.level.level == 1 ? false : award.ticket.order.extra;
-                return extra ? prize * this.result.multiplier : prize;
-            },
+            let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
+            const extra = award.level.level == 1 ? false : this.order.extra;
+            return extra ? prize * this.result.multiplier : prize;
+        },
         _fetchOrder(api) {
             this.loading = true;
             let def = deferred();
