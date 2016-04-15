@@ -18,7 +18,7 @@ class Order extends Model
         'user.email', 'user.last_name', 'user.first_name',
     ];
     protected $dates   = ['created_at', 'updated_at', 'draw_at'];
-    protected $appends = ['ticket_total', 'price', 'url', 'game_name'];
+    protected $appends = ['draw_date', 'ticket_total', 'price', 'url', 'game_name', 'multiplier'];
 
     public function user()
     {
@@ -53,9 +53,7 @@ class Order extends Model
     }
     public function withDrawAt($draw_at)
     {
-        $d = explode('/', $draw_at);
-        (count($d) !== 3) && abort(500, 'Something bad happened');
-        $this->draw_at = Carbon::create($d[2], $d[0], $d[1], ManageGame::getConfig(1)->toArray()['hours_before_close']);
+        $this->draw_at = Carbon::parse($draw_at);
         return $this;
     }
     public function withDescription($description)
@@ -103,7 +101,7 @@ class Order extends Model
 
     public function getTicketTotalAttribute()
     {
-        return count($this->tickets);
+        return $this->tickets()->count();
     }
 
     public function getPriceAttribute()
@@ -126,14 +124,26 @@ class Order extends Model
         return Carbon::parse($date)->toFormattedDateString();
     }
 
-    public function getDrawAtAttribute($date)
+    public function getDrawDateAttribute()
     {
-        return Carbon::parse($date)->toFormattedDateString();
+        return Carbon::parse($this->draw_at)->toFormattedDateString();
+    }
+
+    public function getMultiplierAttribute()
+    {
+        $result = Result::whereGameId($this->game_id)
+            ->whereDate('draw_at', '=', $this->draw_at)->first();
+        return $result ? $result->multiplier : null;
     }
 
     public function getGameNameAttribute()
     {
-        return $this->game->name;
+        return $this->game()->first()->name;
+    }
+
+    public function getDescriptionAttribute($data)
+    {
+        return trim($data) ? $data : 'N/A';
     }
 
     public function refundOrder()

@@ -15,10 +15,10 @@
                         <dd>{{order.created_at}}</dd>
 
                         <dt>Draw date:</dt>
-                        <dd>{{order.draw_at}}</dd>
+                        <dd>{{order.draw_date}}</dd>
 
                         <dt>Description:</dt>
-                        <dd>{{order.description}}</dd>
+                        <dd>{{ order.description }}</dd>
                     </dl>
                 </div>
 
@@ -92,14 +92,24 @@
                                 </ul>
                             </td>
                             <td>
-                                <label class="label label-success" v-if="ticket.status.status == 'won'">{{ ticket.status.status }}</label>
-                                <label class="label label-danger" v-if="ticket.status.status == 'fail'">{{ ticket.status.status }}</label>
-                                <label class="label label-warning" v-if="ticket.status.status == 'waiting'">{{ ticket.status.status }}</label>
+                                <label class="label"
+                                    :class="{
+                                        'label-success': ticket.status.status == 'won',
+                                        'label-danger': ticket.status.status == 'fail',
+                                        'label-warning': ticket.status.status == 'waiting'
+                                    }"
+                                >
+                                    {{ ticket.status.status }}
+                                </label>
                             </td>
-                            <td v-if="ticket.award">{{ticket.award.level.label}}</td>
-                            <td v-else>N/A</td>
-                            <td v-if="ticket.award">{{ prizeMoney(ticket.award) | currency }}</td>
-                            <td v-else>N/A</td>
+                            <td>
+                                <span v-if="ticket.award">{{ticket.award.level.label}}</span>
+                                <span v-else>N/A</span>
+                            </td>
+                            <td>
+                                <span v-if="ticket.award">{{ prizeMoney(ticket.award) | currency }}</span>
+                                <span v-else>N/A</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -161,14 +171,14 @@ import _ from 'lodash';
 Dropzone.autoDiscover = false;
 export default {
     data() {
-            return {
-                order: {},
-                reload: false,
-                submiting: false,
-                dropzone: null,
-                uploading: false
-            }
-        },
+        return {
+            order: {},
+            reload: false,
+            submiting: false,
+            dropzone: null,
+            uploading: false
+        }
+    },
 
     asyncData(resolve, reject) {
         this.submiting = false;
@@ -220,10 +230,10 @@ export default {
 
     methods: {
         prizeMoney(award) {
-                let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-                const extra = award.level.level == 1 ? false : award.ticket.order.extra;
-                return extra ? prize * this.result.multiplier : prize;
-            },
+            let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
+            const extra = award.level.level == 1 ? false : this.order.extra;
+            return extra ? prize * this.order.multiplier : prize;
+        },
         _fetchOrder(api) {
             this.loading = true;
             let def = deferred();

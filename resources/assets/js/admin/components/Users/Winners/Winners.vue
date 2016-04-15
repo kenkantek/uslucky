@@ -13,11 +13,9 @@
                 <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                     <thead>
                         <tr class="uppercase">
-                            <th>
-                                No.
-                            </th>
+                            <th> No. </th>
                             <th colspan="2"> MEMBER </th>
-                            <th> Ticket number </th>
+                            <th width="60%"> Ticket number </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,12 +23,11 @@
                             <td>
                                 #{{$index+1}}
                             </td>
-                            <td class="fit">
-                                <img class="user-pic" :src="user.image" width="30px"> </td>
-                            <td>
+                            <td colspan="2">
+                                <img class="user-pic" :src="user.image" width="30px"> 
                                 <a :href="user.id | linkShow" class="primary-link">{{user.fullname}}</a>
                             </td>
-                            <td> 
+                            <td width="60%"> 
                                 <win-tickets :user="user.id" :game="game_id" :result="drawAt"></win-tickets>
                             </td>
                         </tr>

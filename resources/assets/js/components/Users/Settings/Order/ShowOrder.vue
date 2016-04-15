@@ -13,10 +13,10 @@
                     <dd>{{order.created_at}}</dd>
 
                     <dt>Draw date</dt>
-                    <dd>{{order.draw_at}}</dd>
+                    <dd>{{order.draw_date}}</dd>
 
                     <dt>Description</dt>
-                    <dd>{{order.description.trim() ? order.description : 'N/A'}}</dd>
+                    <dd>{{ order.description }}</dd>
                 </dl>
             </div>
             <div class="col-xs-6">
@@ -65,9 +65,15 @@
                         </ul>
                     </td>
                     <td>
-                        <label class="label label-success" v-if="ticket.status.status == 'won'">{{ ticket.status.status }}</label>
-                        <label class="label label-danger" v-if="ticket.status.status == 'fail'">{{ ticket.status.status }}</label>
-                        <label class="label label-warning" v-if="ticket.status.status == 'waiting'">{{ ticket.status.status }}</label>
+                        <label class="label"
+                            :class="{
+                                'label-success': ticket.status.status == 'won',
+                                'label-danger': ticket.status.status == 'fail',
+                                'label-warning': ticket.status.status == 'waiting'
+                            }"
+                        >
+                            {{ ticket.status.status }}
+                        </label>
                     </td>
                     <td>{{ticket.award ? ticket.award.level.label : 'N/A'}}</td>
                     <td>{{ticket.award ? prizeMoney(ticket.award) : 'N/A' | currency}}</td>
@@ -128,8 +134,8 @@ export default {
 
             prizeMoney(award) {
                 let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-                const extra = award.level.level == 1 ? false : award.ticket.order.extra;
-                return extra ? prize * this.result.multiplier : prize;
+                const extra = award.level.level == 1 ? false : this.order.extra;
+                return extra ? prize * this.order.multiplier : prize;
             },
 
             onCancle() {

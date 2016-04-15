@@ -18,7 +18,7 @@
 		        <tr v-for="(index, history) in histories" id="transaction-{{ history.id }}">
                     <td>{{ history.id }}</td>
 		            <td>{{ history.updated_at }}</td>
-		            <td width="250">{{{ history.description.trim() ? history.description : 'N/A' }}}</td>
+		            <td width="250">{{{ history.description }}}</td>
                     <td>{{ history.amount_prev | currency }}</td>
 		            <td>
 		            	<span :class="[history.type == 1 ? 'text-primary' : 'text-danger']">

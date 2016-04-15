@@ -64,4 +64,9 @@ class Transaction extends Model
     {
         return Carbon::parse($date)->format('g:ia \o\n d F Y');
     }
+
+    public function getDescriptionAttribute($data)
+    {
+        return trim($data) ? $data : 'N/A';
+    }
 }

@@ -49,7 +49,7 @@
 
                             <td>{{ order.draw_at }}</td>
 
-                            <td colspan="2">{{ order.description.trim() ? order.description : 'N/A' }}</td>
+                            <td colspan="2">{{ order.description }}</td>
 
                             <td>
                                 <span 

@@ -1,21 +1,23 @@
-<style scoped>
-	ul{
-		list-style:none;
-	}
-	.tickets li span{
-		display: inline-block;
-	}
-</style>
 <template>
 	<div v-if="$loadingAsyncData" class="text-center text-danger">Loading ...</div>
-	<ul v-else class="tickets">
-	    <li v-for="ticket in data" track-by="$index">
-	    	<span v-for="number in ticket.numbers" track-by="$index" class="clearfix">
-	    		<strong v-text="number"></strong>
-	    	</span>
-	    	<span class="clearfix"><strong class="powerball" v-text="ticket.ball"></strong></span>
-	    </li>
-	</ul>
+	<table v-else class="table-striped table-checkable table table-hover table-bordered admin">
+	    <tbody>
+	        <tr v-for="ticket in data" track-by="$index">
+	            <td width="240">
+	                <ul class="list">
+	                    <li v-for="number in ticket.numbers" track-by="$index">
+	                    	<span> <strong v-text="number"></strong> </span>
+	                    </li>
+	                    <li class="powerball">
+							<span class="clearfix"><strong class="powerball" v-text="ticket.ball"></strong></span>
+	                    </li>
+	                </ul>
+	            </td>
+	            <td>{{ ticket.award.level.label }}</td>
+	            <td>{{ prizeMoney(ticket) | currency }}</td>
+	        </tr>
+	    </tbody>
+	</table>
 </template>
 
 <script>
@@ -37,6 +39,16 @@
 			}, res => {
 				COMMON.alertError();
 			});
+		},
+
+		methods: {
+			prizeMoney(ticket) {
+				const award = ticket.award,
+						order = ticket.order;
+			    let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
+			    const extra = award.level.level == 1 ? false : order.extra;
+			    return extra ? prize * order.multiplier : prize;
+			},
 		}
 	}
 </script>
