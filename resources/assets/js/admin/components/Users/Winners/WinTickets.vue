@@ -13,7 +13,7 @@
 	                    </li>
 	                </ul>
 	            </td>
-	            <td>{{ ticket.award.level.label }}</td>
+	            <td width="200">{{ ticket.award.level.label }}</td>
 	            <td>{{ prizeMoney(ticket) | currency }}</td>
 	        </tr>
 	    </tbody>

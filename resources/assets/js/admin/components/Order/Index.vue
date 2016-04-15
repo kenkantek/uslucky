@@ -47,7 +47,7 @@
                                 {{ order.created_at }}
                             </td>
 
-                            <td>{{ order.draw_at }}</td>
+                            <td>{{ order.draw_date }}</td>
 
                             <td colspan="2">{{ order.description }}</td>
 

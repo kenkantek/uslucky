@@ -22,7 +22,7 @@
             		<td v-text="order.ticket_total"></td>
                     <td v-text="order.price | currency"></td>
             		<td v-text="order.created_at"></td>
-            		<td v-text="order.draw_at"></td>
+            		<td v-text="order.draw_date"></td>
                     <td v-text="order.description"></td>
             		<td>
                     <span 

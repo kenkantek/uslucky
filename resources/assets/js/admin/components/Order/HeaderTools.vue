@@ -14,11 +14,11 @@
                             <i class="icon-printer"></i> Print
                         </a>
                     </li>
-                    <!-- <li>
+                    <li class="hidden">
                         <a href="" @click.prevent="onDelete(ids)" data-action="0" class="tool-action">
                             <i class="icon-trash"></i> Delete
                         </a>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </div>
