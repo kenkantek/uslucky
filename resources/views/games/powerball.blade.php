@@ -21,7 +21,7 @@
                 <powerball></powerball>
             </div>
             <div class="sizebar col-xs-12 col-md-2">
-                <div class="box">
+                {{--<div class="box">
                     <a href="#">
                         <img class="img-responsive" src="https://s4.thelotter.com/images/9ddac69a079eafd126ef2f4fccd5858e.png">
                     </a>
@@ -31,7 +31,7 @@
                     <a href="#">
                         <img class="img-responsive" src="https://s4.thelotter.com/images/926e20f57aa4ea176da0a763e31bf9e0.png">
                     </a>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>
