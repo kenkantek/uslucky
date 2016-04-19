@@ -23,8 +23,16 @@ require('laravel-elixir-vueify');
     .watch('./resources/lang/**');
  });
 
+ elixir.extend("laroute", function() {
+     new Task('speak2', function() {
+         return gulp.src('').pipe(shell("php artisan laroute:generate"));
+     })
+     .watch('./app/Http/routes.php');
+ });
+
 elixir(function(mix) {
     mix.langjs();
+    mix.laroute();
     mix.copy('public/css/images', 'public/build/css/images');
     mix.sass('app.scss');
     mix.sass('admin/admin.scss');
