@@ -3,7 +3,9 @@
   "devDependencies": {
     "babel-preset-stage-0": "^6.5.0",
     "gulp": "^3.8.8",
-    "laravel-elixir-vueify": "^1.0.2"
+    "gulp-shell": "^0.5.2",
+    "laravel-elixir-vueify": "^1.0.2",
+    "lang.js": "~1.0.0"
   },
   "dependencies": {
     "async": "^1.5.2",

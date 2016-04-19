@@ -166,6 +166,7 @@ return [
         Snowfire\Beautymail\BeautymailServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Ixudra\Curl\CurlServiceProvider::class,
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
     ],
 
     /*

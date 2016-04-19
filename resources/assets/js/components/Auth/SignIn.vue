@@ -1,7 +1,7 @@
 <template>
 	<form class="form-horizontal" @submit.prevent="onSubmit" novalidate>
 		<div class="form-group" :class="{'has-error': formErrors.email}">
-			<label class="col-md-4 control-label">E-Mail <sup class="text-danger">*</sup></label>
+			<label class="col-md-4 control-label">{{ $l('auth.email') }} <sup class="text-danger">*</sup></label>
 			<div class="col-md-4">
 				<input type="email" class="form-control" v-model="formInputs.email" autocomplete="off">
 				<span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="form-group" :class="{'has-error': formErrors.password}">
-			<label class="col-md-4 control-label">Password <sup class="text-danger">*</sup></label>
+			<label class="col-md-4 control-label">{{ $l('auth.password') }} <sup class="text-danger">*</sup></label>
 			<div class="col-md-4">
 				<input type="password" class="form-control" v-model="formInputs.password" autocomplete="off">
 				<span class="help-block" v-show="formErrors.password" v-text="formErrors.password"></span>
@@ -24,7 +24,7 @@
 			<div class="col-md-4 col-md-offset-4">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" v-model="formInputs.remember"> Remember Me
+						<input type="checkbox" v-model="formInputs.remember"> {{ $l('auth.remember_me') }}
 					</label>
 				</div>
 			</div>
@@ -33,13 +33,14 @@
 		<div class="form-group">
 			<div class="col-md-4 col-md-offset-4">
 				<button type="submit" class="link" :disabled="submiting">
-					<i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Sign In
+					<i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{ $l('auth.signin') }}
 				</button>
 				<a href="auth/facebook" class="link">
-					<i class="fa fa-facebook"></i> Sign In with Facebook
+					<i class="fa fa-facebook"></i> {{ $l('auth.signin_fb') }}
 				</a><br>
-				<a href="password/reset" class="btn btn-link">Forgot Your Password?</a><br>
-				<a href="register" class="btn btn-link">Or Register new account!</a>
+				<a href="password/reset" class="btn btn-link">{{ $l('auth.forgot_password') }}</a>
+				<br>
+				<a href="register" class="btn btn-link">{{ $l('auth.or_register') }}</a>
 			</div>
 		</div>
 	</form>
@@ -86,7 +87,7 @@
 					if(res.status === 500) {
 						COMMOM.alertError();
 					} else if(status === 422)  {
-						toastr.error('Please check input field!.', 'Validate!');
+						toastr.error(this.$l('auth.message_check_field'), this.$l('auth.validate'));
 					}
 				});
 			}
