@@ -1,6 +1,8 @@
 const Vue = require('vue');
+
 Vue.use(require('vue-resource'));
 Vue.use(require('vue-async-data'));
+
 Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
 Vue.component('loading', Vue.extend(require('../components/Globals/Loading.vue')));
@@ -8,6 +10,12 @@ Vue.component('loading', Vue.extend(require('../components/Globals/Loading.vue')
 Vue.filter('currency', function (value, currency) {
   return require('../filter/currency.js')(value, currency);
 });
+
+import format from '../filter/format';
+
+Vue.prototype.$l = (lang, args = {}) => {
+    return format(Lang.get(lang).replace(/:[^\s]+/g, '{$&}').replace(/(?:{):/g, '{'), args);
+}
 
 import Order from './components/Order/Index.vue';
 import OrderDetails from './components/Order/ShowOrder.vue';

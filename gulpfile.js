@@ -1,5 +1,8 @@
-var elixir = require('laravel-elixir');
+var elixir = require('laravel-elixir'),
+    shell = require('gulp-shell'),
+    gulp = require('gulp');
 
+var Task = elixir.Task;
 require('laravel-elixir-vueify');
 
 /*
@@ -13,7 +16,23 @@ require('laravel-elixir-vueify');
  |
  */
 
+ elixir.extend("langjs", function(path) {
+    new Task('speak', function() {
+        return gulp.src('').pipe(shell("php artisan lang:js -c " + (path || "public/js/lang.min.js")));
+    })
+    .watch('./resources/lang/**');
+ });
+
+ elixir.extend("laroute", function() {
+     new Task('speak2', function() {
+         return gulp.src('').pipe(shell("php artisan laroute:generate"));
+     })
+     .watch('./app/Http/routes.php');
+ });
+
 elixir(function(mix) {
+    mix.langjs();
+    mix.laroute();
     mix.copy('public/css/images', 'public/build/css/images');
     mix.sass('app.scss');
     mix.sass('admin/admin.scss');

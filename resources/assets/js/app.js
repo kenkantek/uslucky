@@ -1,14 +1,22 @@
 const Vue = require('vue');
+
 Vue.use(require('vue-resource'));
 Vue.use(require('vue-async-data'));
+
 Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
-var Loading = Vue.extend(require('./components/Globals/Loading.vue'));
+const Loading = Vue.extend(require('./components/Globals/Loading.vue'));
 Vue.component('loading', Loading);
 
 Vue.filter('currency', function (value, currency) {
   return require('./filter/currency.js')(value, currency);
 });
+
+import format from './filter/format';
+
+Vue.prototype.$l = (lang, args = {}) => {
+    return format(Lang.get(lang).replace(/:[^\s]+/g, '{$&}').replace(/(?:{):/g, '{'), args);
+}
 
 import SignUp from './components/Auth/SignUp.vue';
 import SignIn from './components/Auth/SignIn.vue';
