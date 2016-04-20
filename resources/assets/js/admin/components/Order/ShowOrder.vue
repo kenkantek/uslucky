@@ -39,7 +39,7 @@
                                 class="label"
                                 :class="{
                                     'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
-                                    'label-danger': order.status.status == 'Order Placed' || order.status.status == 'Pending Purchase'
+                                    'label-danger': order.status.status == 'order placed' || order.status.status == 'pending purchase'
                                 }"
                             >{{ order.status.status }}
                             </span>
@@ -58,8 +58,8 @@
                                 class="form-control status"
                             >
                                 <option v-if="statusShowBtn.canceled" value="canceled">Cancel</option>
-                                <option v-if="statusShowBtn.order_placed" value="Order Placed">Order Placed</option>
-                                <option v-if="statusShowBtn.pending_purchase" value="Pending Purchase">Pending Purchase</option>
+                                <option v-if="statusShowBtn.order_placed" value="order placed">Order Placed</option>
+                                <option v-if="statusShowBtn.pending_purchase" value="pending purchase">Pending Purchase</option>
                                 <option v-if="statusShowBtn.purchased" value="purchased">Purchased</option>
                             </select>
                             <div v-if="submiting"><loading></loading></div>
@@ -209,7 +209,7 @@ export default {
             const s = this.order.status.status;
             if(s === 'canceled') {
                 status.canceled = true;
-            } else if(s === 'Pending Purchase') {
+            } else if(s === 'pending purchase') {
                 status.pending_purchase = true;
                 status.purchased = true;
             } else if(s === 'purchased'){

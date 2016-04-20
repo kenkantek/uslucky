@@ -29,7 +29,7 @@
                             class="label"
                             :class="{
                                 'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
-                                'label-danger': order.status.status == 'Order Placed' || order.status.status == 'Pending Purchase'
+                                'label-danger': order.status.status == 'order placed' || order.status.status == 'pending purchase'
                             }"
                         >{{order.status.status}}</span>
                     </td>

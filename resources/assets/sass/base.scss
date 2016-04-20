@@ -185,3 +185,7 @@ a {
 .margin-top-10 {
   margin-top: 10px;
 }
+
+span.label[class *= 'label-'], label.label[class *= 'label-'] {
+  text-transform: capitalize;
+}
