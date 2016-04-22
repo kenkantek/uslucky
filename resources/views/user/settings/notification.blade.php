@@ -2,7 +2,7 @@
 
 @section('body-class', 'noti')
 
-@section('title') Your notifications @stop
+@section('title') {{trans('setting.title_notifications')}} @stop
 
 @section('content')
     <div class="container">
@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2> Your notifications </h2>
+                <h2> {{trans('setting.title_notifications')}} </h2>
                 <hr>
                 <notification></notification>
             </div>

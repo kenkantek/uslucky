@@ -5,30 +5,30 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{$l('setting.modal_title')}}</h4>
                 </div>
                 <div class="modal-body">
                         <div class="form-group" :class="{'has-error' : formErrors.old_password}">
-                            <label>Your old password: <sup class="text-danger">*</sup></label>
+                            <label>{{$l('setting.modal_old')}}: <sup class="text-danger">*</sup></label>
                             <input type="password" class="form-control" autocomplete="off" v-model="formInputs.old_password">
                             <span class="help-block" v-show="formErrors.old_password" v-text="formErrors.old_password"></span>
                         </div>
                         <div class="form-group" :class="{'has-error' : formErrors.password}">
-                            <label>New password: <sup class="text-danger">*</sup></label>
+                            <label>{{$l('setting.modal_pass')}}: <sup class="text-danger">*</sup></label>
                             <input type="password" class="form-control" autocomplete="off" v-model="formInputs.password">
                             <span class="help-block" v-show="formErrors.password" v-text="formErrors.password"></span>
                         </div>
                         <div class="form-group">
-                            <label>Confirm your new password: <sup class="text-danger">*</sup></label>
+                            <label>{{$l('setting.modal_confirm')}}: <sup class="text-danger">*</sup></label>
                             <input type="password" class="form-control" autocomplete="off" v-model="formInputs.password_confirmation">
                             <span class="help-block" v-show="formErrors.password_confirmation" v-text="formErrors.password_confirmation"></span>
                         </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="link" style="opacity:0.5" data-dismiss="modal">Close</button>
+                    <button type="button" class="link" style="opacity:0.5" data-dismiss="modal">{{$l('setting.modal_button_close')}}</button>
                     <button type="submit" class="link":disabled="submiting">
-                        <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Save changes
+                        <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{$l('setting.modal_button_save')}}
                     </button>
                 </div>
             </div>

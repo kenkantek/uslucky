@@ -18,7 +18,7 @@
                     :disabled="isDisabledLuckyBtn"
                     @click="applyLucky"
                     >
-                    MY LUCKY NUMBERS</button>
+                    {{$l('powerball.luckynumber')}}</button>
                     <strong 
                         @click="saveLucky"
                         data-toggle="tooltip" 
@@ -26,7 +26,7 @@
                         title="Save lucky numbers"
                     ><i class="fa fa-floppy-o fa-lg"></i></strong>
                 </span>
-                <button class="btn btn-info text-uppercase" @click="quickPick"> Quick Pick</button>
+                <button class="btn btn-info text-uppercase" @click="quickPick"> {{$l('powerball.button')}}</button>
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 
                 data-placement="top" 
@@ -55,7 +55,7 @@
 
                 <div class="multiplier checkbox">
                     <label>
-                        <input type="checkbox" v-model="extra"> <strong>For An Extra {{ extraPerTicket | currency }} Per Ticket, Make It A Power Play</strong>
+                        <input type="checkbox" v-model="extra"> <strong>{{$l('powerball.extra',{'extra' : extraPerTicket})}}</strong>
                     </label>
                 </div>
 
@@ -63,7 +63,7 @@
                     <table class="table table-condensed">
                         <tbody>
                             <tr>
-                                <td>Ticket Price ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ eachPerTicket | currency }})</td>
+                                <td>{{$l('powerball.price')}} ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ eachPerTicket | currency }})</td>
                                 <td>{{ priceTickets | currency }}</td>
                                 <td></td>
                             </tr>
@@ -76,7 +76,7 @@
 
                         <tfoot>
                             <tr>
-                                <th>Total</th>
+                                <th>{{$l('powerball.total')}}</th>
                                 <th>{{ total | currency }}</th>
                                 <td class="text-right">
                                      <button 
@@ -86,7 +86,7 @@
                                         data-backdrop="static" 
                                         :disabled="disabledPlay"
                                         @click="openModal"
-                                        data-keyboard="false">Play Now
+                                        data-keyboard="false">{{$l('powerball.play')}}
                                     </button>
                                 </td>
                             </tr>

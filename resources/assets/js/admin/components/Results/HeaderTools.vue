@@ -4,22 +4,22 @@
         <div class="table-group-actions pull-right">
             <div class="row">
                 <div class="col-xs-12 col-md-3">
-                    <label>Draw Date From:</label>
+                    <label>{{$l('winning.from')}}:</label>
                     <datepicker :value.sync="date.dateFrom | formatDate" format="MM/DD/YYYY" name="closing_date"><datepicker>
                 </div>
                 <div class="col-xs-12 col-md-3">
-                    <label>Draw Date To:</label>
+                    <label>{{$l('winning.to')}}:</label>
                     <datepicker :value.sync="date.dateTo | formatDate" format="MM/DD/YYYY" name="closing_date"><datepicker>
                 </div>
                 <div class="col-xs-12 col-md-2">
-                    <label>Game Type:</label>
+                    <label>{{$l('winning.game')}}:</label>
                     <select class="form-control" v-model="game">
                         <option v-for="game in games" :value="game.id" v-text="game.name"></option>
                     </select>
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <button class="btn btn-sm green table-group-action-submit move-top--25" @click="onSearch">
-                        <i class="fa fa-check"></i> Search
+                        <i class="fa fa-check"></i> {{$l('winning.search')}}
                     </button>
                 </div>
             </div>

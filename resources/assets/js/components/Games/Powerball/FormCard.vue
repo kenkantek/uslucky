@@ -13,7 +13,7 @@
 <template>
     <div class="main-credit">
       <div class="section">
-          <label>CARD NUMBER: <sup class="text-danger">*</sup></label>
+          <label>{{$l('powerball.credit')}}: <sup class="text-danger">*</sup></label>
           <div class="input-group">
               <input type="text" class="form-control" placeholder="Valid Card Number" autofocus v-model="formInputs.number">
               <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
@@ -23,8 +23,8 @@
       <div class="row">
           <div class="col-xs-7 col-md-7">
               <div class="">
-                  <label><span class="hidden-xs">EXPIRATION</span>
-                  <span class="visible-xs-inline">EXP</span> DATE  <sup class="text-danger">*</sup></label>
+                  <label><span class="hidden-xs">{{$l('powerball.credit_exp')}}</span>
+                  <span class="visible-xs-inline">EXP</span> {{$l('powerball.credit_date')}}  <sup class="text-danger">*</sup></label>
                   <div class="row">
                       <div class="col-xs-8">                  
                           <select class="form-control" v-model="formInputs.exp_month">

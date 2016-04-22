@@ -8,16 +8,16 @@
 		<table v-else class="table table-hover">
 		    <tbody>
 		        <tr>
-		        	<th>Game name</th>
-		            <th>Results</th>
-		            <th>Date</th>
-		            <th>PowerPlay</th>
-		            <th>Estimated Jackpot</th>
+		        	<th>{{$l('winning.name')}}</th>
+		            <th>{{$l('winning.result')}}</th>
+		            <th>{{$l('winning.date')}}</th>
+		            <th>{{$l('winning.play')}}</th>
+		            <th>{{$l('winning.jackpot')}}</th>
 		        </tr>
 		        <tr v-for="pb in data.draws">
 		        	<td class="c1">{{ pb.gameName }}</td>
 		            <td>
-		            	<span v-if="checkWaiting(pb)" class="c1"> waiting</span>
+		            	<span v-if="checkWaiting(pb)" class="c1"> {{$l('winning.wait')}}</span>
 		                <ul v-else v-for="number in pb.results[0].primary" class="list">
 		                    <li v-if="$index < 5" v-text="number"></li>
 		                    <li v-if="$index == 6" v-text="number.slice(-2)" class="powerball"></li>
@@ -27,7 +27,7 @@
 		                <time datetime="{{ pb.drawTime | timestamp2date}}">{{ pb.drawTime | timestamp2date}}</time>
 		            </td>
 		            <td class="c1">
-			            <span v-if="checkWaiting(pb)"> waiting</span>
+			            <span v-if="checkWaiting(pb)"> {{$l('winning.wait')}}</span>
 	                    <span v-else>{{ pb.results[0].multiplier }}</span>
 	                </td>
 		            <td class="c1">{{ pb.estimatedJackpot | remove2CharLast | currency }}</td>

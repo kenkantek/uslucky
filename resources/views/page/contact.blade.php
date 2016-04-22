@@ -10,8 +10,8 @@
                     <p>8901 Marmora Road, <br>Glasgow, D04 89GR.</p>
                     <dl>
                         <dt></dt>
-                        <dd>Freephone: <span>+1 800 559 6580</span></dd>
-                        <dd>Telephone: <span>+1 959 603 6035</span></dd>
+                        <dd>{{trans('contact.mobile')}}: <span>+1 800 559 6580</span></dd>
+                        <dd>{{trans('contact.telephone')}}: <span>+1 959 603 6035</span></dd>
                         <dd>FAX: <span>+1 504 889 9898</span></dd>
                         <dd>E-mail:&nbsp;<span><a href="#">mail@demolink.org</a></span></dd>
                     </dl>
@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="col-md-4">
-			<h2>contact form</h2>
+			<h2>{{trans('contact.title')}}</h2>
 			<contact></contact>
 		</div>
 	</div>

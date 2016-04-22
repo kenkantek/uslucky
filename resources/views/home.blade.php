@@ -18,7 +18,7 @@
                 <time datetime="{{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))}}">
                     {{Carbon\Carbon::createFromTimestamp(strtotime($result->draw_at))->formatLocalized('%A, %B %d')}}
                 </time>
-                &nbsp;|&nbsp;Winning Numbers:
+                &nbsp;|&nbsp;{{trans('home.win_number')}}:
             </p>
         </div>
         @endif
@@ -35,7 +35,7 @@
             </ul>
             @if($result)
             <div class="ticket">
-                <a href="{{route('front::get.winning.numbers')}}">see current winning <br>ticket results</a>
+                <a href="{{route('front::get.winning.numbers')}}">{!! trans('home.current') !!}</a>
             </div>
             @endif
         </div>
@@ -57,7 +57,7 @@
                                 ${{niceNumber($powerball['amount'])}}
                             @endif
                             </span></h3>
-                        <p>Cash Option:
+                        <p>{{trans('home.button')}}:
                             @if($powerball['amount'] == "Not Published")
                                 {{$powerball['amount']}}
                             @else
@@ -65,7 +65,7 @@
                             @endif
                         </p>
 
-                        <p>NEXT DRAW: <span>{{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%B %d')}}</span></p>
+                        <p>{!! trans('home.next') !!}: <span>{{Carbon\Carbon::createFromTimestamp(strtotime($powerball['time']))->formatLocalized('%B %d')}}</span></p>
                         <ul class="list">
                             @if($result)
                                 @forelse($result->numbers as $number)
@@ -79,7 +79,7 @@
                             @endif
                         </ul>
                         <p>
-                            <a class="link home_page" href="{{route('front::game.powerball')}}">play now</a>
+                            <a class="link home_page" href="{{route('front::game.powerball')}}">{{trans('home.button')}}</a>
                         </p>
                     </div>
                 </div>
@@ -88,9 +88,9 @@
                     <div class="game">
                         <h3>Mega Millions <br>$26.0 <span>Million</span></h3>
 
-                        <p>Cash Option: $102.0 <span>Million</span></p>
+                        <p>{{trans('home.button')}}: $102.0 <span>Million</span></p>
 
-                        <p>NEXT DRAW: <span>MAY 31</span></p>
+                        <p>{!! trans('home.next') !!}: <span>MAY 31</span></p>
                         <ul class="list">
                             <li>19</li>
                             <li>24</li>
@@ -100,7 +100,7 @@
                             <li>5</li>
                         </ul>
                         <p>
-                            <a class="link home_page" href="#">play now</a>
+                            <a class="link home_page" href="#">{{trans('home.button')}}</a>
                         </p>
                     </div>
                 </div>
@@ -119,10 +119,10 @@
 
             <div class="col-md-8">
                 <div class="block">
-                    <h2>Believe in your win! <span>Good luck!</span></h2>
+                    <h2>{!! trans('home.h2') !!}</h2>
 
                     <div class="col-md-6 alpha">
-                        <a href="#" class="link1">How To Play</a>
+                        <a href="#" class="link1">{{trans('home.how')}}</a>
 
                         <p>Praesent vestibulum aenean nonummy hendrerit mauris. Hasellus porta. Fusce suscipit varius
                             mi.
@@ -144,7 +144,7 @@
     <div class="bg4 p47">
         <div class="container">
             <div class="col-md-12">
-                <h2>latest winners:</h2>
+                <h2>{{trans('home.winners')}}:</h2>
             </div>
 
             <div class="col-md-12">
@@ -369,7 +369,7 @@
     <div class="bg4">
         <div class="container">
             <div class="col-md-3">
-                <h4>I'm a</h4>
+                <h4>{{trans('home.ima')}}</h4>
                 <ul class="list1">
                     <li><a href="#">Player</a></li>
                     <li><a href="#">Winner! Now what?</a></li>
@@ -380,7 +380,7 @@
                 </ul>
             </div>
             <div class="col-md-3">
-                <h4>Help me</h4>
+                <h4>{{trans('home.help_me')}}</h4>
                 <ul class="list1">
                     <li><a href="#">Find More Ways to Buy</a></li>
                     <li><a href="#">Pick A Game</a></li>
@@ -391,7 +391,7 @@
                 </ul>
             </div>
             <div class="col-md-3">
-                <h4>Show me</h4>
+                <h4>{{trans('home.show_me')}}</h4>
                 <ul class="list1">
                     <li><a href="#">Winning Numbers</a></li>
                     <li><a href="#">Scratchers Games End </a></li>
@@ -403,7 +403,7 @@
                 </ul>
             </div>
             <div class="col-md-3">
-                <h4>Connect with us</h4>
+                <h4>{{trans('home.social')}}</h4>
                 <ul class="list1 asd">
                     <li>
                         <a href="#"><i class="fa fa-twitter-square"></i>  </a>

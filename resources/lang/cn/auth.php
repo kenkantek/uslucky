@@ -17,7 +17,7 @@ return [
     'throttle'            => 'Too many login attempts. Please try again in :seconds seconds.',
 
     //FOR JS
-    'remember_me'         => 'Remember Me',
+    'remember_me'         => '记住我',
     'email'               => 'E-Mail',
     'password'            => 'Password',
     'signin'              => 'Sign In',

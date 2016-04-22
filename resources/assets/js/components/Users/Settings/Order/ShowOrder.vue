@@ -6,16 +6,16 @@
         <div class="row">
             <div class="col-xs-6">
                 <dl class="dl-horizontal">
-                    <dt>Game type</dt>
+                    <dt>{{$l('setting.game')}}</dt>
                     <dd>{{order.game_name}}</dd>
 
-                    <dt>Bought date</dt>
+                    <dt>{{$l('setting.date')}}</dt>
                     <dd>{{order.created_at}}</dd>
 
-                    <dt>Draw date</dt>
+                    <dt>{{$l('setting.draw')}}</dt>
                     <dd>{{order.draw_date}}</dd>
 
-                    <dt>Description</dt>
+                    <dt>{{$l('setting.des')}}</dt>
                     <dd>{{ order.description }}</dd>
                 </dl>
             </div>
@@ -24,10 +24,10 @@
                     <dt>Extra</dt>
                     <dd><span class="label label-info"> {{ order.extra ? 'Yes' : 'No' }} </span></dd>
 
-                    <dt>Price total</dt>
+                    <dt>{{$l('setting.price')}}</dt>
                     <dd>{{order.price | currency}}</dd>
 
-                    <dt>Status</dt>
+                    <dt>{{$l('setting.status')}}</dt>
                     <dd>
                         <span 
                             class="label"
@@ -39,8 +39,8 @@
                     </dd>
 
                     <dt></dt>
-                    <dd class="margin-top-10" v-if="order.status.status == 'order placed'">
-                        <button class="btn btn-primary" @click="onCancle">Cancle</button>
+                    <dd class="margin-top-10" v-if="order.status.status == 'Order Placed'">
+                        <button class="btn btn-primary" @click="onCancle">{{$l('setting.button_cancel')}}</button>
                     </dd>
                 </dl>
             </div>
@@ -49,10 +49,10 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Your number</th>
-                    <th>Status</th>
-                    <th>Prize</th>
-                    <th>Reward</th>
+                    <th>{{$l('setting.number')}}</th>
+                    <th>{{$l('setting.status')}}</th>
+                    <th>{{$l('setting.prize')}}</th>
+                    <th>{{$l('setting.reward')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <p v-else class="text-center text-danger">No have image.</p>
+                <p v-else class="text-center text-danger">{{$l('setting.order_image')}}</p>
             </div>
         </div>
     </div>

@@ -12,13 +12,13 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2>Withdraw your winnings now</h2>
+                <h2>{{trans('setting.title_winning')}}</h2>
                 <hr>
                 <winning>
                     <div class="error-notice" slot="notice-minimum">
                         <div class="oaerror info">
                             <p>
-                                *The minimum amount you can withdraw is <strong>US $ {{ env('MINIMUM_AMOUNT', 25) }}</strong>
+                                {{trans('setting.minimum')}} <strong>US $ {{ env('MINIMUM_AMOUNT', 25) }}</strong>
                             </p>
                         </div>
                     </div>

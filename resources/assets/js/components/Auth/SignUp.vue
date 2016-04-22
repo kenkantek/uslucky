@@ -2,7 +2,7 @@
 	<form class="form-horizontal"  @submit.prevent="onSubmit" novalidate>
 
 	    <div class="form-group" :class="{'has-error': formErrors.first_name}">
-	        <label class="col-md-4 control-label">First Name <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{$l('auth.first_name')}} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="text" class="form-control" v-model="formInputs.first_name" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.first_name"></span>
@@ -10,7 +10,7 @@
 	    </div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.last_name}">
-	        <label class="col-md-4 control-label">Last Name <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{$l('auth.last_name')}} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="text" class="form-control" v-model="formInputs.last_name" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>
@@ -22,7 +22,7 @@
 	    <hr>
 
 	    <div class="form-group" :class="{'has-error': formErrors.email}">
-	        <label class="col-md-4 control-label">E-Mail <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{$l('auth.email')}} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="email" class="form-control" v-model="formInputs.email" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
@@ -30,7 +30,7 @@
 	    </div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.password}">
-	        <label class="col-md-4 control-label">Password <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{$l('auth.password')}} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="password" class="form-control" v-model="formInputs.password" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.password" v-text="formErrors.password"></span>
@@ -38,7 +38,7 @@
 	    </div>
 
 	    <div class="form-group">
-	        <label class="col-md-4 control-label">Re-enter Password <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{$l('auth.confirm_password')}} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="password" class="form-control" v-model="formInputs.password_confirmation" autocomplete="off">
 	        </div>

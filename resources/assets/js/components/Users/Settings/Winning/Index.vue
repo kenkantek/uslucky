@@ -1,16 +1,16 @@
 <template>
-	You currently have
+    {{$l('setting.current')}}
 	<h3>US <span>{{ amount | currency }}</span> </h3>
-	in your account balance
+    {{$l('setting.inaccount')}}
 	<hr>
 	<slot name="notice-minimum"></slot>
 	<hr>
 	<div class="actions">
 	    <button class="btn btn-danger" @click="openDeposit" :disabled="statusForm.deposit">
-	    	Deposit account <i class="fa fa-play"></i>
+            {{$l('setting.button_deposit')}} <i class="fa fa-play"></i>
 	    </button>
 	    <button class="btn btn-info"  @click="openClaim" :disabled="statusForm.claim">
-	    	Claim your winnings <i class="fa fa-play"></i>
+            {{$l('setting.button_claim')}} <i class="fa fa-play"></i>
 	    </button>
 	</div>
 

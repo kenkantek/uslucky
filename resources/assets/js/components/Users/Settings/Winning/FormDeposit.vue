@@ -1,10 +1,10 @@
 <template>
 	<form class="deposit"  @submit.prevent="onSubmit" v-show="statusForm.deposit" novalidate>
-		<h2>Payment on account:</h2>
+		<h2>{{$l('setting.pay_title')}}:</h2>
 		<hr>
 
 		<div class="form-group" :class="{'has-error': formErrors.number}">
-			<label>CARD NUMBER: <sup class="text-danger">*</sup></label>
+			<label>{{$l('setting.card_number')}}: <sup class="text-danger">*</sup></label>
 	        <div class="input-group">
                 <input type="text" class="form-control" placeholder="Valid Card Number" data-stripe="number" autofocus v-model="formInputs.number">
                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
@@ -16,7 +16,7 @@
             <div class="col-xs-7 col-md-7">
                 
                 <div class="form-group" :class="{'has-error': formErrors.exp}">
-                    <label><span class="hidden-xs">EXPIRATION</span>
+                    <label><span class="hidden-xs">{{$l('setting.exp_date')}}</span>
                     <span class="visible-xs-inline">EXP</span> DATE  <sup class="text-danger">*</sup></label>
                     <div class="row">
                         <div class="col-xs-8">                  
@@ -43,13 +43,13 @@
         </div>
 
 		<div class="form-group" :class="{'has-error': formErrors.amount}">
-	        <label>THE MONEY TRANSFER (USD): <sup class="text-danger">*</sup></label>
+	        <label>{{$l('setting.transfer')}}: <sup class="text-danger">*</sup></label>
 	        <input type="text" class="form-control" autocomplete="off" v-model="formInputs.amount">
             <span class="help-block" v-show="formErrors.amount" v-text="formErrors.amount"></span>
 	    </div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.description}">
-	        <label>DESCRIPTION: <sup class="text-danger">*</sup></label>
+	        <label>{{$l('setting.des')}}: <sup class="text-danger">*</sup></label>
 	        <textarea class="form-control" maxlength="255" v-model="formInputs.description"></textarea>
             <span class="help-block" v-show="formErrors.description" v-text="formErrors.description"></span>
 	    </div>
@@ -62,10 +62,10 @@
 	          <hr>
 	        </div>
 	        <button type="submit" class="btn btn-primary" :disabled="submiting">
-	            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Continue Charge
+	            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{$l('setting.button_continue')}}
 	        </button>
 
-	        <button type="button" class="btn btn-info" :disabled="submiting" @click="onCancle"> Cancle </button>
+	        <button type="button" class="btn btn-info" :disabled="submiting" @click="onCancle"> {{$l('setting.button_cancel')}} </button>
 	    </div>
 
 	</form>
