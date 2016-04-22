@@ -122,7 +122,7 @@ class Result extends Model
                     ->publish();
 
                 //Transaction
-                $this->newTraction($verify, $award);
+                $this->makeTransaction($verify, $award);
 
                 event(new AwardEvent($verify, $this->makePrizeMoney($verify)));
 
@@ -184,7 +184,7 @@ class Result extends Model
         return $prize ? $ticket : false;
     }
 
-    protected function newTraction(Ticket $ticket, Award $award)
+    protected function makeTransaction(Ticket $ticket, Award $award)
     {
         $prizeMoney = $this->makePrizeMoney($ticket);
         $order      = $ticket->order;
