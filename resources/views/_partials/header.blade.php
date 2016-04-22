@@ -1,5 +1,5 @@
 <!--Header-->
-
+<?php //dd(app()->getLocale()) ?>
 <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
@@ -13,15 +13,15 @@
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav nav-custome">
-                <li @if($routeName === 'front::home') class="active" @endif ><a href="{{url('')}}">HOME</a></li>
-                <li @if($routeName === 'front::about') class="active" @endif><a href="{{route('front::about')}}">ABOUT</a></li>
-                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a href="{{route('front::game.get.index')}}">GAMES <b class="caret"></b></a>
+                <li @if($routeName === 'front::home') class="active" @endif ><a href="{{url('')}}">{{trans('home.menu_home')}}</a></li>
+                <li @if($routeName === 'front::about') class="active" @endif><a href="{{route('front::about')}}">{{trans('home.menu_about')}}</a></li>
+                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a href="{{route('front::game.get.index')}}">{{trans('home.menu_game')}} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                 	<li><a href="{{route('front::game.powerball')}}" title="">Powerball</a></li>
                 </ul>
                 </li>
-                <li @if($routeName === 'front::get.winning.numbers') class="active" @endif><a href="{{route('front::get.winning.numbers')}}">WINNING NUMBER</a></li>
-                <li @if($routeName === 'front::contact') class="active" @endif><a href="{{route('front::contact')}}">CONTACT</a></li>
+                <li @if($routeName === 'front::get.winning.numbers') class="active" @endif><a href="{{route('front::get.winning.numbers')}}">{{trans('home.menu_winning')}}</a></li>
+                <li @if($routeName === 'front::contact') class="active" @endif><a href="{{route('front::contact')}}">{{trans('home.menu_contact')}}</a></li>
                 @if($auth)
                 <li class="cursor my-acccount">
                     <div class="dropdown-toggle clearfix" data-toggle="dropdown">
@@ -50,8 +50,14 @@
                     </ul>
                 </li>
                 @else
-                <li @if($routeName === 'front::') class="active" @endif><a href="{{url('login')}}">REGISTER/LOGIN</a></li>
+                <li @if($routeName === 'front::') class="active" @endif><a href="{{url('login')}}">{{trans('home.menu_reg')}}</a></li>
                 @endif
+                <li class="lang">
+                    <a href="{{url('language/en')}}" @if(session('locale')=='en')class="active"@endif>EN</a>
+                </li>
+                <li class="lang">
+                    <a href="{{url('language/cn')}}" @if(session('locale')=='cn')class="active"@endif>CN</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -59,8 +65,7 @@
         <div class="row">
             {!! HTML::image('css/images/logo.png', env('TITLE'), ['class' => 'img-responsive']) !!}
             <div class="slogan">
-                DO NOT WASTE YOUR TIME!<br>
-                WIN TODAY!
+                {!! trans('home.title') !!}
             </div>
             @yield('extends_content')
         </div>
