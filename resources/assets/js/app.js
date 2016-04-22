@@ -8,7 +8,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 const Loading = Vue.extend(require('./components/Globals/Loading.vue'));
 Vue.component('loading', Loading);
 
-Vue.filter('currency', function (value, currency) {
+Vue.filter('currency', (value, currency) => {
   return require('./filter/currency.js')(value, currency);
 });
 

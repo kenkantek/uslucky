@@ -17,14 +17,14 @@ require('laravel-elixir-vueify');
  */
 
  elixir.extend("langjs", function(path) {
-    new Task('speak', function() {
+    new Task('langjs', function() {
         return gulp.src('').pipe(shell("php artisan lang:js -c " + (path || "public/js/lang.min.js")));
     })
     .watch('./resources/lang/**');
  });
 
  elixir.extend("laroute", function() {
-     new Task('speak2', function() {
+     new Task('laroute', function() {
          return gulp.src('').pipe(shell("php artisan laroute:generate"));
      })
      .watch('./app/Http/routes.php');

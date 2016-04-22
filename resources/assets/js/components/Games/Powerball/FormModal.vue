@@ -183,12 +183,12 @@
                         } else {
                             vm.$http.post(laroute.route('front::post.powerball'), { tickets: vm.tickets, extra: vm.extra, method: vm.method, payment: vm.payment, description: vm.description, source: result }).then(res => {
                                 swal({
-                                    title: "Success!",
+                                    title: this.$l('message.success'),
                                     text: "You has been purchased tickets successfully!",
                                     type: "success",
                                     showCancelButton: true,
                                     confirmButtonColor: "#DD6B55",
-                                    confirmButtonText: "Go to Your Orders!",
+                                    confirmButtonText: "Go to Your Order",
                                     closeOnConfirm: false
                                 }, () => {
                                     location.href = laroute.route('front::orders.index');

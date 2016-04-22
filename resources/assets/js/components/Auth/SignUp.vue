@@ -17,8 +17,6 @@
 	        </div>
 	    </div>
 
-
-
 	    <hr>
 
 	    <div class="form-group" :class="{'has-error': formErrors.email}">
@@ -47,9 +45,9 @@
 	    <div class="form-group">
 	        <div class="col-md-6 col-md-offset-4">
 	            <button type="submit" class="link" :disabled="submiting">
-	                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Sign Up
+	                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{ $l('auth.signup') }}
 	            </button> 
-	            <a class="link" href="/login">Or Login Here</a>
+	            <a class="link" href="/login">{{ $l('auth.or_login') }}</a>
 	        </div>
 	    </div>
 
@@ -75,15 +73,15 @@
 				this.$http.post('/register', this.formInputs).then(res => {
 					this.submiting = false;
 					swal({
-					    title: "Account create successfully!",
+					    title: this.$l('message.signup_success'),
 					    timer: 2000,
-					    text: "Auto redirect to profile in 2 seconds.",
+					    text: this.$l('message.wait_redirect'),
 					    type: "info",
 					    closeOnConfirm: false,
 					    showLoaderOnConfirm: true,
 					}, () => {
 						location.href = laroute.route('front::settings.account');
-					    setTimeout(() =>{}, 2000);
+					    setTimeout(() =>{}, 1000);
 					});
 
 				}, (res) => {
@@ -92,7 +90,7 @@
 					if(res.status === 500) {
 						BOX.alertError();
 					} else  {
-						toastr.error('Please check input field!.', 'Validate!');
+						toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
 					}
 				});
 			}

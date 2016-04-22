@@ -67,9 +67,9 @@
 				this.$http.post('/login', this.formInputs).then(res => {
 					this.submiting = false;
 					swal({
-					    title: "Sign In Successful!",
+					    title: this.$l('message.signin_success'),
 						timer: 2000,
-					    text: "Please wait auto redirect page.",
+					    text: this.$l('message.wait_redirect'),
 					    type: "info",
 					    closeOnConfirm: false,
 					    showLoaderOnConfirm: true,
@@ -77,7 +77,7 @@
 						const redirect = COMMOM.getQuerystring('redirect');
 						const route = redirect ? redirect : 'front::settings.account';
 						location.href = laroute.route(route);
-						setTimeout(() =>{}, 2000);
+						setTimeout(() =>{}, 1000);
 					});
 
 			}, (res) => {
@@ -87,7 +87,7 @@
 					if(res.status === 500) {
 						COMMOM.alertError();
 					} else if(status === 422)  {
-						toastr.error(this.$l('auth.message_check_field'), this.$l('auth.validate'));
+						toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
 					}
 				});
 			}
