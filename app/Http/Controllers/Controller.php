@@ -20,6 +20,8 @@ class Controller extends BaseController
             '_token'   => csrf_token(),
             '_timzone' => env('TIMEZONE'),
             '_isLogin' => $this->user ? true : false,
+            '_lang'    => session()->get('locale')
         ]);
     }
+    
 }

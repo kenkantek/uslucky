@@ -8,7 +8,7 @@
 <template>
     <article class="header-game clearfix">
         <div class="jackpot pull-right text-center">
-            <span><strong>ESTIMATED JACKPOT</strong></span>
+            <span><strong>{{$l('powerball.jackpot')}}</strong></span>
             <h1><strong>{{ powerball.amount | currency }}</strong></h1>
         </div>
         <div class="draw-date clearfix">
@@ -23,7 +23,8 @@
         </div>
         <div class="hidden tickets clearfix">
             <div class="col-xs-10">
-                How many tickets do you want to buy:
+                {{$l('powerball.many')}}
+
                 <input type="text" :value="tickets.length" readonly>
                 <input type="button" value="+1 ticket" @click="addTicket">
             </div>

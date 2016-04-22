@@ -2,7 +2,7 @@
 
 @section('body-class','history')
 
-@section('title') Transacsion history @stop
+@section('title') {{trans('setting.title_trans')}} @stop
 
 @section('content')
     <div class="container">
@@ -12,9 +12,9 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2> Your Transacsion History </h2>
+                <h2> {{trans('setting.title_trans')}} </h2>
                 <div class="pull-right">
-                    <h3>Your Account Blance: ${{number_format($amount,2)}}</h3>
+                    <h3>{{trans('setting.balance')}}: ${{number_format($amount,2)}}</h3>
                 </div>
                 <hr>
                 <transaction></transaction>

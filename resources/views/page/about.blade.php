@@ -6,11 +6,11 @@
 <div class="bg4 p50">
         <div class="container">
             <div class="col-md-12">
-                <h2>welcome to {{env('TITLE')}}</h2>
+                <h2>{{trans('about.title', ['title'=>env('TITLE')])}}</h2>
 
                 <div class="block1">
                     <div class="left"><img src="{{asset('images/page2_img1.jpg')}}" alt=""></div>
-                    <h5><a href="#">Lorem ipsum dolor sit amet consectetuer adipiscin</a></h5>
+                    <h5><a href="#">{{trans('about.sub_title')}}</a></h5>
                     <!-- Go to www.addthis.com/dashboard to customize your tools -->
                     <div class="addthis_sharing_toolbox"></div>
                     <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce
@@ -47,7 +47,7 @@
     <div class="bg3 p50">
         <div class="container">
             <div class="col-md-12">
-                <h2>why choose us?</h2>
+                <h2>{{trans('about.why_choose_us')}}</h2>
 
                 <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit
                     varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
@@ -94,7 +94,7 @@
     <div class="bg2 p44">
         <div class="container">
             <div class="col-md-12">
-                <h2 class="gray">testimonials</h2>
+                <h2 class="gray">{{trans('about.testimonials')}}</h2>
             </div>
             <div class="col-md-6">
                 <div class="bq">

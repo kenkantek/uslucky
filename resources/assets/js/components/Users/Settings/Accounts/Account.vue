@@ -1,28 +1,28 @@
 <template>
     <div v-if="$loadingAsyncData"><loading></loading></div>
     <div class="col-md-4 col-md-offset-8" v-if="!$loadingAsyncData">
-        <a href="#" class="link" data-toggle="modal" data-target="#myModal">Change Password</a>
+        <a href="#" class="link" data-toggle="modal" data-target="#myModal">{{$l('setting.button')}}</a>
     </div>
     <form v-if="!$loadingAsyncData" class="" @submit.prevent="onSubmit" novalidate>
         <div class="form-group col-md-12">
-            <label>Avatar: <sup class="text-danger">*</sup></label><br>
+            <label>{{$l('setting.avatar')}}: <sup class="text-danger">*</sup></label><br>
             <div style="height:200px; width:200px; overflow:hidden"><img :src="user.image" alt="" @click="getFilePathFromDialog($event)" style="width: 200px"></div>
-            <br><span>Click image to change</span><br />
+            <br><span>{{$l('setting.click_image')}}</span><br />
             <span class="help-block" v-show="formErrors.avatar" v-text="formErrors.avatar"></span><br>
             <input type="file" @change="onChangeAvatar($event)" accept="image/*" v-el:input-avatar class="hidden" />
         </div>
         <div class="form-group col-md-4" :class="{'has-error': formErrors.first_name}">
-            <label>First Name: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.first_name')}}: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.first_name">
             <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.first_name"></span>
         </div>
         <div class="form-group col-md-4" :class="{'has-error': formErrors.last_name}">
-            <label>Last Name: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.last_name')}}: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.last_name">
             <span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>
         </div>
         <div class="form-group col-md-4" :class="{'has-error': formErrors.birthday}">
-            <label>Birthday: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.birthday')}}: <sup class="text-danger">*</sup></label>
             <datepicker :value.sync = "user.birthday" format="YYYY-MM-DD" autocomplete="off" name="closing_date"></datepicker>
             <!-- <input type="date" class="form-control" autocomplete="off" v-model="user.birthday"> -->
             <span class="help-block" v-show="formErrors.birthday" v-text="formErrors.birthday"></span>
@@ -33,42 +33,42 @@
             <span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
         </div>
         <div class="form-group col-md-6" :class="{'has-error': formErrors.phone}">
-            <label>Phone: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.phone')}}: <sup class="text-danger">*</sup></label>
             <input type="number" class="form-control" autocomplete="off" v-model="user.phone">
             <span class="help-block" v-show="formErrors.phone" v-text="formErrors.phone"></span>
         </div>
         <div class="form-group col-md-12" :class="{'has-error': formErrors.address}">
-            <label>Address: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.address')}}: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.address">
             <span class="help-block" v-show="formErrors.address" v-text="formErrors.address"></span>
         </div>
         <div class="form-group col-md-12"  :class="{'has-error': formErrors.country}">
-            <label>Country: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.country')}}: <sup class="text-danger">*</sup></label>
             <select class="form-control" v-model="user.country">
                 <option v-for="country in countries" v-text="country.name" :value="country.code"></option>
             </select>
             <span class="help-block" v-show="formErrors.city" v-text="formErrors.country"></span>
         </div>
         <div class="form-group col-md-12" v-show="states.length">
-            <label>State: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.state')}}: <sup class="text-danger">*</sup></label>
             <select class="form-control" v-model="user.state">
                 <option v-for="state in states" v-text="state.name" :value="state.code"></option>
             </select>
 
         </div>
         <div class="form-group col-md-12" :class="{'has-error': formErrors.city}">
-            <label>City: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.city')}}: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.city">
             <span class="help-block" v-show="formErrors.city" v-text="formErrors.city"></span>
         </div>
         <div class="form-group col-md-12" :class="{'has-error': formErrors.zipcode}">
-            <label>Zipcode: <sup class="text-danger">*</sup></label>
+            <label>{{$l('setting.zipcode')}}: <sup class="text-danger">*</sup></label>
             <input type="text" class="form-control" autocomplete="off" v-model="user.zipcode">
             <span class="help-block" v-show="formErrors.zipcode" v-text="formErrors.zipcode"></span>
         </div>
         <div class="form-group col-md-12">
             <button type="submit" class="link" :disabled="submiting">
-                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Update Account
+                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{$l('setting.button_update')}}
             </button>
         </div>
 

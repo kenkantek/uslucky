@@ -5,13 +5,13 @@
 		    <thead>
 		        <tr>
                     <th>#</th>
-		            <th>Updated At</th>
-		            <th width="250">Description</th>
-                    <th>Amount Prev</th>
-                    <th>Amount</th>
-                    <th>Amount Next</th>
-		            <th>Status</th>
-		            <th>Cancel</th>
+		            <th>{{$l('setting.up_at')}}</th>
+		            <th width="250">{{$l('setting.des')}}</th>
+                    <th>{{$l('setting.amount_prev')}}</th>
+                    <th>{{$l('setting.amount')}}</th>
+                    <th>{{$l('setting.amount_next')}}</th>
+		            <th>{{$l('setting.status')}}</th>
+		            <th>{{$l('setting.button_cancel')}}</th>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -39,15 +39,15 @@
 			<div class="error-notice" slot="notice-minimum">
 			    <div class="oaerror info">
 			        <p>
-			            *You have not transacsion!
+                        {{$l('setting.not_trans')}}
 			        </p>
 			    </div>
 			</div>
 		</div>
 		<button style="margin:0; width:100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">
-            <i class="fa fa-circle-o-notch fa-spin" v-show="loading"></i> Load more {{ numberMore }} record</button>
+            <i class="fa fa-circle-o-notch fa-spin" v-show="loading"></i> {{$l('setting.load_more')}} {{ numberMore }} {{$l('setting.record')}}</button>
 		<div v-show="nextPageUrl" style="width:100%; text-align:center; margin-top:10px">
-			Show {{ histories.length }} of {{ totalHistories }} record.
+            {{$l('setting.show')}} {{ histories.length }} {{$l('setting.of')}} {{ totalHistories }} {{$l('setting.record')}}.
 		</div>
 	</div>
 </template>
@@ -100,7 +100,7 @@ export default {
 
             onCancel(index, id) {
                 swal({
-                    title: "Are you sure cancel it?",
+                    title: this.$l('setting.sure_cancel'),
                     type: "info",
                     showCancelButton: true,
                     closeOnConfirm: false,
@@ -109,7 +109,7 @@ export default {
                     this.$http.put(laroute.route('front::put.cancel.transaction', {
                         one: id
                     })).then(res => {
-                        toastr.success('Your transacsion was canceled.', 'Success!');
+                        toastr.success(this.$l('setting.canceled'), 'Success!');
                         this.histories[index].status.status = 'canceled';
                         swal.close();
                         this.total = res.data;
@@ -117,7 +117,7 @@ export default {
                         if(res.status === 500) {
                             BOX.alertError();
                         }else {
-                            toastr.error('Can not cancel this transacsion. Please try again!', 'Error!');
+                            toastr.error(this.$l('setting.err'), 'Error!');
                             swal.close();
                         }
                     });

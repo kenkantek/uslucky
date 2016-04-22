@@ -3,28 +3,28 @@
 	    <div v-if="load === true" class="contact-form-loader"></div>
 	    <fieldset>
 	        <label>
-	            <input type="text" v-model="formInputs.name" placeholder="Your Name">
+	            <input type="text" v-model="formInputs.name" placeholder="{{$l('contact.name')}}">
 	            <span class="err" v-show="formErrors.name" v-text="formErrors.name"></span>
 
 	        </label>
 	        <label>
-	            <input type="text" v-model="formInputs.email" placeholder="Your Email">
+	            <input type="text" v-model="formInputs.email" placeholder="{{$l('contact.email')}}">
 	            <span class="err" v-show="formErrors.email" v-text="formErrors.email"></span>
 
 	        </label>
 	        <label>
-	            <input type="text" v-model="formInputs.phone" placeholder="Your Phone Number">
+	            <input type="text" v-model="formInputs.phone" placeholder="{{$l('contact.phone')}}">
 	            <span class="err" v-show="formErrors.phone" v-text="formErrors.phone"></span>
 			</label>
 	        <label>
-	            <textarea v-model="formInputs.message" placeholder="Message"></textarea>
+	            <textarea v-model="formInputs.message" placeholder="{{$l('contact.message')}}"></textarea>
 	            <span class="err"v-show="formErrors.message" v-text="formErrors.message"></span>
 	        </label>
 	        <!-- <label class="recaptcha"><span class="empty-message">*This field is required.</span></label> -->
 	        <div class="btns">
-	          <button type="reset" class="link">reset</button>
+	          <button type="reset" class="link">{{$l('contact.reset')}}</button>
 	          <button type="submit" class="link" :disabled="submiting">
-                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> submit</button>
+                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{ $l('contact.submit') }}</button>
 	        </div>
 	    </fieldset>
     </form>

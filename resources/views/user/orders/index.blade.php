@@ -2,7 +2,7 @@
 
 @section('body-class','order')
 
-@section('title') Your orders @stop
+@section('title') {{trans('setting.title_order')}} @stop
 
 @section('content')
     <div class="container">
@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2> Your orders </h2>
+                <h2> {{trans('setting.title_order')}} </h2>
                 <hr>
                 <order></order>
                 <hr>

@@ -18,6 +18,13 @@ class PagesController extends Controller
             '_games' => Game::all(),
         ]);
     }
+    
+    public function getLang($locale)
+    {
+        $path = resource_path("lang/$locale");
+        file_exists($path) && session()->set('locale', $locale);
+        return redirect()->intended();
+    }
 
     public function getIndex()
     {

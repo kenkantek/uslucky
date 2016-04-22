@@ -32,7 +32,7 @@
                     <button type="button" class="close" @click.stop="closeModal">
                         <span>×</span><span class="sr-only">Close</span>
                     </button>
-                    <h3 class="modal-title">Purchase {{ total | currency }}</h3>
+                    <h3 class="modal-title">{{$l('powerball.modal_title')}} {{ total | currency }}</h3>
                 </div>
                 <div class="modal-body">
                     <div v-if="$loadingAsyncData">
@@ -47,28 +47,28 @@
                     <div v-else>
                         <form class="form-horizontal" v-else>
                             <div class="">
-                                <label for="payment-switch">Choose method payment <sup class="text-danger">*</sup></label>
+                                <label for="payment-switch">{{$l('powerball.modal_choose')}} <sup class="text-danger">*</sup></label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" v-model="method" value="1">
-                                Account balance <strong>({{ amount | currency }})</strong>.
+                                  {{$l('powerball.modal_balance')}} <strong>({{ amount | currency }})</strong>.
                                 <span class="text-danger" v-show="method == 1 && amount < total">
-                                    You can not afford to buy it.
-                                    <a @click.stop="closeModal" :href="linkTo.winning" target="_blank">Add now</a>
+                                    {{$l('powerball.modal_afford')}}
+                                    <a @click.stop="closeModal" :href="linkTo.winning" target="_blank">{{$l('powerball.modal_button_add')}}</a>
                                 </span>
                               </label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" v-model="method" value="2">
-                                By credit card
+                                  {{$l('powerball.modal_credit')}}
                               </label>
                               <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
                             </div>
                             <hr>
                             <div class="">
-                                <label for="form-description">Description</label>
+                                <label for="form-description">{{$l('powerball.modal_des_credit')}}</label>
                                 <textarea id="form-description" class="form-control" v-model="description"></textarea>
                             </div>
                         </form>
@@ -78,14 +78,14 @@
                 <div class="modal-footer" v-if="!$loadingAsyncData">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-success" @click.stop="closeModal">Cancle</button>
+                            <button type="button" class="btn btn-success" @click.stop="closeModal">{{$l('powerball.modal_button_cancel')}}</button>
                         </div>
                         <div class="btn-group" role="group">
                             <button 
                                 type="button" 
                                 class="btn btn-danger btn-hover-green" 
                                 :disabled="!readySubmit"
-                                @click="onSubmit">Submit
+                                @click="onSubmit">{{$l('powerball.modal_button_submit')}}
                             </button>
                         </div>
                     </div>
@@ -142,9 +142,9 @@
                 let message = '';
                 if(res.status === 401) {
                     this.checkLogin = false;
-                    message = `You need login to Purchase ticket.`;
+                    message = this.$l('powerball.message');
                 } else if(res.status === 500) {
-                    message = 'Something wrong, please try again!';
+                    message = this.$l('powerball.message_err');
                 }
                 this.message = message;
             });
@@ -153,7 +153,7 @@
         methods: {
             onSubmit() {
                 swal({
-                    text: "Are you sure purchase it?",
+                    text: this.$l('powerball.modal_swal'),
                     title: this.$options.filters.currency(this.total),
                     type: "info",
                     showCancelButton: true,

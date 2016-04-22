@@ -7,13 +7,13 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Game</th>
-                    <th>Tickets total</th>
-                    <th>Price total</th>
-                    <th>Buy date</th>
-                    <th>Draw date</th>
-                    <th>Status</th>
-                    <th>View</th>
+                    <th>{{$l('setting.game')}}</th>
+                    <th>{{$l('setting.ticket')}}</th>
+                    <th>{{$l('setting.price')}}</th>
+                    <th>{{$l('setting.date')}}</th>
+                    <th>{{$l('setting.draw')}}</th>
+                    <th>{{$l('setting.status')}}</th>
+                    <th>{{$l('setting.view')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,21 +33,21 @@
                             }"
                         >{{order.status.status}}</span>
                     </td>
-                    <td class="text-center"><a class="link" :href="order.url">View details</a></td>
+                    <td class="text-center"><a class="link" :href="order.url">{{$l('setting.button_details')}}</a></td>
                 </tr>
             </tbody>
         </table>
         <div v-else>
             <div class="error-notice" slot="notice-minimum">
                 <div class="oaerror info">
-                    <p> *You have not order! </p>
+                    <p> {{$l('setting.not_order')}} </p>
                 </div>
             </div>
         </div>
     </div>
-    <button style="width: 100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">Load more {{ numberMore }} record</button>
+    <button style="width: 100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">{{$l('setting.load_more')}} {{ numberMore }} {{$l('setting.record')}}</button>
     <div v-show="nextPageUrl" style="width: 100%;text-align: center;margin-top: 15px">
-        Show {{ orders.length }} of {{ totalOrders }} record.
+        {{$l('setting.show')}} {{ orders.length }} {{$l('setting.of')}} {{ totalOrders }} {{$l('setting.record')}}.
     </div>
 </template>
 

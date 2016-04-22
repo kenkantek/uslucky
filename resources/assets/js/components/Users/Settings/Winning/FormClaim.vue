@@ -1,16 +1,16 @@
 <template>
         <form class="claim"  @submit.prevent="onSubmit" v-show="statusForm.claim" novalidate>
-            <h2>Claim your winnings:</h2>
+            <h2>{{$l('setting.button_claim')}}:</h2>
             <hr>
 
             <div class="form-group" :class="{'has-error': formErrors.amount}">
-                <label>The money transfer (USD): <sup class="text-danger">*</sup></label>
+                <label>{{$l('setting.transfer')}}: <sup class="text-danger">*</sup></label>
                 <input type="text" class="form-control" autocomplete="off" v-model="formInputs.amount">
                 <span class="help-block" v-show="formErrors.amount" v-text="formErrors.amount"></span>
             </div>
 
             <div class="form-group" :class="{'has-error': formErrors.description}">
-                <label>Description: <sup class="text-danger">*</sup></label>
+                <label>{{$l('setting.des')}}: <sup class="text-danger">*</sup></label>
                 <textarea class="form-control" maxlength="255" v-model="formInputs.description"></textarea>
                 <span class="help-block" v-show="formErrors.description" v-text="formErrors.description"></span>
             </div>
@@ -23,10 +23,10 @@
                   <hr>
                 </div>
                 <button type="submit" class="btn btn-primary" :disabled="submiting">
-                    <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Continue Claim
+                    <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{$l('setting.button_continue_claim')}}
                 </button>
 
-                <button type="button" class="btn btn-info" :disabled="submiting" @click="onCancle"> Cancle </button>
+                <button type="button" class="btn btn-info" :disabled="submiting" @click="onCancle"> {{$l('setting.button_cancel')}} </button>
             </div>
 
         </form>
