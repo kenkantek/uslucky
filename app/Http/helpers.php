@@ -97,7 +97,7 @@ function niceNumber($n)
     } elseif ($n > 1000000000) {
         return round(($n / 1000000000), 2) . ' billion';
     } elseif ($n > 1000000) {
-        return round(($n / 1000000), 2) . ' million';
+        return round(($n / 1000000), 2) . ' '.trans('home.milion');
     } elseif ($n > 1000) {
         return round(($n / 1000), 2) . ' thousand';
     }
