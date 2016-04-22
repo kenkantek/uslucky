@@ -27,9 +27,10 @@ class LevelTableSeeder extends Seeder
         $i = 0;
         foreach ($awards as $k => $award) {
             Level::create([
-                'level' => $i,
-                'label' => $k,
-                'award' => $award,
+                'game_id' => 1, //Powerball
+                'level'   => $i,
+                'label'   => $k,
+                'award'   => $award,
             ]);
             $i++;
         }

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
-    protected $fillable = ['level', 'label', 'award'];
+    protected $fillable = ['level', 'label', 'award', 'game_id'];
 }
