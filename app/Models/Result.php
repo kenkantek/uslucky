@@ -216,7 +216,7 @@ class Result extends Model
         $level      = $ticket->level;
         $prizeMoney = $ticket->add_award + $level->award;
         $extra      = $level->level == 1 ? false : $ticket->order->extra;
-        return $extra ? $this->multiplier * $prizeMoney : $prizeMoney;
+        return $extra ? min(2000000, $this->multiplier * $prizeMoney) : $prizeMoney;
     }
 
     protected function updateStatusTicket(Ticket $ticket, $status = 'fail')

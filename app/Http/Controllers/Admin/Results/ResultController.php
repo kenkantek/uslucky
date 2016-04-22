@@ -105,7 +105,7 @@ class ResultController extends Controller
     public function validateCal(Result $result)
     {
         return Order::whereDate('draw_at', '=', $result->draw_at)->whereHas('status', function ($q) {
-            $q->whereStatus('Order Placed')->orWhere('status', 'Pending Purchase');
+            $q->whereStatus('order placed')->orWhere('status', 'pending purchase');
         })->pluck('id');
     }
 

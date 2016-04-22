@@ -33,7 +33,7 @@ class PowerballController extends Controller
 
             // Add status
             $order->updateOrNewStatus()
-            ->withStatus('Order Placed')
+            ->withStatus('order placed')
             ->publish();
 
             // Save to Ticket

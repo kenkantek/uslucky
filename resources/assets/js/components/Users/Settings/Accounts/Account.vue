@@ -34,7 +34,7 @@
         </div>
         <div class="form-group col-md-6" :class="{'has-error': formErrors.phone}">
             <label>{{$l('setting.phone')}}: <sup class="text-danger">*</sup></label>
-            <input type="number" class="form-control" autocomplete="off" v-model="user.phone">
+            <input type="text" class="form-control" autocomplete="off" v-model="user.phone">
             <span class="help-block" v-show="formErrors.phone" v-text="formErrors.phone"></span>
         </div>
         <div class="form-group col-md-12" :class="{'has-error': formErrors.address}">

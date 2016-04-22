@@ -20,7 +20,7 @@ class CreateStatusesTable extends Migration
                 'processing', 'done',
                 'actived', 'disabled',
                 'unpaid', 'paid',
-                'waiting', 'Order Placed', 'Pending Purchase', 'purchased', 'won', 'fail',
+                'waiting', 'order placed', 'pending purchase', 'purchased', 'won', 'fail',
             ])->default('pendding');
         });
     }
