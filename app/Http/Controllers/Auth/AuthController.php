@@ -57,11 +57,15 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        $minimum_old = env('MINIMUM_OLD', 13);
         return Validator::make($data, [
             'first_name' => 'required|max:255',
             'last_name'  => 'required|max:255',
+            'birthday'   => ['required', "before:$minimum_old years ago"],
             'email'      => 'required|email|max:255|unique:users',
             'password'   => 'required|confirmed|min:6',
+        ], [
+            'birthday.before' => trans('auth.minimum_old', ['number' => $minimum_old]),
         ]);
     }
 
@@ -77,6 +81,7 @@ class AuthController extends Controller
         $user        = User::create([
             'first_name'  => $data['first_name'],
             'last_name'   => $data['last_name'],
+            'birthday'    => $data['birthday'],
             'email'       => $data['email'],
             'password'    => bcrypt($data['password']),
             'active'      => isset($data['id']) ? 1 : 0,
@@ -126,6 +131,6 @@ class AuthController extends Controller
 
     public function sendFailedLoginResponse()
     {
-        return response(['message' => 'Your email or password does not match!'], 401);
+        return response(['message' => trans('auth.failed')], 401);
     }
 }

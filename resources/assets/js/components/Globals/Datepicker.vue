@@ -98,7 +98,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            <input type="text" class="form-control {{ class }}" :style="styleObj" :readonly="readonly" :value="value" :placeholder="placeholder" @click="show = !show">
+            <input type="text" class="form-control {{ class }}" :style="styleObj" :readonly="readonly" :value="value" :placeholder="placeholder" @click="show = !show" autocomplete="off">
             <div class="picker-wrap" v-show="show">
                 <table class="date-picker">
                     <thead>

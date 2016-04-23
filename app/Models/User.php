@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasRoles, TransactionTrait, Eloquence;
 
     protected $fillable = [
-        'first_name', 'last_name', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
+        'first_name', 'last_name', 'birthday', 'avatar', 'email', 'password', 'active_code', 'facebook_id', 'active',
     ];
 
     protected $appends = [

@@ -30,4 +30,6 @@ return [
     'last_name'        => 'Last Name',
     'signup'           => 'Sign up',
     'or_login'         => 'Or Login Here',
+    'birthday'         => 'Birthday',
+    'minimum_old'      => 'You must be at least :number years old.',
 ];

@@ -1,4 +1,4 @@
-const Vue = require('vue');
+import Vue from 'vue';
 
 Vue.use(require('vue-resource'));
 Vue.use(require('vue-async-data'));

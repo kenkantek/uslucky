@@ -1,5 +1,3 @@
-<!--Header-->
-<?php //dd(app()->getLocale()) ?>
 <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
@@ -52,11 +50,11 @@
                 @else
                 <li @if($routeName === 'front::') class="active" @endif><a href="{{url('login')}}">{{trans('home.menu_reg')}}</a></li>
                 @endif
-                <li class="lang">
-                    <a href="{{url('language/en')}}" @if(session('locale')=='en')class="active"@endif>EN</a>
+                <li class="lang en">
+                    <a href="{{ route('front::switch.lang', 'en') }}" class="@if(app()->getLocale() === 'en') active @endif">EN</a>
                 </li>
-                <li class="lang">
-                    <a href="{{url('language/cn')}}" @if(session('locale')=='cn')class="active"@endif>CN</a>
+                <li class="lang cn">
+                    <a href="{{ route('front::switch.lang', 'cn') }}" class="@if(app()->getLocale() === 'cn') active @endif">CN</a>
                 </li>
             </ul>
         </div>
@@ -71,5 +69,3 @@
         </div>
     </div>
 </div>
-
-<!--End Header-->

@@ -17,6 +17,14 @@
 	        </div>
 	    </div>
 
+	    <div class="form-group" :class="{'has-error': formErrors.birthday}">
+	        <label class="col-md-4 control-label">{{$l('auth.birthday')}} <sup class="text-danger">*</sup></label>
+	        <div class="col-md-6">
+	            <datepicker :value.sync="formInputs.birthday" format="YYYY-MM-DD"></datepicker>
+	            <span class="help-block" v-show="formErrors.birthday" v-text="formErrors.birthday"></span>
+	        </div>
+	    </div>
+
 	    <hr>
 
 	    <div class="form-group" :class="{'has-error': formErrors.email}">
@@ -55,8 +63,9 @@
 </template>
 
 <script>
+	import Datepicker from '../Globals/Datepicker.vue';
 	import laroute from '../../laroute';
-	import BOX from '../../common';
+	import COMMON from '../../common';
 
 	export default {
 		data() {
@@ -88,12 +97,14 @@
 					this.formErrors = res.data;
 					this.submiting = false;
 					if(res.status === 500) {
-						BOX.alertError();
+						COMMON.alertError();
 					} else  {
 						toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
 					}
 				});
 			}
-		}
+		},
+
+		components: { Datepicker }
 	}
 </script>

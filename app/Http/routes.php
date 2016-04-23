@@ -14,7 +14,10 @@
 $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($router) {
     $router->auth();
 
-    $router->get('language/{locale}', 'PagesController@getLang');
+    $router->get('language/{locale}', [
+        'as'   => 'switch.lang',
+        'uses' => 'PagesController@getLang',
+    ]);
 
     $router->get('home', function () {
         return redirect()->route('front::settings.account');
