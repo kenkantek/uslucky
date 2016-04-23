@@ -17,14 +17,13 @@
             </div>
             <div class="col-xs-6">
                 <h5 class="text-right">
-                    Next Draw: <time class="time" :title="powerball.time">{{ powerball.time }}</time>
+                    {{ $l('game.next_draw') }}: <time class="time" :title="powerball.time">{{ powerball.time }}</time>
                 </h5>
             </div>
         </div>
         <div class="hidden tickets clearfix">
             <div class="col-xs-10">
                 {{$l('powerball.many')}}
-
                 <input type="text" :value="tickets.length" readonly>
                 <input type="button" value="+1 ticket" @click="addTicket">
             </div>

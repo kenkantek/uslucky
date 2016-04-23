@@ -50,7 +50,7 @@
             },
 
             _toastrWarning(number = 5) {
-                toastr.warning(`Please choose max ${number} number or click number choosed for remove it.`);
+                toastr.warning(this.$l('message.choose_max_number', { number }));
             },
 
             selectNumber(number) {

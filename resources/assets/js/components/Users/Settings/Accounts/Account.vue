@@ -117,8 +117,6 @@
             this.countries = JSON.parse(_countries).result;
         },
 
-
-
         computed: {
             states() {
                 if(!this.user.country) return [];
@@ -140,7 +138,7 @@
                 this.$http.put(laroute.route('front::account.put.account'), user).then(res => {
                     this.submiting = false;
                 swal({
-                    title: "Account edit successfully!",
+                    title: this.$l('message.account_updated'),
                     type: "info",
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true,
@@ -152,7 +150,7 @@
                     if(res.status === 500) {
                         BOX.alertError();
                     } else  {
-                        toastr.error('Please check input field!.', 'Validate!');
+                        toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
                     }
                 });
             },
@@ -171,7 +169,7 @@
                     };
 
                     swal({
-                        title: "Your avatar was updated!",
+                        title: this.$l('message.avatar_updated'),
                         type: "info",
                         closeOnConfirm: false,
                         showLoaderOnConfirm: true,
@@ -190,7 +188,7 @@
                                     if(res.status === 500) {
                                         BOX.alertError();
                                     } else  {
-                                        toastr.error('Please check input field!.', 'Validate!');
+                                        toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
                                     }
                                 }
                             );

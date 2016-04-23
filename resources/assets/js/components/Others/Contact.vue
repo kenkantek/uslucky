@@ -52,7 +52,7 @@
                     this.submiting = false;
                     this.load = true;
                     swal({
-                        title: "Your message was sent!",
+                        title: this.$l('message.contact_sent'),
                         type: "info",
                         closeOnConfirm: false,
                         showLoaderOnConfirm: false,
@@ -69,7 +69,7 @@
                     if(res.status === 500) {
                         BOX.alertError();
                     } else  {
-                        toastr.error('Please check input field!.', 'Validate!');
+                        toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
                     }
                 });
 

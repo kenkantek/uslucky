@@ -204,21 +204,21 @@
             },
             saveLucky() {
                 if(!this.isLogin) {
-                    return toastr.warning('Login to play this lottery with your lucky numbers');
+                    return toastr.warning(this.$l('message.login_to_luckys'));
                 }
                 this.$http.put(laroute.route('front::put.luckys'), {
                     line: this.lineDefault,
                     tickets: this.tickets
                 }).then(res => {
                     this.luckys[this.lineDefault] = _.cloneDeep(this.tickets);
-                    toastr.success('Numbers saved!');
+                    toastr.success(this.$l('message.number_saved'));
                 }, res => {
                     COMMON.alertError();
                 });
             },
             applyLucky() {
                 this.tickets = _.cloneDeep(this.luckys[this.lineDefault]);
-                toastr.success('Apply lucky numbers success!');
+                toastr.success(this.$l('message.apply_number_lucky'));
             }
         },
 

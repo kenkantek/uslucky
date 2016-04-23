@@ -55,7 +55,7 @@
                 this.$http.put(_changepass, change_pass).then(res => {
                     this.submiting = false;
                     swal({
-                        title: "Your password was changed!",
+                        title: this.$l('message.passwords_updated'),
                         type: "info",
                         closeOnConfirm: false,
                         showLoaderOnConfirm: false,
@@ -70,7 +70,7 @@
                     if(res.status === 500) {
                         BOX.alertError();
                     } else  {
-                        toastr.error('Please check input field!.', 'Validate!');
+                        toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
                     }
                 });
 

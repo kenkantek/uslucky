@@ -184,11 +184,11 @@
                             vm.$http.post(laroute.route('front::post.powerball'), { tickets: vm.tickets, extra: vm.extra, method: vm.method, payment: vm.payment, description: vm.description, source: result }).then(res => {
                                 swal({
                                     title: this.$l('message.success'),
-                                    text: "You has been purchased tickets successfully!",
+                                    text: this.$l('message.ticket_purchased'),
                                     type: "success",
                                     showCancelButton: true,
                                     confirmButtonColor: "#DD6B55",
-                                    confirmButtonText: "Go to Your Order",
+                                    confirmButtonText: this.$l('message.go_to_order'),
                                     closeOnConfirm: false
                                 }, () => {
                                     location.href = laroute.route('front::orders.index');
@@ -199,7 +199,7 @@
                             }, res => {
                                 if(res.status === 400)  {
                                     swal.close();
-                                    swal("Payment Invalid", res.data.message, "error");
+                                    swal(this.$l('message.payment_invalid'), res.data.message, "error");
                                 } else {
                                     BOX.alertError();
                                 }
