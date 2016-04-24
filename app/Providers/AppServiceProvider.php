@@ -13,9 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app['request']->server->set('HTTPS', config('app.ssl'));
         view()->composer('*', function ($view) {
             $view->with('auth', auth()->user())
-            ->with('routeName', \Request::route()->getName());
+                ->with('routeName', request()->route() ? request()->route()->getName() : null);
         });
     }
 
