@@ -41,7 +41,7 @@
                                 </span>
                             </td>
                             <td>
-                                <strong>{{ prizeMoney(award) | currency }}</strong>
+                                <strong>{{ award.ticket.reward | currency }}</strong>
                             </td>
                             <td>
                                 <span class="label" :class="[award.status.status == 'paid' ? 'label-success' : 'label-danger']">
@@ -109,11 +109,6 @@
         },
 
         methods: {
-            prizeMoney(award) {
-                let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-                const extra = award.level.level == 1 ? false : award.ticket.order.extra;
-                return extra ? prize * this.result.multiplier : prize;
-            },
             changeToPaid(award) {
                 award.changestatusding = true;
                 this.$http.put(laroute.route('admin.put.award.changestatus', {award: award.id})).then(res => {

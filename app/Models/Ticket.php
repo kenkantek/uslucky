@@ -14,6 +14,8 @@ class Ticket extends Model
         'numbers' => 'array',
     ];
 
+    protected $appends = ['reward'];
+
     public function order()
     {
         return $this->belongsTo(Order::class);
@@ -64,10 +66,36 @@ class Ticket extends Model
 
     public function makePrizeMoney(Result $result)
     {
-        $level      = $this->level;
-        $prizeMoney = $this->add_award + $level->award;
-        $extra      = $level->level == 1 ? false : $this->order->extra;
-        return $extra ? min(2000000, $result->multiplier * $prizeMoney) : $prizeMoney;
+        $level = $this->level;
+        $prize = $this->add_award + $level->award;
+        $extra = $level->level == 1 ? false : $this->order->extra;
+
+        return $this->finalReward($extra, $result->multiplier * $prize, $prize);
     }
 
+    public function getRewardAttribute()
+    {
+        return $this->award ? $this->reward($this->award) : 0;
+    }
+
+    private function reward($award)
+    {
+        $prize = $award->level->award + $award->add_award;
+        $extra = $award->level->level == 1 ? false : $this->order->extra;
+
+        return $this->finalReward($extra, $prize * $award->result->multiplier, $prize);
+    }
+
+    private function finalReward($extra, $total, $prize)
+    {
+        switch ($this->order->game_id) {
+            case 1:
+                $min = 2000000;
+                break;
+            default:
+                break;
+        }
+
+        return $extra ? (isset($min) ? min($min, $total) : $total) : $prize;
+    }
 }

@@ -75,8 +75,8 @@
                             {{ ticket.status.status }}
                         </label>
                     </td>
-                    <td>{{ticket.award ? ticket.award.level.label : 'N/A'}}</td>
-                    <td>{{ticket.award ? prizeMoney(ticket.award) : 'N/A' | currency}}</td>
+                    <td>{{ ticket.award ? ticket.award.level.label : 'N/A' }}</td>
+                    <td>{{ ticket.reward ? ticket.reward : 'N/A' | currency }}</td>
                 </tr>
             </tbody>
         </table>
@@ -130,12 +130,6 @@ export default {
                     this.loading = false;
                 });
                 return def.promise;
-            },
-
-            prizeMoney(award) {
-                let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-                const extra = award.level.level == 1 ? false : this.order.extra;
-                return extra ? prize * this.order.multiplier : prize;
             },
 
             onCancle() {

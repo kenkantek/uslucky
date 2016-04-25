@@ -14,7 +14,7 @@
 	                </ul>
 	            </td>
 	            <td width="200">{{ ticket.award.level.label }}</td>
-	            <td>{{ prizeMoney(ticket) | currency }}</td>
+	            <td>{{ ticket.reward | currency }}</td>
 	        </tr>
 	    </tbody>
 	</table>
@@ -40,15 +40,5 @@
 				COMMON.alertError();
 			});
 		},
-
-		methods: {
-			prizeMoney(ticket) {
-				const award = ticket.award,
-						order = ticket.order;
-			    let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-			    const extra = award.level.level == 1 ? false : order.extra;
-			    return extra ? prize * order.multiplier : prize;
-			},
-		}
 	}
 </script>
