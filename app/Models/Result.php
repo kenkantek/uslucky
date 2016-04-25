@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\AwardEvent;
 use App\Traits\StatusTrait;
+use App\VerifyingTicket\VerifyPowerball;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Sofa\Eloquence\Eloquence;
@@ -105,7 +106,18 @@ class Result extends Model
     {
         $final = [];
         foreach ($tickets as $ticket) {
-            $verify = $this->verifyTicket($ticket);
+            $game_id = $ticket->order->game_id;
+
+            switch ($game_id) {
+                case 1:
+                    $verify = $ticket->verifyTicket($this, new VerifyPowerball);
+                    break;
+
+                default:
+                    $verify = false;
+                    break;
+            }
+
             if ($verify) {
                 // verify là ticket có chiến thắng
 
@@ -124,7 +136,7 @@ class Result extends Model
                 //Transaction
                 $this->makeTransaction($verify, $award);
 
-                event(new AwardEvent($verify, $this->makePrizeMoney($verify)));
+                event(new AwardEvent($verify, $verify->makePrizeMoney($this)));
 
                 array_push($final, $status);
             }
@@ -132,61 +144,9 @@ class Result extends Model
         return $final; //tickets trúng thưởng
     }
 
-    protected function verifyTicket(Ticket $ticket)
-    {
-        if ($ticket->order->status->status != 'purchased') {
-            return false;
-        }
-
-        $match_numbers = collect($ticket->numbers)->intersect($this->numbers)->count();
-        $ball          = $ticket->ball == $this->ball;
-
-        $prize = 0;
-        if ($match_numbers == 5) {
-            if ($ball) {
-                //jackpot = Prize 1
-                $prize = 1;
-            } else {
-                // Prize 2
-                $prize = 2;
-            }
-        } elseif ($match_numbers == 4) {
-            if ($ball) {
-                //Prize 3
-                $prize = 3;
-            } else {
-                // Prize 4
-                $prize = 4;
-            }
-        } elseif ($match_numbers == 3) {
-            if ($ball) {
-                //Prize 5
-                $prize = 5;
-            } else {
-                // Prize 6
-                $prize = 6;
-            }
-        } elseif ($match_numbers == 2 && $ball) {
-            //Prize 7
-            $prize = 7;
-        } elseif ($match_numbers == 1 && $ball) {
-            //Prize 8
-            $prize = 8;
-        } elseif ($match_numbers == 0 && $ball) {
-            //Prize 9
-            $prize = 9;
-        }
-        $ticket->level     = Level::whereLevel($prize)->first();
-        $ticket->add_award = $prize === 1 ? $this->annuity : 0;
-
-        $this->updateStatusTicket($ticket, $prize ? 'won' : 'fail');
-
-        return $prize ? $ticket : false;
-    }
-
     protected function makeTransaction(Ticket $ticket, Award $award)
     {
-        $prizeMoney = $this->makePrizeMoney($ticket);
+        $prizeMoney = $ticket->makePrizeMoney($this);
         $order      = $ticket->order;
         $user       = $order->user;
         $balance    = $user->balance;
@@ -211,16 +171,4 @@ class Result extends Model
             ->publish();
     }
 
-    protected function makePrizeMoney(Ticket $ticket)
-    {
-        $level      = $ticket->level;
-        $prizeMoney = $ticket->add_award + $level->award;
-        $extra      = $level->level == 1 ? false : $ticket->order->extra;
-        return $extra ? min(2000000, $this->multiplier * $prizeMoney) : $prizeMoney;
-    }
-
-    protected function updateStatusTicket(Ticket $ticket, $status = 'fail')
-    {
-        $ticket->updateOrNewStatus($ticket->status)->withStatus($status)->publish();
-    }
 }

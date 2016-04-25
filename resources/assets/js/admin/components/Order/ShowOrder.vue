@@ -201,8 +201,8 @@ export default {
         },
         statusShowBtn() {
             const status =  {
-                'order_placed': false,
-                'pending_purchase': false,
+                order_placed: false,
+                pending_purchase: false,
                 purchased: false,
                 canceled: false
             };
@@ -250,6 +250,7 @@ export default {
             this.submiting = true;
             this.$http.put(laroute.route('admin.orders.update', {orders: this.order.id}), this.order).then(res => {
                 this.submiting = false;
+                toastr.success('Updated status success.');
             }, (res) => {
                 this.submiting = false;
                 COMMON.alertError();

@@ -11,7 +11,7 @@
                             <th>Winning Numbers</th>
                             <th>Extra</th>
                             <th>Prize</th>
-                            <th>Prize Money</th>
+                            <th>Reward</th>
                             <th>Status</th>
                             <th class="text-center">Action</th>
                         </tr>

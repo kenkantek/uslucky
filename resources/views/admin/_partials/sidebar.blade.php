@@ -10,7 +10,7 @@
                 </a>
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.results.index')) active open  @endif">
+            <li class="nav-item  @if(starts_with($routeName, 'admin.results') || starts_with($routeName, 'get.results')) active open  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>
                     <span class="title">Game result</span>
@@ -18,14 +18,14 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start">
+                    <li class="nav-item start @if(starts_with($routeName, 'admin.results')) active open @endif">
                         <a href="{{ route('admin.results.index') }}" class="nav-link ">
                             <span class="title">Daily result input</span>
                             <span class="selected"></span>
                         </a>
                     </li>
-                    <li class="nav-item start">
-                        <a href="{{ route('get.results.awards') }}" class="nav-link ">
+                    <li class="nav-item start @if(starts_with($routeName, 'get.results')) active open @endif">
+                        <a href="{{ route('get.results.awards') }}" class="nav-link">
                             <span class="title">Award matching module</span>
                             <span class="selected"></span>
                         </a>
@@ -90,22 +90,23 @@
                 </ul>
             </li>
 
-            <li class="nav-item  @if(starts_with($routeName, 'admin.users.index')) active open @endif">
+            <li class="nav-item  @if(starts_with($routeName, 'admin.users')) active open @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-user"></i>
                     <span class="title">Manage Users</span>
                     <span class="selected"></span>
                     <span class="arrow"></span>
                 </a>
+
                 <ul class="sub-menu">
-                    <li class="nav-item start @if(starts_with($routeName, 'admin.users')) active open @endif">
+                    <li class="nav-item start @if($routeName == 'admin.users.index') active open @endif">
                         <a href="{{route('admin.users.index')}}" class="nav-link ">
                             <span class="title">All Users</span>
                             <span class="selected"></span>
                         </a>
                     </li>
-                    <li class="nav-item start">
-                        <a href="{{route('admin.users.winners.index')}}" class="nav-link ">
+                    <li class="nav-item start @if($routeName == 'admin.users.winners.index') active open @endif">
+                        <a href="{{ route('admin.users.winners.index') }}" class="nav-link">
                             <span class="title">Winner User</span>
                             <span class="selected"></span>
                         </a>
@@ -122,7 +123,7 @@
                 </a>
             </li>
 
-            <li class="nav-item @if(starts_with($routeName, 'admin.games.powerball.index')) active open @endif">
+            <li class="nav-item @if(starts_with($routeName, 'admin.games')) active open @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-game-controller"></i>
                     <span class="title">Manage Games</span>
@@ -130,13 +131,13 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start">
+                    <li class="nav-item start @if($routeName == 'admin.games.powerball.index') active open @endif">
                         <a href="{{route('admin.games.powerball.index')}}" class="nav-link ">
                             <span class="title">Powerball</span>
                             <span class="selected"></span>
                         </a>
                     </li>
-                    <li class="nav-item start">
+                    <li class="nav-item start @if($routeName == 'admin.games.megamillion.index') active open @endif">
                         <a href="javascript:;" class="nav-link ">
                             <span class="title">Mega Million</span>
                             <span class="selected"></span>

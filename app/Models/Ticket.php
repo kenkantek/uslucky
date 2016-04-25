@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\StatusTrait;
+use App\VerifyingTicket\VerifyTicketInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
@@ -53,4 +54,20 @@ class Ticket extends Model
         $award->ticket()->associate($this);
         return $award;
     }
+
+    public function verifyTicket(Result $result, VerifyTicketInterface $verifyTicket)
+    {
+        $match_numbers = collect($this->numbers)->intersect($result->numbers)->count();
+        $ball          = $this->ball == $result->ball;
+        return $verifyTicket->verify($this, $result, $match_numbers, $ball);
+    }
+
+    public function makePrizeMoney(Result $result)
+    {
+        $level      = $this->level;
+        $prizeMoney = $this->add_award + $level->award;
+        $extra      = $level->level == 1 ? false : $this->order->extra;
+        return $extra ? min(2000000, $result->multiplier * $prizeMoney) : $prizeMoney;
+    }
+
 }
