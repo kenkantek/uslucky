@@ -42,7 +42,7 @@ class TransactionController extends Controller
             ->withAmount($transaction_need_update->amount)
             ->withAmountPrev($amount_prev)
             ->withAmountTotal($amount_total)
-            ->withDescription("Canceled request of transaction <a href='#transaction-{$transaction_need_update->id}'>#{$transaction_need_update->id}</a>.")
+            ->withDescription(trans('transaction.cancle', ['transaction' => $transaction_need_update->id]))
             ->publish();
 
             // Transaction add new status

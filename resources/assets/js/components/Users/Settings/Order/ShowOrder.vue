@@ -39,7 +39,7 @@
                     </dd>
 
                     <dt></dt>
-                    <dd class="margin-top-10" v-if="order.status.status == 'Order Placed'">
+                    <dd class="margin-top-10" v-if="order.status.status == 'order placed'">
                         <button class="btn btn-primary" @click="onCancle">{{$l('setting.button_cancel')}}</button>
                     </dd>
                 </dl>
@@ -100,59 +100,60 @@
 
 <script>
 import laroute from '../../../../laroute';
-import BOX from '../../../../common';
+import COMMON from '../../../../common';
 import deferred from 'deferred';
 
 export default {
     data() {
-            return {
-                order: {}
-            }
-        },
-        asyncData(resolve, reject) {
-            this._fetchOrder(laroute.route('front::api::get.order', {order: order_id})).done(order => {
-                resolve({
-                    order
-                });
-            }, err => {
-                BOX.alertError();
-            });
-        },
-   
-        methods: {
-            _fetchOrder(api) {
-                this.loading = true;
-                let def = deferred();
-                this.$http.get(api).then(res => {
-                    def.resolve(res.data);
-                }, (res) => {
-                    def.reject(res);
-                    this.loading = false;
-                });
-                return def.promise;
-            },
+        return {
+            order: {}
+        }
+    },
 
-            onCancle() {
-                swal({
-                    title: "Are you sure?",
-                    text: "Cancle order",
-                    type: "warning",
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, cancle it!",
-                    cancelButtonText: "No, cancel plx!",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                }, () => {
-                    this.$http.put(laroute.route('front::api::put.order.cancel', {order: this.order.id})).then(res => {
-                        this.order.status.status = 'canceled';
-                        swal.close();
-                        toastr.success(res.data);
-                    }, res => {
-                        BOX.alertError();
-                    });
-                });
-            }
+    asyncData(resolve, reject) {
+        this._fetchOrder(laroute.route('front::api::get.order', {order: order_id})).done(order => {
+            resolve({
+                order
+            });
+        }, err => {
+            COMMON.alertError();
+        });
+    },
+
+    methods: {
+        _fetchOrder(api) {
+            this.loading = true;
+            let def = deferred();
+            this.$http.get(api).then(res => {
+                def.resolve(res.data);
+            }, (res) => {
+                def.reject(res);
+                this.loading = false;
+            });
+            return def.promise;
         },
+
+        onCancle() {
+            swal({
+                title: "Are you sure?",
+                text: "Cancle order",
+                type: "warning",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, cancle it!",
+                cancelButtonText: "No, cancel plx!",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+            }, () => {
+                this.$http.put(laroute.route('front::api::put.order.cancel', {order: this.order.id})).then(res => {
+                    this.order.status.status = 'canceled';
+                    swal.close();
+                    toastr.success(res.data);
+                }, res => {
+                    COMMON.alertError();
+                });
+            });
+        }
+    }
 }
 </script>

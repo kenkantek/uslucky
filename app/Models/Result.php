@@ -157,7 +157,7 @@ class Result extends Model
             ->withAmount($prizeMoney)
             ->withAmountPrev($balance)
             ->withAmountTotal($prizeMoney + $balance)
-            ->withDescription("Winning money is added to your account. Order #{$order->id}")
+            ->withDescription(trans('transaction.winner', ['order' => $order->id]))
             ->publish();
 
         // Transaction add status

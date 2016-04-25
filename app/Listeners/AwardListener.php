@@ -13,7 +13,7 @@ class AwardListener
         $user   = $ticket->order->user;
         Mail::send('mail.award', ['senderName' => $user->fullname, 'award' => $ticket, 'prizeMoney' => $event->prizeMoney], function ($m) use ($user) {
             $m->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
-            $m->to($user->email, $user->fullname)->subject("You are WINNER! Congratulation from USLUCKY");
+            $m->to($user->email, $user->fullname)->subject(trans('event.award'));
         });
     }
 
