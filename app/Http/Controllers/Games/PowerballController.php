@@ -32,6 +32,7 @@ class PowerballController extends Controller
         return $billing->save();
     }
 
+    // numbers lucky
     public function putLuckys(Request $request)
     {
         $tickets = $request->tickets;
