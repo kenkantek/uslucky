@@ -26,6 +26,21 @@ class ManageGameTableSeeder extends Seeder
                 ->withValue($value)
                 ->publish();
         }
+        
+        $mega       = Game::find(2);
+        $mega_value = [
+            'hours_before_close' => 9,
+            'each_per_ticket'    => 2,
+            'extra_per_ticket'   => 1,
+
+        ];
+
+        foreach ($mega_value as $key => $value) {
+            $mega->newOrUpdateSetting()
+                ->withKey($key)
+                ->withValue($value)
+                ->publish();
+        }
 
     }
 }

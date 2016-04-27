@@ -29,8 +29,10 @@ class PagesController extends Controller
     public function getIndex()
     {
         $result    = Result::whereGameId(1)->latest('draw_at')->first();
+        $result_mega    = Result::whereGameId(2)->latest('draw_at')->first();
         $powerball = powerballNextTime();
-        return view('home', compact('powerball', 'result'));
+        $mega      = megaNextTime();
+        return view('home', compact('powerball', 'result', 'mega','result_mega'));
     }
 
     public function getAbout()

@@ -36,6 +36,22 @@ class GameController extends Controller
         return view('games.powerball');
     }
 
+    public function getMegamillions()
+    {
+        Javascript::put(array_add(ManageGame::getConfig(2)->toArray(), '_powerball', megaNextTime()));
+        JavaScript::put([
+            '_stripe' => [
+                'key' => config('services.stripe.key'),
+            ],
+            '_date'   => [
+                'month' => generateMonth(),
+                'year'  => generateYear(15),
+            ],
+            '_luckys' => $this->user ? $this->user->luckys()->whereGameId(2)->pluck('numbers', 'line') : [],
+        ]);
+        return view('games.megamillions');
+    }
+
     // Lay thong tin de Purchase
     public function getPayment()
     {

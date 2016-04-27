@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'title'               => 'Buy Official Tickets for U.S. Mega Millions Lottery Online',
+    'des'                 => 'Select 1-75 main numbers and 1-15 for the Mega Ball to <strong>buy official Mega Millions tickets</strong> every Tuesday and Friday. Mega Millions has a no-limit jackpot, rising as much as $656 million in March 2012. Play the Mega Millions lottery online and stand a chance to <strong>become a mega-millionaire!</strong>',
+    'luckynumber'         => 'MY LUCKY NUMBERS',
+    'button'              => 'Quick Pick',
+    'extra'               => 'For An Extra $:extra Per Ticket, Make It A Power Play',
+    'play'                => 'Play now',
+    'total'               => 'Total',
+    'modal_title'         => 'Purchase',
+    'message'             => 'You need login to Purchase ticket.',
+    'message_err'         => 'Something wrong, please try again!',
+    'price'               => 'Ticket Price',
+    'modal_choose'        => 'Choose method payment',
+    'modal_balance'       => 'Account balance',
+    'modal_afford'        => 'You can not afford to buy it.',
+    'modal_button_add'    => 'Add now',
+    'modal_credit'        => 'By credit card',
+    'modal_des_credit'    => 'Description',
+    'modal_button_cancel' => 'Cancel',
+    'modal_button_submit' => 'Submit',
+    'modal_swal'          => 'Are you sure purchase it?',
+    'credit'              => 'CARD NUMBER',
+    'credit_exp'          => 'EXPIRATION',
+    'credit_date'         => 'DATE',
+    'jackpot'             => 'ESTIMATED JACKPOT',
+    'many'                => 'How many tickets do you want to buy:',
+    'choose'              => 'Choose',
+
+];

@@ -2,6 +2,41 @@
   color: red;
 }
 
+body.game-megamillions {
+  .header-game {
+    width: 100%;
+    min-height: 125px;
+    padding: 5px;
+
+    background: #B30408 url(images/header_megamillions.png) no-repeat;
+    background-size: cover;
+
+    color: #fff;
+
+
+    .jackpot {
+      padding: 10px;
+    }
+
+    .draw-date {
+      clear: both;
+    }
+
+    .tickets {
+      input{
+        color: $text-color;
+        outline: none;
+
+        &[type=text] {
+          padding: 2px;
+          text-align: center;
+          width: 30px;
+        }
+      }
+    }
+  }
+}
+
 .notifications{
   padding-left:0px;
   &>li{

@@ -122,7 +122,7 @@
                 </a>
             </li>
 
-            <li class="nav-item @if(starts_with($routeName, 'admin.games.powerball.index')) active open @endif">
+            <li class="nav-item @if(starts_with($routeName, 'admin.games.show')) active open @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-game-controller"></i>
                     <span class="title">Manage Games</span>
@@ -130,18 +130,15 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
+                    @foreach($games as $game)
                     <li class="nav-item start">
-                        <a href="{{route('admin.games.powerball.index')}}" class="nav-link ">
-                            <span class="title">Powerball</span>
+                        <a href="{{route('admin.games.show',$game->id)}}" class="nav-link ">
+                            <span class="title">{{$game->name}}</span>
                             <span class="selected"></span>
                         </a>
                     </li>
-                    <li class="nav-item start">
-                        <a href="javascript:;" class="nav-link ">
-                            <span class="title">Mega Million</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
+                    @endforeach
+
                 </ul>
             </li>
 

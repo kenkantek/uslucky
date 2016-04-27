@@ -25,6 +25,7 @@ import SettingAccount from './components/Users/Settings/Accounts/Account.vue';
 import CreditCard from './components/Users/Settings/Payment/Index.vue';
 import Winning from './components/Users/Settings/Winning/Index.vue';
 import Powerball from './components/Games/Powerball/Index.vue';
+import MegaMillions from './components/Games/MegaMillions/Index.vue';
 import Transaction from './components/Users/Settings/Payment/Transaction.vue';
 import Order from './components/Users/Settings/Order/Index.vue';
 import ShowOrder from './components/Users/Settings/Order/ShowOrder.vue'
@@ -46,7 +47,9 @@ new Vue({
         Order,
         ShowOrder,
         Winnumber,
-        Notification
+        Notification,
+        MegaMillions,
+        
     }
 });
 $('[data-toggle="tooltip"]').tooltip();

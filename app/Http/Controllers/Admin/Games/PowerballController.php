@@ -10,9 +10,9 @@ use Cache;
 
 class PowerballController extends Controller
 {
-    public function index()
+    public function show($id)
     {
-        return view('admin.games.powerball');
+        return view('admin.games.powerball',compact('id'));
     }
 
     public function update($id, PowerballRequest $request)
@@ -24,8 +24,8 @@ class PowerballController extends Controller
         return $setting;
     }
 
-    public function getKeys()
+    public function getKeys($id)
     {
-        return Game::find(1)->settings;
+        return Game::find($id)->settings;
     }
 }

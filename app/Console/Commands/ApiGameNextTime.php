@@ -42,6 +42,10 @@ class ApiGameNextTime extends Command
         Cache::forget('Powerball');
         $powerball = powerballNextTime();
         print_r($powerball);
+
+        Cache::forget('Mega Millions');
+        $mega = megaNextTime();
+        print_r($mega);
         $this->info('End!');
     }
 }

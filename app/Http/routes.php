@@ -116,19 +116,28 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         ]);
 
     });
-    $router->resource('orders', 'User\OrderController', ['only' => [
-        'index', 'show',
-    ]]);
+    $router->resource('orders', 'User\OrderController', [
+        'only' => [
+            'index',
+            'show',
+        ]
+    ]);
 
     $router->controller('game', 'GameController', [
-        'getPowerball' => 'game.powerball',
-        'getPayment'   => 'game.get.payment',
-        'getIndex'     => 'game.get.index',
+        'getPowerball'    => 'game.powerball',
+        'getMegamillions' => 'game.megamillions',
+        'getPayment'      => 'game.get.payment',
+        'getIndex'        => 'game.get.index',
     ]);
 
     $router->controller('powerball', 'Games\PowerballController', [
         'postPowerball' => 'post.powerball',
         'putLuckys'     => 'put.luckys',
+    ]);
+    
+    $router->controller('megamillions', 'Games\MegamilionController', [
+        'postMegamilion' => 'post.megamillion',
+        'putLuckys'     => 'put.luckys.mega',
     ]);
 
 });
@@ -136,7 +145,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 $router->group([
     'prefix'     => 'admin',
     'namespace'  => 'Admin',
-    'middleware' => ['web']], function () use ($router) {
+    'middleware' => ['web']
+], function () use ($router) {
 
     $router->get('login', [
         'as'   => 'admin.auth.login',
@@ -198,7 +208,7 @@ $router->group([
                 'uses' => 'UserController@getOrders',
             ]);
 
-            $router->get('manages/powerball', [
+            $router->get('manages/{id}', [
                 'as'   => 'get.powerball',
                 'uses' => 'Games\PowerballController@getKeys',
             ]);
@@ -298,11 +308,9 @@ $router->group([
             'only' => ['index', 'update'],
         ]);
 
-        $router->group(['prefix' => 'games'], function () use ($router) {
-            $router->resource('powerball', 'Games\PowerballController', [
-                'only' => ['index', 'update'],
-            ]);
-        });
+        $router->resource('games', 'Games\PowerballController', [
+            'only' =>['show','update']
+        ]);
 
         //NOTICE: Only bottom
         $router->controller('/', 'AdminController', [

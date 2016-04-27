@@ -86,21 +86,37 @@
 
                 <div class="col-md-6">
                     <div class="game">
-                        <h3>Mega Millions <br>$26.0 <span>Million</span></h3>
+                        <h3>Mega Millions <br><span style="text-transform: capitalize;">
+                                @if($mega['amount'] == "Not Published")
+                                    {{$mega['amount']}}
+                                @else
+                                    ${{niceNumber($mega['amount'])}}
+                                @endif
+                            </span></h3>
 
-                        <p>{{trans('home.button')}}: $102.0 <span>Million</span></p>
+                        <p>{{trans('home.button')}}:
+                            @if($mega['amount'] == "Not Published")
+                                {{$mega['amount']}}
+                            @else
+                                ${{niceNumber($mega['cash_option'])}}
+                            @endif
+                        </p>
 
-                        <p>{!! trans('home.next') !!}: <span>MAY 31</span></p>
+                        <p>{!! trans('home.next') !!}: <span>{{Carbon\Carbon::createFromTimestamp(strtotime($mega['time']))->formatLocalized('%B %d')}}</span></p>
                         <ul class="list">
-                            <li>19</li>
-                            <li>24</li>
-                            <li>45</li>
-                            <li>18</li>
-                            <li>36</li>
-                            <li>5</li>
+                            @if($result_mega)
+                                @forelse($result_mega->numbers as $number)
+                                    <li>{{$number}}</li>
+                                @empty
+                                    <li>No</li>
+                                @endforelse
+                                <li>{{$result_mega->ball}}</li>
+                            @else
+                                <li>No</li>
+                            @endif
                         </ul>
                         <p>
-                            <a class="link home_page" href="#">{{trans('home.button')}}</a>
+                            <a class="link home_page" href="{{route('front::game.powerball')}}">{{trans('home.button')}}</a>
                         </p>
                     </div>
                 </div>

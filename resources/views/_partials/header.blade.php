@@ -16,6 +16,7 @@
                 <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a href="{{route('front::game.get.index')}}">{{trans('home.menu_game')}} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                 	<li><a href="{{route('front::game.powerball')}}" title="">Powerball</a></li>
+                    <li><a href="{{route('front::game.megamillions')}}" title="">MegaMilions</a></li>
                 </ul>
                 </li>
                 <li @if($routeName === 'front::get.winning.numbers') class="active" @endif><a href="{{route('front::get.winning.numbers')}}">{{trans('home.menu_winning')}}</a></li>

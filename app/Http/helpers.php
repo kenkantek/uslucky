@@ -21,12 +21,24 @@ function generateYear($add = 15)
 
 function powerballNextTime()
 {
-    return getGameNextTime('Powerball');
+    $now = Carbon::now();
+    $thu4 = $now->copy()->next(Carbon::WEDNESDAY);
+    $thu7 = $now->copy()->next(Carbon::SATURDAY);
+    
+    return getGameNextTime('Powerball', $now, $thu4, $thu7);
 }
 
-function getGameNextTime($game = 'Powerball')
+function megaNextTime()
 {
-    $result = Cache::rememberForever($game, function () use ($game) {
+    $now = Carbon::now();
+    $thu3 = $now->copy()->next(Carbon::TUESDAY);
+    $thu6 = $now->copy()->next(Carbon::FRIDAY);
+    return getGameNextTime('Mega Millions',$now, $thu3, $thu6);
+}
+
+function getGameNextTime($game = 'Powerball', $now, $t1, $t2)
+{
+    $result = Cache::rememberForever($game, function () use ($game, $now, $t1, $t2) {
         $config = Game::whereName($game)->first()->settings->pluck('value', 'key');
         $params = [
             'game-names' => $game,
@@ -50,16 +62,15 @@ function getGameNextTime($game = 'Powerball')
         $time = Carbon::createFromTimestamp(substr($response->drawTime, 0, -3))->addHours($config['hours_before_close']);
 
         // Kiểm tra $time nếu nhỏ hơn ngày hiện tại thì lấy Next
-        $now = Carbon::now();
-        $thu4 = $now->copy()->next(Carbon::WEDNESDAY);
-        $thu7 = $now->copy()->next(Carbon::SATURDAY);
+        
+        
 
         // var_dump($time);
         // var_dump($now);
 
         if ($time->diffInDays($now, false) > 0 ||
             ($time->diffInDays($now, false) == 0 && $time->diffInHours($now, false) >= 0)) {
-            $time = $thu4->diffInDays($thu7, false) <= 0 ? $thu7 : $thu4;
+            $time = $t1->diffInDays($t2, false) <= 0 ? $t2 : $t1;
             $amount = $cash_option = 'Not Published';
         }
         return [
