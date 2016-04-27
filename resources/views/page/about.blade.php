@@ -9,7 +9,7 @@
                 <h2>{{trans('about.title', ['title'=>env('TITLE')])}}</h2>
 
                 <div class="block1">
-                    <div class="left"><img src="{{asset('images/page2_img1.jpg')}}" alt=""></div>
+                    <div class="left"><img src="{{asset('images/ticketscan.png')}}" alt=""></div>
                     <h5><a href="#">{{trans('about.sub_title')}}</a></h5>
                     <!-- Go to www.addthis.com/dashboard to customize your tools -->
                     <div class="addthis_sharing_toolbox"></div>
@@ -49,15 +49,10 @@
             <div class="col-md-12">
                 <h2>{{trans('about.why_choose_us')}}</h2>
 
-                <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit
-                    varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                    Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem.
-                    Maecenas tristique orci ac semduis ultricies pharetra magnaonec accumsan.</p>
-
                 <div class="col-md-4">
                     <div class="thumb1">
                         <div class="circle">1</div>
-                        <h5><a href="#">Lorem ipsum dolor sit amet consectetuer adipiscin</a></h5>
+                        <h5><a href="#">WE BUY</a></h5>
 
                         <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce
                             suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
@@ -68,7 +63,7 @@
                 <div class="col-md-4">
                     <div class="thumb1">
                         <div class="circle">2</div>
-                        <h5><a href="#">Sed ut perspiciatis unde omnis iste natus error sit</a></h5>
+                        <h5><a href="#">WE SCAN</a></h5>
 
                         <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce
                             suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
@@ -79,7 +74,7 @@
                 <div class="col-md-4">
                     <div class="thumb1">
                         <div class="circle">3</div>
-                        <h5><a href="#">Ut enim ad minima veniam quis nostrum exercitationem</a></h5>
+                        <h5><a href="#">YOU SEE</a></h5>
 
                         <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce
                             suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
@@ -91,7 +86,7 @@
         </div>
     </div>
 
-    <div class="bg2 p44">
+    {{--<div class="bg2 p44">
         <div class="container">
             <div class="col-md-12">
                 <h2 class="gray">{{trans('about.testimonials')}}</h2>
@@ -128,5 +123,5 @@
             </div>
 
         </div>
-    </div>
+    </div>--}}
 @stop
