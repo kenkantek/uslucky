@@ -157,7 +157,7 @@ class Order extends Model
             ->withAmount($price)
             ->withAmountPrev($balance)
             ->withAmountTotal($price + $balance)
-            ->withDescription("Account Refund money of order #{$this->id}")
+            ->withDescription(trans('transaction.refund', ['order' => $this->id]))
             ->publish();
         // Transaction add status
         $status = $transaction->updateOrNewStatus()

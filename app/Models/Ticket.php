@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\StatusTrait;
+use App\VerifyingTicket\VerifyTicketInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
@@ -12,6 +13,8 @@ class Ticket extends Model
     protected $casts = [
         'numbers' => 'array',
     ];
+
+    protected $appends = ['reward'];
 
     public function order()
     {
@@ -52,5 +55,47 @@ class Ticket extends Model
         $award = new Award;
         $award->ticket()->associate($this);
         return $award;
+    }
+
+    public function verifyTicket(Result $result, VerifyTicketInterface $verifyTicket)
+    {
+        $match_numbers = collect($this->numbers)->intersect($result->numbers)->count();
+        $ball          = $this->ball == $result->ball;
+        return $verifyTicket->verify($this, $result, $match_numbers, $ball);
+    }
+
+    public function makePrizeMoney(Result $result)
+    {
+        $level = $this->level;
+        $prize = $this->add_award + $level->award;
+        $extra = $level->level == 1 ? false : $this->order->extra;
+
+        return $this->finalReward($extra, $result->multiplier * $prize, $prize);
+    }
+
+    public function getRewardAttribute()
+    {
+        return $this->award ? $this->reward($this->award) : 0;
+    }
+
+    private function reward($award)
+    {
+        $prize = $award->level->award + $award->add_award;
+        $extra = $award->level->level == 1 ? false : $this->order->extra;
+
+        return $this->finalReward($extra, $prize * $award->result->multiplier, $prize);
+    }
+
+    private function finalReward($extra, $total, $prize)
+    {
+        switch ($this->order->game_id) {
+            case 1:
+                $min = 2000000;
+                break;
+            default:
+                break;
+        }
+
+        return $extra ? (isset($min) ? min($min, $total) : $total) : $prize;
     }
 }

@@ -18,8 +18,8 @@ class UserListener
         }
 
         Mail::send('mail.verify', ['event' => $event->user], function ($m) use ($event) {
-            $m->from(env('MAIL_FROM'), 'Verify Your Email Address From US Lucky');
-            $m->to($event->user->email, $event->user->first_name)->subject('Verify Your Email Address');
+            $m->from(env('MAIL_FROM'), env('MAIL_NAME'));
+            $m->to($event->user->email, $event->user->first_name)->subject(trans('event.register'));
         });
     }
 

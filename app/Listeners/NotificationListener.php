@@ -14,11 +14,17 @@ class NotificationListener
         $order = $event->order;
         if ($order->status->status == 'purchased') {
             $subject = 'purchased';
-            $body    = "Your order #{$order->id} at  {$order->created_at}  was purchased. Please check by Your order menu.";
-
+            $body    = trans('event.updated_order', [
+                'order_id'   => $order->id,
+                'created_at' => $order->created_at,
+            ]);
         } else if ($order->status->status == 'canceled') {
             $subject = 'canceled';
-            $body    = "Because your order #{$order->id} at {$order->created_at} was canceled. We refund to you. Total amount: $ " . number_format($order->price) . " .";
+            $body    = trans('event.order_cancle', [
+                'order_id'   => $order->id,
+                'created_at' => $order->created_at,
+                'price'      => number_format($order->price),
+            ]);
         }
 
         isset($subject) && $order->user->makeNotification($subject, $body, $order);
@@ -27,7 +33,11 @@ class NotificationListener
     public function onClaimRequest($event)
     {
         $trans = $event->trans;
-        $body  = "Your claim request #{$trans->id} at {$trans->created_at} was paid. Total amount: $ " . number_format($trans->amount) . ".";
+        $body  = trans('event.claim', [
+            'transaction' => $trans->id,
+            'created_at'  => $trans->created_at,
+            'amount'      => number_format($trans->amount),
+        ]);
 
         $trans->user->makeNotification('claimrequest', $body, $trans);
     }
@@ -35,7 +45,12 @@ class NotificationListener
     public function onWinner($event)
     {
         $ticket = $event->ticket;
-        $body   = "You are WINNER with ticket number: <strong> " . join(" ", $ticket->numbers) . "  <span style='color: red'>{$ticket->ball}</span></strong>. Prize: {$ticket->level->label} with $ " . number_format($event->prizeMoney) . " .";
+        $body   = trans('event.winner', [
+            'tickets' => join(" ", $ticket->numbers),
+            'ball'    => $ticket->ball,
+            'label'   => $ticket->level->label,
+            'reward'  => number_format($event->prizeMoney),
+        ]);
 
         $ticket->order->user->makeNotification('award', $body, $ticket);
     }

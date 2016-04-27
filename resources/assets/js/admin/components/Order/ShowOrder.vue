@@ -107,7 +107,7 @@
                                 <span v-else>N/A</span>
                             </td>
                             <td>
-                                <span v-if="ticket.award">{{ prizeMoney(ticket.award) | currency }}</span>
+                                <span v-if="ticket.award">{{ ticket.reward | currency }}</span>
                                 <span v-else>N/A</span>
                             </td>
                         </tr>
@@ -201,8 +201,8 @@ export default {
         },
         statusShowBtn() {
             const status =  {
-                'order_placed': false,
-                'pending_purchase': false,
+                order_placed: false,
+                pending_purchase: false,
                 purchased: false,
                 canceled: false
             };
@@ -229,11 +229,6 @@ export default {
     },
 
     methods: {
-        prizeMoney(award) {
-            let prize = parseFloat(award.level.award) + parseFloat(award.add_award);
-            const extra = award.level.level == 1 ? false : this.order.extra;
-            return extra ? prize * this.order.multiplier : prize;
-        },
         _fetchOrder(api) {
             this.loading = true;
             let def = deferred();
@@ -250,6 +245,7 @@ export default {
             this.submiting = true;
             this.$http.put(laroute.route('admin.orders.update', {orders: this.order.id}), this.order).then(res => {
                 this.submiting = false;
+                toastr.success('Updated status success.');
             }, (res) => {
                 this.submiting = false;
                 COMMON.alertError();
