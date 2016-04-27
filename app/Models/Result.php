@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\AwardEvent;
 use App\Traits\StatusTrait;
+use App\VerifyingTicket\VerifyMega;
 use App\VerifyingTicket\VerifyPowerball;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -111,6 +112,9 @@ class Result extends Model
             switch ($game_id) {
                 case 1:
                     $verify = $ticket->verifyTicket($this, new VerifyPowerball);
+                    break;
+                case 2:
+                    $verify = $ticket->verifyTicket($this, new VerifyMega);
                     break;
 
                 default:
