@@ -61,7 +61,7 @@
         </div>
     </nav>
     <div class="col-md-12 header_bg">
-        <div class="row">
+        <div class="hidden row">
             {!! HTML::image('css/images/logo.png', env('TITLE'), ['class' => 'img-responsive']) !!}
             <div class="slogan">
                 {!! trans('home.title') !!}
