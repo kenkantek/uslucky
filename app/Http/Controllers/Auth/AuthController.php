@@ -43,8 +43,10 @@ class AuthController extends Controller
         parent::__construct();
         $this->middleware('guest', ['except' => 'logout', 'getVerify', 'getReSendEmail']);
         \JavaScript::put([
-            '_link' => [
-                'account' => route('front::settings.account'),
+            '_date' => [
+                'day'   => generateDay(),
+                'month' => generateMonth(),
+                'year'  => generateYear(100, true),
             ],
         ]);
     }
@@ -61,7 +63,7 @@ class AuthController extends Controller
         return Validator::make($data, [
             'first_name' => 'required|max:255',
             'last_name'  => 'required|max:255',
-            'birthday'   => ['required', "before:$minimum_old years ago"],
+            'birthday'   => ['required', 'date', "before:$minimum_old years ago"],
             'email'      => 'required|email|max:255|unique:users',
             'password'   => 'required|confirmed|min:6',
         ], [

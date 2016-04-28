@@ -14,14 +14,14 @@
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
-                <!-- BEGIN PORTLET -->
-                <powerball id="{{$id}}">
+
+                <manage-game id="{{$id}}">
                     <div class="caption" slot="header">
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject font-dark sbold uppercase">Manager game {{$game_name}}</span>
                     </div>
-                </powerball>
-                <!-- END PORTLET -->
+                </managame>
+
             </div>
         </div>
     </div>

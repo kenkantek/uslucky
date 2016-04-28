@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Games;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Settings\PowerballRequest;
@@ -8,11 +8,11 @@ use App\Models\Game;
 use App\Models\ManageGame;
 use Cache;
 
-class PowerballController extends Controller
+class ManageGameController extends Controller
 {
     public function show($id)
     {
-        return view('admin.games.powerball',compact('id'));
+        return view('admin.managegame', compact('id'));
     }
 
     public function update($id, PowerballRequest $request)

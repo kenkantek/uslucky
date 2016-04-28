@@ -120,7 +120,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'only' => [
             'index',
             'show',
-        ]
+        ],
     ]);
 
     $router->controller('game', 'GameController', [
@@ -134,10 +134,10 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postPowerball' => 'post.powerball',
         'putLuckys'     => 'put.luckys',
     ]);
-    
+
     $router->controller('megamillions', 'Games\MegamilionController', [
         'postMegamilion' => 'post.megamillion',
-        'putLuckys'     => 'put.luckys.mega',
+        'putLuckys'      => 'put.luckys.mega',
     ]);
 
 });
@@ -145,7 +145,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 $router->group([
     'prefix'     => 'admin',
     'namespace'  => 'Admin',
-    'middleware' => ['web']
+    'middleware' => ['web'],
 ], function () use ($router) {
 
     $router->get('login', [
@@ -209,8 +209,8 @@ $router->group([
             ]);
 
             $router->get('manages/{id}', [
-                'as'   => 'get.powerball',
-                'uses' => 'Games\PowerballController@getKeys',
+                'as'   => 'get.managegame',
+                'uses' => 'ManageGameController@getKeys',
             ]);
 
             $router->post('results/{game_id}/assign', [
@@ -308,8 +308,8 @@ $router->group([
             'only' => ['index', 'update'],
         ]);
 
-        $router->resource('games', 'Games\PowerballController', [
-            'only' =>['show','update']
+        $router->resource('games', 'ManageGameController', [
+            'only' => ['show', 'update'],
         ]);
 
         //NOTICE: Only bottom

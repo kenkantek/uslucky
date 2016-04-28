@@ -20,7 +20,30 @@
 	    <div class="form-group" :class="{'has-error': formErrors.birthday}">
 	        <label class="col-md-4 control-label">{{$l('auth.birthday')}} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
-	            <datepicker :value.sync="formInputs.birthday" format="YYYY-MM-DD"></datepicker>
+
+	            <div class="row">
+					<div class="col-xs-3">
+						<label>Day</label>
+						<select class="form-control" v-model="birthday.day">
+							<option v-for="day in date.day" :value="day" v-text="day"></option>
+						</select>
+					</div>
+
+					<div class="col-xs-5">
+						<label>Month</label>
+						<select class="form-control" v-model="birthday.month">
+							<option v-for="month in date.month" :value="$index + 1 | padLeft 2 '0'" v-text="month"></option>
+						</select>
+					</div>
+
+					<div class="col-xs-4">
+						<label>Year</label>
+						<select class="form-control" v-model="birthday.year">
+							<option v-for="year in date.year" :value="year" v-text="year"></option>
+						</select>
+					</div>
+              	</div>
+
 	            <span class="help-block" v-show="formErrors.birthday" v-text="formErrors.birthday"></span>
 	        </div>
 	    </div>
@@ -63,6 +86,8 @@
 </template>
 
 <script>
+	import _ from 'lodash';
+
 	import Datepicker from '../Globals/Datepicker.vue';
 	import laroute from '../../laroute';
 	import COMMON from '../../common';
@@ -70,9 +95,20 @@
 	export default {
 		data() {
 			return {
+				date: _date,
+				birthday: {},
 				formInputs: typeof _userFb === 'undefined' ? {} : {..._userFb},
 				formErrors: {},
 				submiting: false
+			}
+		},
+
+		watch: {
+			birthday: {
+				deep: true,
+				handler(val) {
+					this.formInputs.birthday = `${val.year}-${val.month}-${val.day}`;
+				}
 			}
 		},
 
@@ -102,6 +138,12 @@
 						toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
 					}
 				});
+			}
+		},
+
+		filters: {
+			padLeft(val, length = 0, str = '') {
+				return _.padStart(val, length, str);
 			}
 		},
 

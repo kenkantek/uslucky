@@ -2,6 +2,13 @@
 use App\Models\Game;
 use Carbon\Carbon;
 
+function generateDay()
+{
+    return array_map(function ($n) {
+        return str_pad($n, 2, '0', STR_PAD_LEFT);
+    }, range(1, 31));
+}
+
 function generateMonth()
 {
     $month = [];
@@ -13,27 +20,27 @@ function generateMonth()
     return $month;
 }
 
-function generateYear($add = 15)
+function generateYear($add = 15, $reverse = false)
 {
     $y = date('Y');
-    return range($y, $y + $add);
+    return $reverse ? range($y, $y - $add) : range($y, $y + $add);
 }
 
 function powerballNextTime()
 {
-    $now = Carbon::now();
+    $now  = Carbon::now();
     $thu4 = $now->copy()->next(Carbon::WEDNESDAY);
     $thu7 = $now->copy()->next(Carbon::SATURDAY);
-    
+
     return getGameNextTime('Powerball', $now, $thu4, $thu7);
 }
 
 function megaNextTime()
 {
-    $now = Carbon::now();
+    $now  = Carbon::now();
     $thu3 = $now->copy()->next(Carbon::TUESDAY);
     $thu6 = $now->copy()->next(Carbon::FRIDAY);
-    return getGameNextTime('Mega Millions',$now, $thu3, $thu6);
+    return getGameNextTime('Mega Millions', $now, $thu3, $thu6);
 }
 
 function getGameNextTime($game = 'Powerball', $now, $t1, $t2)
@@ -62,8 +69,6 @@ function getGameNextTime($game = 'Powerball', $now, $t1, $t2)
         $time = Carbon::createFromTimestamp(substr($response->drawTime, 0, -3))->addHours($config['hours_before_close']);
 
         // Kiểm tra $time nếu nhỏ hơn ngày hiện tại thì lấy Next
-        
-        
 
         // var_dump($time);
         // var_dump($now);
@@ -108,7 +113,7 @@ function niceNumber($n)
     } elseif ($n > 1000000000) {
         return round(($n / 1000000000), 2) . ' billion';
     } elseif ($n > 1000000) {
-        return round(($n / 1000000), 2) . ' '.trans('home.milion');
+        return round(($n / 1000000), 2) . ' ' . trans('home.milion');
     } elseif ($n > 1000) {
         return round(($n / 1000), 2) . ' thousand';
     }

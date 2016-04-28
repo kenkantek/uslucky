@@ -21,7 +21,7 @@ class ManageGameTableSeeder extends Seeder
         $powerball       = Game::find(1);
         $powerball_value = [
             'hours_before_close'  => 9,
-            'each_per_ticket'     => 2,
+            'each_per_ticket'     => 3,
             'extra_per_ticket'    => 1,
             'default_line_number' => 5,
         ];

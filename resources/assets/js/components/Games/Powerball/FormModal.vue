@@ -197,8 +197,8 @@
                                 }, () => {
                                     location.href = laroute.route('front::orders.index');
                                 });
-                                localStorage.removeItem("tickets");
-                                localStorage.removeItem("extra");
+                                localStorage.removeItem(`tickets_${_game_id}`);
+                                localStorage.removeItem(`extra_${_game_id}`);
                                 vm.closeModal();
                             }, res => {
                                 if(res.status === 400)  {

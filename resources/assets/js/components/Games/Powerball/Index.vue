@@ -132,16 +132,16 @@
                 nextTime: {..._nextTime},
                 eachPerTicket: each_per_ticket,
                 extraPerTicket: extra_per_ticket,
-                extra: Boolean(Number(localStorage.extra)) || null,
+                extra: Boolean(Number(localStorage[`extra_${_game_id}`])) || null,
                 submiting: false,
-                numberLineDefault: 5,
+                numberLineDefault: default_line_number,
                 luckys: _.mapValues(_luckys, lucky => JSON.parse(lucky))
             }
         },
 
         computed: {
             lineDefault() {
-                return this.tickets.length || 5;
+                return this.tickets.length || default_line_number;
             },
             statusDisable() {
                 return this.tickets.length > 1 ? false : true;
@@ -172,18 +172,18 @@
         watch: {
             tickets: {
                 handler(tickets) {
-                    localStorage.tickets = JSON.stringify(tickets);
+                    localStorage[`tickets_${_game_id}`] = JSON.stringify(tickets);
                 },
                 deep: true
             },
             extra(val) {
-                localStorage.extra = Number(val);
+                localStorage[`extra_${_game_id}`] = Number(val);
             }
         },
 
         ready() {
-            if(localStorage.tickets) {
-                this.tickets = JSON.parse(localStorage.tickets);
+            if(localStorage[`tickets_${_game_id}`]) {
+                this.tickets = JSON.parse(localStorage[`tickets_${_game_id}`]);
             } else {
                 for(let i = 0; i < this.numberLineDefault; i++) {
                     this.tickets.push({...this.ticketTemplate, uuid: Math.random()});

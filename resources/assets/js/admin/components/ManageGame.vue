@@ -14,8 +14,8 @@
 </template>
 
 <script>
-	import laroute from '../../../laroute.js';
-	import COMMON from '../../../common.js';
+	import laroute from '../../laroute.js';
+	import COMMON from '../../common.js';
 
 	export default{
         props: ['id'],
@@ -27,7 +27,7 @@
 		},
 
 		asyncData(resolve, reject) {
-            this.$http.get(laroute.route('admin.get.powerball',{'id':this.id})).then(res => {
+            this.$http.get(laroute.route('admin.get.managegame',{ id: this.id })).then(res => {
                 const settings = res.data;
                 resolve({
                     settings
@@ -43,7 +43,7 @@
         		{
         			if(this.settings[setting].id == id) {
         				const value = this.settings[setting];
-        				this.$http.put(laroute.route('admin.games.update', {games: id} ), value).then(res => {
+        				this.$http.put(laroute.route('admin.games.update', { games: id} ), value).then(res => {
                             toastr.success('Game setting was changed!');
                         }, res => {
                             if(res.status === 500) {

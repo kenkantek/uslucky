@@ -22,32 +22,36 @@ class GameController extends Controller
 
     public function getPowerball()
     {
-        Javascript::put(array_add(ManageGame::getConfig(1)->toArray(), '_nextTime', powerballNextTime()));
+        $game_id = 1;
+        Javascript::put(array_add(ManageGame::getConfig($game_id)->toArray(), '_nextTime', powerballNextTime()));
         JavaScript::put([
-            '_stripe' => [
+            '_game_id' => $game_id,
+            '_stripe'  => [
                 'key' => config('services.stripe.key'),
             ],
-            '_date'   => [
+            '_date'    => [
                 'month' => generateMonth(),
                 'year'  => generateYear(15),
             ],
-            '_luckys' => $this->user ? $this->user->luckys()->whereGameId(1)->pluck('numbers', 'line') : [],
+            '_luckys'  => $this->user ? $this->user->luckys()->whereGameId($game_id)->pluck('numbers', 'line') : [],
         ]);
         return view('games.powerball');
     }
 
     public function getMegamillions()
     {
-        Javascript::put(array_add(ManageGame::getConfig(2)->toArray(), '_nextTime', megaNextTime()));
+        $game_id = 2;
+        Javascript::put(array_add(ManageGame::getConfig($game_id)->toArray(), '_nextTime', megaNextTime()));
         JavaScript::put([
-            '_stripe' => [
+            '_game_id' => $game_id,
+            '_stripe'  => [
                 'key' => config('services.stripe.key'),
             ],
-            '_date'   => [
+            '_date'    => [
                 'month' => generateMonth(),
                 'year'  => generateYear(15),
             ],
-            '_luckys' => $this->user ? $this->user->luckys()->whereGameId(2)->pluck('numbers', 'line') : [],
+            '_luckys'  => $this->user ? $this->user->luckys()->whereGameId($game_id)->pluck('numbers', 'line') : [],
         ]);
         return view('games.megamillions');
     }
