@@ -1,17 +1,17 @@
 <template>
     <section class="numbers">
         <div class="controls clearfix">
-            <button class="btn btn-info btn-xs pull-left" @click="quickPick">{{$l('powerball.button')}}</button>
+            <button class="btn btn-info btn-xs pull-left" @click="quickPick">{{ $l('play.quick_pick') }}</button>
             <button class="hidden btn btn-danger btn-xs pull-right" @click="removeTicket" :disabled="statusDisable">
                 <i class="fa fa-trash-o fa-lg"></i>
             </button>
         </div>
 
         <div class="choose">
-            <i class="fa fa-plus"></i> {{$l('powerball.choose')}} <span v-text="5 - ticket.numbers.length"></span>
+            <i class="fa fa-plus"></i> {{ $l('play.choose') }} <span v-text="5 - ticket.numbers.length"></span>
         </div>
         <div class="list-numbers noselect" :data-index="i + 1">
-            <span v-for="number in 69" 
+            <span v-for="number in 75" 
                 class="number" 
                 v-text="number + 1"
                 @click="selectNumber(number + 1)"
@@ -20,11 +20,11 @@
         </div>
         <hr>
         <div class="choose">
-            <i class="fa fa-plus"></i> {{$l('powerball.choose')}} <span v-text="ticket.ball ? 0 : 1"></span>
+            <i class="fa fa-plus"></i> {{ $l('play.choose') }} <span v-text="ticket.ball ? 0 : 1"></span>
         </div>
         <div class="list-numbers noselect number-ball">
             <span 
-            v-for="number in 26" 
+            v-for="number in 15" 
             class="number"
             v-text=" number + 1"
             @click="selectBall(number + 1)"

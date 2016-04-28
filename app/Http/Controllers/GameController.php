@@ -22,7 +22,7 @@ class GameController extends Controller
 
     public function getPowerball()
     {
-        Javascript::put(array_add(ManageGame::getConfig(1)->toArray(), '_powerball', powerballNextTime()));
+        Javascript::put(array_add(ManageGame::getConfig(1)->toArray(), '_nextTime', powerballNextTime()));
         JavaScript::put([
             '_stripe' => [
                 'key' => config('services.stripe.key'),
@@ -38,7 +38,7 @@ class GameController extends Controller
 
     public function getMegamillions()
     {
-        Javascript::put(array_add(ManageGame::getConfig(2)->toArray(), '_powerball', megaNextTime()));
+        Javascript::put(array_add(ManageGame::getConfig(2)->toArray(), '_nextTime', megaNextTime()));
         JavaScript::put([
             '_stripe' => [
                 'key' => config('services.stripe.key'),

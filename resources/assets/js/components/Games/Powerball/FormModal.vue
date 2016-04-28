@@ -32,7 +32,7 @@
                     <button type="button" class="close" @click.stop="closeModal">
                         <span>×</span><span class="sr-only">Close</span>
                     </button>
-                    <h3 class="modal-title">{{$l('powerball.modal_title')}} {{ total | currency }}</h3>
+                    <h3 class="modal-title">{{$l('play.modal_title')}} {{ total | currency }}</h3>
                 </div>
                 <div class="modal-body">
                     <div v-if="$loadingAsyncData">
@@ -47,28 +47,30 @@
                     <div v-else>
                         <form class="form-horizontal" v-else>
                             <div class="">
-                                <label for="payment-switch">{{$l('powerball.modal_choose')}} <sup class="text-danger">*</sup></label>
+                                <label for="payment-switch">{{ $l('play.modal_choose') }} <sup class="text-danger">*</sup></label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" v-model="method" value="1">
-                                  {{$l('powerball.modal_balance')}} <strong>({{ amount | currency }})</strong>.
+                                  {{ $l('play.modal_balance') }} <strong>({{ amount | currency }})</strong>.
                                 <span class="text-danger" v-show="method == 1 && amount < total">
-                                    {{$l('powerball.modal_afford')}}
-                                    <a @click.stop="closeModal" :href="linkTo.winning" target="_blank">{{$l('powerball.modal_button_add')}}</a>
+                                    {{ $l('play.modal_afford') }}
+                                    <a @click.stop="closeModal" :href="linkTo.winning" target="_blank">
+                                        {{ $l('play.modal_button_add') }}
+                                    </a>
                                 </span>
                               </label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" v-model="method" value="2">
-                                  {{$l('powerball.modal_credit')}}
+                                  {{ $l('play.modal_credit') }}
                               </label>
                               <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
                             </div>
                             <hr>
                             <div class="">
-                                <label for="form-description">{{$l('powerball.modal_des_credit')}}</label>
+                                <label for="form-description">{{ $l('play.modal_des_credit') }}</label>
                                 <textarea id="form-description" class="form-control" v-model="description"></textarea>
                             </div>
                         </form>
@@ -78,14 +80,16 @@
                 <div class="modal-footer" v-if="!$loadingAsyncData">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-success" @click.stop="closeModal">{{$l('powerball.modal_button_cancel')}}</button>
+                            <button type="button" class="btn btn-success" @click.stop="closeModal">
+                                {{ $l('play.modal_button_cancel') }}
+                            </button>
                         </div>
                         <div class="btn-group" role="group">
                             <button 
                                 type="button" 
                                 class="btn btn-danger btn-hover-green" 
                                 :disabled="!readySubmit"
-                                @click="onSubmit">{{$l('powerball.modal_button_submit')}}
+                                @click="onSubmit">{{ $l('play.modal_button_submit') }}
                             </button>
                         </div>
                     </div>
@@ -142,9 +146,9 @@
                 let message = '';
                 if(res.status === 401) {
                     this.checkLogin = false;
-                    message = this.$l('powerball.message');
+                    message = this.$l('play.message');
                 } else if(res.status === 500) {
-                    message = this.$l('powerball.message_err');
+                    message = this.$l('play.message_err');
                 }
                 this.message = message;
             });
@@ -153,7 +157,7 @@
         methods: {
             onSubmit() {
                 swal({
-                    text: this.$l('powerball.modal_swal'),
+                    text: this.$l('play.modal_swal'),
                     title: this.$options.filters.currency(this.total),
                     type: "info",
                     showCancelButton: true,
@@ -179,7 +183,7 @@
                         }
                     ], (err, result) => {
                         if(err) {
-                            swal("Payment Invalid", err.message, "error");
+                            swal(this.$l('message.payment_invalid'), err.message, "error");
                         } else {
                             vm.$http.post(laroute.route('front::post.powerball'), { tickets: vm.tickets, extra: vm.extra, method: vm.method, payment: vm.payment, description: vm.description, source: result }).then(res => {
                                 swal({

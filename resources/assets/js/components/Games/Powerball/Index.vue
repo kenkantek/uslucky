@@ -1,7 +1,7 @@
 <template>
     <section class="main-game">
         <header-power 
-            :powerball="powerball"
+            :next-time="nextTime"
             :tickets="tickets" 
             :ticket-template="ticketTemplate"
             :each-per-ticket="eachPerTicket"
@@ -18,7 +18,8 @@
                     :disabled="isDisabledLuckyBtn"
                     @click="applyLucky"
                     >
-                    {{$l('powerball.luckynumber')}}</button>
+                        {{ $l('play.luckynumber') }}
+                    </button>
                     <strong 
                         @click="saveLucky"
                         data-toggle="tooltip" 
@@ -26,7 +27,7 @@
                         title="Save lucky numbers"
                     ><i class="fa fa-floppy-o fa-lg"></i></strong>
                 </span>
-                <button class="btn btn-info text-uppercase" @click="quickPick"> {{$l('powerball.button')}}</button>
+                <button class="btn btn-info text-uppercase" @click="quickPick"> {{ $l('play.quick_pick') }}</button>
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 
                 data-placement="top" 
@@ -55,7 +56,10 @@
 
                 <div class="multiplier checkbox">
                     <label>
-                        <input type="checkbox" v-model="extra"> <strong>{{$l('powerball.extra',{'extra' : extraPerTicket})}}</strong>
+                        <input type="checkbox" v-model="extra">
+                        <strong>
+                            {{ $l('play.per_line_extra',{ extra : extraPerTicket }) }}
+                        </strong>
                     </label>
                 </div>
 
@@ -63,12 +67,14 @@
                     <table class="table table-condensed">
                         <tbody>
                             <tr>
-                                <td>{{$l('powerball.price')}} ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ eachPerTicket | currency }})</td>
+                                <td>
+                                    {{ $l('play.per_line') }} ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ eachPerTicket | currency }})
+                                </td>
                                 <td>{{ priceTickets | currency }}</td>
                                 <td></td>
                             </tr>
                             <tr v-show="extra">
-                                <td>Extra ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ extraPerTicket | currency }})</td>
+                                <td>{{ $l('play.extra') }} ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ extraPerTicket | currency }})</td>
                                 <td>{{ priceExtraTickets | currency }}</td>
                                 <td></td>
                             </tr>
@@ -76,7 +82,7 @@
 
                         <tfoot>
                             <tr>
-                                <th>{{$l('powerball.total')}}</th>
+                                <th>{{ $l('play.total') }}</th>
                                 <th>{{ total | currency }}</th>
                                 <td class="text-right">
                                      <button 
@@ -86,7 +92,7 @@
                                         data-backdrop="static" 
                                         :disabled="disabledPlay"
                                         @click="openModal"
-                                        data-keyboard="false">{{$l('powerball.play')}}
+                                        data-keyboard="false">{{ $l('play.play_now') }}
                                     </button>
                                 </td>
                             </tr>
@@ -100,7 +106,7 @@
         </article>
     </section>
     <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog">
-    <form-modal v-if="submiting" :submiting.sync="submiting" :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
+        <form-modal v-if="submiting" :submiting.sync="submiting" :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
     </div>
 </template>
 
@@ -123,19 +129,19 @@
                     ball: null
                 },
                 tickets: [],
-                powerball: {..._powerball},
+                nextTime: {..._nextTime},
                 eachPerTicket: each_per_ticket,
                 extraPerTicket: extra_per_ticket,
                 extra: Boolean(Number(localStorage.extra)) || null,
                 submiting: false,
-                numberLineDefault: 3,
+                numberLineDefault: 5,
                 luckys: _.mapValues(_luckys, lucky => JSON.parse(lucky))
             }
         },
 
         computed: {
             lineDefault() {
-                return this.tickets.length || 3;
+                return this.tickets.length || 5;
             },
             statusDisable() {
                 return this.tickets.length > 1 ? false : true;
