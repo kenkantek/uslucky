@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'title'     => 'Contact form',
-    'name'      => 'Your Name',
-    'email'     => 'Your email',
-    'phone'     => 'Your phone number',
-    'message'   => 'Message',
-    'reset'     => 'Reset',
-    'submit'    => 'Submit',
-    'mobile'    => 'Freephone',
-    'telephone' => 'Telephone',
+    'title'     => '联系表格',
+    'name'      => '姓名',
+    'email'     => '电子邮件',
+    'phone'     => '电话',
+    'message'   => '留言',
+    'reset'     => '重设',
+    'submit'    => '提交',
+    'mobile'    => '手机',
+    'telephone' => '电话',
 
 ];

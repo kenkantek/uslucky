@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'button'            => '现在播放',
+    'button'            => '现在投注',
     'winners'           => '最新赢家',
-    'social'            => '联系我们',
+    'social'            => '和我们分享',
     'show_me'           => '给我看',
     'help_me'           => '帮我',
     'ima'               => '我是一个',
-    'win_number'        => '中奖号码',
+    'win_number'        => '中奖查询',
     'current'           => '看到当期中奖 <br>票结果',
-    'next'              => '下一期',
+    'next'              => '下一期开奖',
     'cash'              => '现金选择权',
     'h2'                => '相信你赢了！<span>祝你好运!</span>',
-    'how'               => '怎么玩',
+    'how'               => '怎样操作',
     'menu_home'         => '主页',
     'menu_about'        => '关于',
     'menu_game'         => '游戏',
