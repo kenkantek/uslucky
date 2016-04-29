@@ -6,4 +6,5 @@ return [
     'des_mega'      => 'Mega Millions (which began as The Big Game in 1996, with the name modified to The Big Game Mega Millions six years later) is an American multi-jurisdictional lottery game; it is offered in 44 states, the District of Columbia, and the U.S. Virgin Islands.',
     'button'        => 'Play now',
     'next_draw'     => 'Next Draw',
+    'draw_closed'   => 'Draw Closed',
 ];

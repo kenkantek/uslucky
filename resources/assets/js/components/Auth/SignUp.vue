@@ -2,7 +2,7 @@
 	<form class="form-horizontal"  @submit.prevent="onSubmit" novalidate>
 
 	    <div class="form-group" :class="{'has-error': formErrors.first_name}">
-	        <label class="col-md-4 control-label">{{$l('auth.first_name')}} <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{ $l('auth.first_name') }} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="text" class="form-control" v-model="formInputs.first_name" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.first_name"></span>
@@ -10,7 +10,7 @@
 	    </div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.last_name}">
-	        <label class="col-md-4 control-label">{{$l('auth.last_name')}} <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{ $l('auth.last_name') }} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="text" class="form-control" v-model="formInputs.last_name" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>
@@ -18,26 +18,26 @@
 	    </div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.birthday}">
-	        <label class="col-md-4 control-label">{{$l('auth.birthday')}} <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{ $l('auth.birthday') }} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 
 	            <div class="row">
 					<div class="col-xs-3">
-						<label>Day</label>
+						<label>{{ $l('auth.day') }}</label>
 						<select class="form-control" v-model="birthday.day">
 							<option v-for="day in date.day" :value="day" v-text="day"></option>
 						</select>
 					</div>
 
 					<div class="col-xs-5">
-						<label>Month</label>
+						<label>{{ $l('auth.month') }}</label>
 						<select class="form-control" v-model="birthday.month">
 							<option v-for="month in date.month" :value="$index + 1 | padLeft 2 '0'" v-text="month"></option>
 						</select>
 					</div>
 
 					<div class="col-xs-4">
-						<label>Year</label>
+						<label>{{ $l('auth.year') }}</label>
 						<select class="form-control" v-model="birthday.year">
 							<option v-for="year in date.year" :value="year" v-text="year"></option>
 						</select>
@@ -51,7 +51,7 @@
 	    <hr>
 
 	    <div class="form-group" :class="{'has-error': formErrors.email}">
-	        <label class="col-md-4 control-label">{{$l('auth.email')}} <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{ $l('auth.email') }} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="email" class="form-control" v-model="formInputs.email" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
@@ -59,7 +59,7 @@
 	    </div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.password}">
-	        <label class="col-md-4 control-label">{{$l('auth.password')}} <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{ $l('auth.password') }} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="password" class="form-control" v-model="formInputs.password" autocomplete="off">
 	            <span class="help-block" v-show="formErrors.password" v-text="formErrors.password"></span>
@@ -67,7 +67,7 @@
 	    </div>
 
 	    <div class="form-group">
-	        <label class="col-md-4 control-label">{{$l('auth.confirm_password')}} <sup class="text-danger">*</sup></label>
+	        <label class="col-md-4 control-label">{{ $l('auth.confirm_password') }} <sup class="text-danger">*</sup></label>
 	        <div class="col-md-6">
 	            <input type="password" class="form-control" v-model="formInputs.password_confirmation" autocomplete="off">
 	        </div>

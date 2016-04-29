@@ -31,4 +31,5 @@ return [
     'modal_button_submit' => 'Submit',
     'modal_swal'          => 'Are you sure purchase it?',
     'click_here_login'    => "Click <a @click.stop='closeModal' href=':redirect'>{here</a> and try again.",
+    'estimated_jackpot'   => 'ESTIMATED JACKPOT',
 ];

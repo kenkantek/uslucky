@@ -1,14 +1,7 @@
-<style scoped>
-    .time {
-        padding: 3px;
-        background: #E5EBF1;
-        color: #191818;
-    }
-</style>
 <template>
     <article class="header-game clearfix">
         <div class="jackpot pull-right text-center">
-            <span><strong>{{$l('powerball.jackpot')}}</strong></span>
+            <span><strong>{{ $l('play.estimated_jackpot') }}</strong></span>
             <h1><strong>{{ nextTime.amount | currency }}</strong></h1>
         </div>
         <div class="draw-date clearfix">
@@ -16,8 +9,8 @@
                 
             </div>
             <div class="col-xs-6">
-                <h5 class="text-right">
-                    {{ $l('game.next_draw') }}: <time class="time" :title="nextTime.time">{{ nextTime.time }}</time>
+                <h5 class="text-right text-muted">
+                    {{ $l('game.draw_closed') }}: <strong>{{ downTime | countdown }}</strong>
                 </h5>
             </div>
         </div>
@@ -32,7 +25,7 @@
 </template>
 
 <script>
-    import { countDown } from '../../../common.js';
+    import { countDownGame } from '../../../common.js';
     import countdown from '../../../filter/countdown.js';
 
     export default {
@@ -43,6 +36,14 @@
                 timeOutId: null,
                 downTime: null
             }
+        },
+
+        ready() {
+            const now = new Date(_date.now);
+            this.timeOutId = setInterval(() => {
+                now.setSeconds(now.getSeconds() + 1);
+                this.downTime = countDownGame(now, this.nextTime.time, hours_before_close);
+            }, 1000);
         },
 
         methods: {

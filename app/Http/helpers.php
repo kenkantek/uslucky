@@ -80,7 +80,6 @@ function getGameNextTime($game = 'Powerball', $now, $t1, $t2)
         }
         return [
             'time'        => $time->format('m/d/Y'),
-            'now'         => $now->format('m/d/Y'),
             'amount'      => $amount,
             'cash_option' => $cash_option,
         ];

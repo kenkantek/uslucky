@@ -32,4 +32,8 @@ return [
     'or_login'         => 'Or Login Here',
     'birthday'         => 'Birthday',
     'minimum_old'      => 'You must be at least :number years old.',
+
+    'day'              => 'Day',
+    'month'            => 'Month',
+    'year'             => 'Year',
 ];
