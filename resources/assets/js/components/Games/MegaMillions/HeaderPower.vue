@@ -9,14 +9,14 @@
                 
             </div>
             <div class="col-xs-6">
-                <h5 class="text-right text-muted">
+                <h5 class="text-right text-muted" :title="nextTime.time">
                     {{ $l('game.draw_closed') }}: <strong>{{ downTime | countdown }}</strong>
                 </h5>
             </div>
         </div>
         <div class="hidden tickets clearfix">
             <div class="col-xs-10">
-                {{$l('powerball.many')}}
+                {{ $l('powerball.many') }}
                 <input type="text" :value="tickets.length" readonly>
                 <input type="button" value="+1 ticket" @click="addTicket">
             </div>
