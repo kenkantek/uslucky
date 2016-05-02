@@ -39,10 +39,13 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
     ]);
 
     $router->controller('page', 'PagesController', [
-        'getAbout'   => 'about',
-        'getContact' => 'contact',
-        'putContact' => 'put.contact',
-        'getWinning' => 'get.winning.numbers',
+        'getAbout'         => 'about',
+        'getContact'       => 'contact',
+        'putContact'       => 'put.contact',
+        'getWinning'       => 'get.winning.numbers',
+        'getSpecialOffers' => 'special.offers',
+        'getTrustSecurity' => 'trust',
+        'getPayment'       => 'payment',
     ]);
 
     $router->controller('settings', 'User\SettingsController', [

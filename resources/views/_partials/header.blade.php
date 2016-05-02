@@ -11,49 +11,74 @@
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav nav-custome">
-                <li @if($routeName === 'front::home') class="active" @endif ><a href="{{url('')}}">{{trans('home.menu_home')}}</a></li>
-                <li @if($routeName === 'front::about') class="active" @endif><a href="{{route('front::about')}}">{{trans('home.menu_about')}}</a></li>
-                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a href="{{route('front::game.get.index')}}">{{trans('home.menu_game')}} <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                	<li><a href="{{route('front::game.powerball')}}" title="">Powerball</a></li>
-                    <li><a href="{{route('front::game.megamillions')}}" title="">MegaMilions</a></li>
-                </ul>
+                <li @if($routeName === 'front::home') class="active" @endif>
+                    <a href="{{ route('front::home') }}"> {{ trans('menu.home') }} </a>
                 </li>
-                <li @if($routeName === 'front::get.winning.numbers') class="active" @endif><a href="{{route('front::get.winning.numbers')}}">{{trans('home.menu_winning')}}</a></li>
-                <li @if($routeName === 'front::contact') class="active" @endif><a href="{{route('front::contact')}}">{{trans('home.menu_contact')}}</a></li>
+
+                <li class="@if($routeName === 'front::game.powerball') active @endif">
+                    <a href="{{ route('front::game.powerball') }}">
+                        {{ trans('menu.powerball') }}
+                    </a>
+                </li>
+
+                <li class="@if($routeName === 'front::game.megamillions') active @endif">
+                    <a href="{{ route('front::game.megamillions') }}">
+                        {{ trans('menu.megamilions') }}
+                    </a>
+                </li>
+
+                <li @if($routeName === 'front::get.winning.numbers') class="active" @endif>
+                    <a href="{{ route('front::get.winning.numbers') }}">{{ trans('menu.winning_number') }}</a>
+                </li>
+
+                <li @if($routeName === 'front::special.offers') class="active" @endif>
+                    <a href="{{ route('front::special.offers') }}">{{ trans('menu.special_offers') }}</a>
+                </li>
+
                 @if($auth)
-                <li class="cursor my-acccount">
-                    <div class="dropdown-toggle clearfix" data-toggle="dropdown">
-                        <span>
-                            {{$auth->fullname}}
-                            @if($auth->notification_not_read)
-                                [ {{ $auth->notification_not_read }} ]
-                            @endif
-                        </span>
-                        <div class="wrap-avatar">
-                            {!! HTML::image($auth->image, 'avatar', ['class' => 'img-responsive']) !!}
+                    <li class="cursor my-acccount">
+                        <div class="dropdown-toggle clearfix" data-toggle="dropdown">
+                            <span>
+                                {{ $auth->fullname }}
+                                @if($auth->notification_not_read)
+                                    [ {{ $auth->notification_not_read }} ]
+                                @endif
+                            </span>
+                            <div class="wrap-avatar">
+                                {!! HTML::image($auth->image, 'avatar', ['class' => 'img-responsive']) !!}
+                            </div>
+                            <b class="caret"></b>
                         </div>
-                        <b class="caret"></b>
-                    </div>
-					<ul class="dropdown-menu">
-                    	<li>
-                            <a href="{{ route('front::settings.notifications') }}">
-                                <i class="fa fa-envelope"></i> Notifications
-                                <strong class="number-notify">
-                                    {{ $auth->notification_not_read }}
-                                </strong>
-                            </a>
-                        </li>
-                        <li><a href="{{route('front::settings.account')}}"><i class="fa fa-cog"></i> Account Settings</a></li>
-                    	<li><a href="{{url('logout')}}"><i class="fa fa-sign-out"></i>  SignOut</a></li>
-                    </ul>
-                </li>
+    					<ul class="dropdown-menu">
+                        	<li>
+                                <a href="{{ route('front::settings.notifications') }}">
+                                    <i class="fa fa-envelope"></i> {{ trans('menu.notification') }}
+                                    <strong class="number-notify">
+                                        {{ $auth->notification_not_read }}
+                                    </strong>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('front::settings.account') }}">
+                                    <i class="fa fa-cog"></i>
+                                    {{ trans('menu.account_setting') }}
+                                </a>
+                            </li>
+                        	<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('menu.logout') }} </a></li>
+                        </ul>
+                    </li>
                 @else
-                <li @if($routeName === 'front::') class="active" @endif><a href="{{url('login')}}">{{trans('home.menu_reg')}}</a></li>
+                    <li @if($routeName === 'front::') class="active" @endif>
+                        <a href="{{ url('login') }}">
+                        {{trans('menu.login')}} / {{trans('menu.register')}}
+                        </a>
+                    </li>
                 @endif
+
                 <li class="lang en">
                     <a href="{{ route('front::switch.lang', 'en') }}" class="@if(app()->getLocale() === 'en') active @endif">EN</a>
                 </li>
+
                 <li class="lang cn">
                     <a href="{{ route('front::switch.lang', 'cn') }}" class="@if(app()->getLocale() === 'cn') active @endif">CN</a>
                 </li>

@@ -129,6 +129,8 @@ body.game-megamillions {
         padding-left: 30px;
         padding-right: 30px;
         transition: 0.5s;
+        font-weight: bold;
+
         &:hover {
           color: #dc5e61;
           transition: 1s;
@@ -412,6 +414,24 @@ h3 {
 
 .bg4 {
   background: #ffffff;
+
+  &.link-footer {
+    background: #E6E1E1;
+    padding: 20px 0px;
+    border-bottom: 4px solid #676767;
+
+    .col-md-4 {
+      text-align: center;
+
+      a{
+        font-weight: bold;
+        color: #05536B;
+        font-size: 1.3em;
+      }
+    }
+  }
+
+  
 }
 
 .p9{
@@ -908,14 +928,11 @@ p {
 	position:initial;
 	float:right;
 	width:40px;
-	&.left{
-		text-align: center;
-		background-image: none;
-	}
+  text-align: center;
+  background-image: none;
+
 	&.right{
 		margin:0;
-		text-align: center;
-		background-image: none;
 	}
 	span{
 		font-size:40px
@@ -1070,6 +1087,12 @@ ul {
 .footer {
   position: relative;
   text-align: center;
-  padding: 72px 0 91px;
+  padding: 0px 0 90px;
+
+  .logo {
+    display: inline-block;
+    text-align:center;
+    margin-top: 60px;
+  }
 }
 
