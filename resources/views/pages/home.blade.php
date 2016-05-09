@@ -50,7 +50,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6">
                     <div class="game">
-                        <h3>Powerball <br><span style="text-transform: capitalize;">
+                        {{--<h3>Powerball <br><span style="text-transform: capitalize;">
                             @if($powerball['amount'] == "Not Published")
                                 {{$powerball['amount']}}
                             @else
@@ -77,7 +77,8 @@
                             @else
                                 <li>No</li>
                             @endif
-                        </ul>
+                        </ul>--}}
+                        <img src="http://dummyimage.com/600x400/000/fff" style="width: 100%" alt="">
                         <p>
                             <a class="link home_page" href="{{route('front::game.powerball')}}">{{trans('home.button')}}</a>
                         </p>
@@ -86,7 +87,7 @@
 
                 <div class="col-md-6">
                     <div class="game">
-                        <h3>Mega Millions <br><span style="text-transform: capitalize;">
+                        {{--<h3>Mega Millions <br><span style="text-transform: capitalize;">
                                 @if($mega['amount'] == "Not Published")
                                     {{$mega['amount']}}
                                 @else
@@ -114,7 +115,8 @@
                             @else
                                 <li>No</li>
                             @endif
-                        </ul>
+                        </ul>--}}
+                        <img src="http://dummyimage.com/600x400/000/fff" style="width: 100%" alt="">
                         <p>
                             <a class="link home_page" href="{{route('front::game.powerball')}}">{{trans('home.button')}}</a>
                         </p>
@@ -128,9 +130,9 @@
     <div class="bg3">
         <div class="container">
             <div class="col-md-4">
-                <div class="image">
+                {{--<div class="image">
                     <img src="{{asset('images/page1_img1.png')}}" alt="">
-                </div>
+                </div>--}}
             </div>
 
             <div class="col-md-8">
@@ -147,9 +149,9 @@
 
                     <div class="col-md-6 omega">
                         <ul class="links">
-                            <li><a href="#" class="col1">broadway tickets</a></li>
-                            <li><a href="#" class="col2">lasvegas tickets</a></li>
-                            <li><a href="#" class="col3">museum tickets</a></li>
+                            <li><a href="#" class="col1">broadway<br> tickets</a></li>
+                            <li><a href="#" class="col2">lasvegas<br> tickets</a></li>
+                            <li><a href="#" class="col3">museum<br> tickets</a></li>
                         </ul>
                     </div>
                 </div>
@@ -170,7 +172,7 @@
                         <div class="item active">
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img3.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -183,7 +185,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="images/page1_img2.jpg" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -196,7 +198,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img4.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -209,61 +211,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img5.jpg')}}" alt="">
-
-                                    <div class="caption">
-                                        <a href="#" title="">Richard Clark</a>
-
-                                        <p>Won $1.000 <span>playing</span></p>
-                                        <a href="#" class="add2cart">add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="col-md-3">
-                                <div class="thumb">
-                                    <img src="{{asset('images/page1_img3.jpg')}}" alt="">
-
-                                    <div class="caption">
-                                        <a href="#" title="">Richard Clark</a>
-
-                                        <p>Won $1.000 <span>playing</span></p>
-                                        <a href="#" class="add2cart">add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="thumb">
-                                    <img src="{{asset('images/page1_img2.jpg')}}" alt="">
-
-                                    <div class="caption">
-                                        <a href="#" title="">Richard Clark</a>
-
-                                        <p>Won $1.000 <span>playing</span></p>
-                                        <a href="#" class="add2cart">add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="thumb">
-                                    <img src="{{asset('images/page1_img4.jpg')}}" alt="">
-
-                                    <div class="caption">
-                                        <a href="#" title="">Richard Clark</a>
-
-                                        <p>Won $1.000 <span>playing</span></p>
-                                        <a href="#" class="add2cart">add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="thumb">
-                                    <img src="{{asset('images/page1_img5.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -278,7 +226,7 @@
                         <div class="item">
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img3.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -291,7 +239,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img2.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -304,7 +252,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img4.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -317,7 +265,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img5.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -332,7 +280,7 @@
                         <div class="item">
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img3.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -345,7 +293,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img2.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -358,7 +306,7 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img4.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
@@ -371,7 +319,61 @@
 
                             <div class="col-md-3">
                                 <div class="thumb">
-                                    <img src="{{asset('images/page1_img5.jpg')}}" alt="">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
+
+                                    <div class="caption">
+                                        <a href="#" title="">Richard Clark</a>
+
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="col-md-3">
+                                <div class="thumb">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
+
+                                    <div class="caption">
+                                        <a href="#" title="">Richard Clark</a>
+
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="thumb">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
+
+                                    <div class="caption">
+                                        <a href="#" title="">Richard Clark</a>
+
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="thumb">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
+
+                                    <div class="caption">
+                                        <a href="#" title="">Richard Clark</a>
+
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="thumb">
+                                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
 
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
