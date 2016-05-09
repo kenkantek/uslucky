@@ -147,9 +147,9 @@
 
                     <div class="col-md-6 omega">
                         <ul class="links">
-                            <li><a href="#" class="col1">for <br>players</a></li>
-                            <li><a href="#" class="col2">for <br>retailers</a></li>
-                            <li><a href="#" class="col3">message <br>center</a></li>
+                            <li><a href="#" class="col1">broadway tickets</a></li>
+                            <li><a href="#" class="col2">lasvegas tickets</a></li>
+                            <li><a href="#" class="col3">museum tickets</a></li>
                         </ul>
                     </div>
                 </div>
@@ -175,7 +175,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +188,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +201,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +214,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +229,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +242,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +255,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -261,7 +268,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +283,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +296,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -299,7 +309,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +322,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -325,7 +337,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -337,7 +350,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +363,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -361,7 +376,8 @@
                                     <div class="caption">
                                         <a href="#" title="">Richard Clark</a>
 
-                                        <p>Won $1.000 <span>playing <br>$1000 overload</span></p>
+                                        <p>Won $1.000 <span>playing</span></p>
+                                        <a href="#" class="add2cart">add to cart</a>
                                     </div>
                                 </div>
                             </div>

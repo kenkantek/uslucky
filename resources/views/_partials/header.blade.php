@@ -14,27 +14,28 @@
                 <li @if($routeName === 'front::home') class="active" @endif>
                     <a href="{{ route('front::home') }}"> {{ trans('menu.home') }} </a>
                 </li>
-
-                <li class="@if($routeName === 'front::game.powerball') active @endif">
-                    <a href="{{ route('front::game.powerball') }}">
-                        {{ trans('menu.powerball') }}
-                    </a>
+                <li>
+                    <a href="">Broadway</a>
                 </li>
-
-                <li class="@if($routeName === 'front::game.megamillions') active @endif">
-                    <a href="{{ route('front::game.megamillions') }}">
-                        {{ trans('menu.megamilions') }}
-                    </a>
+                <li>
+                    <a href="">Vega</a>
                 </li>
-
-                <li @if($routeName === 'front::get.winning.numbers') class="active" @endif>
-                    <a href="{{ route('front::get.winning.numbers') }}">{{ trans('menu.winning_number') }}</a>
+                <li>
+                    <a href="">Museum</a>
                 </li>
-
+                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a href="{{route('front::game.get.index')}}">{{trans('home.menu_game')}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('front::game.powerball') }}">
+                                {{ trans('menu.powerball') }}
+                            </a></li>
+                        <li><a href="{{ route('front::game.megamillions') }}">
+                                {{ trans('menu.megamilions') }}
+                            </a></li>
+                    </ul>
+                </li>
                 <li @if($routeName === 'front::special.offers') class="active" @endif>
                     <a href="{{ route('front::special.offers') }}">{{ trans('menu.special_offers') }}</a>
                 </li>
-
                 @if($auth)
                     <li class="cursor my-acccount">
                         <div class="dropdown-toggle clearfix" data-toggle="dropdown">

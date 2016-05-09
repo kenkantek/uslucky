@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'button'     => '现在投注',
+    'menu_game'  => '乐透',
+    'button'     => '买车票',
     'winners'    => '最新赢家',
     'social'     => '和我们分享',
     'show_me'    => '给我看',
