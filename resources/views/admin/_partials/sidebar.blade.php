@@ -161,11 +161,26 @@
 
             <li class="nav-item start @if($routeName === 'admin.dashboard')  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-settings"></i>
-                    <span class="title">Settings</span>
+                    <i class="icon-basket"></i>
+                    <span class="title">e-commerce</span>
                     <span class="selected"></span>
                     <span class="arrow open"></span>
                 </a>
+
+                <ul class="sub-menu">
+                    <li class="nav-item start">
+                        <a href="#" class="nav-link ">
+                            <span class="title">Manager Product</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item start">
+                        <a href="#" class="nav-link">
+                            <span class="title">Order</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="nav-item start">
