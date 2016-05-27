@@ -16,6 +16,13 @@
     </li>
     <li class="divider"></li>
 
+    <li class="@if(($routeName === 'front::product-orders.index')||($routeName === 'front::product-orders.show')) current @endif">
+        <a href="{{ route('front::product-orders.index') }}">
+            {!! trans('setting.menu_order_product') !!} <i class="fa fa-lg fa-shopping-cart pull-right"></i>
+        </a>
+    </li>
+    <li class="divider"></li>
+
     <li class="@if($routeName === 'front::settings.notifications') current @endif">
         <a href="{{ route('front::settings.notifications') }}">{!! trans('setting.menu_notic') !!} <span class="badge pull-right"> {{ $auth->notification_not_read }} </span></a>
     </li>

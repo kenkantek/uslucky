@@ -45,7 +45,7 @@
                 <ul class="sub-menu">
                     <li class="nav-item start">
                         <a href="{{route('admin.orders.index')}}" class="nav-link nav-toggle">
-                            <span class="title">Manage Orders</span>
+                            <span class="title">Manage Ticket Orders</span>
                             <span class="selected"></span>
                             <span class="arrow"></span>
                         </a>
@@ -64,6 +64,13 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item start">
+                        <a href="{{route('admin.product-orders.index')}}" class="nav-link nav-toggle">
+                            <span class="title">Manage Product Orders</span>
+                            <span class="selected"></span>
+                            <span class="arrow"></span>
+                        </a>
                     </li>
                     <li class="hidden nav-item start">
                         <a href="{{route('admin.tickets.index')}}" class="nav-link nav-toggle">

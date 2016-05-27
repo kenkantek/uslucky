@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg4 p8">
-        <div class="container">
+        <div class="container cart-page">
             <div class="row">
                 <div class="col-md-9">
                     <div class="panel panel-default">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-danger cart-button">Check Out</button>
+                            <a href="{{route('front::cart.checkout')}}" class="btn btn-danger cart-button">Check Out</a>
                         </div>
                     </div>
                 </div>
