@@ -23,7 +23,8 @@
                 <li>
                     <a href="">Museum</a>
                 </li>
-                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a href="{{route('front::game.get.index')}}">{{trans('home.menu_game')}} <b class="caret"></b></a>
+                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a
+                            href="{{route('front::game.get.index')}}">{{trans('home.menu_game')}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('front::game.powerball') }}">
                                 {{ trans('menu.powerball') }}
@@ -50,8 +51,8 @@
                             </div>
                             <b class="caret"></b>
                         </div>
-    					<ul class="dropdown-menu">
-                        	<li>
+                        <ul class="dropdown-menu">
+                            <li>
                                 <a href="{{ route('front::settings.notifications') }}">
                                     <i class="fa fa-envelope"></i> {{ trans('menu.notification') }}
                                     <strong class="number-notify">
@@ -65,23 +66,29 @@
                                     {{ trans('menu.account_setting') }}
                                 </a>
                             </li>
-                        	<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('menu.logout') }} </a></li>
+                            <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('menu.logout') }}
+                                </a></li>
                         </ul>
                     </li>
                 @else
                     <li @if($routeName === 'front::') class="active" @endif>
                         <a href="{{ url('login') }}">
-                        {{trans('menu.login')}} / {{trans('menu.register')}}
+                            {{trans('menu.login')}} / {{trans('menu.register')}}
                         </a>
                     </li>
                 @endif
-
                 <li class="lang en">
-                    <a href="{{ route('front::switch.lang', 'en') }}" class="@if(app()->getLocale() === 'en') active @endif">EN</a>
+                    <a href="{{ route('front::switch.lang', 'en') }}"
+                       class="@if(app()->getLocale() === 'en') active @endif">EN</a>
                 </li>
 
                 <li class="lang cn">
-                    <a href="{{ route('front::switch.lang', 'cn') }}" class="@if(app()->getLocale() === 'cn') active @endif">CN</a>
+                    <a href="{{ route('front::switch.lang', 'cn') }}"
+                       class="@if(app()->getLocale() === 'cn') active @endif">CN</a>
+                </li>
+                <li>
+                    <a href="{{route('front::cart.index')}}" style="font-size: 1.5em;"><i class="fa fa-shopping-cart"></i></a>
+                    <span class="cart">11</span>
                 </li>
             </ul>
         </div>

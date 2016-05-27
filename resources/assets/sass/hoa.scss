@@ -8,6 +8,33 @@
   color: white !important;
 }
 
+.price{
+  color: red;
+  font-size: 19px;
+}
+
+.cart-button{
+  margin: 0 !important;
+  width: 100%;
+}
+
+.table-cart{
+  margin: 0 !important;
+  td,th{
+    padding: 10px !important;
+    color: black !important;
+    text-align: center !important;
+    a{
+      margin: 0 !important;
+    }
+    input{
+      width: 30px !important;
+      height: 30px !important;
+      text-align: center !important;
+    }
+  }
+}
+
 body.game-megamillions {
   .header-game {
     width: 100%;

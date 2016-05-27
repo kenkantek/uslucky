@@ -3,7 +3,23 @@ $text-color: #3a3a3a;
 $body-bg: #dc5e61;
 $headings-font-family: 'Roboto', sans-serif;
 
+.cart{
+    position: absolute;
+    top: 8px;
+    right: 0;
+    padding: 2px 5px !important;
+    font-size: 8px;
+    margin: 0 !important;
+    height: auto !important;
+    background-color: black;
+    border-radius: 50%
+}
 
+hr{
+    border-color: red !important;
+  margin-top: 30px !important;
+  margin-bottom: 10px !important;
+}
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 .clearfix {

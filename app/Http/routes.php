@@ -142,6 +142,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postMegamilion' => 'post.megamillion',
         'putLuckys'      => 'put.luckys.mega',
     ]);
+    
+    $router->resource('cart', 'Cart\CartController');
 
 });
 
