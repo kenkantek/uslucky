@@ -2,7 +2,7 @@
     <div class="page-sidebar navbar-collapse collapse">
         <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
             <li class="nav-item start @if($routeName === 'admin.dashboard') active open @endif">
-                <a href="{{route('admin.dashboard')}}" class="nav-link nav-toggle">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
                     <span class="title">Dashboard</span>
                     <span class="selected"></span>
@@ -162,13 +162,13 @@
 
                 <ul class="sub-menu">
                     <li class="nav-item start">
-                        <a href="#" class="nav-link ">
+                        <a href="{{ route('ecommerce.product.index') }}" class="nav-link ">
                             <span class="title">Manager Product</span>
                             <span class="selected"></span>
                         </a>
                     </li>
                     <li class="nav-item start">
-                        <a href="{{route('admin.product-orders.index')}}" class="nav-link">
+                        <a href="" class="nav-link">
                             <span class="title">Order</span>
                             <span class="selected"></span>
                         </a>
