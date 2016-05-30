@@ -11,6 +11,11 @@ class OrderController extends Controller
 {
     public function index()
     {
-        return 'done';
+        return view('admin.orders.products.index');
+    }
+    
+    public function show($id)
+    {
+        return view('admin.orders.products.show');
     }
 }

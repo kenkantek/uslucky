@@ -10,6 +10,29 @@
                 </a>
             </li>
 
+            <li class="nav-item start @if($routeName === 'admin.dashboard') active open @endif">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Products</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start @if(starts_with($routeName, 'admin.results')) active open @endif">
+                        <a href="{{ route('admin.products.create') }}" class="nav-link ">
+                            <span class="title">Addnew</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item start @if(starts_with($routeName, 'get.results')) active open @endif">
+                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                            <span class="title">Products list</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-item  @if(starts_with($routeName, 'admin.results') || starts_with($routeName, 'get.results')) active open  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>

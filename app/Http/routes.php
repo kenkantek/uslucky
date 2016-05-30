@@ -299,6 +299,8 @@ $router->group([
         
         $router->resource('product-orders', 'Cart\OrderController');
         
+        $router->resource('products', 'ProductController');
+        
         $router->resource('tickets', 'TicketsController', [
             'only' => 'index',
         ]);
