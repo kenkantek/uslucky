@@ -325,13 +325,8 @@ $router->group([
         $router->group(['as' => 'ecommerce.', 'prefix' => 'ecommerce', 'namespace' => 'Ecommerce'], function () use ($router) {
             //$router->resource('orders', 'OrderController');
 
-            $router->get('product/index', [
-                'as'   => 'product.index',
-                'uses' => 'ProductController@index',
-            ]);
-            $router->get('product/create', [
-                'as'   => 'product.create',
-                'uses' => 'ProductController@create',
+            $router->resource('products', 'ProductController', [
+                'only' => ['index', 'create', 'store'],
             ]);
         });
 

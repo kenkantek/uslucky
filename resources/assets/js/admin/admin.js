@@ -11,6 +11,12 @@ Vue.filter('currency', (value, currency) => {
   return require('../filter/currency.js')(value, currency);
 });
 
+Vue.directive('submit', require('../directives/submit'));
+Vue.directive('upload', require('../directives/upload'));
+Vue.directive('uploads', require('../directives/uploads'));
+Vue.directive('autofocus', require('../directives/autofocus'));
+Vue.directive('base64', require('../directives/base64'));
+
 Lang.setLocale(_lang);
 import format from '../filter/format';
 
@@ -30,7 +36,9 @@ import AwardPowerball from './components/Award/Index.vue';
 import AwardDetail from './components/Award/Detail/Index.vue';
 import ManageGame from './components/ManageGame.vue';
 import WinnerList from './components/Users/Winners/Winners.vue';
-import RequestList from './components/Requests/Index.vue'
+import RequestList from './components/Requests/Index.vue';
+
+import EcommerceProductCreate from './components/Ecommerce/Product/Create.vue';
 
 new Vue({
     el: 'body',
@@ -48,6 +56,8 @@ new Vue({
         ManageGame,
         WinnerList,
         RequestList,
+
+        EcommerceProductCreate
     }
 });
 

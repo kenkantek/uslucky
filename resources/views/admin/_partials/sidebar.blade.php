@@ -162,7 +162,7 @@
 
                 <ul class="sub-menu">
                     <li class="nav-item start">
-                        <a href="{{ route('ecommerce.product.index') }}" class="nav-link ">
+                        <a href="{{ route('ecommerce.admin.ecommerce.products.index') }}" class="nav-link ">
                             <span class="title">Manager Product</span>
                             <span class="selected"></span>
                         </a>

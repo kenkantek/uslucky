@@ -61,3 +61,13 @@ Breadcrumbs::register('withdraw', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Withdraws Request', route('admin.claim-winning.index'));
 });
+
+Breadcrumbs::register('product.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Product', route('ecommerce.admin.ecommerce.products.index'));
+});
+
+Breadcrumbs::register('product.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('product.index');
+    $breadcrumbs->push('Create Product', route('ecommerce.admin.ecommerce.products.create'));
+});

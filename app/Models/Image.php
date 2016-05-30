@@ -20,12 +20,16 @@ class Image extends Model
     }
 
     //BEGIN new Image
+    public function withType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
     public function withPath($path)
     {
         $this->path = $path;
         return $this;
     }
-
     public function publish()
     {
         $this->save();
