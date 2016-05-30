@@ -1,10 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Cart;
+namespace App\Http\Controllers\Admin\Ecommerce;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -13,7 +10,7 @@ class OrderController extends Controller
     {
         return view('admin.orders.products.index');
     }
-    
+
     public function show($id)
     {
         return view('admin.orders.products.show');

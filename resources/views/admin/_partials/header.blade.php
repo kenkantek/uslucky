@@ -3,7 +3,7 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="index.html">
+            <a href="{{ route('admin.dashboard') }}">
                 {!! HTML::image('tadmin/assets/layouts/layout2/img/logo-default.png', 'logo', ['class' => 'logo-default']) !!}
             </a>
             <div class="menu-toggler sidebar-toggler">
