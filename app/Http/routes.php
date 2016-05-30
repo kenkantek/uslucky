@@ -84,7 +84,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'putCancel'       => 'put.cancel.transaction',
     ]);
 
-    // Orders
+    // FOR API
     $router->group(['as' => 'api::', 'prefix' => 'api'], function () use ($router) {
         $router->get('orders', [
             'as'   => 'get.orders',
@@ -119,6 +119,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         ]);
 
     });
+
+    //FOR ORDER
     $router->resource('orders', 'User\OrderController', [
         'only' => [
             'index',
@@ -143,14 +145,26 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'putLuckys'      => 'put.luckys.mega',
     ]);
 
-    $router->controller('cart', 'Cart\CartController', [
+    $router->group([
+        'as'        => 'ecommerce',
+        'prefix'    => 'ecommerce',
+        'namespace' => 'Ecommerce',
+    ], function () use ($router) {
+        $router->get('api/products', [
+            'as'   => 'api.get.products',
+            'uses' => 'ProductController@apiProducts',
+        ]);
+    });
+
+    $router->controller('cart', 'Ecommerce\CartController', [
         'getIndex'     => 'cart.index',
         'postCheckout' => 'cart.checkout',
     ]);
-    $router->resource('product-orders', 'Cart\ProductOrderController');
+    $router->resource('product-orders', 'Ecommerce\ProductOrderController');
 
 });
 
+//FOR ADMIN
 $router->group([
     'prefix'     => 'admin',
     'namespace'  => 'Admin',

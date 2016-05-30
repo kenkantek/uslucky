@@ -9,6 +9,10 @@ class Product extends Model
 {
     use ImageTrait;
 
+    protected $appends = [
+        'thumb',
+    ];
+
     //BEGIN NEW PRODUCT
     public function withName($name)
     {
@@ -31,4 +35,17 @@ class Product extends Model
         return $this;
     }
     //END NEW PRODUCT
+
+    //RELATIONSHIP
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    //ACCESSOR
+    public function getThumbAttribute()
+    {
+        $thumb = $this->images()->first();
+        return $thumb ? $thumb->path : null;
+    }
 }

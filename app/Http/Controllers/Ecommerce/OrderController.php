@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Cart;
+namespace App\Http\Controllers\Ecommerce;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ProductOrderController extends Controller
+class OrderController extends Controller
 {
     public function index()
     {
