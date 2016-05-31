@@ -19,7 +19,7 @@
 }
 
 .cart-page hr{
-  border-color: red !important;
+  border-color: #efefef !important;
   margin-top: 30px !important;
   margin-bottom: 10px !important;
 }
@@ -34,7 +34,7 @@
       margin: 0 !important;
     }
     input{
-      width: 30px !important;
+      width: 70px !important;
       height: 30px !important;
       text-align: center !important;
     }
@@ -169,18 +169,13 @@ body.game-megamillions {
         padding-right: 15px;
         transition: 0.5s;
         font-weight: bold;
-
-        &:hover {
-          color: #dc5e61;
-          transition: 1s;
-        }
         .caret{
         	margin: initial;
     			margin-left: 5px;
     			margin-top: 8px;
         }
       }
-      &:hover {
+      &:not(.btn-cart):hover {
         background-color: #e7e7e7;
         transition: 1s;
         span {
@@ -189,6 +184,11 @@ body.game-megamillions {
         }
         b{
         	color:#dc5e61;
+        }
+        
+        a:hover {
+          color: #dc5e61;
+          transition: 1s;
         }
       }
       span{
@@ -498,9 +498,6 @@ h3 {
       padding: 3px 12px;
       outline: none;
       border: 1px solid #d9d6d3;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
       resize: none;
       height: 267px;
       margin: 0;
@@ -591,15 +588,12 @@ h3 {
       text-transform: uppercase;
     }
   }
-  button{    
-      margin-top:27px
-  }
+
   .link2{
     color: #dc5e61;
     font-weight: bold;
   }
   .table{
-    border-collapse: separate;
     border-spacing: 2px;
     width: 100%;
     margin: 35px 0 60px;

@@ -1,230 +1,34 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="list-products" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
+        @foreach($products as $chunk => $chunk_product)
+        <div class="item @if($chunk == 0) active @endif">
+            @foreach($chunk_product as $product)
             <div class="col-md-3">
                 <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
+                    <item-product inline-template product="{{{ json_encode($product) }}}">
+                        <img height="180" :src="product.thumb" :alt="product.name">
 
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
+                        <div class="caption">
+                            <a href="javascript:;" v-text="product.name"></a>
+                            <p>Won <span v-text="product.name"></span> <small>playing</small></p>
+                            <a href="#" class="add2cart" @click.prevent="addToCart">add to cart</a>
+                        </div>
+                    </item-product>
                 </div>
             </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-
-        <div class="item">
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/248x181/000/fff" alt="">
-
-                    <div class="caption">
-                        <a href="#" title="">Richard Clark</a>
-
-                        <p>Won $1.000 <span>playing</span></p>
-                        <a href="#" class="add2cart">add to cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 
     <!-- Left and right controls -->
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="fa fa-arrow-circle-right " aria-hidden="true"></span>
+    <a class="right carousel-control" href="#list-products" data-slide="next">
+        <span class="fa fa-arrow-circle-right"></span>
         <span class="sr-only">Next</span>
     </a>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="fa fa-arrow-circle-left " aria-hidden="true"></span>
+    <a class="left carousel-control" href="#list-products" data-slide="prev">
+        <span class="fa fa-arrow-circle-left "></span>
         <span class="sr-only">Previous</span>
     </a>
 </div>

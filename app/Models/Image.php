@@ -76,7 +76,7 @@ class Image extends Model
 
     public static function deleteImage($file)
     {
-        $file = public_path() . '/' . $file;
+        $file = public_path($file);
         if (File::exists($file)) {
             return File::delete($file);
         }

@@ -5,7 +5,7 @@ Dự án chơi game online Powerball và Mega millions tại US.
 
 ## Demo
 
-[uslucky.kennjdemo.com](http://uslucky.kennjdemo.com)
+[uslucky.com](https://uslucky.com)
 
 
 ## Contributing

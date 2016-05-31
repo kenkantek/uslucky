@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Ecommerce\Order as EcommerceOrder;
 use App\Traits\TransactionTrait;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -61,6 +62,11 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
+    public function ecommerce_orders()
+    {
+        return $this->hasMany(EcommerceOrder::class);
+    }
+
     public function getFullnameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
@@ -103,6 +109,13 @@ class User extends Authenticatable
     public function newOrder()
     {
         $order = new Order;
+        $order->user()->associate($this);
+        return $order;
+    }
+
+    public function newEcommerceOrder()
+    {
+        $order = new EcommerceOrder;
         $order->user()->associate($this);
         return $order;
     }

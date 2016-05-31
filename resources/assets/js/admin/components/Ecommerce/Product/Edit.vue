@@ -17,9 +17,9 @@
         },
 
         asyncData(resolve, reject) {
-            this.$http.get(laroute.route('ecommerce.api.edit',{ id : this.id })).then(({data}) => {
+            this.$http.get(laroute.route('ecommerce.api.product.edit', { products : this.id })).then(({ data }) => {
                 resolve({
-                        formInputs : data
+                    formInputs : data
                 });
         }, err => {
                 NOTIFY.alertError();

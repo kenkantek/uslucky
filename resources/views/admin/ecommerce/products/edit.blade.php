@@ -3,10 +3,13 @@
 @section('title') Edit Product @stop
 
 @section('content')
+
     <h3 class="page-title"> Product
         <small>Edit product</small>
     </h3>
-    {!! Breadcrumbs::render('product.create') !!}
+
+    {!! Breadcrumbs::render('product.edit', $products) !!}
+
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
@@ -21,14 +24,18 @@
                             </div>
 
                             <div class="portlet-body">
-                                <ecommerce-product-edit inline-template id="{{$product->id}}">
+                                <ecommerce-product-edit inline-template id="{{ $products->id }}">
+                                    <div v-if="$loadingAsyncData">
+                                        <loading></loading>
+                                    </div>
                                     <form
-                                            class="form-horizontal form-row-seperated"
-                                            action="{{ route('ecommerce.admin.ecommerce.products.update',$product->id) }}" method="post"
-                                            v-submit="formData"
-                                            :submiting='onSubmiting'
-                                            :complete= 'onComplete'
-                                            :error='onError'
+                                        v-else
+                                        class="form-horizontal form-row-seperated"
+                                        action="{{ route('ecommerce.admin.ecommerce.products.update', $products->id) }}" method="post"
+                                        v-submit="formData"
+                                        :submiting='onSubmiting'
+                                        :complete= 'onComplete'
+                                        :error='onError'
                                     >
 
                                         <div class="form-group" :class="{'has-error': formErrors.name}">

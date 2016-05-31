@@ -27,15 +27,6 @@
         <div class="col-md-4 col-sm-12">
             <div class="table-group-actions pull-right">
                 <span> </span>
-                <!--<select class="table-group-action-input form-control input-inline input-small input-sm">
-                    <option value="">Select...</option>
-                    <option value="publish">Publish</option>
-                    <option value="unpublished">Un-publish</option>
-                    <option value="delete">Delete</option>
-                </select>
-                <button class="btn btn-sm btn-success table-group-action-submit">
-                    <i class="fa fa-check"></i> Submit
-                </button>-->
                 <a :href="linkCreate" class="btn btn-sm btn-success table-group-action-submit">
                     <i class="fa fa-plus"></i> Add new product
                 </a>

@@ -71,3 +71,8 @@ Breadcrumbs::register('product.create', function ($breadcrumbs) {
     $breadcrumbs->parent('product.index');
     $breadcrumbs->push('Create Product', route('ecommerce.admin.ecommerce.products.create'));
 });
+
+Breadcrumbs::register('product.edit', function ($breadcrumbs, $products) {
+    $breadcrumbs->parent('product.index');
+    $breadcrumbs->push("Update Product #{$products->id}", route('ecommerce.admin.ecommerce.products.edit', $products->id));
+});

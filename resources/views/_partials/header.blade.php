@@ -86,9 +86,11 @@
                     <a href="{{ route('front::switch.lang', 'cn') }}"
                        class="@if(app()->getLocale() === 'cn') active @endif">CN</a>
                 </li>
-                <li>
-                    <a href="{{route('front::cart.index')}}" style="font-size: 1.5em;"><i class="fa fa-shopping-cart"></i></a>
-                    <span class="cart">11</span>
+                <li class="btn-cart">
+                    <a href="{{ route('front::ecommerce.cart') }}">
+                        <i class="fa fa-shopping-cart fa-lg"></i>
+                    </a>
+                    <cart></cart>
                 </li>
             </ul>
         </div>

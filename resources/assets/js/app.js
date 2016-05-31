@@ -33,6 +33,10 @@ import Contact from './components/Others/Contact.vue';
 import Winnumber from './components/Games/Results/Winnumber.vue';
 import Notification from './components/Users/Settings/Notification/Index.vue';
 
+import ItemProduct from './components/Ecommerce/ItemProduct.vue';
+import Cart from './components/Ecommerce/Cart.vue';
+import ManageCart from './components/Ecommerce/ManageCart.vue';
+
 new Vue({
 	el: 'body',
     components: {
@@ -50,6 +54,16 @@ new Vue({
         Notification,
         MegaMillions,
         
+        ItemProduct, Cart, ManageCart
+    },
+
+    events: {
+        'add-cart'(product) {
+            this.$broadcast('add-cart', product);
+        },
+        'update-cart'(carts) {
+            this.$broadcast('update-cart', carts);
+        }
     }
 });
 $('[data-toggle="tooltip"]').tooltip();

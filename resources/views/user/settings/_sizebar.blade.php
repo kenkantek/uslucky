@@ -16,9 +16,9 @@
     </li>
     <li class="divider"></li>
 
-    <li class="@if(($routeName === 'front::product-orders.index')||($routeName === 'front::product-orders.show')) current @endif">
-        <a href="{{ route('front::product-orders.index') }}">
-            {!! trans('setting.menu_order_product') !!} <i class="fa fa-lg fa-shopping-cart pull-right"></i>
+    <li class="@if(($routeName === 'front::ecommerce.order') || ($routeName === 'front::ecommerce.show')) current @endif">
+        <a href="{{ route('front::ecommerce.order') }}">
+            {!! trans('setting.menu_order_product') !!} <i class="fa fa-lg fa-cart-plus pull-right"></i>
         </a>
     </li>
     <li class="divider"></li>

@@ -42,7 +42,7 @@
                         </dl>
                     </div>
                 </div>
-                <table class="table table-bordered table-hover trans" style="margin-bottom: 0px">
+                <table class="table table-bordered table-hover trans">
                     <thead>
                     <tr>
                         <th>#</th>

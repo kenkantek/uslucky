@@ -6,10 +6,12 @@ use App\Models\Image;
 
 trait ImageTrait
 {
-    public function newImage()
+    public function newImage(Image $image = null)
     {
-        $image = new Image;
-        $image->imageable()->associate($this);
+        if (!$image instanceof Image) {
+            $image = new Image;
+            $image->imageable()->associate($this);
+        }
         return $image;
     }
 }

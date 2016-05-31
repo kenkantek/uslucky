@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Ecommerce;
 
+use App\Models\Image;
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,6 +41,10 @@ class Product extends Model
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'ecommerce_order_product');
     }
 
     //ACCESSOR

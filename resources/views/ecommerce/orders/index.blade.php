@@ -12,9 +12,9 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2> {{trans('setting.title_order_ticket')}} </h2>
+                <h2> {{ trans('setting.title_order_ticket') }} </h2>
                 <hr>
-                <table class="table table-bordered table-hover trans" style="margin-bottom: 0px">
+                <table class="table table-bordered table-hover trans">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -32,7 +32,11 @@
                         <td>4</td>
                         <td>$400</td>
                         <td><span class="label label-danger">Pending</span></td>
-                        <td class="text-center"><a class="link" href="{{route('front::product-orders.show',1)}}">{{trans('setting.button_details')}}</a></td>
+                        <td class="text-center">
+                            <a class="link" href="{{ route('front::ecommerce.order.show', 1) }}">
+                                {{ trans('setting.button_details') }}
+                            </a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
