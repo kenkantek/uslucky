@@ -10,7 +10,6 @@ class Image extends Model
 {
     public $timestamps = false;
     protected $appends = ['image'];
-    protected $hidden  = ['path'];
 
     public static $dir = 'uploads';
 

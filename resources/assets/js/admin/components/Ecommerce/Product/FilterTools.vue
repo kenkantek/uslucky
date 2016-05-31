@@ -27,7 +27,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="table-group-actions pull-right">
                 <span> </span>
-                <select class="table-group-action-input form-control input-inline input-small input-sm">
+                <!--<select class="table-group-action-input form-control input-inline input-small input-sm">
                     <option value="">Select...</option>
                     <option value="publish">Publish</option>
                     <option value="unpublished">Un-publish</option>
@@ -35,10 +35,10 @@
                 </select>
                 <button class="btn btn-sm btn-success table-group-action-submit">
                     <i class="fa fa-check"></i> Submit
-                </button>
-                <button class="btn btn-sm btn-success table-group-action-submit">
+                </button>-->
+                <a :href="linkCreate" class="btn btn-sm btn-success table-group-action-submit">
                     <i class="fa fa-plus"></i> Add new product
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
 
 <script>
     export default {
-        props: ['data', 'keyword'],
+        props: ['data', 'linkCreate'],
 
         methods: {
             onKeyup() {

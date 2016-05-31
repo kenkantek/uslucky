@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Cart;
+namespace App\Http\Controllers\Ecommerce;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -13,7 +11,7 @@ class CartController extends Controller
     {
         return view('cart.cart');
     }
-    
+
     public function postCheckout(Request $request)
     {
         return view('cart.checkout');

@@ -1,12 +1,14 @@
 <template>
-    <filter-tool :data.sync="data"></filter-tool>
+    <filter-tool
+            :data.sync="data"
+            :link-create="linkCreate"></filter-tool>
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer"
                id="datatable_products" aria-describedby="datatable_products_info" role="grid">
             <thead>
             <tr role="row" class="heading">
                 <th width="1%" class="sorting_disabled" rowspan="1" colspan="1">
-                    <div class="checker"><span><input type="checkbox" class="group-checkable"></span>
+                    <div class="checker"><span><input type="checkbox" v-model="checkAll"></span>
                     </div>
                 </th>
                 <th width="10%" class="sorting" tabindex="0" aria-controls="datatable_products"
@@ -21,36 +23,30 @@
                 <th width="15%" class="sorting" tabindex="0" aria-controls="datatable_products"
                     rowspan="1" colspan="1"> Date&nbsp;Created
                 </th>
-                <th width="10%" class="sorting" tabindex="0" aria-controls="datatable_products"
+                <!--<th width="10%" class="sorting" tabindex="0" aria-controls="datatable_products"
                     rowspan="1" colspan="1"> Status
-                </th>
+                </th>-->
                 <th width="10%" class="sorting" tabindex="0" aria-controls="datatable_products"
                     rowspan="1" colspan="1"> Actions
                 </th>
             </tr>
-            <tr role="row" class="filter">
-                <td rowspan="1" colspan="1"><input type="checkbox"></td>
+            <tr role="row" v-for="product in data.data" class="filter" :class="[$index % 2 == 0 ? 'odd' : 'even']">
+                <td rowspan="1" colspan="1"><input type="checkbox" v-model="ids" :value="product.id"></td>
+                <td rowspan="1" colspan="1" v-text="product.id"></td>
                 <td rowspan="1" colspan="1">
-                    0001</td>
-                <td rowspan="1" colspan="1">
-                    <img src="http://dummyimage.com/300x200/000/fff" alt="" width="150px">
+                    <img :src="product.thumb" alt="" width="150px">
                 </td>
-                <td rowspan="1" colspan="1">
-                    Product Name
-                </td>
-                <td rowspan="1" colspan="1">
-                    $100</td>
-                <td rowspan="1" colspan="1">
-                    May 26, 2016
-                </td>
-                <td rowspan="1" colspan="1">
+                <td rowspan="1" colspan="1" v-text="product.name"></td>
+                <td rowspan="1" colspan="1" v-text="product.price | currency"></td>
+                <td rowspan="1" colspan="1" v-text="product.created_at"></td>
+                <!--<td rowspan="1" colspan="1">
                     <span class="label label-danger">Un-publish</span>
-                </td>
+                </td>-->
                 <td rowspan="1" colspan="1">
                     <div class="margin-bottom-5">
-                        <button class="btn btn-sm btn-success filter-submit margin-bottom">
+                        <a :href="product.id | linkEdit" class="btn btn-sm btn-success filter-submit margin-bottom">
                             <i class="fa fa-pencil"></i> Edit
-                        </button>
+                        </a>
                     </div>
                     <button class="btn btn-sm btn-default filter-cancel">
                         <i class="fa fa-trash"></i> Delete
@@ -66,6 +62,7 @@
 <script>
     import laroute from '../../../../laroute';
     import FilterTool from './FilterTools.vue';
+    import deferred from 'deferred';
 
     export default{
         data(){
@@ -74,7 +71,42 @@
                 data: {
                     per_page: "10",
                 },
+                linkCreate: laroute.route('ecommerce.admin.ecommerce.products.create'),
+                ids: []
             }
+        },
+
+        asyncData(resolve, reject) {
+            this._fetchProducts(this.api).done(data => {
+                resolve({ data });
+        }, err => {
+                console.warn(err);
+            });
+        },
+
+        watch: {
+            checkAll(val) {
+                this.ids = val ? this.data.data.map(product => { return product.id }) : [];
+            }
+        },
+
+        methods: {
+            _fetchProducts(api, take = this.data.per_page) {
+                const def = deferred();
+                this.$http.get(api, { take }).then(res => {
+                    const { data } = res;
+                def.resolve(data);
+            }, res => {
+                    def.reject(res);
+                });
+                return  def.promise;
+            },
+        },
+
+        filters: {
+            linkEdit(products) {
+                return laroute.route('ecommerce.admin.ecommerce.products.edit', { products });
+            },
         },
 
 

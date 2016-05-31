@@ -14,16 +14,21 @@ class ProductController extends Controller
     {
         return view('admin.ecommerce.products.index');
     }
-
+    
     public function create()
     {
         return view('admin.ecommerce.products.create');
     }
-
-    public function store(CreateProductRequest $request)
+    
+    public function edit($id)
     {
-        $product = new Product;
+        $product = Product::find($id);
+        return view('admin.ecommerce.products.edit', compact('product'));
+    }
 
+    public function postUpdate(Request $request, $id)
+    {
+        $product = Product::with('images')->find($id);
         $product->withName($request->name)
             ->withPrice($request->price)
             ->withDescription($request->price)
@@ -32,6 +37,8 @@ class ProductController extends Controller
         $thumb = $request->file('thumb');
 
         if ($thumb) {
+            \File::delete($product->images->first()->path);
+            Image::destroy($product->images->first()->id);
             $storeFile = Image::setDir('uploads/ecommerces')->fromForm($thumb);
             $product->newImage()
                 ->withType('thumb')
@@ -45,13 +52,42 @@ class ProductController extends Controller
         ];
     }
     
+    public function store(CreateProductRequest $request)
+    {
+        $product = new Product;
+        
+        $product->withName($request->name)
+            ->withPrice($request->price)
+            ->withDescription($request->price)
+            ->publish();
+        
+        $thumb = $request->file('thumb');
+        
+        if ($thumb) {
+            $storeFile = Image::setDir('uploads/ecommerces')->fromForm($thumb);
+            $product->newImage()
+                ->withType('thumb')
+                ->withPath($storeFile->name)
+                ->publish();
+        }
+        
+        return [
+            'redirect' => route('ecommerce.admin.ecommerce.products.index'),
+            'message'  => trans('message.success'),
+        ];
+    }
+    
     public function getApi(Request $request)
     {
         $take     = $request->take ?: 10;
-        $products = Product::with('images')
-            ->latest()
-            ->paginate($take)
-            ->get();
+        $products = Product::latest()
+            ->paginate($take);
         return $products;
+    }
+    
+    public function getShow($id)
+    {
+        $product = Product::find($id);
+        return $product;
     }
 }

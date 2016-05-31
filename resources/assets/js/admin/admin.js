@@ -39,6 +39,7 @@ import WinnerList from './components/Users/Winners/Winners.vue';
 import RequestList from './components/Requests/Index.vue';
 
 import EcommerceProductCreate from './components/Ecommerce/Product/Create.vue';
+import EcommerceProductEdit from './components/Ecommerce/Product/Edit.vue';
 import EcommerceProductList from './components/Ecommerce/Product/ProductList.vue';
 
 new Vue({
@@ -59,6 +60,7 @@ new Vue({
         RequestList,
 
         EcommerceProductCreate,
+        EcommerceProductEdit,
         EcommerceProductList,
     }
 });

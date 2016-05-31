@@ -83,8 +83,12 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getTransactions' => 'get.transaction',
         'putCancel'       => 'put.cancel.transaction',
     ]);
+
     
     // Orders
+
+
+    // FOR API
     $router->group(['as' => 'api::', 'prefix' => 'api'], function () use ($router) {
         $router->get('orders', [
             'as'   => 'get.orders',
@@ -119,6 +123,8 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         ]);
         
     });
+
+    //FOR ORDER
     $router->resource('orders', 'User\OrderController', [
         'only' => [
             'index',
@@ -142,15 +148,27 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postMegamilion' => 'post.megamillion',
         'putLuckys'      => 'put.luckys.mega',
     ]);
-    
-    $router->controller('cart', 'Cart\CartController', [
+
+    $router->group([
+        'as'        => 'ecommerce',
+        'prefix'    => 'ecommerce',
+        'namespace' => 'Ecommerce',
+    ], function () use ($router) {
+        $router->get('api/products', [
+            'as'   => 'api.get.products',
+            'uses' => 'ProductController@apiProducts',
+        ]);
+    });
+
+    $router->controller('cart', 'Ecommerce\CartController', [
         'getIndex'     => 'cart.index',
         'postCheckout' => 'cart.checkout',
     ]);
-    $router->resource('product-orders', 'Cart\ProductOrderController');
+    $router->resource('product-orders', 'Ecommerce\ProductController');
     
 });
 
+//FOR ADMIN
 $router->group([
     'prefix'     => 'admin',
     'namespace'  => 'Admin',
@@ -325,14 +343,21 @@ $router->group([
         $router->group(['as' => 'ecommerce.', 'prefix' => 'ecommerce', 'namespace' => 'Ecommerce'],
             function () use ($router) {
                 //$router->resource('orders', 'OrderController');
-                
+    
+                $router->get('products/api/edit/{id}', [
+                    'as'   => 'api.edit',
+                    'uses' => 'ProductController@getShow'
+                ]);
                 $router->get('products/api', [
                     'as'   => 'api.list',
                     'uses' => 'ProductController@getApi'
                 ]);
-                
+                $router->post('products/{products}', [
+                    'as'   => 'admin.ecommerce.products.update',
+                    'uses' => 'ProductController@postUpdate'
+                ]);
                 $router->resource('products', 'ProductController', [
-                    'only' => ['index', 'create', 'store'],
+                    'only' => ['index', 'create', 'store','update','edit'],
                 ]);
             });
         
