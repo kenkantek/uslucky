@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ecommerce\CreateProductRequest;
 use App\Models\Image;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -42,5 +43,15 @@ class ProductController extends Controller
             'redirect' => route('ecommerce.admin.ecommerce.products.index'),
             'message'  => trans('message.success'),
         ];
+    }
+    
+    public function getApi(Request $request)
+    {
+        $take     = $request->take ?: 10;
+        $products = Product::with('images')
+            ->latest()
+            ->paginate($take)
+            ->get();
+        return $products;
     }
 }
