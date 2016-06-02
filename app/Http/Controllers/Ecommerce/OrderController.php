@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use App\Models\Ecommerce\Order as EcommerceOrder;
 use App\Models\Ecommerce\Product;
+use App\Models\Order;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use DB;
 use Exception;
@@ -16,12 +17,14 @@ class OrderController extends Controller
     {
         return view('ecommerce.orders.index');
     }
-
-    public function show(EcommerceOrder $order)
+    
+    public function show($id)
     {
+        \Javascript::put([
+            'order_id' => $id,
+        ]);
         return view('ecommerce.orders.show');
     }
-
     public function store(Request $request)
     {
 
@@ -145,5 +148,16 @@ class OrderController extends Controller
         $product = Product::findOrFail($product_id);
 
         return $product->price * $count;
+    }
+
+    public function getOrders(Request $request)
+    {
+        $take = $request->take;
+        return $this->user->ecommerce_orders()->latest()->paginate($take);
+    }
+
+    public function getOrder(\App\Models\Ecommerce\Order $order)
+    {
+        return $order->load('products');
     }
 }

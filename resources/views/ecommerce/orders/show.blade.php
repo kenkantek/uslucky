@@ -14,55 +14,51 @@
             <div class="col-xs-12 col-md-9">
                 <h2> Your Products </h2>
                 <hr>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <dl class="dl-horizontal">
-                            <dt>#</dt>
-                            <dd>01</dd>
-
-                            <dt>Bought date</dt>
-                            <dd>Apr 27, 2016</dd>
-
-                            <dt>Qty</dt>
-                            <dd>4</dd>
-                        </dl>
+                <ecommerce-show-order inline-template>
+                    <div v-if="$loadingAsyncData">
+                        <loading></loading>
                     </div>
-                    <div class="col-xs-6">
-                        <dl class="dl-horizontal">
-                            <dt>Total</dt>
-                            <dd>$400</dd>
+                    <div v-else>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <dl class="dl-horizontal">
+                                <dt>#</dt>
+                                <dd>@{{order.id}}</dd>
 
-                            <dt>Status</dt>
-                            <dd><span class="label label-danger">Pending</span></dd>
+                                <dt>Bought date</dt>
+                                <dd>@{{order.created_at}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-6">
+                            <dl class="dl-horizontal">
+                                <dt>Total</dt>
+                                <dd>@{{ order.total | currency }}</dd>
 
-                            <dt></dt>
-                            <dd class="margin-top-10">
-                                <button class="btn btn-primary">Cancel</button>
-                            </dd>
-                        </dl>
+                                <dt>Qty</dt>
+                                <dd>@{{ order.products.length }}</dd>
+
+                            </dl>
+                        </div>
                     </div>
-                </div>
-                <table class="table table-bordered table-hover trans">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th colspan="2">Product name</th>
-                        <th>Price</th>
-                        <th>Qty</th>
-                        <th>Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><img src="http://dummyimage.com/300x200/000/fff" alt="" width="100px"></td>
-                        <td>Product Name</td>
-                        <td>$100</td>
-                        <td>4</td>
-                        <td>$400</td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-bordered table-hover trans">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th colspan="2">Product name</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="product in order.products">
+                            <td v-text="product.id"></td>
+                            <td><img :src="product.thumb" alt="" width="100px"></td>
+                            <td v-text="product.name"></td>
+                            <td v-text="product.price | currency"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </ecommerce-show-order>
 
                 <hr>
 

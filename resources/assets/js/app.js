@@ -36,6 +36,8 @@ import Notification from './components/Users/Settings/Notification/Index.vue';
 import ItemProduct from './components/Ecommerce/ItemProduct.vue';
 import Cart from './components/Ecommerce/Cart.vue';
 import ManageCart from './components/Ecommerce/ManageCart.vue';
+import EcommerceOrder from './components/Ecommerce/Orders/Index.vue';
+import EcommerceShowOrder from './components/Ecommerce/Orders/Show.vue';
 
 new Vue({
 	el: 'body',
@@ -54,7 +56,9 @@ new Vue({
         Notification,
         MegaMillions,
         
-        ItemProduct, Cart, ManageCart
+        ItemProduct, Cart, ManageCart,
+        EcommerceOrder,
+        EcommerceShowOrder
     },
 
     events: {
