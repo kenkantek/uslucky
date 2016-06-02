@@ -79,6 +79,14 @@ class ProductController extends Controller
         ];
     }
 
+    public function destroy(Product $products)
+    {
+        $image_first = $products->images()->first();
+        Image::deleteImage($image_first->getOriginal()['path']);
+        $products->delete();
+        return;
+    }
+
     public function apiGetShow(Product $products)
     {
         return $products;

@@ -76,3 +76,12 @@ Breadcrumbs::register('product.edit', function ($breadcrumbs, $products) {
     $breadcrumbs->parent('product.index');
     $breadcrumbs->push("Update Product #{$products->id}", route('ecommerce.admin.ecommerce.products.edit', $products->id));
 });
+
+Breadcrumbs::register('ecommerce.order.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Ecommerce Orders', route('ecommerce.order.index'));
+});
+Breadcrumbs::register('ecommerce.order.show', function ($breadcrumbs, $order) {
+    $breadcrumbs->parent('ecommerce.order.index');
+    $breadcrumbs->push("Ecommerce Order #{$order->id}", route('ecommerce.order.show', $order->id));
+});

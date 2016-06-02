@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Listeners\AwardListener;
 use App\Listeners\NotificationListener;
+use App\Listeners\OrderEcommerceListener;
 use App\Listeners\OrderListener;
 use App\Listeners\PaymentListener;
 use App\Listeners\UserListener;
@@ -31,5 +32,6 @@ class EventServiceProvider extends ServiceProvider
         OrderListener::class,
         AwardListener::class,
         NotificationListener::class,
+        OrderEcommerceListener::class,
     ];
 }

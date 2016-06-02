@@ -2,6 +2,7 @@
     import laroute from '../../../../laroute';
     import FilterTool from './FilterTools.vue';
     import deferred from 'deferred';
+    import NOTIFY from '../../../../common.js';
 
     export default{
         data(){
@@ -11,7 +12,8 @@
                     per_page: "10",
                 },
                 linkCreate: laroute.route('ecommerce.admin.ecommerce.products.create'),
-                ids: []
+                ids: [],
+                checkAll: false
             }
         },
 
@@ -19,7 +21,7 @@
             this._fetchProduct(this.api).done(data => {
                 resolve({ data });
         }, err => {
-                console.warn(err);
+                NOTIFY.alertError();
             });
         },
 
@@ -41,6 +43,33 @@
 
                 return  def.promise;
             },
+
+            deleteProduct(product) {
+                swal({
+                    title: "Are you sure delete this product?",
+                    type: "info",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, (isConfirm) => {
+                    if(isConfirm) {
+                        this.$http.delete(laroute.route('ecommerce.admin.ecommerce.products.destroy', { products: product.id })).then(res => {
+                            toastr.success('Delete product success');
+                            this.data.data.$remove(product);
+                            swal.close();
+                        }, res => {
+                            NOTIFY.alertError();
+                        });
+
+                    } else {
+                        swal.close();
+                    }
+                });
+
+                
+            }
         },
 
         filters: {

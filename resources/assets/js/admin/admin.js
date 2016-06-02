@@ -41,6 +41,8 @@ import RequestList from './components/Requests/Index.vue';
 import EcommerceProductCreate from './components/Ecommerce/Product/Create.vue';
 import EcommerceProductEdit from './components/Ecommerce/Product/Edit.vue';
 import EcommerceProductList from './components/Ecommerce/Product/ProductList.vue';
+import EcommerceOrderList from './components/Ecommerce/Order/Index.vue';
+import EcommerceOrderShow from './components/Ecommerce/Order/ShowOrder.vue';
 
 new Vue({
     el: 'body',
@@ -59,9 +61,9 @@ new Vue({
         WinnerList,
         RequestList,
 
-        EcommerceProductCreate,
-        EcommerceProductEdit,
-        EcommerceProductList,
+        EcommerceProductCreate, EcommerceProductEdit, EcommerceProductList,
+        EcommerceOrderList, EcommerceOrderShow
+
     }
 });
 

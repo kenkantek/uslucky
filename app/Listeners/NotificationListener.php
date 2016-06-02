@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AwardEvent;
+use App\Events\Ecommerce\OrderUpdateStatusEvent;
 use App\Events\Order\UpdateStatusEvent;
 use App\Events\PaidRequestEvent;
 use App\Models\User;
@@ -55,6 +56,13 @@ class NotificationListener
         $ticket->order->user->makeNotification('award', $body, $ticket);
     }
 
+    public function onEcommerceOrderUpdateStatus($event)
+    {
+        $order = $event->order;
+
+        $order->user->makeNotification('claimrequest', "Ecommerce order #{$order->id} has been update to {$order->status->status}", $order);
+    }
+
     public function subscribe($events)
     {
         $events->listen(
@@ -70,6 +78,11 @@ class NotificationListener
         $events->listen(
             AwardEvent::class,
             static::class . '@onWinner'
+        );
+
+        $events->listen(
+            OrderUpdateStatusEvent::class,
+            static::class . '@onEcommerceOrderUpdateStatus'
         );
     }
 }
