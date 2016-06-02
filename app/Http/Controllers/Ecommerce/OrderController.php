@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Events\Ecommerce\OrderCreateStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Ecommerce\Order as EcommerceOrder;
 use App\Models\Ecommerce\Product;
@@ -57,6 +58,8 @@ class OrderController extends Controller
                 //Credit card
                 $message = $this->payWithCreditCard($user, $amount, $balance, $amount_total, $request);
             }
+
+            event(new OrderCreateStatusEvent($order, $user));
 
             return $message ? response(['message' => 'Success']) : response(['message' => $message], 401);
         });
