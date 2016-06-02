@@ -33,7 +33,7 @@
                             <td v-text="order.created_at"></td>
                             <td v-text="order.total | currency"></td>
                             <td class="text-center">
-                                <a class="link" href="{{ route('front::ecommerce.order.show', 1) }}">
+                                <a class="link" href="/ecommerce/order/@{{ order.id }}">
                                     {{ trans('setting.button_details') }}
                                 </a>
                             </td>

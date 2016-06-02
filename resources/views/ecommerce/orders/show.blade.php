@@ -37,6 +37,17 @@
                                 <dt>Qty</dt>
                                 <dd>@{{ order.products.length }}</dd>
 
+                                <dt>{{trans('setting.status')}}</dt>
+                                <dd>
+                                    <span
+                                            class="label"
+                                            :class="{
+                                            'label-success': order.status.status == 'purchased',
+                                            'label-danger': order.status.status == 'pendding'
+                                        }"
+                                    >@{{order.status.status}}</span>
+                                </dd>
+
                             </dl>
                         </div>
                     </div>
