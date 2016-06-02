@@ -166,6 +166,6 @@ class OrderController extends Controller
 
     public function getOrder(\App\Models\Ecommerce\Order $order)
     {
-        return $order->load('products');
+        return $order->load('products','status');
     }
 }
