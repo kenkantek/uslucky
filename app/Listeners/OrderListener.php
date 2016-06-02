@@ -35,7 +35,9 @@ class OrderListener
     public function onOrderEmail($event)
     {
         $order = $event->order;
-        $user  = Auth::user();
+
+        $user = Auth::user();
+
         Mail::send('mail.order.neworder', ['senderName' => $user->fullname, 'order' => $order, 'logo' => ['path' => asset('css/images/logo.png'), 'width' => 150, 'height' => 150]], function ($m) use ($user) {
             $m->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
             $m->to($user->email, $user->fullname)->subject(trans('event.title_new_order'));

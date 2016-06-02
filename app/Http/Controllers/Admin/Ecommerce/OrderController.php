@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Ecommerce;
 use App\Events\Ecommerce\OrderUpdateStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Ecommerce\Order as EcommerceOrder;
+use DB;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -40,14 +41,18 @@ class OrderController extends Controller
 
     public function apiUpdateStatus(EcommerceOrder $order)
     {
-        $status = 'succeeded';
+        return DB::transaction(function () use ($order) {
 
-        /*$order->updateOrNewStatus($order->status)
-        ->withStatus($status)
-        ->publish();*/
+            $status = 'succeeded';
 
-        event(new OrderUpdateStatusEvent($order, $this->user));
+            $order->updateOrNewStatus($order->status)
+                ->withStatus($status)
+                ->publish();
 
-        return;
+            event(new OrderUpdateStatusEvent($order, $this->user));
+
+            return;
+        });
+
     }
 }

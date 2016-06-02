@@ -11,6 +11,7 @@ class OrderEcommerceListener
     {
         $order = $event->order;
         $user  = $order->user;
+
         Mail::send('mail.ecommerce.orders.update-status', compact(['order', 'user']), function ($m) use ($user) {
 
             $m->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
