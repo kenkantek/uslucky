@@ -22,16 +22,27 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{trans('setting.date')}}</th>
+                            <th>User name</th>
+                            <th>{{ trans('setting.date') }}</th>
+                            <th>Quantity</th>
                             <th>Total</th>
-                            <th></th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="order in orders">
                             <td v-text="order.id"></td>
+                            <td v-text="order.user.fullname"></td>
                             <td v-text="order.created_at"></td>
+                            <td v-text="order.products_count"></td>
                             <td v-text="order.total | currency"></td>
+                            <td>
+                                <span class="label" v-text="order.status.status" :class="{
+                                    'label-success': order.status.status == 'succeeded',
+                                    'label-danger': order.status.status == 'pendding'
+                                }"></span>
+                            </td>
                             <td class="text-center">
                                 <a class="link" href="/ecommerce/order/@{{ order.id }}">
                                     {{ trans('setting.button_details') }}

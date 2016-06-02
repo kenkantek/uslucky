@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Events\Ecommerce\OrderCreateStatusEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Ecommerce\Order as EcommerceOrder;
 use App\Models\Ecommerce\Product;
 use App\Models\Order;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
@@ -18,7 +17,7 @@ class OrderController extends Controller
     {
         return view('ecommerce.orders.index');
     }
-    
+
     public function show($id)
     {
         \Javascript::put([
@@ -161,11 +160,15 @@ class OrderController extends Controller
     public function getOrders(Request $request)
     {
         $take = $request->take;
-        return $this->user->ecommerce_orders()->latest()->paginate($take);
+        return $this->user->ecommerce_orders()
+            ->with(['status', 'user'])
+            ->withCount('products')
+            ->latest()
+            ->paginate($take);
     }
 
     public function getOrder(\App\Models\Ecommerce\Order $order)
     {
-        return $order->load('products','status');
+        return $order->load('products', 'status', 'user');
     }
 }

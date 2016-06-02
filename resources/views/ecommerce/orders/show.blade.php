@@ -25,6 +25,9 @@
                                 <dt>#</dt>
                                 <dd>@{{order.id}}</dd>
 
+                                <dt>User name</dt>
+                                <dd v-text="order.user.fullname"></dd>
+
                                 <dt>Bought date</dt>
                                 <dd>@{{order.created_at}}</dd>
                             </dl>
@@ -51,12 +54,20 @@
                             </dl>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div v-html="order.description"></div>
+                        </div>
+                    </div>
                     <table class="table table-bordered table-hover trans">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Order ID</th>
                             <th colspan="2">Product name</th>
+                            <th>Quantity</th>
                             <th>Price</th>
+                            <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -64,7 +75,9 @@
                             <td v-text="product.id"></td>
                             <td><img :src="product.thumb" alt="" width="100px"></td>
                             <td v-text="product.name"></td>
-                            <td v-text="product.price | currency"></td>
+                            <td v-text="product.pivot.count"></td>
+                            <td v-text="product.pivot.price | currency"></td>
+                            <td v-text="product.pivot.count * product.pivot.price | currency"></td>
                         </tr>
                         </tbody>
                     </table>
