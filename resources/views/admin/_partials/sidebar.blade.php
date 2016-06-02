@@ -152,7 +152,7 @@
                 </a>
             </li>
 
-            <li class="nav-item start @if($routeName === 'admin.dashboard')  @endif">
+            <li class="nav-item start @if(strpos($routeName, 'ecommerce') !== false) active  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-basket"></i>
                     <span class="title">e-commerce</span>
@@ -163,13 +163,13 @@
                 <ul class="sub-menu">
                     <li class="nav-item start">
                         <a href="{{ route('ecommerce.admin.ecommerce.products.index') }}" class="nav-link ">
-                            <span class="title">Manager Product</span>
+                            <span class="title">Manage Products</span>
                             <span class="selected"></span>
                         </a>
                     </li>
                     <li class="nav-item start">
-                        <a href="" class="nav-link">
-                            <span class="title">Order</span>
+                        <a href="{{ route('ecommerce.order.index') }}" class="nav-link">
+                            <span class="title">Manage Orders</span>
                             <span class="selected"></span>
                         </a>
                     </li>

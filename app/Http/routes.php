@@ -347,7 +347,6 @@ $router->group([
         //FOR e-commerce
         $router->group(['as' => 'ecommerce.', 'prefix' => 'ecommerce', 'namespace' => 'Ecommerce'],
             function () use ($router) {
-                //$router->resource('orders', 'OrderController');
 
                 $router->get('api/products/{products}/edit', [
                     'as'   => 'api.product.edit',
@@ -362,7 +361,29 @@ $router->group([
                     'uses' => 'ProductController@update',
                 ]);
                 $router->resource('products', 'ProductController', [
-                    'only' => ['index', 'create', 'store', 'edit'],
+                    'only' => ['index', 'create', 'store', 'edit', 'destroy'],
+                ]);
+
+                $router->get('orders', [
+                    'as'   => 'order.index',
+                    'uses' => 'OrderController@index',
+                ]);
+                $router->get('order/{order}', [
+                    'as'   => 'order.show',
+                    'uses' => 'OrderController@show',
+                ]);
+
+                $router->get('api/orders', [
+                    'as'   => 'api.orders',
+                    'uses' => 'OrderController@apiIndex',
+                ]);
+                $router->get('api/order/{order}', [
+                    'as'   => 'api.order.show',
+                    'uses' => 'OrderController@apiShow',
+                ]);
+                $router->put('api/updatestatus/{order}', [
+                    'as'   => 'api.order.update.status',
+                    'uses' => 'OrderController@apiUpdateStatus',
                 ]);
             });
 

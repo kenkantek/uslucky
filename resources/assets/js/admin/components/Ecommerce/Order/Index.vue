@@ -18,12 +18,11 @@
                         <tr class="uppercase">
                             <th><input type="checkbox" v-model="checkAll"></th>
                             <th>#ID</th>
-                            <th colspan="2">MEMBER</th>
-                            <th> Game Type </th>
-                            <th> Total Ticket </th>
+                            <th>User</th>
                             <th> Bought Date </th>
-                            <th>Draw Date</th>
-                            <th colspan="2"> Description </th>
+                            <th> Description </th>
+                            <th> Quantity </th>
+                            <th> Total </th>
                             <th> Status </th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -34,29 +33,26 @@
 
                             <td>{{ order.id }}</td>
 
-                            <td colspan="2"> 
-                                <img height="50" :src="order.user.image"> 
+                            <td> 
                                 <a href="javascript:;" class="primary-link">{{ order.user.fullname }}</a>
                             </td>
-
-                            <td>{{ order.game_name }}</td>
-
-                            <td>{{ order.ticket_total }} (<strong>{{ order.price | currency }}</strong>)</td>
 
                             <td>
                                 {{ order.created_at }}
                             </td>
 
-                            <td>{{ order.draw_date }}</td>
+                            <td>{{ order.description }}</td>
 
-                            <td colspan="2">{{ order.description }}</td>
+                            <td>{{ order.products_count }}</td>
+    
+                            <td><strong>{{ order.total | currency }}</strong></td>
 
                             <td>
                                 <span 
                                     class="label"
                                     :class="{
-                                        'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
-                                        'label-danger': order.status.status == 'order placed' || order.status.status == 'pending purchase'
+                                        'label-success': order.status.status == 'succeeded',
+                                        'label-danger': order.status.status == 'pendding'
                                     }"
                                 >{{ order.status.status }}
                                 </span>
@@ -64,12 +60,11 @@
 
                             <td class="text-center">
                                 <a class="label label-default" :href="order.id | linkShow"><i class="fa fa-eye"></i></a>
-                                <a class="label label-info" target="_blank" :href="order.id | linkPrint"><i class="fa fa-print"></i></a>
-                                <a class="hidden label label-danger" @click.prevent="onDelete(order.id)"><i class="fa fa-remove"></i></a>
                             </td>
                         </tr>
+
                         <tr v-if="!data.data || !data.data.length">
-                            <td colspan="12">No records found.</td>
+                            <td colspan="8">No records found.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,16 +75,16 @@
 </template>
 
 <script>
-    import laroute  from '../../../laroute';
+    import laroute  from '../../../../laroute';
     import deferred from 'deferred';
-    import COMMON from '../../../common';
+    import COMMON from '../../../../common';
     import HeaderTools from './HeaderTools.vue';
-    import FilterTools from '../Globals/FilterTools.vue';
+    import FilterTools from '../../Globals/FilterTools.vue';
 
     export default {
         data() {
             return {
-                api: laroute.route('admin.get.orders'),
+                api: laroute.route('ecommerce.api.orders'),
                 data: {
                     per_page: "10",
                 },
@@ -140,39 +135,11 @@
                 });
                 return  def.promise;
             },
-
-            onDelete(ids){
-                swal({
-                    title: "Are you sure delete this order?",
-                    type: "info",
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true
-                }, (isConfirm) => {
-                    if(isConfirm) {
-                        this.$http.delete(laroute.route('admin.orders.destroy', { 'orders': [ids]})).then(res => {
-                            swal.close();
-                            this.reloadAsyncData();
-                            return res;
-                        }, (res) => {
-                            if(res.status === 500) {
-                                COMMON.alertError();
-                            }
-                            }
-                        );
-                    } else {
-                        swal.close();
-                    }
-                });
-            }
-
         },
 
         filters: {
-            linkShow(orders) {
-                return laroute.route('admin.orders.show', { orders });
+            linkShow(order) {
+                return laroute.route('ecommerce.order.show', { order });
             },
             linkPrint(ids){
                 return laroute.route('get.prints')+'/?' + $.param({ids: typeof ids == 'object' ? ids : [ids]}).replace(/%5B%5D/g, '[]');

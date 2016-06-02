@@ -44,7 +44,8 @@ class Product extends Model
     }
     public function orders()
     {
-        return $this->belongsToMany(Order::class, 'ecommerce_order_product');
+        return $this->belongsToMany(Order::class, 'ecommerce_order_product')
+            ->withPivot('count', 'price');
     }
 
     //ACCESSOR

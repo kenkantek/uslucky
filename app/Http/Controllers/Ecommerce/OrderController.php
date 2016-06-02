@@ -37,6 +37,11 @@ class OrderController extends Controller
                 ->withDescription($request->description)
                 ->publish();
 
+            // add status
+            $order->updateOrNewStatus()
+                ->withStatus('pendding')
+                ->publish();
+
             foreach ($request->carts as $cart) {
                 $order->products()->attach($cart['data']['id'], [
                     'count' => $cart['count'],
