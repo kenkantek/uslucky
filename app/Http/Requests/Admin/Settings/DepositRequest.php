@@ -25,7 +25,7 @@ class DepositRequest extends Request
     {
         return [
             'amount'      => 'bail|required|numeric|min:' . env('MINIMUM_AMOUNT'),
-            'description' => 'bail|required|max:255|min:50',
+            'description' => 'bail|required|max:255|min:10',
         ];
     }
 }

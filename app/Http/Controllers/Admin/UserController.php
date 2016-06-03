@@ -73,7 +73,6 @@ class UserController extends Controller
 
     public function getTransactions(Request $request)
     {
-        // return $this->user->transactions()->with('status')->latest('updated_at')->paginate($take);
         $take = $request->take ?: 10;
         return User::find($request->id)
             ->transactions()->with('status')

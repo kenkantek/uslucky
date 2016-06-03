@@ -11,7 +11,7 @@
 
                         <div class="caption">
                             <a href="javascript:;" v-text="product.name"></a>
-                            <p>Won <span v-text="product.name"></span> <small>playing</small></p>
+                            <p>Won <span v-text="product.price | currency"></span> <small>playing</small></p>
                             <a href="#" class="add2cart" @click.prevent="addToCart">add to cart</a>
                         </div>
                     </item-product>

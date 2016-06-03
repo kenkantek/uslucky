@@ -24,7 +24,7 @@ class AvatarRequest extends Request
     public function rules()
     {
         return [
-            'avatar' => 'image|max:2024'
+            'avatar' => 'required|image',
         ];
     }
 

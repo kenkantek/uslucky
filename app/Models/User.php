@@ -79,12 +79,12 @@ class User extends Authenticatable
 
     public function getBirthdayAttribute($date)
     {
-        return $date ? Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d') : null;
+        return $date ? Carbon::parse($date)->format('Y-m-d') : null;
     }
 
     public function setBirthdayAttribute($date)
     {
-        return $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');
+        return $this->attributes['birthday'] = Carbon::parse($date)->format('Y-m-d H:i:s');
     }
 
     public function getBalanceAttribute()

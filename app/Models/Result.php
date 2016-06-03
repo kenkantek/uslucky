@@ -82,7 +82,7 @@ class Result extends Model
 
     public function getDrawAtAttribute($date)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+        return Carbon::parse($date)->format('Y-m-d');
     }
 
     public function scopeGameId($query, $type = 1)
@@ -97,7 +97,7 @@ class Result extends Model
 
     protected function getTickets()
     {
-        $draw_at = Carbon::createFromFormat('Y-m-d', $this->draw_at)->toDateString();
+        $draw_at = Carbon::parse($this->draw_at)->toDateString();
         return Ticket::whereHas('order', function ($q) use ($draw_at) {
             $q->whereDate('draw_at', '=', $draw_at);
         })->get();
