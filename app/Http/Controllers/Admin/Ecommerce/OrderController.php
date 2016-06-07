@@ -39,14 +39,12 @@ class OrderController extends Controller
         return $order->load(['user', 'status', 'products']);
     }
 
-    public function apiUpdateStatus(EcommerceOrder $order)
+    public function apiUpdateStatus(EcommerceOrder $order, Request $request)
     {
-        return DB::transaction(function () use ($order) {
-
-            $status = 'succeeded';
+        return DB::transaction(function () use ($order, $request) {
 
             $order->updateOrNewStatus($order->status)
-                ->withStatus($status)
+                ->withStatus($request->status['status'])
                 ->publish();
 
             event(new OrderUpdateStatusEvent($order, $this->user));

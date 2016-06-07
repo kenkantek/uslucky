@@ -7,7 +7,9 @@
             <div class="col-md-3">
                 <div class="thumb">
                     <item-product inline-template product="{{{ json_encode($product) }}}">
-                        <img height="180" :src="product.thumb" :alt="product.name">
+                        <div class="image">
+                            <img height="200" :src="product.thumb" :alt="product.name">
+                        </div>
 
                         <div class="caption">
                             <a href="javascript:;" v-text="product.name"></a>

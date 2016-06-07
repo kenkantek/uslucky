@@ -35,7 +35,8 @@
                                 class="label"
                                 :class="{
                                     'label-success': order.status.status == 'succeeded',
-                                    'label-danger': order.status.status == 'pendding'
+                                    'label-danger': order.status.status == 'pendding',
+                                    'label-info': order.status.status == 'pending purchase'
                                 }"
                             >{{ order.status.status }}
                             </span>
@@ -54,6 +55,7 @@
                                 class="form-control status"
                             >
                                 <option v-if="order.status.status == 'pendding'" value="pendding">Pendding</option>
+                                <option v-if="order.status.status != 'succeeded'" value="pending purchase">Pending Purchase</option>
                                 <option value="succeeded">Succeeded</option>
                             </select>
                             <div v-if="submiting"><loading></loading></div>

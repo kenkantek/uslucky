@@ -23,13 +23,13 @@
                         <div class="col-xs-6">
                             <dl class="dl-horizontal">
                                 <dt>#</dt>
-                                <dd>@{{order.id}}</dd>
+                                <dd>@{{ order.id }}</dd>
 
                                 <dt>User name</dt>
                                 <dd v-text="order.user.fullname"></dd>
 
                                 <dt>Bought date</dt>
-                                <dd>@{{order.created_at}}</dd>
+                                <dd>@{{ order.created_at }}</dd>
                             </dl>
                         </div>
                         <div class="col-xs-6">
@@ -40,15 +40,16 @@
                                 <dt>Qty</dt>
                                 <dd>@{{ order.products.length }}</dd>
 
-                                <dt>{{trans('setting.status')}}</dt>
+                                <dt>{{ trans('setting.status') }}</dt>
                                 <dd>
                                     <span
-                                            class="label"
-                                            :class="{
-                                            'label-success': order.status.status == 'purchased',
-                                            'label-danger': order.status.status == 'pendding'
-                                        }"
-                                    >@{{order.status.status}}</span>
+                                        class="label"
+                                        :class="{
+                                        'label-success': order.status.status == 'succeeded',
+                                        'label-info': order.status.status == 'pending purchase',
+                                        'label-danger': order.status.status == 'pendding'}"
+                                        v-text="order.status.status"
+                                    ></span>
                                 </dd>
 
                             </dl>

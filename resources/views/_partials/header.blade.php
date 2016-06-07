@@ -1,42 +1,50 @@
 <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div class="container">
+            <div class="navbar-header">
+                  <a class="navbar-brand" href="{{ route('front::home') }}">
+                    <img src="{{ asset('images/logo-here.jpg') }}" height="30">
+                  </a>
+            </div>
             <ul class="nav navbar-nav nav-custome">
                 <li @if($routeName === 'front::home') class="active" @endif>
                     <a href="{{ route('front::home') }}"> {{ trans('menu.home') }} </a>
                 </li>
-                <li>
-                    <a href="">Broadway</a>
-                </li>
-                <li>
-                    <a href="">Vega</a>
-                </li>
-                <li>
-                    <a href="">Museum</a>
-                </li>
-                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif"><a
-                            href="{{route('front::game.get.index')}}">{{trans('home.menu_game')}} <b class="caret"></b></a>
+
+                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif">
+                    <a href="{{route('front::game.get.index')}}">
+                        NYC <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('front::game.powerball') }}">
+                        <li>
+                            <a href="#">
+                                Broadway
+                            </a>
+                        </li>
+                        <li><a href="#">Museum</a></li>
+                        <li><a href="#">Concert</a></li>
+                        <li>
+                            <a href="{{ route('front::game.powerball') }}">
                                 {{ trans('menu.powerball') }}
-                            </a></li>
-                        <li><a href="{{ route('front::game.megamillions') }}">
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('front::game.megamillions') }}">
                                 {{ trans('menu.megamilions') }}
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="">Vegas</a>
+                </li>
+
                 <li @if($routeName === 'front::special.offers') class="active" @endif>
                     <a href="{{ route('front::special.offers') }}">{{ trans('menu.special_offers') }}</a>
                 </li>
+
                 @if($auth)
                     <li class="cursor my-acccount">
                         <div class="dropdown-toggle clearfix" data-toggle="dropdown">
@@ -52,6 +60,12 @@
                             <b class="caret"></b>
                         </div>
                         <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('front::orders.index') }}">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    {{ trans('menu.order') }}
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ route('front::settings.notifications') }}">
                                     <i class="fa fa-envelope"></i> {{ trans('menu.notification') }}
@@ -77,6 +91,7 @@
                         </a>
                     </li>
                 @endif
+
                 <li class="lang en">
                     <a href="{{ route('front::switch.lang', 'en') }}"
                        class="@if(app()->getLocale() === 'en') active @endif">EN</a>
@@ -86,6 +101,7 @@
                     <a href="{{ route('front::switch.lang', 'cn') }}"
                        class="@if(app()->getLocale() === 'cn') active @endif">CN</a>
                 </li>
+
                 <li class="btn-cart">
                     <a href="{{ route('front::ecommerce.cart') }}">
                         <i class="fa fa-shopping-cart fa-lg"></i>

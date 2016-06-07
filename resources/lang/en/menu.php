@@ -14,4 +14,7 @@ return [
     'powerball'       => 'Powerball',
     'megamilions'     => 'Mega Milions',
     'special_offers'  => 'Special Offers',
+    'order'           => 'Order history',
+    'vagas'           => 'Vagas',
+    'nyc'             => 'YNC',
 ];

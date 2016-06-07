@@ -40,6 +40,7 @@
                             <td>
                                 <span class="label" v-text="order.status.status" :class="{
                                     'label-success': order.status.status == 'succeeded',
+                                    'label-info': order.status.status == 'pending purchase',
                                     'label-danger': order.status.status == 'pendding'
                                 }"></span>
                             </td>
@@ -58,9 +59,11 @@
                             </div>
                         </div>
                     </div>
-                    <button style="width: 100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">{{trans('setting.load_more')}} @{{ numberMore }} {{trans('setting.record')}}</button>
+                    <button style="width: 100%" class="link" @click="nextPagination" v-show="nextPageUrl" :disabled="loading">
+                        {{ trans('setting.load_more') }} @{{ numberMore }} {{ trans('setting.record') }}
+                    </button>
                     <div v-show="nextPageUrl" style="width: 100%;text-align: center;margin-top: 15px">
-                        {{trans('setting.show')}} @{{ orders.length }} {{trans('setting.of')}} @{{ totalOrders }} {{trans('setting.record')}}.
+                        {{ trans('setting.show')}} @{{ orders.length }} {{ trans('setting.of') }} @{{ totalOrders }} {{ trans('setting.record') }}.
                     </div>
                 </ecommerce-order>
                 <hr>

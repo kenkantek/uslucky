@@ -21,7 +21,8 @@
                             <th> DEPOSIT Total </th>
                             <th> WITHDRAW/CLAIM Total </th>
                             <th> Blance </th>
-                            <th></th>
+                            <th>Actived</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +42,13 @@
                             <td>
                                 <span class="bold theme-font">{{user.balance | currency}}</span>
                             </td>
-                            <td><a v-if="user.active == 0" class="label label-success" href="" @click.prevent="onActive(user.id)" title="Active user"><i class="fa fa-check"></i></a> <a class="label label-danger" href="" @click.prevent="onDelete(user.id)" title="Delete user"><i class="fa fa-remove"></i></a></td>
+                            <td>
+                                <a v-if="user.active == 0" class="label label-danger" href="#" @click.prevent="onActive(user.id)" title="Active user">Active</a>
+                                <span v-else class="label label-success">Actived</span>
+                            </td>
+                            <td>
+                                <a class="label label-danger" href="" @click.prevent="onDelete(user.id)" title="Delete user"><i class="fa fa-remove"></i></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

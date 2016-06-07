@@ -16,11 +16,11 @@
         },
 
         asyncData(resolve, reject) {
-            this._fetchOrder(laroute.route('front::api::get.ecommerce.orders'), this.numberMore).done(orders => {
+            this._fetchOrder(laroute.route('front::api::get.ecommerce.orders'), this.numberMore).done((orders = []) => {
                 resolve({
-                        orders
+                    orders
                 });
-        }, err => {
+            }, err => {
                 BOX.alertError();
             });
         },

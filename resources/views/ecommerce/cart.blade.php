@@ -58,8 +58,7 @@
                                     <span class="pull-right" v-text="total | currency"></span>
                                     <hr>
                                     <span class="pull-left">Total:</span>
-                                    <span class="pull-right" class="price" v-text="total | currency"></span><br>
-                                    <small><i>(included VAT)</i></small>
+                                    <span class="pull-right" class="price" v-text="total | currency"></span>
                         	  </div>
                         </div>
                         <div class="row">
