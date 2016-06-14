@@ -52,6 +52,7 @@
                                     class="label"
                                     :class="{
                                         'label-success': order.status.status == 'succeeded',
+                                        'label-info': order.status.status == 'pending purchase',
                                         'label-danger': order.status.status == 'pendding'
                                     }"
                                 >{{ order.status.status }}

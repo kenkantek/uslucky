@@ -6,7 +6,12 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
 
 Breadcrumbs::register('contact', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Contact', route('admin.contacts'));
+    $breadcrumbs->push('Contacts', route('admin.contact.index'));
+});
+
+Breadcrumbs::register('contact.show', function ($breadcrumbs, $contact) {
+    $breadcrumbs->parent('contact');
+    $breadcrumbs->push('Contact #' . $contact->id, route('admin.contact.show', $contact->id));
 });
 
 Breadcrumbs::register('user', function ($breadcrumbs) {
@@ -77,6 +82,15 @@ Breadcrumbs::register('product.edit', function ($breadcrumbs, $products) {
     $breadcrumbs->push("Update Product #{$products->id}", route('ecommerce.admin.ecommerce.products.edit', $products->id));
 });
 
+Breadcrumbs::register('discount', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Manage Discounts', route('admin.discount.index'));
+});
+Breadcrumbs::register('discount.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('discount');
+    $breadcrumbs->push('Create discount', route('admin.discount.create'));
+});
+
 Breadcrumbs::register('ecommerce.order.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Ecommerce Orders', route('ecommerce.order.index'));
@@ -84,4 +98,17 @@ Breadcrumbs::register('ecommerce.order.index', function ($breadcrumbs) {
 Breadcrumbs::register('ecommerce.order.show', function ($breadcrumbs, $order) {
     $breadcrumbs->parent('ecommerce.order.index');
     $breadcrumbs->push("Ecommerce Order #{$order->id}", route('ecommerce.order.show', $order->id));
+});
+
+Breadcrumbs::register('managegame', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Manage Game', 'javascript:;');
+});
+Breadcrumbs::register('managegame.general', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('managegame');
+    $breadcrumbs->push("Game #{$id}", route('admin.games.show', $id));
+});
+Breadcrumbs::register('managegame.discount', function ($breadcrumbs, $game) {
+    $breadcrumbs->parent('managegame');
+    $breadcrumbs->push("Discount {$game->name}", route('admin.games.show', $game->id));
 });

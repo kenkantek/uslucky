@@ -34,15 +34,22 @@ import ShowUser from './components/Users/ShowUser.vue';
 import ResultsDaily from './components/Results/Index.vue';
 import AwardPowerball from './components/Award/Index.vue';
 import AwardDetail from './components/Award/Detail/Index.vue';
-import ManageGame from './components/ManageGame.vue';
+
 import WinnerList from './components/Users/Winners/Winners.vue';
 import RequestList from './components/Requests/Index.vue';
+
+import ManageGame from './components/ManageGame/General.vue';
+import GameDiscount from './components/ManageGame/Discount.vue';
 
 import EcommerceProductCreate from './components/Ecommerce/Product/Create.vue';
 import EcommerceProductEdit from './components/Ecommerce/Product/Edit.vue';
 import EcommerceProductList from './components/Ecommerce/Product/ProductList.vue';
 import EcommerceOrderList from './components/Ecommerce/Order/Index.vue';
 import EcommerceOrderShow from './components/Ecommerce/Order/ShowOrder.vue';
+
+import Discount from './components/Discount/Discount.vue';
+import DiscountCreate from './components/Discount/DicountCreate.vue';
+import DiscountEdit from './components/Discount/DicountEdit.vue';
 
 new Vue({
     el: 'body',
@@ -57,12 +64,16 @@ new Vue({
         ResultsDaily,
         AwardPowerball,
         AwardDetail,
-        ManageGame,
+
+        ManageGame, GameDiscount,
+
         WinnerList,
         RequestList,
 
         EcommerceProductCreate, EcommerceProductEdit, EcommerceProductList,
-        EcommerceOrderList, EcommerceOrderShow
+        EcommerceOrderList, EcommerceOrderShow,
+
+        Discount, DiscountCreate, DiscountEdit
 
     }
 });

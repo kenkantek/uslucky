@@ -28,12 +28,14 @@ class ContactController extends Controller
         }
 
         $contact->save();
-        return view('admin.contacts.detail', compact('contact'));
+
+        return view('admin.contacts.show', compact('contact'));
     }
 
     public function getContacts(Request $request)
     {
         $take = $request->take;
+
         return Contact::latest()->paginate($take);
     }
 
@@ -44,9 +46,10 @@ class ContactController extends Controller
         $contact->status        = 'replied';
         Mail::send('mail.contact.reply', ['senderName' => $contact->name, 'content' => $contact, 'logo' => ['path' => 'http://www.dadafest.co.uk/wp-content/uploads/2011/12/big-lottery-fund-logo.gif', 'width' => 150, 'height' => 150]], function ($m) use ($contact) {
             $m->from(env('MAIL_FROM'), env('MAIL_FROM_NAME'));
-            $m->to($contact->email, $contact->name)->subject("US Lucky reply your contact");
+            $m->to($contact->email, $contact->name)->subject('US Lucky reply your contact');
         });
         $contact->save();
+
         return $contact;
     }
 }

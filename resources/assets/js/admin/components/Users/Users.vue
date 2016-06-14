@@ -116,29 +116,29 @@ export default {
             },
             onDelete(ids){
                 swal({
-                        title: "Are you sure delete this User?",
-                        type: "info",
-                        closeOnConfirm: false,
-                        showLoaderOnConfirm: true,
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        showLoaderOnConfirm: true
-                    }, (isConfirm) => {
-                        if(isConfirm) {
-                            this.$http.delete(laroute.route('admin.users.destroy', { 'users': [ids]})).then(res => {
-                                swal.close();
-                                this.reloadAsyncData();
-                                return res;
-                            }, (res) => {
-                                if(res.status === 500) {
-                                    COMMON.alertError('Can not delete yourself!');
-                                }
-                                }
-                            );
-                        } else {
+                    title: "Are you sure delete this User?",
+                    type: "info",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, (isConfirm) => {
+                    if(isConfirm) {
+                        this.$http.delete(laroute.route('admin.users.destroy', { 'users': [ids]})).then(res => {
                             swal.close();
-                        }
-                    });
+                            this.reloadAsyncData();
+                            return res;
+                        }, (res) => {
+                            if(res.status === 500) {
+                                COMMON.alertError('Can not delete yourself!');
+                            }
+                            }
+                        );
+                    } else {
+                        swal.close();
+                    }
+                });
             },
 
             onActive(ids){

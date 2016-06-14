@@ -32,14 +32,14 @@
                     <button type="button" class="close" @click.stop="closeModal">
                         <span>×</span><span class="sr-only">Close</span>
                     </button>
-                    <h3 class="modal-title">{{$l('play.modal_title')}} {{ total | currency }}</h3>
+                    <h3 class="modal-title">{{ $l('play.modal_title') }} {{ total | currency }}</h3>
                 </div>
                 <div class="modal-body">
                     <div v-if="$loadingAsyncData">
                         <div v-if="message">
                             {{{ message }}}
                             <span v-show="!checkLogin">
-                                Click <a  @click.stop="closeModal" href="/login?redirect=front::game.powerball">here</a> and try again.
+                                Click <a  @click.stop="closeModal" href="/login?redirect=front::game.{{ name }}">here</a> and try again.
                             </span>
                         </div>
                         <loading v-else></loading>
@@ -69,9 +69,21 @@
                               <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
                             </div>
                             <hr>
-                            <div class="">
+                            <div>
                                 <label for="form-description">{{ $l('play.modal_des_credit') }}</label>
                                 <textarea id="form-description" class="form-control" v-model="description"></textarea>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="form-coupon">{{ $l('play.coupon') }}</label>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input id="form-coupon" type="text" class="form-control" :placeholder="$l('play.coupon')">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-info">{{ $l('play.apply') }}</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -106,7 +118,7 @@
     import async from 'async';
 
     export default {
-        props: ['tickets', 'total', 'extra', 'submiting'],
+        props: ['tickets', 'total', 'extra', 'submiting', 'name'],
 
         data() {
             return {
@@ -185,7 +197,14 @@
                         if(err) {
                             swal(this.$l('message.payment_invalid'), err.message, "error");
                         } else {
-                            vm.$http.post(laroute.route('front::post.powerball'), { tickets: vm.tickets, extra: vm.extra, method: vm.method, payment: vm.payment, description: vm.description, source: result }).then(res => {
+                            vm.$http.post(laroute.route(`front::post.${vm.name}`), { 
+                                tickets: vm.tickets, 
+                                extra: vm.extra, 
+                                method: vm.method, 
+                                payment: vm.payment, 
+                                description: vm.description, 
+                                source: result 
+                            }).then(res => {
                                 swal({
                                     title: this.$l('message.success'),
                                     text: this.$l('message.ticket_purchased'),

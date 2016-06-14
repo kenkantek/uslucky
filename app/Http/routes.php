@@ -13,31 +13,31 @@
 
 $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($router) {
     $router->auth();
-    
+
     $router->get('language/{locale}', [
         'as'   => 'switch.lang',
         'uses' => 'PagesController@getLang',
     ]);
-    
+
     $router->get('home', function () {
         return redirect()->route('front::settings.account');
     });
-    
+
     $router->get('/', [
         'as'   => 'home',
         'uses' => 'PagesController@getIndex',
     ]);
-    
+
     $router->get('auth/facebook', [
         'as'   => 'auth.facebook',
         'uses' => 'Auth\AuthController@redirectToProvider',
     ]);
-    
+
     $router->get('auth/facebook/callback', [
         'as'   => 'auth.social.confirm',
         'uses' => 'Auth\AuthController@handleProviderCallback',
     ]);
-    
+
     $router->controller('page', 'PagesController', [
         'getAbout'         => 'about',
         'getContact'       => 'contact',
@@ -47,14 +47,14 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getTrustSecurity' => 'trust',
         'getPayment'       => 'payment',
     ]);
-    
+
     $router->controller('settings', 'User\SettingsController', [
         'getAccount'       => 'settings.account',
         'getPayment'       => 'settings.payment',
         'getWinning'       => 'settings.winning',
         'getNotifications' => 'settings.notifications',
     ]);
-    
+
     $router->controller('account', 'User\AccountController', [
         'putEditAccount'   => 'account.put.account',
         'postChangeAvatar' => 'account.avatar',
@@ -64,7 +64,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'getVerify'        => 'register.verify',
         'getAccount'       => 'get.account',
     ]);
-    
+
     $router->controller('payment', 'User\PaymentController', [
         'getPayments'   => 'get.payments',
         'putPayment'    => 'put.payment',
@@ -73,17 +73,17 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
         'postCharge'    => 'post.charge',
         'getHistory'    => 'payment.history',
     ]);
-    
+
     $router->controller('winning', 'User\WinningController', [
         'postCharge' => 'post.charge',
         'postClaim'  => 'post.claim',
     ]);
-    
+
     $router->controller('transaction', 'User\TransactionController', [
         'getTransactions' => 'get.transaction',
         'putCancel'       => 'put.cancel.transaction',
     ]);
-    
+
     // FOR API
     $router->group(['as' => 'api::', 'prefix' => 'api'], function () use ($router) {
         $router->get('orders', [
@@ -94,17 +94,17 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'as'   => 'get.order',
             'uses' => 'User\OrderController@getOrder',
         ]);
-        
+
         $router->put('orders/{order}/cancel', [
             'as'   => 'put.order.cancel',
             'uses' => 'User\OrderController@cancleOrder',
         ]);
-        
+
         $router->get('results', [
             'as'   => 'get.results',
             'uses' => 'Games\PowerballController@getResults',
         ]);
-        
+
         $router->get('notifications', [
             'as'   => 'get.notifications',
             'uses' => 'User\NotificationController@getNotifications',
@@ -117,18 +117,18 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'as'   => 'delete.notification',
             'uses' => 'User\NotificationController@deleteNotify',
         ]);
-        
+
         $router->get('ecom-orders', [
             'as'   => 'get.ecommerce.orders',
-            'uses' => 'Ecommerce\OrderController@getOrders'
+            'uses' => 'Ecommerce\OrderController@getOrders',
         ]);
         $router->get('ecom-show-orders/{order}', [
             'as'   => 'get.ecommerce.show.order',
-            'uses' => 'Ecommerce\OrderController@getOrder'
+            'uses' => 'Ecommerce\OrderController@getOrder',
         ]);
-        
+
     });
-    
+
     //FOR ORDER
     $router->resource('orders', 'User\OrderController', [
         'only' => [
@@ -136,24 +136,24 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'show',
         ],
     ]);
-    
+
     $router->controller('game', 'GameController', [
         'getPowerball'    => 'game.powerball',
         'getMegamillions' => 'game.megamillions',
         'getPayment'      => 'game.get.payment',
         'getIndex'        => 'game.get.index',
     ]);
-    
+
     $router->controller('powerball', 'Games\PowerballController', [
         'postPowerball' => 'post.powerball',
         'putLuckys'     => 'put.luckys',
     ]);
-    
+
     $router->controller('megamillions', 'Games\MegamilionController', [
-        'postMegamilion' => 'post.megamillion',
+        'postMegamilion' => 'post.megamillions',
         'putLuckys'      => 'put.luckys.mega',
     ]);
-    
+
     $router->group([
         'as'        => 'ecommerce.',
         'prefix'    => 'ecommerce',
@@ -163,23 +163,23 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'as'   => 'cart',
             'uses' => 'CartController@index',
         ]);
-        
+
         $router->get('order', [
             'as'   => 'order',
             'uses' => 'OrderController@index',
         ]);
-        
+
         $router->post('order/store', [
             'as'   => 'order.store',
             'uses' => 'OrderController@store',
         ]);
-        
+
         $router->get('order/{order}', [
             'as'   => 'order.show',
             'uses' => 'OrderController@show',
         ]);
     });
-    
+
 });
 
 //FOR ADMIN
@@ -188,21 +188,21 @@ $router->group([
     'namespace'  => 'Admin',
     'middleware' => ['web'],
 ], function () use ($router) {
-    
+
     $router->get('login', [
         'as'   => 'admin.auth.login',
         'uses' => 'Auth\AuthController@getLogin',
     ]);
-    
+
     $router->group(['middleware' => ['auth', 'active', 'admin']], function () use ($router) {
-        
+
         //API
         $router->group(['as' => 'admin.', 'prefix' => 'api'], function () use ($router) {
             $router->get('contacts', [
                 'as'   => 'get.contacts',
                 'uses' => 'ContactController@getContacts',
             ]);
-            
+
             $router->get('orders', [
                 'as'   => 'get.orders',
                 'uses' => 'OrdersController@getOrders',
@@ -219,7 +219,7 @@ $router->group([
                 'as'   => 'delete.file.order',
                 'uses' => 'OrdersController@deleteFile',
             ]);
-            
+
             $router->get('users', [
                 'as'   => 'get.users',
                 'uses' => 'UserController@getUsers',
@@ -248,12 +248,12 @@ $router->group([
                 'as'   => 'get.user.orders',
                 'uses' => 'UserController@getOrders',
             ]);
-            
+
             $router->get('manages/{id}', [
                 'as'   => 'get.managegame',
                 'uses' => 'ManageGameController@getKeys',
             ]);
-            
+
             $router->post('results/{game_id}/assign', [
                 'as'   => 'post.assign.result',
                 'uses' => 'Results\ResultController@assignToResult',
@@ -278,38 +278,56 @@ $router->group([
                 'as'   => 'put.award.changestatus',
                 'uses' => 'Results\ResultController@putStatusTicket',
             ]);
-            
+
             $router->post('results/validate/{result}', [
                 'as'   => 'post.award.result.validate',
                 'uses' => 'Results\ResultController@validateCal',
             ]);
-            
+
             $router->post('results/calculate/{result}', [
                 'as'   => 'post.award.result.calculate',
                 'uses' => 'Results\ResultController@onCalculate',
             ]);
-            
+
             $router->get('users/winners', [
                 'as'   => 'get.winners',
                 'uses' => 'WinnerController@getWinners',
             ]);
-            
+
             $router->get('users/winners/tickets', [
                 'as'   => 'get.winners.tickets',
                 'uses' => 'WinnerController@getTicketWin',
             ]);
-            
+
             $router->get('claim-winning', [
                 'as'   => 'get.transactions',
                 'uses' => 'RequestList\WithDrawController@getTransacsions',
             ]);
-            
+
+            $router->get('discounts', [
+                'as'   => 'api.discounts',
+                'uses' => 'DiscountController@apiIndex',
+            ]);
+            $router->get('discounts/autocomplete', [
+                'as'   => 'api.discounts.autocomplete',
+                'uses' => 'DiscountController@autocomplete',
+            ]);
+
+            $router->delete('game/{game}/discount/{discount}', [
+                'as'   => 'api.game.discount.delete',
+                'uses' => 'ManageGameController@removeDiscount',
+            ]);
+            $router->post('game/{game}/discount/{discount}', [
+                'as'   => 'api.game.discount.add',
+                'uses' => 'ManageGameController@addDiscount',
+            ]);
+
         }); //END API
-        
+
         $router->resource('contact', 'ContactController', [
             'only' => ['index', 'show', 'update'],
         ]);
-        
+
         $router->resource('users/winners', 'WinnerController', [
             'only' => 'index',
         ]);
@@ -320,7 +338,7 @@ $router->group([
         $router->resource('users', 'UserController', [
             'only' => ['index', 'destroy', 'show', 'update'],
         ]);
-        
+
         $router->get('orders/prints', [
             'as'   => 'get.prints',
             'uses' => 'OrdersController@getPrints',
@@ -328,11 +346,11 @@ $router->group([
         $router->resource('orders', 'OrdersController', [
             'only' => ['index', 'show', 'update', 'destroy'],
         ]);
-        
+
         $router->resource('tickets', 'TicketsController', [
             'only' => 'index',
         ]);
-        
+
         $router->resource('results', 'Results\ResultController', [
             'only' => 'index',
         ]);
@@ -344,17 +362,27 @@ $router->group([
             'as'   => 'get.award.result.detailt',
             'uses' => 'Results\ResultController@awardDetail',
         ]);
-        
+
         $router->resource('claim-winning', 'RequestList\WithDrawController', [
             'only' => ['index', 'update'],
         ]);
-        
+
         $router->resource('games', 'ManageGameController', [
             'only' => ['show', 'update'],
         ]);
-        
+
+        $router->resource('discount', 'DiscountController', [
+            'only' => ['index', 'edit', 'update', 'create', 'store', 'destroy'],
+        ]);
+
+        $router->get('games/{game}/discount', [
+            'as'   => 'game.assign.discount',
+            'uses' => 'ManageGameController@discount',
+        ]);
+
         //FOR e-commerce
-        $router->group(['as' => 'ecommerce.', 'prefix' => 'ecommerce', 'namespace' => 'Ecommerce'],
+        $router->group(
+            ['as' => 'ecommerce.', 'prefix' => 'ecommerce', 'namespace' => 'Ecommerce'],
             function () use ($router) {
                 $router->get('api/products/{products}/edit', [
                     'as'   => 'api.product.edit',
@@ -393,13 +421,14 @@ $router->group([
                     'as'   => 'api.order.update.status',
                     'uses' => 'OrderController@apiUpdateStatus',
                 ]);
-            });
-        
+            }
+        );
+
         //NOTICE: Only bottom
         $router->controller('/', 'AdminController', [
             'getDashboard' => 'admin.dashboard',
         ]);
-        
+
     });
 });
 

@@ -1,8 +1,13 @@
 @extends('admin.layouts.master')
+
 @section('css')
 <link href="{{asset('tadmin/assets/apps/css/ticket.min.css')}}" rel="stylesheet" type="text/css">
 @stop
+
 @section('content')
+
+{!! Breadcrumbs::render('contact.show', $contact) !!}
+
 <div class="app-ticket app-ticket-details">
     <div class="row">
         <div class="col-md-12">

@@ -1,12 +1,12 @@
 <template>
     <section class="main-game">
-        <header-power 
+        <header-game 
             :next-time="nextTime"
             :tickets="tickets" 
             :ticket-template="ticketTemplate"
             :each-per-ticket="eachPerTicket"
         >
-        </header-power>
+        </header-game>
 
         <article class="view-game clearfix">
             <section class="pull-left">
@@ -106,16 +106,16 @@
         </article>
     </section>
     <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog">
-        <form-modal v-if="submiting" :submiting.sync="submiting" :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
+        <form-modal v-if="submiting" name="megamillions" :submiting.sync="submiting" :tickets="ticketsActive" :extra="extra" :total="total"></form-modal>
     </div>
 </template>
 
 
 <script>
-    import HeaderPower from './HeaderPower.vue';
+    import HeaderGame from '../Global/HeaderGame.vue';
     import Ticket from './Ticket.vue';
-    import FormModal from './FormModal.vue';
-    import ChooseLine from './ChooseLine.vue';
+    import FormModal from '../Global/FormModal.vue';
+    import ChooseLine from '../Global/ChooseLine.vue';
     import laroute from '../../../laroute';
     import COMMON from '../../../common';
     import _ from 'lodash';
@@ -234,7 +234,7 @@
             }
         },
 
-        components: { HeaderPower, Ticket, FormModal, ChooseLine }
+        components: { HeaderGame, Ticket, FormModal, ChooseLine }
     }
 
 </script>

@@ -10,7 +10,9 @@
             @endforeach
         </small>
     </h3>
-    {!! Breadcrumbs::render('order') !!}
+
+    {!! Breadcrumbs::render('managegame.general', $id) !!}
+
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">

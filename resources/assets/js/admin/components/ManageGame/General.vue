@@ -14,8 +14,8 @@
 </template>
 
 <script>
-	import laroute from '../../laroute.js';
-	import COMMON from '../../common.js';
+	import laroute from '../../../laroute';
+	import COMMON from '../../../common';
 
 	export default{
         props: ['id'],
