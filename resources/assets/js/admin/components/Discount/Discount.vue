@@ -17,6 +17,7 @@
                             <th>#ID</th>
                             <th>Name</th>
                             <th>Code</th>
+                            <th class="text-center">Discount (%)</th>
                             <th>Description</th>
                             <th>Begin at</th>
                             <th>End at</th>
@@ -36,6 +37,10 @@
 
                             <td>
                                 {{ discount.code }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ discount.value }} %
                             </td>
 
                             <td>

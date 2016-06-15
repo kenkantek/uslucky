@@ -33,6 +33,12 @@ class Discount extends Model
 
         return $this;
     }
+    public function withValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
     public function withCode($code)
     {
         $this->code = strtoupper($code);
@@ -85,7 +91,7 @@ class Discount extends Model
     {
         if ($this->active) {
             $end_at = Carbon::parse($this->getOriginal('end_at'));
-            $day = Carbon::now()->diffInDays($end_at, false);
+            $day    = Carbon::now()->diffInDays($end_at, false);
 
             return $day > 0
             ? "left $day day(s)"

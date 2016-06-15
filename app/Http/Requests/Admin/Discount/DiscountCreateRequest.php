@@ -26,6 +26,7 @@ class DiscountCreateRequest extends Request
         return [
             'name'     => 'bail|required|unique:discounts',
             'code'     => 'bail|required|alpha_num|min:7|max:15|unique:discounts',
+            'value'    => 'bail|required|numeric|between:1,99',
             'begin_at' => 'bail|required',
             'end_at'   => 'bail|required|after:begin_at',
         ];

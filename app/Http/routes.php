@@ -127,6 +127,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'uses' => 'Ecommerce\OrderController@getOrder',
         ]);
 
+        $router->post('discount/game/{game}/apply', [
+            'as'   => 'discount.apply.game',
+            'uses' => 'DiscountController@applyGameDiscount',
+        ]);
+
     });
 
     //FOR ORDER

@@ -4,10 +4,12 @@ namespace App\Billing;
 use App\Charging\ChargeBalance;
 use App\Charging\ChargeCredit;
 use App\Events\Order\UserPurchasedTicket;
+use App\Models\Discount;
 use App\Models\Game;
 use App\Models\ManageGame;
 use App\Models\Order;
 use App\Models\User;
+use Carbon\Carbon;
 
 class Billing implements BillingInterface
 {
@@ -21,6 +23,7 @@ class Billing implements BillingInterface
     public $draw_at;
     public $description = '';
     public $source;
+    public $coupon;
 
     public function setUser(User $user)
     {
@@ -76,6 +79,12 @@ class Billing implements BillingInterface
         return $this;
     }
 
+    public function setCoupon($coupon)
+    {
+        $this->coupon = $coupon;
+        return $this;
+    }
+
     public function newOrder()
     {
         $order = $this->user->newOrder()
@@ -125,7 +134,21 @@ class Billing implements BillingInterface
         if ($this->extra) {
             $amount += count($this->tickets) * $config['extra_per_ticket'];
         }
-        return $amount;
+        $discount = $this->validateDiscount();
+        return $discount ? $amount - ($amount * $discount->value) / 100 : $amount;
     }
 
+    public function validateDiscount()
+    {
+        $now = Carbon::today()->toDateString();
+
+        return Discount::whereCode($this->coupon)
+            ->whereActive(true)
+            ->whereDate('begin_at', '<=', $now)
+            ->whereDate('end_at', '>=', $now)
+            ->whereHas('games', function ($q) {
+                $q->whereId($this->game_type->id);
+            })
+            ->first();
+    }
 }

@@ -26,6 +26,7 @@ class DiscountEditRequest extends Request
         return [
             'name'     => "bail|required|unique:discounts,name,{$this->discount->id}",
             'code'     => "bail|required|alpha_num|min:7|max:15|unique:discounts,code,{$this->discount->id}",
+            'value'    => 'bail|required|numeric|between:1,99',
             'begin_at' => 'bail|required',
             'end_at'   => 'bail|required|after:begin_at',
         ];

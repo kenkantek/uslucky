@@ -3,11 +3,11 @@
 @section('title') Create Discount @stop
 
 @section('content')
-    
+
     <h3 class="page-title"> Manage Discounts
         <small>Create discount</small>
     </h3>
-    
+
     {!! Breadcrumbs::render('discount.create') !!}
 
     <div class="profile-content">
@@ -24,7 +24,7 @@
 
                     <div class="portlet-body">
                         <discount-create inline-template>
-                            <form 
+                            <form
                                 action="{{ route('admin.discount.store') }}" novalidate method="post"
                                 v-submit="formInputs"
                                 :submiting="onSubmiting"
@@ -32,7 +32,7 @@
                                 :error="onError"
                             >
                                 <div class="row">
-                                
+
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group" :class="{'has-error': formErrors.name}">
                                             <label class="control-label">Discount name</label>
@@ -44,6 +44,16 @@
                                             <textarea class="form-control" placeholder="Content" rows="5" v-model="formInputs.description"></textarea>
                                             <span class="help-block" v-show="formErrors.description" v-text="formErrors.description"></span>
                                         </div>
+                                        <div class="form-group" :class="{'has-error': formErrors.value}">
+                                            <label class="control-label">Discount <strong>(percent)</strong></label>
+                                            <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Discount" v-model="formInputs.value">
+                                                <div class="input-group-addon">
+                                                    %
+                                                </div>
+                                            </div>
+                                            <span class="help-block" v-show="formErrors.value" v-text="formErrors.value"></span>
+                                        </div>
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
@@ -54,12 +64,12 @@
                                         </div>
                                         <div class="form-group" :class="{'has-error': formErrors.begin_at}">
                                             <label class="control-label">Begin at</label>
-                                            <date-picker :value.sync="formInputs.begin_at" format="YYYY-MM-DD"></date-picker> 
+                                            <date-picker :value.sync="formInputs.begin_at" format="YYYY-MM-DD"></date-picker>
                                             <span class="help-block" v-show="formErrors.begin_at" v-text="formErrors.begin_at"></span>
                                         </div>
                                         <div class="form-group" :class="{'has-error': formErrors.end_at}">
                                             <label class="control-label">End at</label>
-                                            <date-picker :value.sync="formInputs.end_at" format="YYYY-MM-DD"></date-picker> 
+                                            <date-picker :value.sync="formInputs.end_at" format="YYYY-MM-DD"></date-picker>
                                             <span class="help-block" v-show="formErrors.end_at" v-text="formErrors.end_at"></span>
                                         </div>
                                     </div>
@@ -77,5 +87,5 @@
             </div>
         </div>
     </div>
-    
+
 @stop

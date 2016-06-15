@@ -24,7 +24,9 @@
 					@click.prevent="addDiscount(discount)"
 				>
 					{{ discount.name }}
-					<span class="badge" v-text="discount.status"></span>
+					<span class="badge">
+						{{ discount.value }}% - {{ discount.status }}
+					</span>
 				</a>
 			</ul>
 		</div>
@@ -36,6 +38,7 @@
 	            <tr>
 	                <th>Name</th>
 	                <th>Code</th>
+	                <th class="text-center">Discount</th>
 	                <th>Begin at</th>
 	                <th>End at</th>
 	                <th>Status</th>
@@ -46,6 +49,7 @@
 	        	<tr v-for="discount in game.discounts">
 	        	    <td v-text="discount.name"></td>
 	        	    <td v-text="discount.code"></td>
+	        	    <td class="text-center">{{ discount.value }}%</td>
 	        	    <td v-text="discount.begin_at"></td>
 	        	    <td v-text="discount.end_at"></td>
 	        	    <td>

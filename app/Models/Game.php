@@ -3,10 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Sofa\Eloquence\Eloquence;
 
 class Game extends Model
 {
+    use Eloquence;
+
     protected $fillable = ['name'];
+
+    protected $searchableColumns = [
+        'name',
+    ];
 
     public function settings()
     {

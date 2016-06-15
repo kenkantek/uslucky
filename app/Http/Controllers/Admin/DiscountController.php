@@ -26,6 +26,7 @@ class DiscountController extends Controller
             ->withName($request->name)
             ->withDescription($request->description)
             ->withCode($request->code)
+            ->withValue($request->value)
             ->withBeginAt($request->begin_at)
             ->withEndAt($request->end_at)
             ->publish();
@@ -47,6 +48,7 @@ class DiscountController extends Controller
             ->withName($request->name)
             ->withDescription($request->description)
             ->withCode($request->code)
+            ->withValue($request->value)
             ->withBeginAt($request->begin_at)
             ->withEndAt($request->end_at)
             ->withActive($request->active)

@@ -17,7 +17,7 @@ class CreateDiscountsTable extends Migration
             $table->text('description');
             $table->timestamp('begin_at');
             $table->timestamp('end_at');
-            $table->string('discount');
+            $table->string('value');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

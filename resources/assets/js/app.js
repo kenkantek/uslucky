@@ -12,6 +12,8 @@ Vue.filter('currency', (value, currency) => {
   return require('./filter/currency.js')(value, currency);
 });
 
+Vue.directive('submit', require('./directives/submit'));
+
 Lang.setLocale(_lang);
 import format from './filter/format';
 

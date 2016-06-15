@@ -17,9 +17,12 @@ class Order extends Model
         'id', 'draw_at',
         'user.email', 'user.last_name', 'user.first_name',
     ];
-    protected $dates   = ['created_at', 'updated_at', 'draw_at'];
+
+    protected $dates = ['created_at', 'updated_at', 'draw_at'];
+
     protected $appends = ['draw_date', 'ticket_total', 'price', 'url', 'game_name', 'multiplier'];
 
+    //BEGIN RELATIONSHIP
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -39,6 +42,17 @@ class Order extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function transactions()
+    {
+        return $this->morphMany(Transaction::class, 'transactionable');
+    }
+    //END RELATIONSHIP
 
     //BEGIN NEW ORDER
     public function withExtra($extra)
@@ -68,37 +82,7 @@ class Order extends Model
     }
     //END NEW ORDER
 
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class);
-    }
-
-    public function newTicket()
-    {
-        $ticket = new Ticket;
-        $ticket->order()->associate($this);
-        return $ticket;
-    }
-
-    public function newMultiTicket($tickets)
-    {
-        $newTickets = [];
-        foreach ($tickets as $ticket) {
-            $newTicket = $this->newTicket()
-                ->withNumbers($ticket['numbers'])
-                ->withBall($ticket['ball'])
-                ->publish();
-
-            $status = $newTicket->updateOrNewStatus()
-                ->withStatus('waiting')
-                ->publish();
-
-            array_push($newTickets, $newTicket);
-        }
-        $this->tickets()->saveMany($newTickets);
-        return $this;
-    }
-
+    //BEGIN ACCESSTOR
     public function getTicketTotalAttribute()
     {
         return $this->tickets()->count();
@@ -106,6 +90,11 @@ class Order extends Model
 
     public function getPriceAttribute()
     {
+
+        if ($transaction = $this->transactions()->whereType(2)->first()) {
+            return $transaction->amount;
+        }
+
         $config = ManageGame::getConfig(1)->toArray();
         $price  = $this->ticket_total * $config['each_per_ticket'];
         if ($this->extra) {
@@ -144,6 +133,34 @@ class Order extends Model
     public function getDescriptionAttribute($data)
     {
         return trim($data) ? $data : 'N/A';
+    }
+    //END ACCESSTOR
+
+    //ORTHER
+    public function newTicket()
+    {
+        $ticket = new Ticket;
+        $ticket->order()->associate($this);
+        return $ticket;
+    }
+
+    public function newMultiTicket($tickets)
+    {
+        $newTickets = [];
+        foreach ($tickets as $ticket) {
+            $newTicket = $this->newTicket()
+                ->withNumbers($ticket['numbers'])
+                ->withBall($ticket['ball'])
+                ->publish();
+
+            $status = $newTicket->updateOrNewStatus()
+                ->withStatus('waiting')
+                ->publish();
+
+            array_push($newTickets, $newTicket);
+        }
+        $this->tickets()->saveMany($newTickets);
+        return $this;
     }
 
     public function refundOrder()

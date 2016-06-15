@@ -32,7 +32,7 @@
                     <button type="button" class="close" @click.stop="closeModal">
                         <span>×</span><span class="sr-only">Close</span>
                     </button>
-                    <h3 class="modal-title">{{ $l('play.modal_title') }} {{ total | currency }}</h3>
+                    <h3 class="modal-title">{{ $l('play.modal_title') }} {{ totalView | currency }}</h3>
                 </div>
                 <div class="modal-body">
                     <div v-if="$loadingAsyncData">
@@ -73,18 +73,7 @@
                                 <label for="form-description">{{ $l('play.modal_des_credit') }}</label>
                                 <textarea id="form-description" class="form-control" v-model="description"></textarea>
                             </div>
-                            <br>
-                            <div>
-                                <label for="form-coupon">{{ $l('play.coupon') }}</label>
-                                <div class="row">
-                                    <div class="col-xs-10">
-                                        <input id="form-coupon" type="text" class="form-control" :placeholder="$l('play.coupon')">
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <button class="btn btn-info">{{ $l('play.apply') }}</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <coupon :discount.sync="discount" :coupon.sync="coupon"></coupon>
                         </form>
                     </div>
                     
@@ -116,6 +105,7 @@
     import BOX from '../../../common';
     import FormCard from './FormCard.vue';
     import async from 'async';
+    import Coupon from './Coupon.vue';
 
     export default {
         props: ['tickets', 'total', 'extra', 'submiting', 'name'],
@@ -138,6 +128,8 @@
                     exp_month: 1,
                     exp_year: new Date().getFullYear()
                 },
+                discount: 0,
+                coupon: ''
             }
         },
 
@@ -148,6 +140,10 @@
                 }
 
                 return false;
+            },
+
+            totalView() {
+                return this.total - (this.total * this.discount) / 100;
             }
         },
 
@@ -170,7 +166,7 @@
             onSubmit() {
                 swal({
                     text: this.$l('play.modal_swal'),
-                    title: this.$options.filters.currency(this.total),
+                    title: this.$options.filters.currency(this.totalView),
                     type: "info",
                     showCancelButton: true,
                     closeOnConfirm: false,
@@ -203,7 +199,8 @@
                                 method: vm.method, 
                                 payment: vm.payment, 
                                 description: vm.description, 
-                                source: result 
+                                source: result,
+                                coupon: vm.coupon
                             }).then(res => {
                                 swal({
                                     title: this.$l('message.success'),
@@ -241,6 +238,6 @@
             }
         },
 
-        components: { FormCard }
+        components: { FormCard, Coupon }
     }
 </script>
