@@ -69,17 +69,17 @@ Breadcrumbs::register('withdraw', function ($breadcrumbs) {
 
 Breadcrumbs::register('product.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Product', route('ecommerce.admin.ecommerce.products.index'));
+    $breadcrumbs->push('Products', route('ecommerce.admin.ecommerce.product.index'));
 });
 
 Breadcrumbs::register('product.create', function ($breadcrumbs) {
     $breadcrumbs->parent('product.index');
-    $breadcrumbs->push('Create Product', route('ecommerce.admin.ecommerce.products.create'));
+    $breadcrumbs->push('Create Product', route('ecommerce.admin.ecommerce.product.create'));
 });
 
 Breadcrumbs::register('product.edit', function ($breadcrumbs, $products) {
     $breadcrumbs->parent('product.index');
-    $breadcrumbs->push("Update Product #{$products->id}", route('ecommerce.admin.ecommerce.products.edit', $products->id));
+    $breadcrumbs->push("Update Product #{$products->id}", route('ecommerce.admin.ecommerce.product.edit', $products->id));
 });
 
 Breadcrumbs::register('discount', function ($breadcrumbs) {
@@ -98,6 +98,19 @@ Breadcrumbs::register('ecommerce.order.index', function ($breadcrumbs) {
 Breadcrumbs::register('ecommerce.order.show', function ($breadcrumbs, $order) {
     $breadcrumbs->parent('ecommerce.order.index');
     $breadcrumbs->push("Ecommerce Order #{$order->id}", route('ecommerce.order.show', $order->id));
+});
+
+Breadcrumbs::register('ecommerce.category.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Ecommerce Categories', route('ecommerce.admin.ecommerce.category.index'));
+});
+Breadcrumbs::register('ecommerce.category.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('ecommerce.category.index');
+    $breadcrumbs->push('Ecommerce Create', route('ecommerce.admin.ecommerce.category.create'));
+});
+Breadcrumbs::register('ecommerce.category.edit', function ($breadcrumbs, $category) {
+    $breadcrumbs->parent('ecommerce.category.index');
+    $breadcrumbs->push('Ecommerce Edit #' . $category->name, route('ecommerce.admin.ecommerce.category.edit', $category->id));
 });
 
 Breadcrumbs::register('managegame', function ($breadcrumbs) {

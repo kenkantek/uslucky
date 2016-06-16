@@ -8,7 +8,7 @@
         <small>Edit product</small>
     </h3>
 
-    {!! Breadcrumbs::render('product.edit', $products) !!}
+    {!! Breadcrumbs::render('product.edit', $product) !!}
 
     <div class="profile-content">
         <div class="row">
@@ -24,70 +24,87 @@
                             </div>
 
                             <div class="portlet-body">
-                                <ecommerce-product-edit inline-template id="{{ $products->id }}">
+                                <ecommerce-product-edit inline-template id="{{ $product->id }}" categories="{{ $categories }}">
                                     <div v-if="$loadingAsyncData">
                                         <loading></loading>
                                     </div>
                                     <form
                                         v-else
                                         class="form-horizontal form-row-seperated"
-                                        action="{{ route('ecommerce.admin.ecommerce.products.update', $products->id) }}" method="post"
+                                        action="{{ route('ecommerce.admin.ecommerce.product.update', $product->id) }}" method="post"
                                         v-submit="formData"
                                         :submiting='onSubmiting'
                                         :complete= 'onComplete'
                                         :error='onError'
                                     >
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" :class="{'has-error': formErrors.name}">
+                                                    <label class="col-md-2 control-label">Name:
+                                                        <span class="required"> * </span>
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" v-model="formInputs.name">
+                                                        <span class="help-block" v-text="formErrors.name" v-show="formErrors.name"></span>
+                                                    </div>
+                                                </div>
 
-                                        <div class="form-group" :class="{'has-error': formErrors.name}">
-                                            <label class="col-md-2 control-label">Name:
-                                                <span class="required"> * </span>
-                                            </label>
-                                            <div class="col-md-10">
-                                                <input type="text" class="form-control" v-model="formInputs.name">
-                                                <span class="help-block" v-text="formErrors.name" v-show="formErrors.name"></span>
-                                            </div>
-                                        </div>
+                                                <div class="form-group" :class="{'has-error': formErrors.price}">
+                                                    <label class="col-md-2 control-label">Price:
+                                                        <span class="required"> * </span>
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" v-model="formInputs.price">
+                                                        <span class="help-block" v-text="formErrors.price" v-show="formErrors.price"></span>
+                                                    </div>
+                                                </div>
 
-                                        <div class="form-group" :class="{'has-error': formErrors.price}">
-                                            <label class="col-md-2 control-label">Price:
-                                                <span class="required"> * </span>
-                                            </label>
-                                            <div class="col-md-10">
-                                                <input type="text" class="form-control" v-model="formInputs.price">
-                                                <span class="help-block" v-text="formErrors.price" v-show="formErrors.price"></span>
-                                            </div>
-                                        </div>
+                                                <div class="form-group" :class="{'has-error': formErrors.description}">
+                                                    <label class="col-md-2 control-label">Description:
+                                                        <span class="required"> * </span>
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" v-model="formInputs.description"></textarea>
+                                                        <span class="help-block" v-text="formErrors.description" v-show="formErrors.description"></span>
+                                                    </div>
+                                                </div>
 
-                                        <div class="form-group" :class="{'has-error': formErrors.description}">
-                                            <label class="col-md-2 control-label">Description:
-                                                <span class="required"> * </span>
-                                            </label>
-                                            <div class="col-md-10">
-                                                <textarea class="form-control" v-model="formInputs.description"></textarea>
-                                                <span class="help-block" v-text="formErrors.description" v-show="formErrors.description"></span>
-                                            </div>
-                                        </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Thumb image:
+                                                        <span class="required"> * </span>
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <img v-base64="formInputs.thumb" height="100">
+                                                        <div class="margin-top-10" :class="{'has-error': formErrors.thumb}">
+                                                            <input type="file" v-upload="formInputs.thumb" accept="image/*">
+                                                            <span class="help-block" v-text="formErrors.thumb" v-show="formErrors.thumb"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">Thumb image:
-                                                <span class="required"> * </span>
-                                            </label>
-                                            <div class="col-md-10">
-                                                <img v-base64="formInputs.thumb" height="100">
-                                                <div class="margin-top-10" :class="{'has-error': formErrors.thumb}">
-                                                    <input type="file" v-upload="formInputs.thumb" accept="image/*">
-                                                    <span class="help-block" v-text="formErrors.thumb" v-show="formErrors.thumb"></span>
+                                                <div class="margin-top-10 clearfix form-group">
+                                                    <div class="col-md-10 col-md-offset-2">
+                                                        <button type="submit" class="btn green" :disabled="submiting">
+                                                            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Save
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="col-md-6">
+                                                <category v-if="categories.length"
+                                                :categories="categories"
+                                                :categories-selected="formInputs.categories"
+                                                ></category>
 
-                                        <div class="margin-top-10 clearfix form-group">
-                                            <div class="col-md-10 col-md-offset-2">
-                                                <button type="submit" class="btn green" :disabled="submiting">
-                                                    <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Save
-                                                </button>
+                                                <alert v-else type="info">
+                                                    Please add new category
+                                                    <a href="{{ route('ecommerce.admin.ecommerce.category.create') }}">
+                                                        <small class="text-danger">click here</small>
+                                                    </a>
+                                                </alert>
                                             </div>
                                         </div>
+
 
                                     </form>
                                 </ecommerce-product-edit>

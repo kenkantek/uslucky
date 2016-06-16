@@ -20,6 +20,6 @@ return [
     'avatar_updated'       => 'Your avatar was updated!',
     'passwords_updated'    => 'Your password was changed!',
     'coupon_expired'       => 'Coupon has been expired',
-    'coupon_404'           => 'Cannot not found coupon',
+    'coupon_404'           => 'Cannot found coupon',
     'coupon_apply_success' => 'Coupon has been apply',
 ];

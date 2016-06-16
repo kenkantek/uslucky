@@ -10,6 +10,8 @@ class Product extends Model
 {
     use ImageTrait;
 
+    protected $table = 'ecommerce_products';
+
     protected $appends = [
         'thumb',
     ];
@@ -46,6 +48,10 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class, 'ecommerce_order_product')
             ->withPivot('count', 'price');
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'ecommerce_category_company');
     }
 
     //ACCESSOR

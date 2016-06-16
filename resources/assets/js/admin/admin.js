@@ -6,6 +6,7 @@ Vue.use(require('vue-async-data'));
 Vue.http.headers.common['X-CSRF-TOKEN'] = _token;
 
 Vue.component('loading', Vue.extend(require('../components/Globals/Loading.vue')));
+Vue.component('alert', Vue.extend(require('../components/Globals/Alert.vue')));
 
 Vue.filter('currency', (value, currency) => {
   return require('../filter/currency.js')(value, currency);
@@ -42,10 +43,13 @@ import ManageGame from './components/ManageGame/General.vue';
 import GameDiscount from './components/ManageGame/Discount.vue';
 
 import EcommerceProductCreate from './components/Ecommerce/Product/Create.vue';
-import EcommerceProductEdit from './components/Ecommerce/Product/Edit.vue';
+import EcommerceProductEdit from './components/Ecommerce/Product/Edit/Edit.vue';
 import EcommerceProductList from './components/Ecommerce/Product/ProductList.vue';
 import EcommerceOrderList from './components/Ecommerce/Order/Index.vue';
 import EcommerceOrderShow from './components/Ecommerce/Order/ShowOrder.vue';
+import EcommerceCategoryList from './components/Ecommerce/Category/Index.vue';
+import EcommerceCategoryCreate from './components/Ecommerce/Category/Create.vue';
+import EcommerceCategoryEdit from './components/Ecommerce/Category/Edit.vue';
 
 import Discount from './components/Discount/Discount.vue';
 import DiscountCreate from './components/Discount/DicountCreate.vue';
@@ -72,6 +76,7 @@ new Vue({
 
         EcommerceProductCreate, EcommerceProductEdit, EcommerceProductList,
         EcommerceOrderList, EcommerceOrderShow,
+        EcommerceCategoryList, EcommerceCategoryCreate, EcommerceCategoryEdit,
 
         Discount, DiscountCreate, DiscountEdit
 

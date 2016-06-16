@@ -24,7 +24,7 @@ class CreateProductRequest extends Request
     public function rules()
     {
         return [
-            'name'        => 'bail|required|unique:products',
+            'name'        => 'bail|required|unique:ecommerce_products',
             'description' => 'bail|required',
             'price'       => 'bail|required|numeric',
             'thumb'       => 'bail|image',

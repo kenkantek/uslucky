@@ -389,20 +389,16 @@ $router->group([
         $router->group(
             ['as' => 'ecommerce.', 'prefix' => 'ecommerce', 'namespace' => 'Ecommerce'],
             function () use ($router) {
-                $router->get('api/products/{products}/edit', [
-                    'as'   => 'api.product.edit',
-                    'uses' => 'ProductController@apiGetShow',
-                ]);
                 $router->get('api/products', [
                     'as'   => 'api.list',
                     'uses' => 'ProductController@apiGetProducts',
                 ]);
-                $router->post('products/{products}', [
-                    'as'   => 'admin.ecommerce.products.update',
-                    'uses' => 'ProductController@update',
+                $router->resource('product', 'ProductController', [
+                    'except' => ['update'],
                 ]);
-                $router->resource('products', 'ProductController', [
-                    'only' => ['index', 'create', 'store', 'edit', 'destroy'],
+                $router->post('product/{product}', [
+                    'as'   => 'admin.ecommerce.product.update',
+                    'uses' => 'ProductController@update',
                 ]);
 
                 $router->get('orders', [
@@ -425,6 +421,19 @@ $router->group([
                 $router->put('api/updatestatus/{order}', [
                     'as'   => 'api.order.update.status',
                     'uses' => 'OrderController@apiUpdateStatus',
+                ]);
+
+                $router->resource('category', 'CategoryController', [
+
+                ]);
+
+                $router->get('api/categories', [
+                    'as'   => 'category.api.index',
+                    'uses' => 'CategoryController@apiIndex',
+                ]);
+                $router->get('api/categories/autocomplete', [
+                    'as'   => 'category.api.autocomplete',
+                    'uses' => 'CategoryController@autocompleteCategories',
                 ]);
             }
         );

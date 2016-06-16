@@ -11,7 +11,7 @@
                 data: {
                     per_page: "10",
                 },
-                linkCreate: laroute.route('ecommerce.admin.ecommerce.products.create'),
+                linkCreate: laroute.route('ecommerce.admin.ecommerce.product.create'),
                 ids: [],
                 checkAll: false
             }
@@ -55,7 +55,7 @@
                     showLoaderOnConfirm: true
                 }, (isConfirm) => {
                     if(isConfirm) {
-                        this.$http.delete(laroute.route('ecommerce.admin.ecommerce.products.destroy', { products: product.id })).then(res => {
+                        this.$http.delete(laroute.route('ecommerce.admin.ecommerce.product.destroy', { product: product.id })).then(res => {
                             toastr.success('Delete product success');
                             this.data.data.$remove(product);
                             swal.close();
@@ -73,8 +73,8 @@
         },
 
         filters: {
-            linkEdit(products) {
-                return laroute.route('ecommerce.admin.ecommerce.products.edit', { products });
+            linkEdit(product) {
+                return laroute.route('ecommerce.admin.ecommerce.product.edit', { product });
             },
         },
 

@@ -24,7 +24,7 @@
                                 <ecommerce-product-create inline-template>
                                     <form
                                         class="form-horizontal form-row-seperated"
-                                        action="{{ route('ecommerce.admin.ecommerce.products.store') }}" method="post"
+                                        action="{{ route('ecommerce.admin.ecommerce.product.store') }}" method="post"
                                         v-submit="formData"
                                         :submiting='onSubmiting'
                                         :complete= 'onComplete'

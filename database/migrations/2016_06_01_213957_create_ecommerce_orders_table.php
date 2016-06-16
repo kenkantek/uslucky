@@ -42,7 +42,7 @@ class CreateEcommerceOrdersTable extends Migration
 
             $table->foreign('product_id')
                 ->references('id')
-                ->on('products')
+                ->on('ecommerce_products')
                 ->onDelete('cascade');
         });
     }

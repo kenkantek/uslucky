@@ -12,7 +12,11 @@
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
-                <ecommerce-order-list></ecommerce-order-list>
+                <ecommerce-order-list>
+                    <div slot="header" class="caption">
+                        <i class="fa fa-shopping-cart"></i>Orders Listing
+                    </div>
+                </ecommerce-order-list>
             </div>
         </div>
     </div>

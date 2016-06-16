@@ -159,6 +159,15 @@
                 </ul>
             </li>
 
+            <li class="nav-item start @if(strpos($routeName, 'discount') !== false) active  @endif">
+                <a href="{{ route('admin.discount.index') }}" class="nav-link nav-toggle">
+                    <i class="icon-puzzle"></i>
+                    <span class="title">Manage Discounts</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+            </li>
+
             <li class="nav-item start @if(strpos($routeName, 'ecommerce') !== false) active  @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-basket"></i>
@@ -169,7 +178,13 @@
 
                 <ul class="sub-menu">
                     <li class="nav-item start">
-                        <a href="{{ route('ecommerce.admin.ecommerce.products.index') }}" class="nav-link ">
+                        <a href="{{ route('ecommerce.admin.ecommerce.category.index') }}" class="nav-link ">
+                            <span class="title">Manage Categories</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item start">
+                        <a href="{{ route('ecommerce.admin.ecommerce.product.index') }}" class="nav-link ">
                             <span class="title">Manage Products</span>
                             <span class="selected"></span>
                         </a>
@@ -181,15 +196,6 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-
-            <li class="nav-item start @if(strpos($routeName, 'discount') !== false) active  @endif">
-                <a href="{{ route('admin.discount.index') }}" class="nav-link nav-toggle">
-                    <i class="icon-puzzle"></i>
-                    <span class="title">Manage Discounts</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
-                </a>
             </li>
 
             <li class="nav-item  @if(($routeName == 'admin.contact.index') || ($routeName == 'admin.contact.show')) active open @endif">

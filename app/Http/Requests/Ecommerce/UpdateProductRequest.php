@@ -24,7 +24,7 @@ class UpdateProductRequest extends Request
     public function rules()
     {
         return [
-            'name'        => 'bail|required|unique:products,name,' . $this->products->id,
+            'name'        => 'bail|required|unique:ecommerce_products,name,' . $this->product->id,
             'description' => 'bail|required',
             'price'       => 'bail|required|numeric',
             'thumb'       => 'bail',

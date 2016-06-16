@@ -1,27 +1,6 @@
 <template>
     <div class="portlet-title">
         <slot name="header"></slot>
-        <div class="actions">
-            <div class="btn-group" v-show="ids.length != 0">
-                <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-share"></i>
-                    <span class="hidden-xs"> Tools </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown-menu pull-right" id="datatable_ajax_tools">
-                    <li class="hidden" :class="{disabled: !printsUrl}">
-                        <a :href="printsUrl" target="_blank" data-action="0" class="tool-action">
-                            <i class="icon-printer"></i> Print
-                        </a>
-                    </li>
-                    <li class="hidden">
-                        <a href="" @click.prevent="onDelete(ids)" data-action="0" class="tool-action">
-                            <i class="icon-trash"></i> Delete
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
 </template>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Ecommerce;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ecommerce\CreateProductRequest;
 use App\Http\Requests\Ecommerce\UpdateProductRequest;
+use App\Models\Ecommerce\Category;
 use App\Models\Ecommerce\Product;
 use App\Models\Image;
 use Illuminate\Http\Request;
@@ -41,64 +42,73 @@ class ProductController extends Controller
         }
 
         return [
-            'redirect' => route('ecommerce.admin.ecommerce.products.index'),
+            'redirect' => route('ecommerce.admin.ecommerce.product.edit', $product->id),
             'message'  => trans('message.success'),
         ];
     }
 
-    public function edit(Product $products)
+    public function edit(Product $product)
     {
-        return view('admin.ecommerce.products.edit', compact('products'));
+        $categories = Category::whereParentId(0)
+            ->with('childrens')
+            ->get();
+
+        return view('admin.ecommerce.products.edit', compact('product', 'categories'));
     }
 
-    public function update(Product $products, UpdateProductRequest $request)
+    public function show(Product $product)
     {
-        $products->withName($request->name)
+        return collect($product)->merge([
+            'categories' => $product->categories()->pluck('id', 'id'),
+        ]);
+    }
+
+    public function update(Product $product, UpdateProductRequest $request)
+    {
+
+        $product->withName($request->name)
             ->withPrice($request->price)
             ->withDescription($request->price)
             ->publish();
 
+        $product->categories()->sync((array) json_decode($request->categories));
+
         $thumb = $request->file('thumb');
 
         if ($thumb) {
-            $image_first = $products->images()->first();
+            $image_first = $product->images()->first();
 
             Image::deleteImage($image_first->getOriginal()['path']);
 
             $storeFile = Image::setDir('uploads/ecommerces')->fromForm($thumb);
 
-            $products->newImage($image_first)
+            $product->newImage($image_first)
                 ->withType('thumb')
                 ->withPath($storeFile->name)
                 ->publish();
         }
 
         return [
-            'redirect' => route('ecommerce.admin.ecommerce.products.index'),
+            'redirect' => route('ecommerce.admin.ecommerce.product.index'),
             'message'  => trans('message.success'),
         ];
     }
 
-    public function destroy(Product $products)
+    public function destroy(Product $product)
     {
-        $image_first = $products->images()->first();
+        $image_first = $product->images()->first();
         Image::deleteImage($image_first->getOriginal()['path']);
-        $products->delete();
+        $product->delete();
         return;
-    }
-
-    public function apiGetShow(Product $products)
-    {
-        return $products;
     }
 
     public function apiGetProducts(Request $request)
     {
         $take = $request->take ?: 10;
 
-        $products = Product::latest()
+        $product = Product::latest()
             ->paginate($take);
 
-        return $products;
+        return $product;
     }
 }
