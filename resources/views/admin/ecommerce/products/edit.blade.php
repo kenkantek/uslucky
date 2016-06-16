@@ -59,16 +59,6 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group" :class="{'has-error': formErrors.description}">
-                                                    <label class="col-md-2 control-label">Description:
-                                                        <span class="required"> * </span>
-                                                    </label>
-                                                    <div class="col-md-10">
-                                                        <textarea class="form-control" v-model="formInputs.description"></textarea>
-                                                        <span class="help-block" v-text="formErrors.description" v-show="formErrors.description"></span>
-                                                    </div>
-                                                </div>
-
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label">Thumb image:
                                                         <span class="required"> * </span>
@@ -82,13 +72,40 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="margin-top-10 clearfix form-group">
-                                                    <div class="col-md-10 col-md-offset-2">
-                                                        <button type="submit" class="btn green" :disabled="submiting">
-                                                            <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Save
-                                                        </button>
+                                                <div class="form-group" :class="{'has-error': formErrors.description}">
+                                                    <label class="col-md-2 control-label">Description:
+                                                        <span class="required"> * </span>
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" v-model="formInputs.description"></textarea>
+                                                        <span class="help-block" v-text="formErrors.description" v-show="formErrors.description"></span>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Images:
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <ul class="company-product-images clearfix">
+                                                            <li v-for="image in formInputs.images">
+                                                                <img v-base64="image" height="100">
+                                                                <span @click="deleteImage(image)" title="Delete">
+                                                                    <i class="fa fa-trash fa-2x"></i>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="input-group input-group-file">
+                                                            <input type="text" class="form-control" placeholder="Select multi file image" readonly>
+                                                            <span class="input-group-btn">
+                                                                <span class="btn btn-file">
+                                                                    <i class="icon wb-upload"></i>
+                                                                    <input type="file" accept="image/*" v-uploads="formInputs.images" multiple>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="col-md-6">
                                                 <category v-if="categories.length"
@@ -105,7 +122,25 @@
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">Content:
+                                                </label>
+                                                <div class="col-md-10 transX13">
+                                                    <div v-editor="formInputs.content">{!! $product->content !!}</div>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-1 col-md-offset-1 transX13">
+                                                    <button type="submit" class="btn green" :disabled="submiting">
+                                                        <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
                                 </ecommerce-product-edit>
                             </div>
@@ -117,4 +152,10 @@
             </div>
         </div>
     </div>
+@stop
+@section('css')
+    {!! HTML::style('js/libs/summernote/summernote.css') !!}
+@stop
+@section('script')
+    {!! HTML::script('js/libs/summernote/summernote.min.js') !!}
 @stop

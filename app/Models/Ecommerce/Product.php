@@ -32,6 +32,11 @@ class Product extends Model
         $this->price = $price;
         return $this;
     }
+    public function withContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
     public function publish()
     {
         $this->save();

@@ -2,6 +2,9 @@
 	.sub {
 		margin-left: 20px;
 	}
+	h3 {
+		margin-top: 0px;
+	}
 </style>
 
 <template>

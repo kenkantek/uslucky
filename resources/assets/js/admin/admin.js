@@ -17,6 +17,7 @@ Vue.directive('upload', require('../directives/upload'));
 Vue.directive('uploads', require('../directives/uploads'));
 Vue.directive('autofocus', require('../directives/autofocus'));
 Vue.directive('base64', require('../directives/base64'));
+Vue.directive('editor', require('../directives/editor'));
 
 Lang.setLocale(_lang);
 import format from '../filter/format';

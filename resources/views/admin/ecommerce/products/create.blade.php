@@ -77,7 +77,7 @@
                                         <div class="margin-top-10 clearfix form-group">
                                             <div class="col-md-10 col-md-offset-2">
                                                 <button type="submit" class="btn green" :disabled="submiting">
-                                                   <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Save
+                                                   <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Next
                                                 </button>
                                             </div>
                                         </div>

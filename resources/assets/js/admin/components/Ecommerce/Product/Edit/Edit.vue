@@ -69,6 +69,11 @@
                     this.formData.set(i, this.formInputs[i]);
                 }
                 this.formData.set('categories', JSON.stringify(this.categories_selected));
+
+                this.formData.delete('images[]');
+                for(let i = 0; i < this.formInputs.images.length; i++) {
+                    this.formData.append('images[]', this.formInputs.images[i]);
+                }
             },
             onComplete({ redirect, message }) {
                 message && toastr.success(message);
@@ -84,6 +89,10 @@
                 }
                 this.submiting = false;
             },
+
+            deleteImage(image) {
+                this.formInputs.images.$remove(image);
+            }
         },
 
         components: { Category }

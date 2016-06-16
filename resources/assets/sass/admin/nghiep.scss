@@ -54,3 +54,25 @@
         }
     }
 }
+
+.company-product-images {
+    padding: 0;
+
+    li {
+        float: left;
+        border: 1px solid #989898;
+        text-align:center;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+        position: relative;
+
+        span {
+            position: absolute;
+            top: -5px;
+            right: 0px;
+            cursor: pointer;
+            color: #423939;
+        }
+    }
+}

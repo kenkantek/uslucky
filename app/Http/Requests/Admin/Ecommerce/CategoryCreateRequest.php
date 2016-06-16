@@ -14,7 +14,7 @@ class CategoryCreateRequest extends Request
     public function rules()
     {
         return [
-            'name'             => 'bail|required|min:5|max:255|unique:ecommerce_categories',
+            'name'             => 'bail|required|min:3|max:255|unique:ecommerce_categories',
             'position'         => 'bail|required|numeric|min:1',
             'relationship.key' => 'bail|required|between:0,2',
         ];

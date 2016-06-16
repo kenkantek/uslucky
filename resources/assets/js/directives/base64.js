@@ -9,7 +9,12 @@ module.exports = {
 			}
 			reader.readAsDataURL(file);
 		} else {
-			this.el.src = file;
+			if(/^https?/.test(file)) {
+				return this.el.src = file;
+			}
+			if(file.image) {
+				return this.el.src = file.image;
+			}
 		}
 	}
 }

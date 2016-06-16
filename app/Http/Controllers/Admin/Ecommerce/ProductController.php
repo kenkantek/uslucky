@@ -28,7 +28,7 @@ class ProductController extends Controller
 
         $product->withName($request->name)
             ->withPrice($request->price)
-            ->withDescription($request->price)
+            ->withDescription($request->description)
             ->publish();
 
         $thumb = $request->file('thumb');
@@ -58,7 +58,9 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return collect($product)->merge([
+        return collect($product->load(['images' => function ($q) {
+            $q->whereType('images');
+        }]))->merge([
             'categories' => $product->categories()->pluck('id', 'id'),
         ]);
     }
@@ -68,7 +70,8 @@ class ProductController extends Controller
 
         $product->withName($request->name)
             ->withPrice($request->price)
-            ->withDescription($request->price)
+            ->withDescription($request->description)
+            ->withContent($request->content)
             ->publish();
 
         $product->categories()->sync((array) json_decode($request->categories));
@@ -78,7 +81,7 @@ class ProductController extends Controller
         if ($thumb) {
             $image_first = $product->images()->first();
 
-            Image::deleteImage($image_first->getOriginal()['path']);
+            $image_first && Image::deleteImage($image_first->getOriginal()['path']);
 
             $storeFile = Image::setDir('uploads/ecommerces')->fromForm($thumb);
 
@@ -86,6 +89,19 @@ class ProductController extends Controller
                 ->withType('thumb')
                 ->withPath($storeFile->name)
                 ->publish();
+        }
+
+        //Images
+        $this->updateImages($product, $request->images);
+        if ($request->hasFile('images')) {
+            foreach ((array) $request->file('images') as $file) {
+                $storeFile = Image::setDir('uploads/ecommerces')->fromForm($file);
+
+                $product->newImage()
+                    ->withType('images')
+                    ->withPath($storeFile->name)
+                    ->publish();
+            }
         }
 
         return [
@@ -97,7 +113,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $image_first = $product->images()->first();
-        Image::deleteImage($image_first->getOriginal()['path']);
+        $image_first && Image::deleteImage($image_first->getOriginal()['path']);
         $product->delete();
         return;
     }
@@ -110,5 +126,23 @@ class ProductController extends Controller
             ->paginate($take);
 
         return $product;
+    }
+
+    private function updateImages($product, $images)
+    {
+        $images_id = [];
+
+        foreach ((array) $images as $image) {
+            isset($image->id) && $images_id[] = $image->id;
+        }
+        $images_need_delete = $product->images()
+            ->whereType('images')
+            ->whereNotIn('id', $images_id);
+
+        foreach ($images_need_delete->get() as $image) {
+            $image && Image::deleteImage($image->getOriginal('path'));
+        }
+
+        $images_need_delete->delete();
     }
 }
