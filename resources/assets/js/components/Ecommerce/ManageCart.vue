@@ -1,6 +1,7 @@
 <script>
 	import _ from 'lodash';
 	import FormModal from './Checkout/FormModal.vue';
+	import laroute from '../../laroute';
 
 	export default {
 		data() {
@@ -67,6 +68,12 @@
 
 			openModal() {
 				this.submiting = true;
+			}
+		},
+
+		filters: {
+			linkProduct(product) {
+				return laroute.route('front::ecommerce.product.show', { product })
 			}
 		},
 

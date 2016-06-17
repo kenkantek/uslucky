@@ -106,19 +106,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('front::ecommerce.category.show', 1) }}">
                         {{ trans('menu.nyc') }}
                     </a>
 
                     <ul class="sub-nav">
                         <li>
-                            <a href="#">Broadway</a>
+                            <a href="{{ route('front::ecommerce.category.show', 3) }}">Broadway</a>
                         </li>
                         <li>
-                            <a href="#">Museum</a>
+                            <a href="{{ route('front::ecommerce.category.show', 4) }}">Museum</a>
                         </li>
                         <li>
-                            <a href="#">Concert</a>
+                            <a href="{{ route('front::ecommerce.category.show', 5) }}">Concert</a>
                         </li>
                         <li>
                             <a href="{{ route('front::game.powerball') }}">
@@ -133,19 +133,19 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('front::ecommerce.category.show', 2) }}">
                         {{ trans('menu.vagas') }}
                     </a>
 
                     <ul class="sub-nav">
                         <li>
-                            <a href="#">Shows</a>
+                            <a href="{{ route('front::ecommerce.category.show', 6) }}">Shows</a>
                         </li>
                         <li>
-                            <a href="#">Museum</a>
+                            <a href="{{ route('front::ecommerce.category.show', 7) }}">Museum</a>
                         </li>
                         <li>
-                            <a href="#">Concert</a>
+                            <a href="{{ route('front::ecommerce.category.show', 8) }}">Concert</a>
                         </li>
                     </ul>
                 </li>

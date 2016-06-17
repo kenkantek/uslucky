@@ -10,7 +10,7 @@
 		<div class="container">
 			<div class="tab-header clearfix">
 				@foreach($nyc->childrens as $key => $sub)
-				<a href="#" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">
+				<a href="{{ route('front::ecommerce.category.show', $sub->id) }}" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">
 					{{ $sub->name }}
 				</a>
 				@endforeach
@@ -58,7 +58,7 @@
     		<div class="container">
     			<div class="tab-header clearfix">
     				@foreach($vagas->childrens as $key => $sub)
-    				<a href="#" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">
+    				<a href="{{ route('front::ecommerce.category.show', $sub->id) }}" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">
     					{{ $sub->name }}
     				</a>
     				@endforeach

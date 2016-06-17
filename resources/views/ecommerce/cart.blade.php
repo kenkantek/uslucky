@@ -28,7 +28,7 @@
                                                 <img :src="cart.data.thumb" height="100"/>
                                             </td>
                                             <td>
-                                                <a href="#" v-text="cart.data.name">Name</a>
+                                                <a :href="cart.data.id | linkProduct" v-text="cart.data.name">Name</a>
                                             </td>
                                             <td v-text="cart.data.price | currency">Price</td>
                                             <td>

@@ -9,6 +9,9 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-        return $product;
+        $product->load(['images' => function ($q) {
+            $q->whereType('images');
+        }]);
+        return view('ecommerce.products.show', compact('product'));
     }
 }
