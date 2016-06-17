@@ -20,9 +20,9 @@
 
     @include('_partials.header')
 
-    <div class="content">
+    <main>
       @yield('content')
-    </div>
+    </main>
 
     @include('_partials.footer')
     @include('_partials.php2js')

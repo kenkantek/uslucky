@@ -16,5 +16,8 @@ return [
     'special_offers'  => 'Special Offers',
     'order'           => 'Order history',
     'vagas'           => 'Vagas',
-    'nyc'             => 'YNC',
+    'nyc'             => 'NYC',
+    'join'            => 'Join',
+    'log_in'          => 'Log in',
+    'help'            => 'Help',
 ];

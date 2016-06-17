@@ -1,7 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-<div style="    padding: 50px 15px 30px 15px;">
-    <sign-in></sign-in>
-</div>
+
+	<div class="container">
+	    <div class="row">
+	        <div class="col-md-12">
+				<sign-in></sign-in>
+	        </div>
+	    </div>
+	</div>
+
 @endsection

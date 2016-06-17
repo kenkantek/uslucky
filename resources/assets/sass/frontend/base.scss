@@ -21,7 +21,9 @@ $primary-bg-color: #FB7E04;//D9534F
 }
 ul {
   margin-bottom: 0px;
+  list-style: none;
 }
+
 textarea {
   resize: vertical;
 }
@@ -82,9 +84,7 @@ textarea {
 .success strong {
   color: #2b542c;
 }
-.content{
-  background-color:#ffffff;
-}
+
 
 /* Flash Background*/
 .flashBg {
@@ -96,20 +96,7 @@ textarea {
     animation-duration: 2s;
 }
 
-.link{
-  position: relative;
-  display: inline-block;
-  background: #2e3e4b;
-  color: #eae6e3;
-  font-family: 'Roboto', sans-serif;
-  text-decoration: none;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 0 20px;
-  font-size: 14px;
-  line-height: 40px;
-  letter-spacing: 1px;
-}
+
 
 button.link{
   border:none;

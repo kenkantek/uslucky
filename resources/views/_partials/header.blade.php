@@ -7,14 +7,80 @@
                         uslucky e-commerce website system: Order Site uslucky.com
                     </p>
                 </div>
-                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <div class="col-xs-12 col-md-5 col-md-offset-3">
                     <ul class="right-menu">
-                        <li><a href="#">Join</a></li>
-                        <li><a href="#">Log in</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Help</a></li>
-                        <li> <a href="#">EN</a> </li>
-                        <li> <a href="#">CN</a> </li>
+                        @if($auth)
+                           <li class="cursor my-acccount">
+                               <div class="dropdown-toggle clearfix" data-toggle="dropdown">
+                                   <span>
+                                       {{ $auth->fullname }}
+                                       @if($auth->notification_not_read)
+                                           [ {{ $auth->notification_not_read }} ]
+                                       @endif
+                                   </span>
+                                   <div class="wrap-avatar">
+                                       {!! HTML::image($auth->image, 'avatar', ['class' => 'img-responsive']) !!}
+                                   </div>
+                                   <b class="caret"></b>
+                               </div>
+                               <ul class="dropdown-menu">
+                                   <li>
+                                       <a href="{{ route('front::orders.index') }}">
+                                           <i class="fa fa-shopping-cart"></i>
+                                           {{ trans('menu.order') }}
+                                       </a>
+                                   </li>
+                                   <li>
+                                       <a href="{{ route('front::settings.notifications') }}">
+                                           <i class="fa fa-envelope"></i> {{ trans('menu.notification') }}
+                                           <strong class="number-notify">
+                                               {{ $auth->notification_not_read }}
+                                           </strong>
+                                       </a>
+                                   </li>
+                                   <li>
+                                       <a href="{{ route('front::settings.account') }}">
+                                           <i class="fa fa-cog"></i>
+                                           {{ trans('menu.account_setting') }}
+                                       </a>
+                                   </li>
+                                   <li>
+                                        <a href="{{ url('logout') }}">
+                                            <i class="fa fa-sign-out"></i>
+                                            {{ trans('menu.logout') }}
+                                        </a>
+                                   </li>
+                               </ul>
+                           </li>
+                       @else
+                           <li><a href="{{ url('register') }}">
+                                {{ trans('menu.join') }}
+                           </a></li>
+                           <li><a href="{{ url('login') }}">
+                                {{ trans('menu.log_in') }}
+                           </a></li>
+                       @endif
+
+
+
+                        <li><a href="{{ route('front::contact') }}">
+                            {{ trans('footer.contact_us') }}
+                        </a></li>
+                        <li><a href="#">
+                            {{ trans('menu.help') }}
+                        </a></li>
+                        <li class="@if(app()->getLocale() === 'en') lang-current @endif">
+                            <a href="{{ route('front::switch.lang', 'en') }}">EN</a>
+                        </li>
+                        <li class="@if(app()->getLocale() === 'cn') lang-current @endif">
+                            <a href="{{ route('front::switch.lang', 'cn') }}">CN</a>
+                        </li>
+                        <li class="btn-cart">
+                            <a href="{{ route('front::ecommerce.cart') }}">
+                                <i class="fa fa-shopping-cart fa-lg"></i>
+                            </a>
+                            <cart></cart>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +91,7 @@
 
     <section class="logo">
         <div class="container">
-            <a href="#">
+            <a href="{{ route('front::home') }}">
                 <img src="http://tour.dotdotbuy.com/uploads/main/allimg/20150910/20150910111710.png" alt="">
             </a>
         </div>
@@ -35,13 +101,13 @@
         <div class="container">
             <ul class="list-nav clearfix">
                 <li>
-                    <a href="#">
-                        Home
+                    <a href="{{ route('front::home') }}" class="@if($routeName === 'front::home') active @endif">
+                        {{ trans('menu.home') }}
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        NYC
+                        {{ trans('menu.nyc') }}
                     </a>
 
                     <ul class="sub-nav">
@@ -55,16 +121,20 @@
                             <a href="#">Concert</a>
                         </li>
                         <li>
-                            <a href="#">Powerball</a>
+                            <a href="{{ route('front::game.powerball') }}">
+                                {{ trans('menu.powerball') }}
+                            </a>
                         </li>
                         <li>
-                            <a href="#">Mega Millions</a>
+                            <a href="{{ route('front::game.megamillions') }}">
+                                {{ trans('menu.megamilions') }}
+                            </a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="#">
-                        Vagas
+                        {{ trans('menu.vagas') }}
                     </a>
 
                     <ul class="sub-nav">
@@ -80,8 +150,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
-                        Special Offers
+                    <a href="{{ route('front::special.offers') }}">
+                        {{ trans('menu.special_offers') }}
                     </a>
                 </li>
             </ul>
