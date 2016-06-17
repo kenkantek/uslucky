@@ -1,0 +1,146 @@
+@import "base";
+@import "hoa";
+@import "nghiep";
+@import "responsive";
+
+main {
+	min-height: 500px;
+}
+
+#sizebar {
+	display: block;
+	width: 90%;
+	position: static;
+	
+	&>li.current {
+		a{
+			font-weight: bold!important;
+		}
+	}
+}
+
+#header {
+	.top-header {
+	    border-bottom: 1px solid #ccc;
+	    height: 37px;
+	    width: 100%;
+	    line-height: 37px;
+
+	    p.text-welcome {
+	    	font-size: 0.9em;
+	    }
+
+	    ul.right-menu {
+	    	li {
+				float: left;
+				position: relative;
+
+				a{
+					color: #959595;
+					font-size: 0.9em;
+					display: inline-block;
+					padding: 0px 10px;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+
+				&:not(:last-child):after {
+					content: '|';
+					position: absolute;
+					right: 0px;
+					top: 0px;
+				    font-size: 0.8em;
+				}
+			}
+	    }
+	}
+    
+    .logo {
+    	padding: 10px 0;
+
+		.link-logo {
+			display: block;
+		}
+    }
+
+    .manin-navigation {
+    	background: $primary-bg-color;
+    	border-top: 3px solid #D0D0C1;
+
+    	.list-nav {
+    		li {
+    			float: left;
+    			position: relative;
+
+    			a{
+    				color: #fff;
+    				display: inline-block;
+    				padding: 9px 40px;
+    				text-transform: uppercase;
+
+    				&:hover, &.active {
+    					color: $primary-color;
+    					background: #fff;
+
+    				}
+    			}
+
+    			ul.sub-nav {
+    				display: none;
+    				position: absolute;
+    				border: 1px solid $primary-bg-color;
+    				padding-left: 0px;
+    				background: #fff;
+    				z-index: 90;
+    				left: 50%;
+    				transform: translateX(-50%);
+    				width: 100%;
+
+					li {
+						float: none;
+						text-align: center;
+
+						a {
+							color: $text-color;
+							display: inline-block;
+							text-align: center;
+							width: 100%;
+							font-size: 0.9em;
+							padding: 8px 10px;
+
+							&:hover {
+								color: $primary-bg-color;
+							}
+						}
+					}
+
+					&:after {
+						content: '';
+						position: absolute;
+						top: -12px;
+						left: calc(50% - 6px);
+						border-width: 6px;
+						border-style: solid;
+						border-color: transparent transparent $primary-bg-color transparent;
+					}
+					&:before {
+						content: '';
+						position: absolute;
+						top: -10px;
+						left: calc(50% - 5px);
+						border-width: 5px;
+						border-style: solid;
+						z-index: 1;
+						border-color: transparent transparent #fff transparent;
+					}
+    			}
+				
+				&:hover ul {
+					display: block;
+				}
+    		}
+    	}
+    }
+}

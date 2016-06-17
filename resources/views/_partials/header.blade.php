@@ -1,123 +1,90 @@
-<div class="container">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<header id="header">
+    <section class="top-header">
         <div class="container">
-            <div class="navbar-header">
-                  <a class="navbar-brand" href="{{ route('front::home') }}">
-                    <img src="{{ asset('images/logo-here.jpg') }}" height="30">
-                  </a>
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <p class="text-welcome text-nowrap">
+                        uslucky e-commerce website system: Order Site uslucky.com
+                    </p>
+                </div>
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <ul class="right-menu">
+                        <li><a href="#">Join</a></li>
+                        <li><a href="#">Log in</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li> <a href="#">EN</a> </li>
+                        <li> <a href="#">CN</a> </li>
+                    </ul>
+                </div>
             </div>
-            <ul class="nav navbar-nav nav-custome">
-                <li @if($routeName === 'front::home') class="active" @endif>
-                    <a href="{{ route('front::home') }}"> {{ trans('menu.home') }} </a>
-                </li>
+        </div>
+    </section>
 
-                <li class="dropdown @if(starts_with($routeName, 'front::game')) active @endif">
-                    <a href="{{route('front::game.get.index')}}">
-                        NYC <b class="caret"></b>
+    <div class="clearfix"></div>
+
+    <section class="logo">
+        <div class="container">
+            <a href="#">
+                <img src="http://tour.dotdotbuy.com/uploads/main/allimg/20150910/20150910111710.png" alt="">
+            </a>
+        </div>
+    </section>
+
+    <section class="manin-navigation">
+        <div class="container">
+            <ul class="list-nav clearfix">
+                <li>
+                    <a href="#">
+                        Home
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">
-                                Broadway
-                            </a>
-                        </li>
-                        <li><a href="#">Museum</a></li>
-                        <li><a href="#">Concert</a></li>
-                        <li>
-                            <a href="{{ route('front::game.powerball') }}">
-                                {{ trans('menu.powerball') }}
-                            </a>
-                        </li>
+                </li>
+                <li>
+                    <a href="#">
+                        NYC
+                    </a>
 
+                    <ul class="sub-nav">
                         <li>
-                            <a href="{{ route('front::game.megamillions') }}">
-                                {{ trans('menu.megamilions') }}
-                            </a>
+                            <a href="#">Broadway</a>
+                        </li>
+                        <li>
+                            <a href="#">Museum</a>
+                        </li>
+                        <li>
+                            <a href="#">Concert</a>
+                        </li>
+                        <li>
+                            <a href="#">Powerball</a>
+                        </li>
+                        <li>
+                            <a href="#">Mega Millions</a>
                         </li>
                     </ul>
                 </li>
-
                 <li>
-                    <a href="">Vegas</a>
-                </li>
-
-                <li @if($routeName === 'front::special.offers') class="active" @endif>
-                    <a href="{{ route('front::special.offers') }}">{{ trans('menu.special_offers') }}</a>
-                </li>
-
-                @if($auth)
-                    <li class="cursor my-acccount">
-                        <div class="dropdown-toggle clearfix" data-toggle="dropdown">
-                            <span>
-                                {{ $auth->fullname }}
-                                @if($auth->notification_not_read)
-                                    [ {{ $auth->notification_not_read }} ]
-                                @endif
-                            </span>
-                            <div class="wrap-avatar">
-                                {!! HTML::image($auth->image, 'avatar', ['class' => 'img-responsive']) !!}
-                            </div>
-                            <b class="caret"></b>
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{{ route('front::orders.index') }}">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    {{ trans('menu.order') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('front::settings.notifications') }}">
-                                    <i class="fa fa-envelope"></i> {{ trans('menu.notification') }}
-                                    <strong class="number-notify">
-                                        {{ $auth->notification_not_read }}
-                                    </strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('front::settings.account') }}">
-                                    <i class="fa fa-cog"></i>
-                                    {{ trans('menu.account_setting') }}
-                                </a>
-                            </li>
-                            <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('menu.logout') }}
-                                </a></li>
-                        </ul>
-                    </li>
-                @else
-                    <li @if($routeName === 'front::') class="active" @endif>
-                        <a href="{{ url('login') }}">
-                            {{trans('menu.login')}} / {{trans('menu.register')}}
-                        </a>
-                    </li>
-                @endif
-
-                <li class="lang en">
-                    <a href="{{ route('front::switch.lang', 'en') }}"
-                       class="@if(app()->getLocale() === 'en') active @endif">EN</a>
-                </li>
-
-                <li class="lang cn">
-                    <a href="{{ route('front::switch.lang', 'cn') }}"
-                       class="@if(app()->getLocale() === 'cn') active @endif">CN</a>
-                </li>
-
-                <li class="btn-cart">
-                    <a href="{{ route('front::ecommerce.cart') }}">
-                        <i class="fa fa-shopping-cart fa-lg"></i>
+                    <a href="#">
+                        Vagas
                     </a>
-                    <cart></cart>
+
+                    <ul class="sub-nav">
+                        <li>
+                            <a href="#">Shows</a>
+                        </li>
+                        <li>
+                            <a href="#">Museum</a>
+                        </li>
+                        <li>
+                            <a href="#">Concert</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        Special Offers
+                    </a>
                 </li>
             </ul>
         </div>
-    </nav>
-    <div class="col-md-12 header_bg">
-        <div class="hidden row">
-            {!! HTML::image('css/images/logo.png', env('TITLE'), ['class' => 'img-responsive']) !!}
-            <div class="slogan">
-                {!! trans('home.title') !!}
-            </div>
-            @yield('extends_content')
-        </div>
-    </div>
-</div>
+    </section>
+</header>

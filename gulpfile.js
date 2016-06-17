@@ -34,7 +34,7 @@ elixir(function(mix) {
     mix.langjs();
     mix.laroute();
     mix.copy('public/css/images', 'public/build/css/images');
-    mix.sass('app.scss');
+    mix.sass('frontend/app.scss');
     mix.sass('admin/admin.scss');
 
     mix.browserify('app.js');

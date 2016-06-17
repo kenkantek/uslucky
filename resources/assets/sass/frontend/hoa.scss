@@ -695,9 +695,6 @@ h3 {
   }
 }
 
-img {
-  vertical-align: top;
-}
 
 .block {
   position: relative;
@@ -807,11 +804,6 @@ h5 {
   &:hover {
     color: #2e3e4b;
   }
-}
-
-p {
-  color: #bfac9d;
-  font-weight: 400;
 }
 
 
@@ -1067,5 +1059,53 @@ footer.footer {
     }
 
     
+  }
+}
+
+.cart{
+    position: absolute;
+    top: 8px;
+    right: 0;
+    padding: 2px 4px !important;
+    font-size: 10px;
+    margin: 0 !important;
+    height: auto !important;
+    background-color: black;
+    width: 18px;
+    border-radius: 50%
+}
+
+.thumb1{
+  position: relative;
+  background: #ffffff;
+  text-align: center;
+  margin: 57px 0 13px;
+  padding: 25px 26px 30px;
+  transition: all 0.4s ease;
+  &:hover{
+    background: #dc5e61;
+    color: #ffffff;
+    p{
+      color: #ffffff;
+    }
+    .circle{
+      background: #ffffff;
+      color: #dc5e61;
+    }
+    h5 a{
+      color: #2e3e4b;
+      &:hover{
+        color: #ffffff;
+      }
+    }
+
+    .link{
+      color: #2e3e4b;
+      background: #ffffff;
+      &:hover{
+        color: #dc5e61;
+        background: #2e3e4b;
+      }
+    }
   }
 }
