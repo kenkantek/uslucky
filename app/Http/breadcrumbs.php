@@ -1,5 +1,18 @@
 <?php
+//FRONTEND
+Breadcrumbs::register('front.home', function ($breadcrumbs) {
+    $breadcrumbs->push('Home', route('front::home'), ['icon' => 'icon-home']);
+});
+Breadcrumbs::register('front.category', function ($breadcrumbs, $category) {
+    $breadcrumbs->parent('front.home');
+    $breadcrumbs->push($category->name, route('front::ecommerce.category.show', $category->id));
+});
+Breadcrumbs::register('front.product', function ($breadcrumbs, $product) {
+    $breadcrumbs->parent('front.home');
+    $breadcrumbs->push($product->name, route('front::ecommerce.product.show', $product->id));
+});
 
+//BACKEND
 Breadcrumbs::register('home', function ($breadcrumbs) {
     $breadcrumbs->push('Home', route('admin.dashboard'), ['icon' => 'icon-home']);
 });

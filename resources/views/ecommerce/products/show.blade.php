@@ -7,6 +7,9 @@
 @section('content')
 
 	<div class="container">
+
+		{!! Breadcrumbs::render('front.product', $product) !!}
+
     	<section class="box-detail main-detail">
     		<div class="title-show">
 	        	<h2>{{ $product->name }}</h2>

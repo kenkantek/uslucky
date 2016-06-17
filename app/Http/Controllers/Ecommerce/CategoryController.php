@@ -9,6 +9,8 @@ class CategoryController extends Controller
 {
     public function show(Category $category)
     {
-        return $category->load('products');
+        $category->load('products');
+
+        return view('ecommerce.categories.show', compact('category'));
     }
 }

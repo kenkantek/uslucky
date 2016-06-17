@@ -408,3 +408,74 @@ body.product {
         margin-top: 20px;
     }
 }
+
+body.category {
+    .wrap-categories {
+        .item-product {
+            width: calc(100% / 3 - 20px);
+            float: left;
+            margin: 10px 10px 20px 10px;
+
+            a{
+                display: block;
+                height: 385px;
+                overflow: hidden;
+
+                .thumb {
+                    text-align: center;
+                    background-size: cover;
+                    height: 320px;
+                    position: relative;
+
+                    &:before {
+                        content: '';
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        background-color: rgba(0,0,0,0.6);
+                        display: none;
+                    }
+                    
+                    &:after {
+                        content: attr(description);
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 100%;
+                        left: 0;
+                        max-height: 80px;
+                        overflow: hidden;
+                        color: #fff;
+                        text-align: center;
+                        text-transform: uppercase;
+                        padding: 0px 10px;
+                        display: none;
+                    }
+
+                    &:hover{
+                        &:after, &:before {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            .product-detail {
+                margin-top: 10px;
+
+                .product-name {
+                    color: #777777;
+                    font-size: 1.2em;
+                }
+
+                .product-price {
+                    color: #ff63b1;
+                    font-size: 2em;
+                }
+            }
+        }
+    }
+}

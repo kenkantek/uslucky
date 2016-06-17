@@ -126,3 +126,15 @@ a {
 span.label[class *= 'label-'], label.label[class *= 'label-'] {
   text-transform: capitalize;
 }
+
+.page-breadcrumb {
+  padding: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #efeeee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+  li {
+    float: left;
+  }
+}
