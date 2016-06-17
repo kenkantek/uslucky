@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
-use App\Models\Ecommerce\Product;
 use App\Models\Game;
-use App\Models\Result;
 
 class PagesController extends Controller
 {
@@ -28,14 +26,7 @@ class PagesController extends Controller
 
     public function getIndex()
     {
-        $result      = Result::whereGameId(1)->latest('draw_at')->first();
-        $result_mega = Result::whereGameId(2)->latest('draw_at')->first();
-        $powerball   = powerballNextTime();
-        $mega        = megaNextTime();
-
-        $products = array_chunk(Product::all()->toArray(), 4);
-
-        return view('pages.home', compact('products', 'powerball', 'result', 'mega', 'result_mega'));
+        return view('pages.home');
     }
 
     public function getAbout()

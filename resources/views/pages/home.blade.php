@@ -1,9 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            row
-        </div>
+    <div class="demo-2">
+        @include('_partials._slider-home')
     </div>
 @stop
