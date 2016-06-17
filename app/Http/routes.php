@@ -169,6 +169,16 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
             'uses' => 'CartController@index',
         ]);
 
+        $router->get('category/{category}', [
+            'as'   => 'category.show',
+            'uses' => 'CategoryController@show',
+        ]);
+
+        $router->get('product/{product}', [
+            'as'   => 'product.show',
+            'uses' => 'ProductController@show',
+        ]);
+
         $router->get('order', [
             'as'   => 'order',
             'uses' => 'OrderController@index',

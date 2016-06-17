@@ -21,7 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ecommerce_category_company', function (Blueprint $table) {
+        Schema::create('ecommerce_category_product', function (Blueprint $table) {
             $table->integer('product_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
 
@@ -42,7 +42,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ecommerce_category_company');
+        Schema::dropIfExists('ecommerce_category_product');
         Schema::dropIfExists('ecommerce_categories');
     }
 }

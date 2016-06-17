@@ -55,73 +55,13 @@
 	</nav>
 
 </div><!-- /slider-wrapper -->
-@section('scripts')
-<script type="text/javascript" src="/js/libs/FullscreenSlitSlider/js/modernizr.custom.79639.js"></script>
-<script type="text/javascript" src="/js/libs/FullscreenSlitSlider/js/jquery.ba-cond.min.js"></script>
-<script type="text/javascript" src="/js/libs/FullscreenSlitSlider/js/jquery.slitslider.js"></script>
 
+<style>
+	main {
+		padding: 0px!important;
+	}
 
-<script type="text/javascript">
-	$(function() {
-
-		var SliderHome = (function() {
-
-			var $nav = $( '#nav-dots > span' ),
-				slitslider = $( '#slider' ).slitslider( {
-					onBeforeChange : function( slide, pos ) {
-
-						$nav.removeClass( 'nav-dot-current' );
-						$nav.eq( pos ).addClass( 'nav-dot-current' );
-
-					}
-				} ),
-
-				init = function() {
-
-					initEvents();
-
-				},
-				initEvents = function() {
-
-					$nav.each( function( i ) {
-
-						$( this ).on( 'click', function( event ) {
-
-							var $dot = $( this );
-
-							if( !slitslider.isActive() ) {
-
-								$nav.removeClass( 'nav-dot-current' );
-								$dot.addClass( 'nav-dot-current' );
-
-							}
-
-							slitslider.jump( i + 1 );
-							return false;
-
-						} );
-
-					} );
-
-				};
-
-				return { init : init };
-
-		})();
-
-		SliderHome.init();
-	});
-</script>
-@stop
-
-@section('styles')
-	<style>
-		main {
-			padding-top: 0px!important;
-		}
-
-		.demo-2 .sl-slider-wrapper {
-			height: 500px!important;
-		}
-	</style>
-@stop
+	.demo-2 .sl-slider-wrapper {
+		height: 500px!important;
+	}
+</style>

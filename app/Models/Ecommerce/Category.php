@@ -8,6 +8,8 @@ class Category extends Model
 {
     protected $table = 'ecommerce_categories';
 
+    protected $fillable = ['name', 'position'];
+
     public function scopeIgnoreId($query, $id = null)
     {
         return $id ? $query->where('id', '<>', $id) : $query;
@@ -51,6 +53,11 @@ class Category extends Model
     {
         return $this->hasMany(static::class, 'parent_id')
             ->where('parent_id', '<>', 0);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'ecommerce_category_product');
     }
     // END RELATIONSHIP
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Ecommerce;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Ecommerce\CreateProductRequest;
-use App\Http\Requests\Ecommerce\UpdateProductRequest;
+use App\Http\Requests\Admin\Ecommerce\CreateProductRequest;
+use App\Http\Requests\Admin\Ecommerce\UpdateProductRequest;
 use App\Models\Ecommerce\Category;
 use App\Models\Ecommerce\Product;
 use App\Models\Image;

@@ -56,7 +56,7 @@ class Product extends Model
     }
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'ecommerce_category_company');
+        return $this->belongsToMany(Category::class, 'ecommerce_category_product');
     }
 
     //ACCESSOR

@@ -45,7 +45,6 @@ textarea {
   border: 1px solid #eee;
   border-left-width: 5px;
   border-radius: 3px;
-  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
 
@@ -96,19 +95,18 @@ textarea {
     animation-duration: 2s;
 }
 
-
-
-button.link{
-  border:none;
+.disabled {
+  pointer-events: none;
 }
+
 
 a {
   text-decoration: none;
   transition: all 0.4s ease;
+
   &:hover{
     text-decoration: none;
     color: #dc5e61;
-    cursor: pointer;
   }
 }
 

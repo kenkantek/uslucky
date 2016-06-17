@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use Faker\Generator;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,7 +14,7 @@
 |
  */
 
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Generator $faker) {
     return [
         'first_name'     => $faker->firstName,
         'last_name'      => $faker->lastName,

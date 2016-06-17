@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Ecommerce;
+namespace App\Http\Requests\Admin\Ecommerce;
 
 use App\Http\Requests\Request;
 
@@ -24,7 +24,7 @@ class CreateProductRequest extends Request
     public function rules()
     {
         return [
-            'name'        => 'bail|required|unique:ecommerce_products',
+            'name'        => 'bail|required|min:3|max:255',
             'description' => 'bail|required',
             'price'       => 'bail|required|numeric',
             'thumb'       => 'bail|image',

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
+use App\Models\Ecommerce\Category;
 use App\Models\Game;
+use JavaScript;
 
 class PagesController extends Controller
 {
@@ -12,7 +14,7 @@ class PagesController extends Controller
     public function __construct()
     {
         parent::__construct();
-        \JavaScript::put([
+        JavaScript::put([
             '_games' => Game::all(),
         ]);
     }
@@ -26,7 +28,21 @@ class PagesController extends Controller
 
     public function getIndex()
     {
-        return view('pages.home');
+        $categories = Category::whereParentId(0)
+            ->with(['childrens' => function ($q) {
+                $q->with('products');
+            }])
+            ->get();
+
+        $nyc = collect($categories)->first(function ($key, $item) {
+            return $item->name == 'NYC';
+        });
+
+        $vagas = collect($categories)->first(function ($key, $item) {
+            return $item->name == 'Vagas';
+        });
+
+        return view('pages.home', compact('nyc', 'vagas'));
     }
 
     public function getAbout()
@@ -61,7 +77,7 @@ class PagesController extends Controller
 
     public function putContact(ContactRequest $request)
     {
-        $contacts          = new Contact();
+        $contacts          = new Contact;
         $contacts->name    = $request->name;
         $contacts->phone   = $request->phone;
         $contacts->email   = $request->email;
