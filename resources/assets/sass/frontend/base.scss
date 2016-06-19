@@ -7,21 +7,10 @@ $primary-bg-color: #FB7E04;//D9534F
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-.clearfix {
-  *zoom: 1;
-  &:before,
-  &:after {
-    display: table;
-    content: "";
-    line-height: 0;
-  }
-  &:after {
-    clear: both;
-  }
-}
 ul {
   margin-bottom: 0px;
   list-style: none;
+  padding: 0px; 
 }
 
 textarea {
@@ -98,7 +87,6 @@ textarea {
 .disabled {
   pointer-events: none;
 }
-
 
 a {
   text-decoration: none;

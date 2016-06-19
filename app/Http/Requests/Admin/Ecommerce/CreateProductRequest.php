@@ -27,7 +27,7 @@ class CreateProductRequest extends Request
             'name'        => 'bail|required|min:3|max:255',
             'description' => 'bail|required',
             'price'       => 'bail|required|numeric',
-            'thumb'       => 'bail|image',
+            'thumb'       => 'bail|required|image',
         ];
     }
 }

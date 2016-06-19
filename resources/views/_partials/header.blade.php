@@ -2,13 +2,13 @@
     <section class="top-header">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-sm-3 col-md-4">
                     <p class="text-welcome text-nowrap">
-                        uslucky e-commerce website system: Order Site uslucky.com
+                        uslucky e-commerce website system
                     </p>
                 </div>
-                <div class="col-xs-12 col-md-5 col-md-offset-3">
-                    <ul class="right-menu">
+                <div class="col-xs-12 col-sm-9 col-md-6 col-md-offset-2">
+                    <ul class="right-menu clearfix">
                         @if($auth)
                            <li class="cursor my-acccount">
                                <div class="dropdown-toggle clearfix" data-toggle="dropdown">
@@ -87,9 +87,11 @@
         </div>
     </section>
 
-    <div class="clearfix"></div>
+    <div class="clearfix">
+      <div class="container"></div>
+    </div>
 
-    <section class="logo">
+    <section class="logo clearfix">
         <div class="container">
             <a href="{{ route('front::home') }}">
                 <img src="http://tour.dotdotbuy.com/uploads/main/allimg/20150910/20150910111710.png" alt="">
@@ -97,7 +99,7 @@
         </div>
     </section>
 
-    <section class="manin-navigation">
+    <section class="main-navigation">
         <div class="container">
             <ul class="list-nav clearfix">
                 <li>

@@ -1,0 +1,42 @@
+@mixin media-query($type: 'max', $width: $screen-xs-min) {
+	@media (#{$type}-width: $width) {
+	   @content;
+ 	}
+}
+
+@mixin absolute-center($h: true, $v: true) {
+    position: absolute;
+    @if $h {
+		left: 50%;
+		transform: translateX(-50%);
+    }
+    @if $v {
+		top: 50%;
+		transform: translateY(-50%);
+    }
+}
+
+@mixin flex-center($h: true, $v: true) {
+    display: flex;
+
+    @if $h {
+        justify-content: center;
+    }
+    @if $v {
+		align-items: center;
+    }
+}
+
+@mixin box-divide($divide, $margin: 0px) {
+	width: calc(100% / #{$divide} - #{$margin});
+}
+
+@mixin box-divide-product($margin) {
+	@include box-divide(3, $margin);
+	@include media-query('max', $screen-sm-min) {
+		@include box-divide(2, $margin);
+	}
+  	@include media-query('max', $screen-xs-min) {
+		width: 100%;
+	}
+}

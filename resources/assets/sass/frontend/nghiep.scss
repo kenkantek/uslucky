@@ -135,12 +135,9 @@ body.content-games {
                                 }
                                 &:after {
                                     // content: attr(data-index);
-                                    position: absolute;
                                     font-size: 170px;
                                     opacity: .3;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
+                                    @include absolute-center(true, true);
                                 }
                                 &:hover:after {
                                     z-index: -1;
@@ -234,6 +231,10 @@ body.home {
                 padding: 12px 0px;
                 margin-top: 7px;
                 border-radius: 3px 3px  0 0;
+
+                @include media-query('max', 678px) {
+                    font-size: 2.3vw;
+                }
                 
                 &:first-child {
                     margin-left: 7px;
@@ -257,7 +258,9 @@ body.home {
             }
 
             .item-product {
-                width: calc(100% / 3 - 20px);
+                
+                @include box-divide-product(20px);
+
                 overflow: hidden;
                 border: 1px solid #dcdcdc;
                 float: left;
@@ -283,7 +286,7 @@ body.home {
             }
 
             .product-description {
-                height: 160px;
+                height: 155px;
                 overflow: hidden;
                 padding:10px;
                 border: 1px solid #e2dede;
@@ -301,7 +304,7 @@ body.home {
     }
     
     .nav-nyc {
-        background: url(http://tour.dotdotbuy.com/templets/haitao/images/home_point_repeat01.gif);
+        background: url(images/home_point_repeat01.gif);
 
         &.tab-category {
             .tab-header {
@@ -322,7 +325,7 @@ body.home {
     }
 
     .nav-vagas {
-        background: url(http://tour.dotdotbuy.com/templets/haitao/images/home_point_repeat02.gif);
+        background: url(images/home_point_repeat02.gif);
 
         &.tab-category {
             .tab-header {
@@ -412,7 +415,7 @@ body.product {
 body.category {
     .wrap-categories {
         .item-product {
-            width: calc(100% / 3 - 20px);
+            @include box-divide-product(20px);
             float: left;
             margin: 10px 10px 20px 10px;
 
@@ -424,6 +427,7 @@ body.category {
                 .thumb {
                     text-align: center;
                     background-size: cover;
+                    background-color: antiquewhite;
                     height: 320px;
                     position: relative;
 
@@ -440,10 +444,8 @@ body.category {
                     }
                     
                     &:after {
+                        @include absolute-center(false, true);
                         content: attr(description);
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
                         width: 100%;
                         left: 0;
                         max-height: 80px;
@@ -474,6 +476,7 @@ body.category {
                 .product-price {
                     color: #ff63b1;
                     font-size: 2em;
+                    white-space: nowrap;
                 }
             }
         }
