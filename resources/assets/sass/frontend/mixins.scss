@@ -33,10 +33,10 @@
 
 @mixin box-divide-product($margin) {
 	@include box-divide(3, $margin);
-	@include media-query('max', $screen-sm-min) {
+	@include media-query('max', $screen-md-min) {
 		@include box-divide(2, $margin);
 	}
-  	@include media-query('max', $screen-xs-min) {
-		width: 100%;
+  	@include media-query('max', 580px) {
+		@include box-divide(1, $margin);
 	}
 }
