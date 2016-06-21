@@ -251,7 +251,10 @@ body.home {
 
         .tab-contents {
             background: #fff;
-            padding: 10px;
+            
+            @include media-query('min', 580px) {
+                padding: 10px;
+            }
 
             >div:not(.active) {
                 display: none;

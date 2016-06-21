@@ -10,7 +10,7 @@
 
 		{!! Breadcrumbs::render('front.category', $category) !!}
 
-		<section class="wrap-categories">
+		<section class="wrap-categories clearfix">
 			@foreach($category->products as $product)
 			<article class="item-product">
 				<a href="{{ route('front::ecommerce.product.show', $product) }}" target="_blank">

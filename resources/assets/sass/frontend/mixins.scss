@@ -37,6 +37,8 @@
 		@include box-divide(2, $margin);
 	}
   	@include media-query('max', 580px) {
-		@include box-divide(1, $margin);
+		@include box-divide(1, 0px);
+		margin-left: 0px;
+		margin-right: 0px;
 	}
 }

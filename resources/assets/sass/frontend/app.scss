@@ -25,7 +25,7 @@ main {
 #header {
 	.top-header {
 	    border-bottom: 1px solid #ccc;
-	    height: 37px;
+	    min-height: 37px;
 	    width: 100%;
 	    line-height: 37px;
 
@@ -133,6 +133,11 @@ main {
 							width: 100%;
 							font-size: 0.9em;
 							padding: 8px 10px;
+
+                            @include media-query('max', $screen-xs-min) {
+                                font-size: 0.7em;
+                                padding: 8px 5px;
+                            }
 
 							&:hover {
 								color: $primary-bg-color;
