@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="/js/libs/FullscreenSlitSlider/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/js/libs/FullscreenSlitSlider/css/custom.css" />
+{!! HTML::style('js/libs/FullscreenSlitSlider/css/style.css') !!}
+{!! HTML::style('js/libs/FullscreenSlitSlider/css/custom.css') !!}
 
 <div id="slider" class="sl-slider-wrapper">
 
@@ -63,5 +63,9 @@
 
 	.demo-2 .sl-slider-wrapper {
 		height: 500px!important;
+	}
+
+	.sl-slide-inner > :not(div){
+		display: none;
 	}
 </style>

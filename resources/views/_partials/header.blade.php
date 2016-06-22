@@ -88,7 +88,7 @@
   <section class="logo clearfix">
       <div class="container">
         <a href="{{ route('front::home') }}">
-          {!! HTML::image('images/logo-header.png', env('TITLE')) !!}
+          {!! HTML::image('images/logo-top.png', env('TITLE'), ['width' => 280]) !!}
         </a>
       </div>
   </section>
