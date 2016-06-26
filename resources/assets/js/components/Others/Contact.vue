@@ -1,39 +1,30 @@
 <template>
-	<form id="contact-form" class="form-horizontal" @submit.prevent="onSubmit" novalidate>
-	    <div v-if="load" class="contact-form-loader"></div>
+	<form id="contact-form" @submit.prevent="onSubmit" novalidate>
 	    <fieldset>
 	        <div class="form-group">
-	        	<label>
-	        	    <input class="form-control" type="text" v-model="formInputs.name" placeholder="{{ $l('contact.name') }}">
-	        	    <span class="err" v-show="formErrors.name" v-text="formErrors.name"></span>
-	        	</label>
+	        	<input class="form-control" type="text" v-model="formInputs.name" placeholder="{{ $l('contact.name') }}">
+        	    <span class="err" v-show="formErrors.name" v-text="formErrors.name"></span>
 	        </div>
 	        <div class="form-group">
-	        	<label>
-	        	    <input class="form-control" type="text" v-model="formInputs.email" placeholder="{{ $l('contact.email') }}">
-	        	    <span class="err" v-show="formErrors.email" v-text="formErrors.email"></span>
-	        	</label>
+	        	<input class="form-control" type="text" v-model="formInputs.email" placeholder="{{ $l('contact.email') }}">
+	        	<span class="err" v-show="formErrors.email" v-text="formErrors.email"></span>
 	        </div>
 	        <div class="form-group">
-	        	<label>
-	        	    <input class="form-control" type="text" v-model="formInputs.phone" placeholder="{{ $l('contact.phone') }}">
-	        	    <span class="err" v-show="formErrors.phone" v-text="formErrors.phone"></span>
-				</label>
+	        	<input class="form-control" type="text" v-model="formInputs.phone" placeholder="{{ $l('contact.phone') }}">
+	        	<span class="err" v-show="formErrors.phone" v-text="formErrors.phone"></span>
 	        </div>
 	        <div class="form-group">
-	        	<label>
-	        	    <textarea class="form-control" v-model="formInputs.message" placeholder="{{ $l('contact.message') }}"></textarea>
-	        	    <span class="err"v-show="formErrors.message" v-text="formErrors.message"></span>
-	        	</label>
+	        	<textarea class="form-control" v-model="formInputs.message" placeholder="{{ $l('contact.message') }}"></textarea>
+	        	<span class="err"v-show="formErrors.message" v-text="formErrors.message"></span>
 	        </div>
 	        <div class="form-group">
-	        	<div class="btns">
-	        	  <button type="submit" class="btn btn-primary" :disabled="submiting">
-    	                <i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> 
-    	                {{ $l('contact.submit') }}
-	                </button>
-	        	  <button type="reset" class="btn btn-default">{{ $l('contact.reset') }}</button>
-	        	</div>
+				<button type="submit" class="btn btn-primary" :disabled="submiting">
+					<i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> 
+					{{ $l('contact.submit') }}
+				</button>
+				<button type="reset" class="btn btn-default">
+					{{ $l('contact.reset') }}
+				</button>
 	        </div>
 	    </fieldset>
     </form>
@@ -47,36 +38,34 @@
             submiting: false,
 			formInputs : {},
             formErrors : {},
-            onSubmmit : false,
-            load : false
+            onSubmmit : false
 		}),
 
 		methods: {
-            onSubmit() {
-                const contact = this.formInputs;
+            onSubmit(e) {
+                const contact = this.formInputs,
+                	form = e.currentTarget;
                 this.submiting = true;
+                this.formErrors = {};
                 this.$http.put(laroute.route('front::put.contact'), this.formInputs).then(res => {
                     this.submiting = false;
-                    this.load = true;
                     swal({
                         title: this.$l('message.contact_sent'),
                         type: "info",
                         closeOnConfirm: false,
                         showLoaderOnConfirm: false,
-                    }, function() {
-                    	$('.contact-form-loader').remove('div');
-                    	$('input').val('');
-                    	$('textarea').val('');
+                    }, () => {
                         swal.close();
+                        form.reset();
                     });
 
                 }, (res) => {
                     this.formErrors = res.data;
                     this.submiting = false;
-                    if(res.status === 500) {
-                        BOX.alertError();
-                    } else  {
+                    if(res.status === 422) {
                         toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
+                    } else  {
+                        BOX.alertError();
                     }
                 });
 

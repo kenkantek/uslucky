@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'title'     => 'Contact form',
-    'name'      => 'Your Name',
+    'title'     => 'Contact Form',
+    'name'      => 'Your name',
     'email'     => 'Your email',
     'phone'     => 'Your phone number',
     'message'   => 'Message',
     'reset'     => 'Reset',
-    'submit'    => 'Submit',
-    'mobile'    => 'Freephone',
+    'submit'    => 'Send now',
+    'phone'     => 'Phone',
     'telephone' => 'Telephone',
 
 ];
