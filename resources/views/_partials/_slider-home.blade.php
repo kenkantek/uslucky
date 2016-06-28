@@ -79,4 +79,11 @@
 	.demo-2 .sl-slider-wrapper {
 		height: 600px!important;
 	}
+	.demo-2 .sl-slide-inner > *:not(div) {
+		display: none!important;
+	}
+
+	body.home .tab-category {
+		background: #E9E9E9;
+	}
 </style>
