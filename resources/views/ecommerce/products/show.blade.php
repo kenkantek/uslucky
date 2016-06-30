@@ -35,7 +35,7 @@
 	        		    </ul>
 	        		</div>
 
-	        		<div class="product-description">
+	        		<div class="product-description hidden">
 	        			{{ $product->description }}
 	        		</div>
 	        	</div>

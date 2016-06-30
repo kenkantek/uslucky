@@ -52,7 +52,7 @@ class EcommcerceCategoriesTableSeeder extends Seeder
                 'position'  => random_int(1, 100),
             ],
             [
-                'name'      => 'Museum',
+                'name'      => 'Trade show',
                 'parent_id' => $ids[1],
                 'position'  => random_int(1, 100),
             ],

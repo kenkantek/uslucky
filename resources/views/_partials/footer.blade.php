@@ -8,19 +8,19 @@
 
     <div class="links">
         <a href="#" class="link">
-            <header>See Who's Trending</header>
+            <header>{{ trans('footer.box_1') }}</header>
             <p>
                 Connect with the most active startups this week.
             </p>
         </a>
         <a href="#" class="link">
-            <header>Raise Money Online</header>
+            <header>{{ trans('footer.box_2') }}</header>
             <p>
                 Join the 855 startups that have raised online.
             </p>
         </a>
         <a href="#" class="link">
-            <header>Recruit Your Team</header>
+            <header>{{ trans('footer.box_3') }}</header>
             <p>
                 High-quality talent. Fun. Free.
             </p>
@@ -30,13 +30,23 @@
         <a href="{{ route('front::home') }}">
             {{ trans('menu.home') }}
         </a>
-        <a href="#">Payment</a>
-        <a href="#">About</a>
+        <a href="#">
+            {{ trans('footer.payment') }}
+        </a>
+        <a href="#">
+            {{ trans('footer.about') }}
+        </a>
         <a href="{{ route('front::contact') }}">
             {{ trans('footer.contact_us') }}
         </a>
-        <a href="#">FAQs</a>
-        <a href="#">Terms</a>
-        <a href="http://kan-tek.com" target="_blank">Powered by KanTek</a>
+        <a href="#">
+            {{ trans('footer.faq') }}
+        </a>
+        <a href="#">
+            {{ trans('footer.term') }}
+        </a>
+        <a href="http://kan-tek.com" target="_blank">
+            {{ trans('footer.powered_by') }}
+        </a>
     </div>
 </footer>

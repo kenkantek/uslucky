@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 
 return [
-    'winner' => "Winning money is added to your account. Order # :order",
-    'refund' => "Account Refund money of order # :order",
-    'cancle' => "Canceled request of transaction <a href='#transaction-:transaction'>#:transaction</a>.",
+    'winner' => "奖金直接加入您的账户.",
+    'refund' => "退款",
+    'cancle' => "取消交易 <a href='#transaction-:transaction'>#:transaction</a>.",
 ];

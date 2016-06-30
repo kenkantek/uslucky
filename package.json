@@ -1,11 +1,17 @@
 {
   "private": true,
+  "scripts": {
+    "prestart": "gulp",
+    "start": "gulp watch",
+    "build": "cross-env NODE_ENV=production gulp --production"
+  },
   "devDependencies": {
     "babel-preset-stage-0": "^6.5.0",
+    "cross-env": "^1.0.8",
     "gulp": "^3.8.8",
     "gulp-shell": "^0.5.2",
-    "laravel-elixir-vueify": "^1.0.2",
-    "lang.js": "~1.0.0"
+    "lang.js": "~1.0.0",
+    "laravel-elixir-vueify": "^1.0.2"
   },
   "dependencies": {
     "async": "^1.5.2",

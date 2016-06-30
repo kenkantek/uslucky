@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Language Lines
@@ -12,23 +12,28 @@ return [
     | these language lines according to your application's requirements.
     |
      */
-    
-    'failed'              => '数据不匹配.',
-    'throttle'            => '多次登录. 请稍后再尝试 :seconds seconds.',
-    
+
+    'failed'           => '信息与我们的存档不相符.',
+    'throttle'         => '尝试太多次登录。请稍后再试:seconds seconds.',
+
     //FOR JS
-    'remember_me'         => '记住我',
-    'email'               => '电子邮件',
-    'password'            => '密码',
-    'confirm_password'    => '再一次输入密码',
-    'signin'              => '登录',
-    'signin_fb'           => '脸书登录',
-    'forgot_password'     => '忘记密码了吗?',
-    'or_register'         => '新用户登录!',
-    'message_check_field' => '请检查输入内容!.',
-    'validate'            => '无效!',
-    'first_name'          => '名字',
-    'last_name'           => '姓氏',
-    'signup'              => '注册',
-    'or_login'            => '登录',
+    'remember_me'      => '记住我',
+    'email'            => '电子邮件',
+    'password'         => '密码',
+    'confirm_password' => '再次输入密码',
+    'signin'           => '注册',
+    'signup'           => '注册',
+    'signin_fb'        => '用Facebook登录',
+    'forgot_password'  => '忘记密码?',
+    'or_register'      => '或者用另一个新的账户登录!',
+    'first_name'       => '名字',
+    'last_name'        => '姓氏',
+    'signup'           => '注册',
+    'or_login'         => '或者登录这里',
+    'birthday'         => '生日',
+    'minimum_old'      => '你必须至少18岁:number years old.',
+
+    'day'              => '日',
+    'month'            => '月',
+    'year'             => '年',
 ];

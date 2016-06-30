@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 return [
     'title'     => '联系表格',
@@ -9,6 +9,6 @@ return [
     'reset'     => '重设',
     'submit'    => '提交',
     'mobile'    => '手机',
-    'telephone' => '电话',
+    'telephone' => '固定电话',
 
 ];

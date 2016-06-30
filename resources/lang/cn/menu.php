@@ -1,17 +1,18 @@
-<?php
+﻿<?php
 
 return [
     'home'            => '主页',
-    'about'           => 'About',
-    'game'            => 'Games',
+    'about'           => '关于',
+    'game'            => '彩票',
     'winning_number'  => '中奖查询',
-    'contact'         => 'Contact',
-    'notification'    => 'Notifications',
-    'account_setting' => 'Account settings',
-    'logout'          => 'Log out',
-    'register'        => '登录',
-    'login'           => '注册',
-    'powerball'       => '强力球',
-    'megamilions'     => '百万大博彩',
-    'special_offers'  => '优惠活动',
+    'contact'         => '联系',
+    'notification'    => '公告',
+    'account_setting' => '账户设置',
+    'logout'          => '登出',
+    'register'        => '注册R',
+    'login'           => '登录',
+    'order'           => '订购记录',
+    'join'            => '加入',
+    'log_in'          => '登录',
+    'help'            => '帮助',
 ];

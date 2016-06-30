@@ -14,7 +14,7 @@
         "itsgoingd/clockwork": "~1.11",
         "cartalyst/stripe-laravel": "4.0.*",
         "laracasts/utilities": "~2.0",
-        "lord/laroute" : "2.*",
+        "lord/laroute": "2.*",
         "snowfire/beautymail": "dev-master",
         "sabre/xml": "^1.4",
         "ixudra/curl": "6.*",

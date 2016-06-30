@@ -1,32 +1,9 @@
-<?php
+﻿<?php
 
 return [
-    'title'               => '在线购买美国官方强力球彩票',
-    'des'                 => '美国官方强力球彩票，头彩大奖起始于<strong>四千万</strong>美元，2016年1月，该彩票最高奖金创下历史记录，高达十五亿美元！从1-69选号范围中选择5个主要号码，并从1-26范围中选择一个强力球号码，中国时间每周四和周日的早上11点开奖。',
-    'luckynumber'         => '我的幸运号码',
-    'luckynumber'         => '我的幸运号码',
-    'button'              => '机选',
-    'extra'               => 'For An Extra $:extra Per Ticket, Make It A Power Play',
-    'play'                => '投注',
-    'total'               => '总计',
-    'modal_title'         => '购买',
-    'message'             => '登录购买彩票.',
-    'message_err'         => '错误, 再试一次!',
-    'price'               => '彩票价格',
-    'modal_choose'        => '选择支付方式',
-    'modal_balance'       => '账户余额',
-    'modal_afford'        => '余额不足.',
-    'modal_button_add'    => '增加',
-    'modal_credit'        => '信用卡支付',
-    'modal_des_credit'    => '描述',
-    'modal_button_cancel' => '取消',
-    'modal_button_submit' => '提交',
-    'modal_swal'          => '确定此次购买吗?',
-    'credit'              => '卡号',
-    'credit_exp'          => '过期日期',
-    'credit_date'         => '日期',
-    'jackpot'             => '预计最高奖金',
-    'many'                => '买多少张彩票:',
-    'choose'              => '选择',
+    'title' => '在线购买美国官方强力球彩票',
+    'des'   => '美国官方强力球彩票，头彩大奖起始于<strong>四千万美元</strong> 2016年1月，该彩票最高奖金创下历史记录，高达 <strong>十五亿美元！</strong> 从<strong>1-69</strong>选号范围中选择<strong>5</strong>个主要号码，并从<strong>1-26</strong>范围中选择一个强力球号码，中国时间每周四和周日的早上11点开奖。 ',
+
+    'many'  => '你想购买多少张彩票:',
 
 ];

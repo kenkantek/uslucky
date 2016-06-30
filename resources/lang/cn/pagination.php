@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 return [
 
@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'previous' => '前一个 ',
-    'next'     => '下一个 ',
+    'previous' => '&laquo; 前面',
+    'next'     => '后面 &raquo;',
 
 ];

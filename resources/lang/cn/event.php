@@ -1,14 +1,14 @@
-<?php
+﻿<?php
 
 return [
-    'award'              => "You are WINNER! Congratulation from " . env('TITLE'),
-    'updated_order'      => "Your order # :order_id at :created_at  was purchased. Please check by Your order menu.",
-    'order_cancle'       => "Because your order # :order_id at :created_at was canceled. We refund to you. Total amount: $ :price",
-    'claim'              => "Your claim request # :transaction at :created_at was paid. Total amount: $ :amount",
-    'winner'             => "You are WINNER with ticket number: <strong> :tickets  <span style='color: red'> :ball </span></strong>. Prize: :label with $ :reward",
-    'title_update_order' => env('TITLE') . " - Your order was purchased",
-    'title_new_order'    => "Your new order from " . env('TITLE'),
-    'title_claim'        => env('TITLE') . " Preview Payment transaction # :transaction",
-    'title_paid'         => env('TITLE') . " Preview Payment transaction # :transaction",
-    'register'           => "Verify Your Email Address From " . env('TITLE'),
+    'award'              => "你中奖了! 恭喜发财 " . env('TITLE'),
+    'updated_order'      => "你的订单已经购买成功了。请查询你的订单记录.",
+    'order_cancle'       => "你的订单已经取消。我们会全额退款给你。退款金额为: $ :price",
+    'claim'              => "你的兑现要求 # :交易为 :created_at 已经付款. 总计为: $ :amount",
+    'winner'             => "你选中的号码中奖了： <strong> :tickets  <span style='color: red'> :ball </span></strong>. 奖金: :label with $ :reward",
+    'title_update_order' => env('TITLE') . " - 你选的号码已经购买成功了Your order was purchased",
+    'title_new_order'    => "你的新订单 " . env('TITLE'),
+    'title_claim'        => env('TITLE') . " 预览支付交易# :transaction",
+    'title_paid'         => env('TITLE') . " 预览支付交易 # :transaction",
+    'register'           => "验证你的电子邮件地址 " . env('TITLE'),
 ];

@@ -1,17 +1,17 @@
-<?php
+﻿<?php
 
 return [
-    'title'   => '在线中奖查询',
-    'from'    => '起始日期',
-    'to'      => '终止日期',
-    'game'    => '彩票种类',
+    'title'   => '开奖查询',
+    'from'    => '开奖起始日期',
+    'to'      => '开奖终止日期',
+    'game'    => 'Game Type',
     'search'  => '查询',
-    'name'    => '彩票名称',
+    'name'    => '彩票种类',
     'result'  => '结果',
-    'date'    => '日期',
-    'play'    => '倍增彩',
-    'jackpot' => '预计最高奖金',
-    'wait'    => '未知',
-    'des'     => '<p>美国强力球是世界上最大的彩票游戏之一，累积彩金最低4000万美元，奖池彩金可累积到惊人的巨额！这个美国博彩投注格式非常简易，100万美元二等奖，以及其他七个惊人的非头彩大奖奖项。现在投注抓住机会成为下一个美国大乐透的赢家!</p><br>
-            <p>可以选择下面的时间段，查找以往中奖结果.</p>',
+    'date'    => '开奖日期',
+    'play'    => '强力球',
+    'jackpot' => '奖池金额',
+    'wait'    => '等待',
+    'des'     => '<p>Check the latest winning numbers for the draws below featuring jackpots worth <a href="#" class="link2">$ 647,559,209</a>!  Follow your favourites with FREE lottery result alerts by setting your preferences here or download one of theLotter\'s FREE results apps for iPhone, Android, or iPad to keep the most important lottery results with you on the go!</p><br>
+          	<p>Find results, see winning numbers, or select from the list below to check results for all lotteries at the Lottery.</p>'
 ];

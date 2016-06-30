@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-4">
                 <p class="text-welcome text-nowrap">
-                    uslucky e-commerce website system
+                  {{ trans('header.top') }}
                 </p>
             </div>
             <div class="col-xs-12 col-sm-9 col-md-6 col-md-offset-2">
@@ -103,51 +103,70 @@
             </li>
             <li>
                 <a href="{{ route('front::ecommerce.category.show', 1) }}">
-                    {{ trans('menu.nyc') }}
+                    {{ trans('nav.nyc') }}
                 </a>
 
                 <ul class="sub-nav">
                     <li>
-                        <a href="{{ route('front::ecommerce.category.show', 3) }}">Broadway</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('front::ecommerce.category.show', 4) }}">Museum</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('front::ecommerce.category.show', 5) }}">Concert</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('front::game.powerball') }}">
-                            {{ trans('menu.powerball') }}
+                        <a href="{{ route('front::ecommerce.category.show', 3) }}">
+                            {{ trans('nav.broadway') }}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('front::game.megamillions') }}">
-                            {{ trans('menu.megamilions') }}
+                        <a href="{{ route('front::ecommerce.category.show', 4) }}">
+                            {{ trans('nav.museum') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('front::ecommerce.category.show', 5) }}">
+                            {{ trans('nav.concert') }}
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="{{ route('front::ecommerce.category.show', 2) }}">
-                    {{ trans('menu.vagas') }}
+                    {{ trans('nav.vagas') }}
                 </a>
 
                 <ul class="sub-nav">
                     <li>
-                        <a href="{{ route('front::ecommerce.category.show', 6) }}">Shows</a>
+                        <a href="{{ route('front::ecommerce.category.show', 6) }}">
+                            {{ trans('nav.shows') }}
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ route('front::ecommerce.category.show', 7) }}">Museum</a>
+                        <a href="{{ route('front::ecommerce.category.show', 7) }}">
+                            {{ trans('nav.trade_show') }}
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ route('front::ecommerce.category.show', 8) }}">Concert</a>
+                        <a href="{{ route('front::ecommerce.category.show', 8) }}">
+                            {{ trans('nav.concert') }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{ route('front::ecommerce.category.show', 1) }}">
+                    {{ trans('nav.games') }}
+                </a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="{{ route('front::game.powerball') }}">
+                            {{ trans('nav.powerball') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('front::game.megamillions') }}">
+                            {{ trans('nav.megamilions') }}
+                        </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="{{ route('front::special.offers') }}">
-                    {{ trans('menu.special_offers') }}
+                    {{ trans('nav.special_offers') }}
                 </a>
             </li>
         </ul>
