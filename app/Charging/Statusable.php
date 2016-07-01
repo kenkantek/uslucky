@@ -4,7 +4,7 @@ namespace App\Charging;
 
 use App\Models\Transaction;
 
-trait Status
+trait Statusable
 {
     public function makeStatus(Transaction $transaction, $status)
     {

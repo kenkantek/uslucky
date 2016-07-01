@@ -15,7 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Clockwork\Support\Laravel\ClockworkMiddleware::class
+        \Clockwork\Support\Laravel\ClockworkMiddleware::class,
     ];
 
     /**
@@ -30,7 +30,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-            \App\Http\Middleware\AppMiddleware::class
+            \App\Http\Middleware\AppMiddleware::class,
         ],
 
         'api' => [
@@ -47,9 +47,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth'       => \App\Http\Middleware\Authenticate::class,
-        'game_time'  => \App\Http\Middleware\GameMiddleware::class,
-        'active'     => \App\Http\Middleware\Active::class,
-        'admin'      => \App\Http\Middleware\AdminMiddlware::class,
+        'active'     => \App\Http\Middleware\ActiveMiddleware::class,
+        'admin'      => \App\Http\Middleware\AdminMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,

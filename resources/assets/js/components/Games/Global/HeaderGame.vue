@@ -4,22 +4,10 @@
             <span><strong>{{ $l('play.estimated_jackpot') }}</strong></span>
             <h1><strong>{{ nextTime.amount | currency }}</strong></h1>
         </div>
-        <div class="draw-date clearfix">
-            <div class="col-xs-4 col-md-offset-2">
-                
-            </div>
-            <div class="col-xs-6">
-                <h5 class="text-right" :title="nextTime.time">
-                    {{ $l('game.draw_closed') }}: <strong>{{ downTime | countdown }}</strong>
-                </h5>
-            </div>
-        </div>
-        <div class="hidden tickets clearfix">
-            <div class="col-xs-10">
-                {{ $l('powerball.many') }}
-                <input type="text" :value="tickets.length" readonly>
-                <input type="button" value="+1 ticket" @click="addTicket">
-            </div>
+        <div class="draw-date">
+            <h5 class="text-right" :title="nextTime.time">
+                {{ $l('game.draw_closed') }}: <strong>{{ downTime | countdown }}</strong>
+            </h5>
         </div>
     </article>
 </template>

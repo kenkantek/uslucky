@@ -10,9 +10,11 @@
 			<div class="thumbs">
 				<img class="img-responsive" src="https://tribwpix.files.wordpress.com/2016/01/powerball-11.jpg" alt="">
                  <div class="capture">
-                   <h2><a href="{{route('front::game.powerball')}}">powerball</a></h2>
-                   <p>{{trans('game.des_powerball')}}</p>
-                   <center><a href="{{route('front::game.powerball')}}" class="link">{{trans('game.button')}}</a></center>
+                   <h2><a href="{{route('front::game.powerball')}}">
+                   	{{ trans('nav.powerball') }}
+                   </a></h2>
+                   <p>{{ trans('game.des_powerball') }}</p>
+                   <a href="{{ route('front::game.powerball') }}" class="btn btn-danger">{{trans('game.button')}}</a>
                  </div>
 			</div>
 		</div>
@@ -20,9 +22,13 @@
 			<div class="thumbs">
 				<img class="img-responsive" src="http://casinoonline.it/assets/Uploads/Lottery-Mega-Millions.jpg" alt="">
                  <div class="capture">
-                   <h2><a href="#">mega millions</a></h2>
-                   <p>{{trans('game.des_mega')}}</p>
-                   <center><a href="#" class="link">{{trans('game.button')}}</a></center>
+                   <h2><a href="#">
+						{{ trans('nav.megamilions') }}
+                   </a></h2>
+                   <p>{{ trans('game.des_mega') }}</p>
+                   <a href="{{ route('front::game.megamillions') }}" class="btn btn-danger">
+                   {{ trans('game.button') }}
+                   </a>
                  </div>
 			</div>
 		</div>

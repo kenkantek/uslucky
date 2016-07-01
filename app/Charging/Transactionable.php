@@ -4,7 +4,7 @@ namespace App\Charging;
 
 use App\Models\Order;
 
-trait Transaction
+trait Transactionable
 {
     public function makeTransaction(Order $order, $amount, $balance, $amount_total, $description)
     {

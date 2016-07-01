@@ -2,15 +2,15 @@
 namespace App\Charging;
 
 use App\Billing\Billing;
-use App\Charging\Status;
-use App\Charging\Transaction;
+use App\Charging\Statusable;
+use App\Charging\Transactionable;
 use App\Models\User;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Exception;
 
 class ChargeCredit implements ChargeInterface
 {
-    use Transaction, Status;
+    use Transactionable, Statusable;
 
     public function charge(Billing $billing)
     {

@@ -15,13 +15,13 @@
 				</a>
 				@endforeach
 				<a href="{{ route('front::game.powerball') }}">
-					{{ trans('menu.powerball') }}
+					{{ trans('nav.powerball') }}
 				</a>
 				<a href="{{ route('front::game.megamillions') }}">
-					{{ trans('menu.megamilions') }}
+					{{ trans('nav.megamilions') }}
 				</a>
 				<a href="{{ route('front::ecommerce.category.show', 1) }}">
-					{{ trans('menu.nyc') }}
+					{{ trans('nav.nyc') }}
 					<i class="fa fa-angle-double-right"></i>
 				</a>
 			</div>
@@ -63,7 +63,7 @@
     				</a>
     				@endforeach
     				<a href="{{ route('front::ecommerce.category.show', 2) }}">
-    					{{ trans('menu.vagas') }}
+    					{{ trans('nav.vagas') }}
     					<i class="fa fa-angle-double-right"></i>
     				</a>
     			</div>

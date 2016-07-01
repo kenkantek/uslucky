@@ -6,38 +6,33 @@ body.winnings {
     }
 }
 
-body.game-powerball {
-    .header-game {
-        width: 100%;
-        min-height: 125px;
-        padding: 5px;
-        background: #B30408 url(images/header_powerball.png) no-repeat;
-        background-size: cover;
-        color: #fff;
-        .jackpot {
-            padding: 10px;
-        }
-        .draw-date {
-            clear: both;
-        }
-        .tickets {
-            input {
-                color: $text-color;
-                outline: none;
-                &[type=text] {
-                    padding: 2px;
-                    text-align: center;
-                    width: 30px;
-                }
-            }
-        }
-    }
-}
 
 
-/* COMMON */
 
+/* BEGIN PAGE GAME */
 body.content-games {
+    .header-game {
+      width: 100%;
+      min-height: 125px;
+      padding: 5px;
+      background-size: cover;
+      color: #fff;
+
+      .jackpot {
+        padding: 10px;
+      }
+      .draw-date {
+        clear: both;
+        h5 {
+            margin: 0px;
+        }
+      }
+
+      @include media-query('max', '700px') {
+        background-position: 100%;
+      }
+    }
+
     >main {
         padding-top: 10px;
     }
@@ -97,11 +92,30 @@ body.content-games {
                     .ticket {
                         border: 1px solid #ccc;
                         border-radius: 5px;
-                        width: calc(100% / 5 - 10px);
                         word-wrap: break-word;
                         padding: 15px 5px;
                         float: left;
                         margin: 10px 5px 0px;
+                        @include box-divide(5, '10px');
+                        
+                        @include media-query('max', $screen-md-min) {
+                            @include box-divide(4, '10px');
+                        }
+
+                        @include media-query('max', $screen-md-min) {
+                            @include box-divide(3, '10px');
+                        }
+
+                        @include media-query('max', '580px') {
+                            @include box-divide(2, '10px');
+                        }
+
+                        @include media-query('max', '400px') {
+                            width: 100%;
+                            margin-left: 0px;
+                            margin-right: 0px;
+                        }
+
                         .numbers {
                             position: relative;
                             .controls {
@@ -194,6 +208,21 @@ body.content-games {
         }
     }
 }
+
+body.game-powerball {
+    .header-game {
+        background-image: url(images/header_powerball.png);
+        background-color: #b71317;
+    }
+}
+
+body.game-megamillions {
+  .header-game {
+    background-image: url(images/header_megamillions.png);
+    background-color: #FFCD48;
+  }
+}
+//END PAGE GAME
 
 .my-acccount {
     .wrap-avatar {

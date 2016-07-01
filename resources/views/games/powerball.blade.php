@@ -1,15 +1,13 @@
 @extends('layouts.master')
 
-
 @section('title') US Powerball Tickets Online @stop
-
 
 @section('body-class') content-games game-powerball @stop
 
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="game col-xs-12 col-md-10">
+            <div class="game col-xs-12">
                 <section class="header">
                     <h1>{{trans('powerball.title')}}</h1>
                     <p>
@@ -19,19 +17,6 @@
                 </section>
 
                 <powerball></powerball>
-            </div>
-            <div class="sizebar col-xs-12 col-md-2">
-                {{--<div class="box">
-                    <a href="#">
-                        <img class="img-responsive" src="https://s4.thelotter.com/images/9ddac69a079eafd126ef2f4fccd5858e.png">
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="#">
-                        <img class="img-responsive" src="https://s4.thelotter.com/images/926e20f57aa4ea176da0a763e31bf9e0.png">
-                    </a>
-                </div>--}}
             </div>
         </div>
     </div>
