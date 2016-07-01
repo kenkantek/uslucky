@@ -135,6 +135,7 @@ class Billing implements BillingInterface
             $amount += count($this->tickets) * $config['extra_per_ticket'];
         }
         $discount = $this->validateDiscount();
+
         return $discount ? $amount - ($amount * $discount->value) / 100 : $amount;
     }
 

@@ -27,6 +27,7 @@ class MegamilionController extends Controller
                 ->setDrawAt(megaNextTime()['time'])
                 ->setDescription($request->description)
                 ->setSource($request->source)
+                ->setCoupon($request->coupon)
         );
 
         return $billing->save();
