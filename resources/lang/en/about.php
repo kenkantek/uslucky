@@ -13,5 +13,4 @@ return [
     'des_2'         => 'After the tickets are purchased on your behalf, each ticket receipt - containing full participation details, is scanned into our system and matched to the appropriate transaction in your account. This allows you to view the specific ticket you paid for, in your password-protected online account.',
     'des_3'         => 'We guarantee that a scan of every ticket you buy on the site will be available to view in your account before the draw. However, in rare cases, circumstances beyond our control may prevent us from purchasing the ticket in time. In these rare cases, the ticket will be canceled and refunded in full to your account, with additional compensation.',
 
-
 ];

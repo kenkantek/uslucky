@@ -45,7 +45,7 @@
         <a href="#">
             {{ trans('footer.term') }}
         </a>
-        <a href="http://kan-tek.com" target="_blank">
+        <a href="{{ trans('footer.powered_by_link') }}" target="_blank">
             {{ trans('footer.powered_by') }}
         </a>
     </div>

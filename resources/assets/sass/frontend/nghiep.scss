@@ -110,7 +110,7 @@ body.content-games {
                             @include box-divide(2, '10px');
                         }
 
-                        @include media-query('max', '400px') {
+                        @include media-query('max', '380px') {
                             width: 100%;
                             margin-left: 0px;
                             margin-right: 0px;
