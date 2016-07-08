@@ -148,7 +148,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ route('front::ecommerce.category.show', 1) }}">
+                <a href="{{ route('front::game.get.index') }}">
                     {{ trans('nav.games') }}
                 </a>
                 <ul class="sub-nav">

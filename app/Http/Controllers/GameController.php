@@ -12,6 +12,7 @@ class GameController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->middleware('comingsoon');
         $this->middleware('auth', ['only' => 'getPayment']);
 
         JavaScript::put([
