@@ -54,13 +54,4 @@ class GameController extends Controller
         return view('games.megamillions');
     }
 
-    // Lay thong tin de Purchase
-    public function getPayment()
-    {
-        return response([
-            'amount'   => $this->user->balance,
-            'payments' => $this->user->payments,
-        ]);
-    }
-
 }

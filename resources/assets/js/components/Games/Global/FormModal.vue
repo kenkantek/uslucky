@@ -148,7 +148,7 @@
         },
 
         asyncData(resolve, reject) {
-            this.$http.get(laroute.route('front::game.get.payment')).then(res => {
+            this.$http.get(laroute.route('front::purchase.payment')).then(res => {
                 resolve({ ...res.data, checkLogin: true});
             }, res => {
                 let message = '';

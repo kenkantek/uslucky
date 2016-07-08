@@ -96,4 +96,13 @@ class PaymentController extends Controller
 
         return view('user.settings.transaction-history', compact('amount'));
     }
+
+    // Lay thong tin de Purchase
+    public function getPayment()
+    {
+        return response()->json([
+            'amount'   => $this->user->balance,
+            'payments' => $this->user->payments,
+        ]);
+    }
 }
