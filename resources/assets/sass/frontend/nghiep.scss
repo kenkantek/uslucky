@@ -249,10 +249,10 @@ body.home {
     .tab-category {
 
         .tab-header {
-            background: #FDB803;
+            background: #E9E9E9;
 
             a {
-                color: #fff;
+                color: #45494E;
                 display: block;
                 float: left;
                 text-transform: uppercase;
@@ -340,7 +340,7 @@ body.home {
 
         &.tab-category {
             .tab-header {
-                background: #FDB803;
+                background: #E9E9E9;
 
                 a {
                     width: calc(100% / 6);
@@ -409,7 +409,7 @@ body.product {
 
         .price {
             color: #fff;
-            background: $primary-bg-color;
+            background: grey;
             padding: 20px;
             font-size: 1.5em;
 
@@ -424,7 +424,7 @@ body.product {
             .add2cart {
                 display: block;
                 padding: 20px 50px;
-                background: #FB7E04;
+                background: grey;
                 color: #fff;
                 width: 300px;
                 margin: 0 auto;
