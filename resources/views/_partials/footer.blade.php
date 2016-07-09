@@ -10,19 +10,19 @@
         <a href="#" class="link">
             <header>{{ trans('footer.box_1') }}</header>
             <p>
-                Connect with the most active startups this week.
+
             </p>
         </a>
         <a href="#" class="link">
             <header>{{ trans('footer.box_2') }}</header>
             <p>
-                Join the 855 startups that have raised online.
+
             </p>
         </a>
         <a href="#" class="link">
             <header>{{ trans('footer.box_3') }}</header>
             <p>
-                High-quality talent. Fun. Free.
+
             </p>
         </a>
     </div>
