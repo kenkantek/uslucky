@@ -77,7 +77,7 @@
 	}
 
 	.demo-2 .sl-slider-wrapper {
-		height: 600px!important;
+		height: 600px;
 	}
 	.demo-2 .sl-slide-inner > *:not(div) {
 		display: none!important;

@@ -48,18 +48,42 @@
 
 .demo-2 .bg-img {
 	padding: 200px;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	position: absolute;
-	top: -200px;
-	left: -200px;
-	width: 100%;
-	height: 100%;
-	/* -webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover; */
-	background-position: center center;
+	/*-webkit-box-sizing: content-box;*/
+	/*-moz-box-sizing: content-box;*/
+	/*box-sizing: content-box;*/
+	/*position: absolute;*/
+	/*top: -200px;*/
+	/*left: -200px;*/
+	/*width: 100%;*/
+	/*height: 100%;*/
+	/*!* -webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*background-size: cover; *!*/
+	/*background-position: center center;*/
+}
+
+@media screen and (max-width: 600px) {
+	.demo-2 .bg-img{
+		background-size: 100%;
+		background-repeat: no-repeat;
+	}
+}
+
+@media screen and (min-width: 601px) {
+	.demo-2 .bg-img{
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
+		position: absolute;
+		top: -200px;
+		left: -200px;
+		width: 100%;
+		height: 100%;
+		/* -webkit-background-size: cover;
+		-moz-background-size: cover;
+		background-size: cover; */
+		background-position: center center;
+	}
 }
 
 /* Custom navigation arrows */

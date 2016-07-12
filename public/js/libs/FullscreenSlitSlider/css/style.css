@@ -6,6 +6,12 @@
 	overflow: hidden;
 }
 
+@media screen and (max-width: 600px){
+	.sl-slider-wrapper{
+		height: 150px !important;
+	}
+}
+
 .sl-slider {
 	position: absolute;
 	top: 0;
