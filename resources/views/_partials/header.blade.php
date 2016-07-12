@@ -67,12 +67,12 @@
                     <li><a href="#">
                         {{ trans('menu.help') }}
                     </a></li>
-                    <li class="@if(app()->getLocale() === 'en') lang-current @endif">
-                        <a href="{{ route('front::switch.lang', 'en') }}">EN</a>
-                    </li>
-                    <li class="@if(app()->getLocale() === 'cn') lang-current @endif">
-                        <a href="{{ route('front::switch.lang', 'cn') }}">CN</a>
-                    </li>
+                    {{--<li class="@if(app()->getLocale() === 'en') lang-current @endif">--}}
+                        {{--<a href="{{ route('front::switch.lang', 'en') }}">EN</a>--}}
+                    {{--</li>--}}
+                    {{--<li class="@if(app()->getLocale() === 'cn') lang-current @endif">--}}
+                        {{--<a href="{{ route('front::switch.lang', 'cn') }}">CN</a>--}}
+                    {{--</li>--}}
                     <li class="btn-cart">
                         <a href="{{ route('front::ecommerce.cart') }}">
                             <i class="fa fa-shopping-cart fa-lg"></i>
