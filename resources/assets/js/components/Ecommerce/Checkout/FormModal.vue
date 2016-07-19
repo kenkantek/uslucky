@@ -70,7 +70,7 @@
                             <div class="radio">
                                 <label>
                                     <input type="radio" v-model="method" value="3">
-                                    {{ $l('play.modal_alipay') }}
+                                    支付宝
                                 </label>
                                 <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
                                 <form-alipay v-show="method == 3" :form-inputs.sync="formInputs" :sms_id.sync="sms_id" :total="total"></form-alipay>
