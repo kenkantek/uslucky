@@ -66,7 +66,14 @@
                                 <input type="radio" v-model="method" value="2">
                                   {{ $l('play.modal_credit') }}
                               </label>
-                              <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" v-model="method" value="3">
+                                    {{ $l('play.modal_alipay') }}
+                                </label>
+                                <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
+                                <form-alipay v-show="method == 3" :form-inputs.sync="formInputs" :sms_id.sync="sms_id" :total="total"></form-alipay>
                             </div>
                             <hr>
                             <div>
@@ -103,6 +110,7 @@
     import laroute from '../../../laroute.js';
     import BOX from '../../../common.js';
     import FormCard from './FormCard.vue';
+    import FormAlipay from './FormAlipay.vue';
     import async from 'async';
 
     export default {
@@ -126,12 +134,14 @@
                     exp_month: 1,
                     exp_year: new Date().getFullYear()
                 },
+                sms_id : '',
+                stripe: _stripKey,
             }
         },
 
         computed: {
             readySubmit() {
-                if((this.method == 2) || (this.method == 1 && this.amount >= this.total)) {
+                if((this.method == 2) ||(this.method == 3)|| (this.method == 1 && this.amount >= this.total)) {
                     return true;
                 }
 
@@ -177,6 +187,34 @@
                                         cb(null, res.id);
                                     }
                                 });
+                            } else if (vm.method == 3) {
+                                $.ajax({
+                                    url: 'https://api.stripe.com/v1/alipay/verify_user?email='+this.formInputs.email+'&sms_id='+this.sms_id+'&user_last5='+this.formInputs.id5+'&sms_verification_code='+this.formInputs.sms_code+'&key='+this.stripe,
+                                    method: 'post',
+                                    success: function(res) {
+                                        var atoken = res.id;
+                                        var atotal = res.alipay_account.payment_amount;
+                                        console.log(res.alipay_account.payment_amount);
+                                        $.ajax({
+                                            url: (laroute.route('front::alipay.post')+'?atoken='+atoken+'&description='+vm.description+'&total='+atotal+'&_token='+_token),
+                                            method: 'post',
+                                            success: function(res) {
+                                                cb(null, res.id);
+                                            }
+                                        });
+                                    },
+                                    error: function(xhr, status, text) {
+                                        var response = $.parseJSON(xhr.responseText);
+
+                                        console.log('111111!');
+
+                                        if (response) {
+                                            cb(new Error(response.error.message));
+                                        } else {
+                                            // This would mean an invalid response from the server - maybe the site went down or whatever...
+                                        }
+                                    }
+                                });
                             } else {
                                 cb(null, null);
                             }
@@ -185,12 +223,12 @@
                         if(err) {
                             swal(this.$l('message.payment_invalid'), err.message, "error");
                         } else {
-                            vm.$http.post(laroute.route('front::ecommerce.order.store'), { 
+                            vm.$http.post(laroute.route('front::ecommerce.order.store'), {
                                 carts: vm.carts,
-                                method: vm.method, 
-                                payment: vm.payment, 
-                                description: vm.description, 
-                                source: result 
+                                method: vm.method,
+                                payment: vm.payment,
+                                description: vm.description,
+                                source: result
                             }).then(res => {
                                 swal({
                                     title: this.$l('message.success'),
@@ -216,9 +254,9 @@
                                 vm.submiting = false;
                             });
                         }
-                        
+
                     });
-                    
+
                 });
             },
 
@@ -228,6 +266,6 @@
             }
         },
 
-        components: { FormCard }
+        components: { FormCard, FormAlipay }
     }
 </script>

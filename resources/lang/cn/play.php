@@ -26,6 +26,7 @@ return [
     'modal_afford'        => '账户余额不足购买.',
     'modal_button_add'    => '现在增加',
     'modal_credit'        => '信用卡支付',
+    'modal_alipay'        => '支付宝',
     'modal_des_credit'    => '描述',
     'modal_button_cancel' => '取消',
     'modal_button_submit' => '提交',

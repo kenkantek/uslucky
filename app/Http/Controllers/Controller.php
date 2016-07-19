@@ -21,6 +21,7 @@ class Controller extends BaseController
             '_timzone' => env('TIMEZONE'),
             '_isLogin' => $this->user ? true : false,
             '_lang'    => app()->getLocale(),
+            '_stripKey'=> env('STRIPE_KEY'),
         ]);
     }
 

@@ -26,6 +26,7 @@ return [
     'modal_afford'        => 'You can not afford to buy it.',
     'modal_button_add'    => 'Add now',
     'modal_credit'        => 'By credit card',
+    'modal_alipay'        => 'By 支付宝',
     'modal_des_credit'    => 'Description',
     'modal_button_cancel' => 'Cancel',
     'modal_button_submit' => 'Submit',

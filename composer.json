@@ -19,7 +19,8 @@
         "sabre/xml": "^1.4",
         "ixudra/curl": "6.*",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "mariuzzo/laravel-js-localization": "dev-master"
+        "mariuzzo/laravel-js-localization": "dev-master",
+        "stripe/stripe-php": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
