@@ -101,7 +101,7 @@ main {
     				text-transform: uppercase;
 
                     @include media-query('max', $screen-xs-min) {
-                        padding: 9px 20px;
+                        padding: 9px 10px;
                     }
 
     				&:hover, &.active {
