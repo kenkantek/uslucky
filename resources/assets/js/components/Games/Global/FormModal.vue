@@ -66,10 +66,17 @@
                                 <input type="radio" v-model="method" value="2">
                                   {{ $l('play.modal_credit') }}
                               </label>
-                              <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" v-model="method" value="3">
+                                    支付宝
+                                </label>
+                                <form-card v-show="method == 2" :form-inputs.sync="formInputs"></form-card>
+                                <form-alipay v-show="method == 3" :form-inputs.sync="formInputs" :sms_id.sync="sms_id" :total="total"></form-alipay>
                             </div>
                             <hr>
-                            <div>
+                            <div style="display:none">
                                 <label for="form-description">{{ $l('play.modal_des_credit') }}</label>
                                 <textarea id="form-description" class="form-control" v-model="description"></textarea>
                             </div>
@@ -104,6 +111,7 @@
     import laroute from '../../../laroute';
     import BOX from '../../../common';
     import FormCard from './FormCard.vue';
+    import FormAlipay from './FormAlipay.vue';
     import async from 'async';
     import Coupon from './Coupon.vue';
 
@@ -129,13 +137,15 @@
                     exp_year: new Date().getFullYear()
                 },
                 discount: 0,
-                coupon: ''
+                coupon: '',
+                sms_id : '',
+                stripe: _stripKey,
             }
         },
 
         computed: {
             readySubmit() {
-                if((this.method == 2) || (this.method == 1 && this.amount >= this.total)) {
+                if((this.method == 2) ||(this.method == 3)|| (this.method == 1 && this.amount >= this.total)) {
                     return true;
                 }
 
@@ -182,7 +192,32 @@
                                     if(res.error) {
                                         cb(new Error(res.error.message));
                                     } else {
+                                        console.log(res.id);
                                         cb(null, res.id);
+                                    }
+                                });
+                            } else if (vm.method == 3) {
+                                $.ajax({
+                                    url: 'https://api.stripe.com/v1/alipay/verify_user?email='+this.formInputs.email+'&sms_id='+this.sms_id+'&user_last5='+this.formInputs.id5+'&sms_verification_code='+this.formInputs.sms_code+'&key='+this.stripe,
+                                    method: 'post',
+                                    success: function(res) {
+                                        if(res.error) {
+                                            cb(new Error(res.error.message));
+                                        } else {
+                                            console.log(res.id);
+                                            cb(null, res.id);
+                                        }
+                                    },
+                                    error: function(xhr, status, text) {
+                                        var response = $.parseJSON(xhr.responseText);
+
+                                        console.log('111111!');
+
+                                        if (response) {
+                                            cb(new Error(response.error.message));
+                                        } else {
+                                            // This would mean an invalid response from the server - maybe the site went down or whatever...
+                                        }
                                     }
                                 });
                             } else {
@@ -238,6 +273,6 @@
             }
         },
 
-        components: { FormCard, Coupon }
+        components: { FormCard, Coupon, FormAlipay }
     }
 </script>

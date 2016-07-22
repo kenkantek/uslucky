@@ -199,7 +199,8 @@
                                             url: (laroute.route('front::alipay.post')+'?atoken='+atoken+'&description='+vm.description+'&total='+atotal+'&_token='+_token),
                                             method: 'post',
                                             success: function(res) {
-                                                cb(null, res.id);
+                                                console.log(res);
+                                                cb(null, res);
                                             }
                                         });
                                     },
