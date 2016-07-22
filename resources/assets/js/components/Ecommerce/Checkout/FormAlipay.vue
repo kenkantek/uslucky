@@ -15,7 +15,7 @@
       <div class="section">
           <label>支付宝用户名: <sup class="text-danger">*</sup></label>
           <div class="input-group">
-              <input type="text" @change.prevent="onKeyup(formInputs.email)" class="form-control" placeholder="电邮" autofocus v-model="formInputs.email"/>
+              <input type="text" @change.prevent="onKeyup(formInputs.email)" class="form-control" placeholder="支付宝用户名" autofocus v-model="formInputs.email"/>
               <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
           </div>
       </div>
