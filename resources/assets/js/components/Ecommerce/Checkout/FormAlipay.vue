@@ -30,7 +30,7 @@
           </div>
       </div>
         <div class="section" v-show="show">
-            <label>身份中号码后5位数: <sup class="text-danger">*</sup></label>
+            <label>身份证号码后5位数: <sup class="text-danger">*</sup></label>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="身份证号码后5位" autofocus v-model="formInputs.id5">
                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
