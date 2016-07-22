@@ -13,7 +13,7 @@
 <template>
     <div class="main-credit">
       <div class="section">
-          <label>电邮: <sup class="text-danger">*</sup></label>
+          <label>支付宝用户名: <sup class="text-danger">*</sup></label>
           <div class="input-group">
               <input type="text" @change.prevent="onKeyup(formInputs.email)" class="form-control" placeholder="电邮" autofocus v-model="formInputs.email"/>
               <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -30,7 +30,7 @@
           </div>
       </div>
         <div class="section" v-show="show">
-            <label>最近5身份证号码: <sup class="text-danger">*</sup></label>
+            <label>身份中号码后5位数: <sup class="text-danger">*</sup></label>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="身份证号码后5位" autofocus v-model="formInputs.id5">
                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>

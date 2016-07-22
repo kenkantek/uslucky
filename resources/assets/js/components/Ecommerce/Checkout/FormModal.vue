@@ -76,7 +76,7 @@
                                 <form-alipay v-show="method == 3" :form-inputs.sync="formInputs" :sms_id.sync="sms_id" :total="total"></form-alipay>
                             </div>
                             <hr>
-                            <div>
+                            <div style="display:none">
                                 <label for="form-description">{{ $l('play.modal_des_credit') }}</label>
                                 <textarea id="form-description" class="form-control" v-model="description"></textarea>
                             </div>
