@@ -328,7 +328,7 @@ body.home {
             .product-price {
                 padding: 0px 10px;
                 span {
-                    color: #ff63b1;
+                    color: #f0812b;
                     font-size: 2.5em;
                 }
             }
@@ -408,8 +408,8 @@ body.product {
         }
 
         .price {
-            color: #fff;
-            background: grey;
+            //color: #fff;
+            //background: grey;
             padding: 20px;
             font-size: 1.5em;
 
@@ -506,7 +506,7 @@ body.category {
                 }
 
                 .product-price {
-                    color: #ff63b1;
+                    color: #f0812b;
                     font-size: 2em;
                     white-space: nowrap;
                 }

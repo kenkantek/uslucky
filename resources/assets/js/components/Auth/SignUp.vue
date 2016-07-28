@@ -9,44 +9,44 @@
 	        </div>
 	    </div>
 
-	    <div class="form-group" :class="{'has-error': formErrors.last_name}">
-	        <label class="col-md-4 control-label">{{ $l('auth.last_name') }} <sup class="text-danger">*</sup></label>
-	        <div class="col-md-6">
-	            <input type="text" class="form-control" v-model="formInputs.last_name" autocomplete="off">
-	            <span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>
-	        </div>
-	    </div>
+	    <!--<div class="form-group" :class="{'has-error': formErrors.last_name}">-->
+	        <!--<label class="col-md-4 control-label">{{ $l('auth.last_name') }} <sup class="text-danger">*</sup></label>-->
+	        <!--<div class="col-md-6">-->
+	            <!--<input type="text" class="form-control" v-model="formInputs.last_name" autocomplete="off">-->
+	            <!--<span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>-->
+	        <!--</div>-->
+	    <!--</div>-->
 
-	    <div class="form-group" :class="{'has-error': formErrors.birthday}">
-	        <label class="col-md-4 control-label">{{ $l('auth.birthday') }} <sup class="text-danger">*</sup></label>
-	        <div class="col-md-6">
+	    <!--<div class="form-group" :class="{'has-error': formErrors.birthday}">-->
+	        <!--<label class="col-md-4 control-label">{{ $l('auth.birthday') }} <sup class="text-danger">*</sup></label>-->
+	        <!--<div class="col-md-6">-->
 
-	            <div class="row">
-					<div class="col-xs-3">
-						<label>{{ $l('auth.day') }}</label>
-						<select class="form-control" v-model="birthday.day">
-							<option v-for="day in date.day" :value="day" v-text="day"></option>
-						</select>
-					</div>
+	            <!--<div class="row">-->
+					<!--<div class="col-xs-3">-->
+						<!--<label>{{ $l('auth.day') }}</label>-->
+						<!--<select class="form-control" v-model="birthday.day">-->
+							<!--<option v-for="day in date.day" :value="day" v-text="day"></option>-->
+						<!--</select>-->
+					<!--</div>-->
 
-					<div class="col-xs-5">
-						<label>{{ $l('auth.month') }}</label>
-						<select class="form-control" v-model="birthday.month">
-							<option v-for="month in date.month" :value="$index + 1 | padLeft 2 '0'" v-text="month"></option>
-						</select>
-					</div>
+					<!--<div class="col-xs-5">-->
+						<!--<label>{{ $l('auth.month') }}</label>-->
+						<!--<select class="form-control" v-model="birthday.month">-->
+							<!--<option v-for="month in date.month" :value="$index + 1 | padLeft 2 '0'" v-text="month"></option>-->
+						<!--</select>-->
+					<!--</div>-->
 
-					<div class="col-xs-4">
-						<label>{{ $l('auth.year') }}</label>
-						<select class="form-control" v-model="birthday.year">
-							<option v-for="year in date.year" :value="year" v-text="year"></option>
-						</select>
-					</div>
-              	</div>
+					<!--<div class="col-xs-4">-->
+						<!--<label>{{ $l('auth.year') }}</label>-->
+						<!--<select class="form-control" v-model="birthday.year">-->
+							<!--<option v-for="year in date.year" :value="year" v-text="year"></option>-->
+						<!--</select>-->
+					<!--</div>-->
+              	<!--</div>-->
 
-	            <span class="help-block" v-show="formErrors.birthday" v-text="formErrors.birthday"></span>
-	        </div>
-	    </div>
+	            <!--<span class="help-block" v-show="formErrors.birthday" v-text="formErrors.birthday"></span>-->
+	        <!--</div>-->
+	    <!--</div>-->
 
 	    <hr>
 
@@ -57,6 +57,14 @@
 	            <span class="help-block" v-show="formErrors.email" v-text="formErrors.email"></span>
 	        </div>
 	    </div>
+
+		<div class="form-group" :class="{'has-error': formErrors.phone}">
+			<label class="col-md-4 control-label">手机 <sup class="text-danger">*</sup></label>
+			<div class="col-md-6">
+				<input type="text" class="form-control" v-model="formInputs.phone" autocomplete="off">
+				<span class="help-block" v-show="formErrors.phone" v-text="formErrors.phone"></span>
+			</div>
+		</div>
 
 	    <div class="form-group" :class="{'has-error': formErrors.password}">
 	        <label class="col-md-4 control-label">{{ $l('auth.password') }} <sup class="text-danger">*</sup></label>
@@ -117,17 +125,7 @@
 				this.submiting = true;
 				this.$http.post('/register', this.formInputs).then(res => {
 					this.submiting = false;
-					swal({
-					    title: this.$l('message.signup_success'),
-					    timer: 2000,
-					    text: this.$l('message.wait_redirect'),
-					    type: "info",
-					    closeOnConfirm: false,
-					    showLoaderOnConfirm: true,
-					}, () => {
-						location.href = laroute.route('front::settings.account');
-					    setTimeout(() =>{}, 1000);
-					});
+					location.href = laroute.route('front::register.thank');
 
 				}, (res) => {
 					this.formErrors = res.data;

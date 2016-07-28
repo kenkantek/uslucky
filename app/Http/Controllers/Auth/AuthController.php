@@ -62,9 +62,10 @@ class AuthController extends Controller
         $minimum_old = env('MINIMUM_OLD', 13);
         return Validator::make($data, [
             'first_name' => 'required|max:255',
-            'last_name'  => 'required|max:255',
-            'birthday'   => ['required', 'date', "before:$minimum_old years ago"],
+//            'last_name'  => 'required|max:255',
+            'birthday'   => ['date', "before:$minimum_old years ago"],
             'email'      => 'required|email|max:255|unique:users',
+            'phone'      => 'required|digits_between:10,15',
             'password'   => 'required|confirmed|min:6',
         ], [
             'birthday.before' => trans('auth.minimum_old', ['number' => $minimum_old]),
@@ -82,9 +83,10 @@ class AuthController extends Controller
         $active_code = str_random(30);
         $user        = User::create([
             'first_name'  => $data['first_name'],
-            'last_name'   => $data['last_name'],
-            'birthday'    => $data['birthday'],
+//            'last_name'   => $data['last_name'],
+//            'birthday'    => $data['birthday'],
             'email'       => $data['email'],
+            'phone'       => $data['phone'],
             'password'    => bcrypt($data['password']),
             'active'      => isset($data['id']) ? 1 : 0,
             'active_code' => isset($data['id']) ? null : $active_code,

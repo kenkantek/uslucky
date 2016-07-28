@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'home'            => 'Home',
+    'home'            => '<i class="fa fa-home"></i>',
     'about'           => 'About',
     'game'            => 'Games',
     'winning_number'  => 'Winning Numbers',

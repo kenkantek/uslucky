@@ -8,23 +8,23 @@
 	@if($nyc)
     <section class="nav-nyc tab-category">
 		<div class="container">
-			<div class="tab-header clearfix">
-				@foreach($nyc->childrens as $key => $sub)
-				<a href="{{ route('front::ecommerce.category.show', $sub->id) }}" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">
-					{{ $sub->name }}
-				</a>
-				@endforeach
-				<a href="{{ route('front::game.powerball') }}">
-					{{ trans('nav.powerball') }}
-				</a>
-				<a href="{{ route('front::game.megamillions') }}">
-					{{ trans('nav.megamilions') }}
-				</a>
-				<a href="{{ route('front::ecommerce.category.show', 1) }}">
-					{{ trans('nav.nyc') }}
-					<i class="fa fa-angle-double-right"></i>
-				</a>
-			</div>
+			{{--<div class="tab-header clearfix">--}}
+				{{--@foreach($nyc->childrens as $key => $sub)--}}
+				{{--<a href="{{ route('front::ecommerce.category.show', $sub->id) }}" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">--}}
+					{{--{{ $sub->name }}--}}
+				{{--</a>--}}
+				{{--@endforeach--}}
+				{{--<a href="{{ route('front::game.powerball') }}">--}}
+					{{--{{ trans('nav.powerball') }}--}}
+				{{--</a>--}}
+				{{--<a href="{{ route('front::game.megamillions') }}">--}}
+					{{--{{ trans('nav.megamilions') }}--}}
+				{{--</a>--}}
+				{{--<a href="{{ route('front::ecommerce.category.show', 1) }}">--}}
+					{{--{{ trans('nav.nyc') }}--}}
+					{{--<i class="fa fa-angle-double-right"></i>--}}
+				{{--</a>--}}
+			{{--</div>--}}
 
 			<div class="tab-contents">
 				@foreach($nyc->childrens as $key => $sub)
@@ -56,17 +56,17 @@
     	@if($vagas)
         <section class="nav-vagas tab-category">
     		<div class="container">
-    			<div class="tab-header clearfix">
-    				@foreach($vagas->childrens as $key => $sub)
-    				<a href="{{ route('front::ecommerce.category.show', $sub->id) }}" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">
-    					{{ $sub->name }}
-    				</a>
-    				@endforeach
-    				<a href="{{ route('front::ecommerce.category.show', 2) }}">
-    					{{ trans('nav.vagas') }}
-    					<i class="fa fa-angle-double-right"></i>
-    				</a>
-    			</div>
+    			{{--<div class="tab-header clearfix">--}}
+    				{{--@foreach($vagas->childrens as $key => $sub)--}}
+    				{{--<a href="{{ route('front::ecommerce.category.show', $sub->id) }}" class="@if(!$key) active @endif" data-target="{{ $sub->id }}">--}}
+    					{{--{{ $sub->name }}--}}
+    				{{--</a>--}}
+    				{{--@endforeach--}}
+    				{{--<a href="{{ route('front::ecommerce.category.show', 2) }}">--}}
+    					{{--{{ trans('nav.vagas') }}--}}
+    					{{--<i class="fa fa-angle-double-right"></i>--}}
+    				{{--</a>--}}
+    			{{--</div>--}}
 
     			<div class="tab-contents">
     				@foreach($vagas->childrens as $key => $sub)

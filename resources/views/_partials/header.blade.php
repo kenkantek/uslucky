@@ -88,7 +88,7 @@
   <section class="logo clearfix">
       <div class="container">
         <a href="{{ route('front::home') }}">
-          {!! HTML::image('images/logo.png', env('TITLE'), ['width' => 280]) !!}
+          {!! HTML::image('images/new_logo1.png', env('TITLE'), ['width' => 280]) !!}
         </a>
       </div>
   </section>
@@ -97,8 +97,9 @@
     <div class="container">
         <ul class="list-nav clearfix">
             <li>
-                <a href="{{ route('front::home') }}" class="@if($routeName === 'front::home') active @endif">
-                    {{ trans('menu.home') }}
+                <a style="font-size: 2em;
+    padding: 0px 15px;" href="{{ route('front::home') }}" class="@if($routeName === 'front::home') active @endif">
+                    {!! trans('menu.home') !!}
                 </a>
             </li>
             <li>

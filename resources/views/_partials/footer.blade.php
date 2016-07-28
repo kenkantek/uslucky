@@ -27,24 +27,6 @@
         </a>
     </div>
     <div class="footer">
-        <a href="{{ route('front::home') }}">
-            {{ trans('menu.home') }}
-        </a>
-        <a href="#">
-            {{ trans('footer.payment') }}
-        </a>
-        <a href="#">
-            {{ trans('footer.about') }}
-        </a>
-        <a href="{{ route('front::contact') }}">
-            {{ trans('footer.contact_us') }}
-        </a>
-        <a href="#">
-            {{ trans('footer.faq') }}
-        </a>
-        <a href="#">
-            {{ trans('footer.term') }}
-        </a>
         <a href="{{ trans('footer.powered_by_link') }}" target="_blank">
             {{ trans('footer.powered_by') }}
         </a>

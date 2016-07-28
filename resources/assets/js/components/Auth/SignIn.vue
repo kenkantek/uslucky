@@ -35,9 +35,9 @@
 				<button type="submit" class="link" :disabled="submiting">
 					<i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> {{ $l('auth.signin') }}
 				</button>
-				<a href="auth/facebook" class="link">
-					<i class="fa fa-facebook"></i> {{ $l('auth.signin_fb') }}
-				</a><br>
+				<!--<a href="auth/facebook" class="link">-->
+					<!--<i class="fa fa-facebook"></i> {{ $l('auth.signin_fb') }}-->
+				<!--</a>--><br>
 				<a href="password/reset" class="btn btn-link">{{ $l('auth.forgot_password') }}</a>
 				<br>
 				<a href="register" class="btn btn-link">{{ $l('auth.or_register') }}</a>
@@ -66,19 +66,9 @@
 				this.submiting = true;
 				this.$http.post('/login', this.formInputs).then(res => {
 					this.submiting = false;
-					swal({
-					    title: this.$l('message.signin_success'),
-						timer: 2000,
-					    text: this.$l('message.wait_redirect'),
-					    type: "info",
-					    closeOnConfirm: false,
-					    showLoaderOnConfirm: true,
-					}, () => {
-						const redirect = COMMOM.getQuerystring('redirect');
-						const route = redirect ? redirect : 'front::settings.account';
-						location.href = laroute.route(route);
-						setTimeout(() =>{}, 1000);
-					});
+					const redirect = COMMOM.getQuerystring('redirect');
+					const route = redirect ? redirect : 'front::home';
+					location.href = laroute.route(route);
 
 			}, (res) => {
 					const status = res.status;
