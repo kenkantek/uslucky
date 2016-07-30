@@ -297,6 +297,7 @@ body.home {
                 border: 1px solid #dcdcdc;
                 float: left;
                 margin: 0px 10px 10px;
+                position: relative;
 
 
                 .product-link {
@@ -315,14 +316,28 @@ body.home {
                         font-size: 1.2em;
                     }
                 }
-            }
 
-            .product-description {
-                height: 155px;
-                overflow: hidden;
-                padding:10px;
-                border: 1px solid #e2dede;
-                border-width: 1px 0;
+                .product-description {
+                    //height: 155px;
+                    overflow: hidden;
+                    //padding:10px;
+                    border: 1px solid #e2dede;
+                    border-width: 1px 0;
+                    position: absolute;
+                    width: 100%;
+                    z-index: 99;
+                    top: 0;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.7);
+                    padding: 25px;
+                    color: rgb(170, 170, 170);
+                    visibility: hidden;
+                }
+                &:hover{
+                    .product-description{
+                        visibility: visible;
+                    }
+                }
             }
 
             .product-price {
