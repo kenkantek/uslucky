@@ -1,5 +1,5 @@
-{!! HTML::style('js/libs/FullscreenSlitSlider/css/style.css') !!}
-{!! HTML::style('js/libs/FullscreenSlitSlider/css/custom.css') !!}
+{!! HTML::style('js/libs/FullscreenSlitSlider/css/style.css?version=1') !!}
+{!! HTML::style('js/libs/FullscreenSlitSlider/css/custom.css?version=1') !!}
 
 <div id="slider" class="sl-slider-wrapper">
 
