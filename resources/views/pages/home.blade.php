@@ -38,7 +38,14 @@
 							</p>
 						</a>
 						<div class="product-description">
-							{{ $product->description }}
+							<div style="
+								vertical-align: middle;
+								width: 100%;
+								height: 260px;
+								display: table-cell;
+							">
+								{{ $product->description }}
+							</div>
 						</div>
 						<div class="product-price">
 							<span>$ {{ number_format($product->price) }}</span>
@@ -80,7 +87,9 @@
     							</p>
     						</a>
     						<div class="product-description">
-    							{{ $product->description }}
+    							<div style="width: 100%;height: 260px; display: table-cell; vertical-align: middle">
+									{{ $product->description }}
+								</div>
     						</div>
     						<div class="product-price">
     							<span>$ {{ number_format($product->price) }}</span>

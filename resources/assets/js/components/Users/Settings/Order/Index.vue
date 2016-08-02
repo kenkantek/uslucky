@@ -31,7 +31,7 @@
                                 'label-success': order.status.status == 'purchased' || order.status.status == 'canceled',
                                 'label-danger': order.status.status == 'order placed' || order.status.status == 'pending purchase'
                             }"
-                        >{{order.status.status}}</span>
+                        >{{order.status.status == 'pending purchase' ? '订单处理中' : order.status.status}}</span>
                     </td>
                     <td class="text-center"><a class="link" :href="order.url">{{$l('setting.button_details')}}</a></td>
                 </tr>

@@ -10,7 +10,7 @@
         <a href="#" class="link">
             <header>{{ trans('footer.box_1') }}</header>
             <p>
-                <img src="{{asset('images/contact us.jpg')}}" style="max-width: 100%" alt="">
+                <img src="{{asset('images/security.jpg')}}" style="max-width: 100%" alt="">
             </p>
         </a>
         <a href="#" class="link">
@@ -22,7 +22,7 @@
         <a href="#" class="link">
             <header>{{ trans('footer.box_3') }}</header>
             <p>
-                <img src="{{asset('images/security.jpg')}}" style="max-width: 100%" alt="">
+                <img src="{{asset('images/contact us.jpg')}}" style="max-width: 100%" alt="">
             </p>
         </a>
     </div>
