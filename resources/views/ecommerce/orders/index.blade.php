@@ -38,11 +38,11 @@
                             <td v-text="order.products_count"></td>
                             <td v-text="order.total | currency"></td>
                             <td>
-                                <span class="label" v-text="order.status.status" :class="{
+                                <span class="label" :class="{
                                     'label-success': order.status.status == 'succeeded',
                                     'label-info': order.status.status == 'pending purchase',
                                     'label-danger': order.status.status == 'pendding'
-                                }"></span>
+                                }">@{{order.status.status == 'pending purchase' ? '订单处理中' : (order.status.status == 'pendding' ? '有待' : (order.status.status == 'purchased' ? '已购买' : order.status.status))}}</span>
                             </td>
                             <td class="text-center">
                                 <a class="link" href="/ecommerce/order/@{{ order.id }}">
