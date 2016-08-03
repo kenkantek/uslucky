@@ -7,9 +7,9 @@
             </button>
         </div>
 
-        <div class="choose">
-            <i class="fa fa-plus"></i> {{ $l('play.choose') }} <span v-text="5 - ticket.numbers.length"></span>
-        </div>
+        <!--<div class="choose">-->
+            <!--<i class="fa fa-plus"></i> {{ $l('play.choose') }} <span v-text="5 - ticket.numbers.length"></span>-->
+        <!--</div>-->
         <div class="list-numbers noselect" :data-index="i + 1">
             <span v-for="number in 75" 
                 class="number" 
@@ -19,9 +19,9 @@
             ></span>
         </div>
         <hr>
-        <div class="choose">
-            <i class="fa fa-plus"></i> {{ $l('play.choose') }} <span v-text="ticket.ball ? 0 : 1"></span>
-        </div>
+        <!--<div class="choose">-->
+            <!--<i class="fa fa-plus"></i> {{ $l('play.choose') }} <span v-text="ticket.ball ? 0 : 1"></span>-->
+        <!--</div>-->
         <div class="list-numbers noselect number-ball">
             <span 
             v-for="number in 15" 
@@ -76,7 +76,7 @@
 
             quickPick() {
                 const numbers = _.sampleSize(_.range(1, 69 + 1), 5),
-                        ball = _.random(1, 26);
+                        ball = _.random(1, 15);
 
                 this.ticket.numbers = numbers;
                 this.ticket.ball = ball;

@@ -434,21 +434,27 @@ body.product {
         }
 
         .button-add-cart {
-            margin-top: 30px;
+            //margin-top: 20px;
+
+            .qty{
+                //margin: 0 auto;
+                //margin-bottom: 20px;
+                width: 300px;
+            }
 
             .add2cart {
                 display: block;
-                padding: 20px 50px;
-                background: grey;
+                padding: 10px 20px;
+                background: #f25950;
                 color: #fff;
                 width: 300px;
-                margin: 0 auto;
+                //margin: 0 auto;
                 border-radius: 3px;
                 text-align: center;
                 font-size: 2em;
 
                 &:focus {
-                    text-decoration: none;
+                    text-decoration: none
                 }
             }
         }

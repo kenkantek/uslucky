@@ -28,7 +28,9 @@ class ProductController extends Controller
 
         $product->withName($request->name)
             ->withPrice($request->price)
+            ->withSalePrice($request->sale_price)
             ->withDescription($request->description)
+            ->withOffer($request->offer)
             ->publish();
 
         $thumb = $request->file('thumb');
@@ -70,7 +72,9 @@ class ProductController extends Controller
 
         $product->withName($request->name)
             ->withPrice($request->price)
+            ->withSalePrice($request->sale_price)
             ->withDescription($request->description)
+            ->withOffer($request->offer)
             ->withContent($request->content)
             ->publish();
 

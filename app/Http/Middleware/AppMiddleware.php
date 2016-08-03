@@ -22,6 +22,7 @@ class AppMiddleware
 
         app()->setLocale(session()->get('locale'));
 
+
         return $next($request);
     }
 }

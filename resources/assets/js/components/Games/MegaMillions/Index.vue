@@ -31,7 +31,7 @@
                 <button class="btn btn-danger" 
                 data-toggle="tooltip" 
                 data-placement="top" 
-                title="Clear all lines"
+                title="清除"
                 @click="clearAll"
                 :disabled="statusClearAll"
                 :each-per-ticket="eachPerTicket"
@@ -68,13 +68,13 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    {{ $l('play.per_line') }} ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ eachPerTicket | currency }})
+                                    {{ $l('play.per_line') }} ({{ ticketsActive.length }} 注<!--{{ ticketsActive.length | pluralize 'Line'}}--> X {{ eachPerTicket | currency }})
                                 </td>
                                 <td>{{ priceTickets | currency }}</td>
                                 <td></td>
                             </tr>
                             <tr v-show="extra">
-                                <td>{{ $l('play.extra') }} ({{ ticketsActive.length }} {{ ticketsActive.length | pluralize 'Line'}} X {{ extraPerTicket | currency }})</td>
+                                <td>{{ $l('play.extra') }} ({{ ticketsActive.length }} 注<!--{{ ticketsActive.length | pluralize 'Line'}}--> X {{ extraPerTicket | currency }})</td>
                                 <td>{{ priceExtraTickets | currency }}</td>
                                 <td></td>
                             </tr>

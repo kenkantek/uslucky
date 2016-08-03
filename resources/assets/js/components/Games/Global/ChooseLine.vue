@@ -1,7 +1,7 @@
 <template>
     <div class="choose-lines">
         <a href="#" @click.prevent="chooseLines(line)" v-for="line in lines" :class="{active: line == lineDefault}">
-            {{line}} {{line | pluralize 'Line'}}
+            {{ line }} 注<!--{{line}} {{line | pluralize '注'}}-->
         </a>
     </div>
 </template>

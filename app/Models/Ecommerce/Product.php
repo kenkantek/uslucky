@@ -27,9 +27,19 @@ class Product extends Model
         $this->description = $description;
         return $this;
     }
+    public function withOffer($offer)
+    {
+        $this->offer = $offer;
+        return $this;
+    }
     public function withPrice($price)
     {
         $this->price = $price;
+        return $this;
+    }
+    public function withSalePrice($sale_price)
+    {
+        $this->sale_price = $sale_price;
         return $this;
     }
     public function withContent($content)

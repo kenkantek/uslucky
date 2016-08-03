@@ -30,7 +30,7 @@
                                             <td>
                                                 <a :href="cart.data.id | linkProduct" v-text="cart.data.name">Name</a>
                                             </td>
-                                            <td v-text="cart.data.price | currency">Price</td>
+                                            <td>@{{cart.data.price | currency}}</td>
                                             <td>
                                                 <input width="100" type="number" step="1" min="1" :value="cart.count" @change="updateCountCart(cart.data, $event)">
                                             </td>

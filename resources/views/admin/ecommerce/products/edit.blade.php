@@ -49,6 +49,16 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group" :class="{'has-error': formErrors.sale_price}">
+                                                    <label class="col-md-2 control-label">Cost:
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" v-model="formInputs.sale_price">
+                                                        <span class="help-block"> Leave it blank if this product doesn't have discount </span>
+                                                        <span class="help-block" v-text="formErrors.sale_price" v-show="formErrors.sale_price"></span>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group" :class="{'has-error': formErrors.price}">
                                                     <label class="col-md-2 control-label">Price:
                                                         <span class="required"> * </span>
@@ -79,6 +89,14 @@
                                                     <div class="col-md-10">
                                                         <textarea class="form-control" v-model="formInputs.description"></textarea>
                                                         <span class="help-block" v-text="formErrors.description" v-show="formErrors.description"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Special Offer:
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" v-model="formInputs.offer"></textarea>
                                                     </div>
                                                 </div>
 

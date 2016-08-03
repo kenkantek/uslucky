@@ -47,7 +47,9 @@ class OrderController extends Controller
                 ->withStatus($request->status['status'])
                 ->publish();
 
-            event(new OrderUpdateStatusEvent($order, $this->user));
+            if($request->status['status'] != 'pending purchase') {
+                event(new OrderUpdateStatusEvent($order, $this->user));
+            }
 
             return;
         });

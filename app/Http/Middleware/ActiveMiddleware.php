@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ class ActiveMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->active == 0) {
+        if ((Auth::user() !== null)&&(Auth::user()->active == 0)) {
             return redirect(url('account/thank'));
         }
         return $next($request);

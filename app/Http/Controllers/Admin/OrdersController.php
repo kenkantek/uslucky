@@ -46,8 +46,10 @@ class OrdersController extends Controller
                 // trả tiền lại nếu là cancled
                 $orders->refundOrder();
             }
-
-            event(new UpdateStatusEvent($orders));
+            if($status != 'pending purchase')
+            {
+                event(new UpdateStatusEvent($orders));
+            }
             return $orders;
         });
 

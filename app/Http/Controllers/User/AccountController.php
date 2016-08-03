@@ -17,7 +17,7 @@ class AccountController extends Controller
     {
         parent::__construct();
         $this->middleware('auth', ['except' => ['getThank', 'getVerify']]);
-        $this->middleware('active', ['only' => 'getReSendEmail']);
+        $this->middleware('active', ['except' => 'getReSendEmail']);
     }
 
     public function getAccount()
@@ -101,11 +101,9 @@ class AccountController extends Controller
     public function getReSendEmail()
     {
         if ($this->user->active == 1) {
-
             return redirect()->route('front::settings.account');
 
         } else {
-
             $user = $this->user;
 
             Mail::send('mail.verify', ['event' => $user], function ($message) use ($user) {
