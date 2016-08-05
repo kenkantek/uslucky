@@ -130,3 +130,24 @@ span.label[class *= 'label-'], label.label[class *= 'label-'] {
 .visibility-hidden {
   visibility: hidden;
 }
+
+.new-game{
+  margin-top: 40px;
+  .row{
+    margin-bottom: 40px;
+  }
+  .col-md-5{
+    text-align: center;
+  }
+  .col-md-7{
+    min-height: 174px;
+    .text-game{
+      height: 174px;
+      width: 100%;
+      display: table-cell;
+      vertical-align: middle;
+      color: #0b97c4;
+      font-size: 14pt;
+    }
+  }
+}
