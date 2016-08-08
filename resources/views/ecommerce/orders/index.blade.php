@@ -21,19 +21,19 @@
                     <table v-if="orders.length" class="table table-bordered table-hover trans">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>User name</th>
+                            {{--<th>#</th>--}}
+                            {{--<th>User name</th>--}}
                             <th>{{ trans('setting.date') }}</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>数量</th>
+                            <th>总价</th>
+                            <th>状态</th>
+                            <th>查看</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="order in orders">
-                            <td v-text="order.id"></td>
-                            <td v-text="order.user.fullname"></td>
+                            {{--<td v-text="order.id"></td>--}}
+                            {{--<td v-text="order.user.fullname"></td>--}}
                             <td v-text="order.created_at"></td>
                             <td v-text="order.products_count"></td>
                             <td v-text="order.total | currency"></td>

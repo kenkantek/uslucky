@@ -33,7 +33,7 @@
 
                             <td>{{ order.id }}</td>
 
-                            <td> 
+                            <td>
                                 <a href="javascript:;" class="primary-link">{{ order.user.fullname }}</a>
                             </td>
 

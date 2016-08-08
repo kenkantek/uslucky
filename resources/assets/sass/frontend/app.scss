@@ -193,7 +193,7 @@ main {
 
     .links {
         @include flex-center(true, true);
-        
+        background-color: grey;
         padding: 30px 0px;
         box-shadow: 0 -1px 0 rgba(0,0,0,.15) inset;
         border-bottom: 1px solid rgba(255,255,255,.05);

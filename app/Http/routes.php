@@ -13,8 +13,25 @@
 
 $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($router){
 	$router->auth();
-
-	$router->get('token', function () {
+	$router->get('terms', [
+		'as'   => 'terms.get',
+		'uses' => function (){
+			return view('pages.blank');
+		},
+	]);
+	$router->get('fqa', [
+		'as'   => 'fqa.get',
+		'uses' => function (){
+			return view('pages.blank');
+		},
+	]);
+	$router->get('payment-instructions', [
+		'as'   => 'payin.get',
+		'uses' => function (){
+			return view('pages.blank');
+		},
+	]);
+	$router->get('token', function (){
 		return csrf_token();
 	});
 

@@ -55,6 +55,7 @@ class Notification extends Model
 
     public function getCreatedAtAttribute($date)
     {
+        Carbon::setLocale('zh');
         return Carbon::parse($date)->diffForHumans();
     }
 

@@ -27,13 +27,13 @@
         </a>
     </div>
     <div class="footer">
-	<a href="#" target="_blank">
+	<a href="{{route('front::terms.get')}}" target="_blank">
             {{ trans('footer.copyright_1') }}
         </a>|
-	<a href="#" target="_blank">
+	<a href="{{route('front::fqa.get')}}" target="_blank">
             {{ trans('footer.copyright_2') }}
         </a>|
-	<a href="#" target="_blank">
+	<a href="{{route('front::payin.get')}}" target="_blank">
             {{ trans('footer.copyright_3') }}
         </a>|
         <a href="{{ trans('footer.powered_by_link') }}" target="_blank">

@@ -6,7 +6,6 @@
         <table class="table table-bordered table-hover trans" v-if="orders.length" style="margin-bottom: 0px">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>{{$l('setting.game')}}</th>
                     <th>{{$l('setting.ticket')}}</th>
                     <th>{{$l('setting.price')}}</th>
@@ -18,8 +17,7 @@
             </thead>
             <tbody>
                 <tr v-for="order in orders">
-                    <td>{{order.id}}</td>
-                    <td>{{order.game.name}}</td>
+                    <td>{{order.game.name == 'Mega Millions' ? '百万大博彩' : '强力球'}}</td>
                     <td>{{order.ticket_total}}</td>
                     <td>{{order.price | currency}}</td>
                     <td>{{order.created_at}}</td>

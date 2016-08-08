@@ -2,8 +2,8 @@
 $text-color: #666;
 // $body-bg: #dc5e61;
 $headings-font-family: 'Roboto', sans-serif;
-$primary-color: #fb7e04;
-$primary-bg-color: #FB7E04;//D9534F
+$primary-color: #9b231c;
+$primary-bg-color: #9b231c;//D9534F
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -148,6 +148,9 @@ span.label[class *= 'label-'], label.label[class *= 'label-'] {
       vertical-align: middle;
       color: #0b97c4;
       font-size: 14pt;
+      ul{
+        list-style-type: disc;
+      }
     }
   }
 }

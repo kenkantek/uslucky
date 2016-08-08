@@ -16,11 +16,11 @@
             <input type="text" class="form-control" autocomplete="off" v-model="user.first_name">
             <span class="help-block" v-show="formErrors.first_name" v-text="formErrors.first_name"></span>
         </div>
-        <div class="form-group col-md-4" :class="{'has-error': formErrors.last_name}">
-            <label>{{$l('setting.last_name')}}: <sup class="text-danger">*</sup></label>
-            <input type="text" class="form-control" autocomplete="off" v-model="user.last_name">
-            <span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>
-        </div>
+        <!--<div class="form-group col-md-4" :class="{'has-error': formErrors.last_name}">-->
+            <!--<label>{{$l('setting.last_name')}}: <sup class="text-danger">*</sup></label>-->
+            <!--<input type="text" class="form-control" autocomplete="off" v-model="user.last_name">-->
+            <!--<span class="help-block" v-show="formErrors.last_name" v-text="formErrors.last_name"></span>-->
+        <!--</div>-->
         <div class="form-group col-md-4" :class="{'has-error': formErrors.birthday}">
             <label>{{$l('setting.birthday')}}: <sup class="text-danger">*</sup></label>
             <datepicker :value.sync="user.birthday" format="YYYY-MM-DD"></datepicker>

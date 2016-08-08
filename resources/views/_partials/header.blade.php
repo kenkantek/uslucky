@@ -25,30 +25,29 @@
                            </div>
                            <ul class="dropdown-menu">
                                <li>
+                                   <a href="{{ route('front::payment.history') }}">{!! trans('setting.menu_trans') !!} <i class="fa fa-history fa-lg pull-right"></i></a>
+                               </li>
+                               <li>
+                                   <a href="{{ route('front::ecommerce.order') }}">
+                                       {!! trans('setting.menu_order_product') !!} <i class="fa fa-lg fa-cart-plus pull-right"></i>
+                                   </a>
+                               </li>
+                               <li>
                                    <a href="{{ route('front::orders.index') }}">
-                                       <i class="fa fa-shopping-cart"></i>
-                                       {{ trans('menu.order') }}
+                                       {!! trans('setting.menu_order') !!} <i class="fa fa-lg fa-shopping-cart pull-right"></i>
                                    </a>
                                </li>
                                <li>
-                                   <a href="{{ route('front::settings.notifications') }}">
-                                       <i class="fa fa-envelope"></i> {{ trans('menu.notification') }}
-                                       <strong class="number-notify">
-                                           {{ $auth->notification_not_read }}
-                                       </strong>
-                                   </a>
+                                   <a href="{{ route('front::settings.winning') }}">{!! trans('setting.menu_winning') !!} <i class="fa fa-trophy fa-lg pull-right"></i></a>
                                </li>
                                <li>
-                                   <a href="{{ route('front::settings.account') }}">
-                                       <i class="fa fa-cog"></i>
-                                       {{ trans('menu.account_setting') }}
-                                   </a>
+                                   <a href="{{ route('front::settings.notifications') }}">{!! trans('setting.menu_notic') !!} <span class="badge pull-right"> {{ $auth->notification_not_read }} </span></a>
                                </li>
                                <li>
-                                    <a href="{{ url('logout') }}">
-                                        <i class="fa fa-sign-out"></i>
-                                        {{ trans('menu.logout') }}
-                                    </a>
+                                   <a href="{{ route('front::settings.account') }}">{!! trans('setting.menu_account_setting') !!} <i class="fa fa-cog fa-lg pull-right"></i></a>
+                               </li>
+                               <li>
+                                   <a href="/logout">{!! trans('setting.menu_sign_out') !!} <i class="fa fa-sign-out fa-lg pull-right"></i></a>
                                </li>
                            </ul>
                        </li>

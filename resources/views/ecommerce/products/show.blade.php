@@ -43,8 +43,7 @@
 	        	<div class="col-xs-12 col-md-5">
 	        		<div class="price">
 	        			<p>
-	        				<span>Price: </span>
-	        				<strong>${{ number_format($product->price) }}</strong>
+	        				<strong>${{ number_format($product->price) }}</strong><br>
 							@if(($product->sale_price != null) && ($product->sale_price > 0))
 								<strike>${{number_format($product->sale_price)}}</strike>
 							@endif
@@ -54,15 +53,17 @@
 	        		<div class="button-add-cart">
 	        			<item-product inline-template product="{{ collect($product)->merge(['content' => '']) }}">
 							<div class="form-group col-md-12">
-								<label>QTY: </label>
-
-
-								<input type="number" step="1" min="1" @change="updateCountCart(qty, $event)" class="form-control qty" v-model="qty" required="required">
+								<label>数量: </label>
+								<select @change="updateCountCart(qty, $event)" v-model="qty" class="form-control">
+								@for($i =1; $i <= 15; ++$i)
+								<option value="{{$i}}">{{$i}}</option>
+								@endfor
+								</select>
 							</div>
 							@if($product->offer)
 							<div class="col-md-12">
 								<div style="width: 300px; margin-bottom: 10px; text-align: justify">
-									<h4>Special Offer:</h4>
+									<h4>优惠:</h4>
 									{{$product->offer}}
 								</div>
 							</div>
