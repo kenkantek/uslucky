@@ -34,7 +34,7 @@
 						<a class="product-link" href="{{ route('front::ecommerce.product.show', $product->id) }}">
 							<img src="{{ $product->thumb }}" height="315" alt="{{ $product->name }}">
 							<p class="text-nowrap">
-								{{ $product->name }}
+								{{$product->name}}
 							</p>
 						</a>
 						<div class="product-description">
