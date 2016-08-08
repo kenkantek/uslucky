@@ -33,9 +33,12 @@
 					<article class="item-product">
 						<a class="product-link" href="{{ route('front::ecommerce.product.show', $product->id) }}">
 							<img src="{{ $product->thumb }}" height="315" alt="{{ $product->name }}">
-							<p class="text-nowrap">
+							<p class="text-nowrap pull-left" style="max-width: 250px">
 								{{$product->name}}
 							</p>
+							<div class="product-price pull-right">
+								<span>$ {{ number_format($product->price) }}</span>
+							</div>
 						</a>
 						<div class="product-description">
 							<div style="
@@ -46,9 +49,6 @@
 							">
 								{{ $product->description }}
 							</div>
-						</div>
-						<div class="product-price">
-							<span>$ {{ number_format($product->price) }}</span>
 						</div>
 					</article>
 					@endforeach
