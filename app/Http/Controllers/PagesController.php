@@ -35,7 +35,7 @@ class PagesController extends Controller
             ->get();
 
         $nyc = collect($categories)->first(function ($key, $item) {
-            return $item->name == 'Broadway shows-百老汇';
+            return $item->id == 3;
         });
 
         $vagas = collect($categories)->first(function ($key, $item) {
