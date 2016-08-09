@@ -43,9 +43,9 @@
 	        	<div class="col-xs-12 col-md-5">
 	        		<div class="price">
 	        			<p>
-	        				<strong>${{ number_format($product->price) }}</strong><br>
+	        				<strong>${{ number_format($product->price,2) }}</strong><br>
 							@if(($product->sale_price != null) && ($product->sale_price > 0))
-								<strike>${{number_format($product->sale_price)}}</strike>
+								<strike>${{number_format($product->sale_price,2)}}</strike>
 							@endif
 	        			</p>
 	        		</div>

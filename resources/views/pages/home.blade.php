@@ -36,7 +36,7 @@
 								{{$product->name}}
 							</p>
 							<div class="product-price pull-right">
-								<span>$ {{ number_format($product->price) }}</span>
+								<span>$ {{ number_format($product->price,2) }}</span>
 							</div>
 						</a>
 						<div class="product-description">
@@ -83,7 +83,7 @@
     								{{ $product->name }}
     							</p>
 								<div class="product-price pull-right">
-									<span>$ {{ number_format($product->price) }}</span>
+									<span>$ {{ number_format($product->price,2) }}</span>
 								</div>
     						</a>
     						<div class="product-description">
