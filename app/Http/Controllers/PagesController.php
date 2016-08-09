@@ -35,14 +35,14 @@ class PagesController extends Controller
             ->get();
 
         $nyc = collect($categories)->first(function ($key, $item) {
-            return $item->name == 'NYC';
+            return $item->name == 'Broadway shows-百老汇';
         });
 
         $vagas = collect($categories)->first(function ($key, $item) {
             return $item->name == 'Vagas';
         });
 
-        return view('pages.home', compact('nyc', 'vagas'));
+        return view('pages.home', compact('nyc', 'vagas','categories'));
     }
 
     public function getAbout()
