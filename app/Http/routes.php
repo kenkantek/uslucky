@@ -363,11 +363,20 @@ $router->group([
 				'as'   => 'api.game.discount.add',
 				'uses' => 'ManageGameController@addDiscount',
 			]);
+			
+			$router->get('api-promotion',[
+				'as' => 'api.promotion',
+				'uses' => 'PromotionController@apiPromotion'
+			]);
 
 		}); //END API
 
 		$router->resource('contact', 'ContactController', [
 			'only' => ['index', 'show', 'update'],
+		]);
+
+		$router->resource('promotion', 'PromotionController', [
+			'only' => ['index', 'update'],
 		]);
 
 		$router->resource('users/winners', 'WinnerController', [

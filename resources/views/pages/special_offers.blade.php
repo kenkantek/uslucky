@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container">
-        Content page ...
+        <h1>{{$offer->name}}</h1>
+        {!! $offer->contents !!}
     </div>
 @stop

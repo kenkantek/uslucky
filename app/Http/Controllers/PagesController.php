@@ -6,6 +6,7 @@ use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Models\Ecommerce\Category;
 use App\Models\Game;
+use App\Models\Promotion;
 use JavaScript;
 
 class PagesController extends Controller
@@ -62,7 +63,8 @@ class PagesController extends Controller
 
     public function getSpecialOffers()
     {
-        return view('pages.special_offers');
+        $offer = Promotion::first();
+        return view('pages.special_offers',compact('offer'));
     }
 
     public function getTrustSecurity()

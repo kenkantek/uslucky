@@ -56,9 +56,12 @@ import Discount from './components/Discount/Discount.vue';
 import DiscountCreate from './components/Discount/DicountCreate.vue';
 import DiscountEdit from './components/Discount/DicountEdit.vue';
 
+import Promotion from './components/Promotion/Index.vue';
+
 new Vue({
     el: 'body',
     components: {
+        Promotion,
         SignIn,
         Contacts,
         Order,

@@ -206,6 +206,15 @@
                     <span class="arrow"></span>
                 </a>
             </li>
+
+            <li class="nav-item  @if(($routeName == 'admin.promotion.index') || ($routeName == 'admin.promotion.show')) active open @endif">
+                <a href="{{ route('admin.promotion.index') }}" class="nav-link nav-toggle">
+                    <i class="icon-puzzle"></i>
+                    <span class="title">Promotion Manage</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

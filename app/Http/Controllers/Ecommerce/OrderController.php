@@ -39,7 +39,10 @@ class OrderController extends Controller
                 ->withTotal($amount)
                 ->withDescription($request->description)
                 ->publish();
-
+            
+            //Add $2 if amount > $10
+            //HERE
+            
             // add status
             $order->updateOrNewStatus()
                 ->withStatus('pendding')
