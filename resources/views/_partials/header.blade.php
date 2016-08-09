@@ -108,21 +108,21 @@
             </li>
             <li>
                 <a href="{{ route('front::ecommerce.category.show', 4) }}">
-                    {{ trans('nav.museum') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('front::ecommerce.category.show', 5) }}">
-                    {{ trans('nav.concert') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('front::ecommerce.category.show', 5) }}">
                     超值电影票
                 </a>
             </li>
             <li>
-                <a href="{{ route('front::ecommerce.category.show', 5) }}">
+                <a href="{{ route('front::ecommerce.category.show', 12) }}">
+                    博物馆
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('front::ecommerce.category.show', 13) }}">
+                    演唱会
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('front::ecommerce.category.show', 14) }}">
                     球赛
                 </a>
             </li>

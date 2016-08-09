@@ -39,7 +39,7 @@ class PagesController extends Controller
         });
 
         $vagas = collect($categories)->first(function ($key, $item) {
-            return $item->name == 'Vagas';
+            return $item->id == 2;
         });
 
         return view('pages.home', compact('nyc', 'vagas','categories'));

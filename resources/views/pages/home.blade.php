@@ -27,9 +27,8 @@
 			{{--</div>--}}
 
 			<div class="tab-contents">
-				@foreach($nyc->childrens as $key => $sub)
-				<div class="@if(!$key) active @endif clearfix" data-source="{{ $sub->id }}">
-					@foreach($sub->products as $product)
+				<div class="active" data-source="1">
+					@foreach($nyc->products as $product)
 					<article class="item-product">
 						<a class="product-link" href="{{ route('front::ecommerce.product.show', $product->id) }}">
 							<img src="{{ $product->thumb }}" height="315" alt="{{ $product->name }}">
@@ -53,7 +52,6 @@
 					</article>
 					@endforeach
 				</div>
-				@endforeach
 			</div>
 
 		</div>
@@ -76,9 +74,8 @@
     			{{--</div>--}}
 
     			<div class="tab-contents">
-    				@foreach($vagas->childrens as $key => $sub)
-    				<div class="@if(!$key) active @endif clearfix" data-source="{{ $sub->id }}">
-    					@foreach($sub->products as $product)
+    				<div class="active" data-source="2">
+    					@foreach($vagas->products as $product)
     					<article class="item-product">
     						<a class="product-link" href="{{ route('front::ecommerce.product.show', $product->id) }}">
     							<img src="{{ $product->thumb }}" height="315" alt="{{ $product->name }}">
@@ -97,7 +94,6 @@
     					</article>
     					@endforeach
     				</div>
-    				@endforeach
     			</div>
 
     		</div>
