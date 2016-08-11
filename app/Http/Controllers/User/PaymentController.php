@@ -9,6 +9,7 @@ use App\Models\Amount;
 use App\Models\Payment;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Support\Facades\Auth;
+use Javascript;
 
 class PaymentController extends Controller
 {
@@ -87,6 +88,21 @@ class PaymentController extends Controller
 
     public function getHistory()
     {
+        JavaScript::put([
+            '_stripe'         => [
+                'key' => config('services.stripe.key'),
+            ],
+            '_payments'       => $this->user->payments,
+            '_amount'         => $this->user->balance,
+            '_minimum_amount' => env('MINIMUM_AMOUNT'),
+            '_stripe'         => [
+                'key' => config('services.stripe.key'),
+            ],
+            '_date'           => [
+                'month' => generateMonth(),
+                'year'  => generateYear(15),
+            ],
+        ]);
         $amount = Amount::whereUserId(Auth::user()->id)->first();
         if (!empty($amount)) {
             $amount = $amount->amount;

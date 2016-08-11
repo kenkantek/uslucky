@@ -18,9 +18,11 @@
 		        	<td class="c1">{{ pb.gameName }}</td>
 		            <td>
 		            	<span v-if="checkWaiting(pb)" class="c1"> {{$l('winning.wait')}}</span>
-		                <ul v-else v-for="number in pb.results[0].primary" class="list">
-		                    <li v-if="$index < 5" v-text="number"></li>
-		                    <li v-if="$index == 6" v-text="number.slice(-2)" class="powerball"></li>
+		                <ul v-else class="list">
+		                    <li v-for="number in pb.results[0].primary">
+                                <div v-if="$index < 5">{{number}}</div>
+                                <div v-if="$index == 6" class="powerball">{{number.slice(-2)}}</div>
+                            </li>
 		                </ul>
 		            </td>
 		            <td>

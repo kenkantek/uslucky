@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Game;
 use Javascript;
 
 class SettingsController extends Controller
@@ -41,19 +42,7 @@ class SettingsController extends Controller
     public function getWinning()
     {
         JavaScript::put([
-            '_stripe'         => [
-                'key' => config('services.stripe.key'),
-            ],
-            '_payments'       => $this->user->payments,
-            '_amount'         => $this->user->balance,
-            '_minimum_amount' => env('MINIMUM_AMOUNT'),
-            '_stripe'         => [
-                'key' => config('services.stripe.key'),
-            ],
-            '_date'           => [
-                'month' => generateMonth(),
-                'year'  => generateYear(15),
-            ],
+            '_games' => Game::all(),
         ]);
         return view('user.settings.winning');
     }

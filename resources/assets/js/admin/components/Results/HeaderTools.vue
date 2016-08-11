@@ -18,7 +18,8 @@
                     </select>
                 </div>
                 <div class="col-xs-12 col-md-3">
-                    <button class="btn btn-sm green table-group-action-submit move-top--25" @click="onSearch">
+                    <br>
+                    <button style="margin-top:8px" class="btn btn-sm green table-group-action-submit move-top--25" @click="onSearch">
                         <i class="fa fa-check"></i> {{$l('winning.search')}}
                     </button>
                 </div>
