@@ -20,6 +20,13 @@ class Amount extends Model
         $this->amount = $amount;
         return $this;
     }
+    
+    public function withCredit($credit)
+    {
+        $this->credit = $credit;
+        return $this;
+    }
+    
     public function publish()
     {
         $this->save();

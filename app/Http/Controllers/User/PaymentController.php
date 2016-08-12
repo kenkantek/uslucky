@@ -119,6 +119,7 @@ class PaymentController extends Controller
     {
         return response()->json([
             'amount'   => $this->user->balance,
+            'credit'   => $this->user->credit,
             'payments' => $this->user->payments,
         ]);
     }

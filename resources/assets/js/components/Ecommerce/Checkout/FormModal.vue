@@ -62,6 +62,15 @@
                               </label>
                             </div>
                             <div class="radio">
+                                <label>
+                                    <input type="radio" v-model="method" value="4">
+                                    By credit <strong>({{ credit | currency }})</strong>.
+                                <span class="text-danger" v-show="method == 4 && credit < total">
+                                    {{ $l('play.modal_afford') }}
+                                </span>
+                                </label>
+                            </div>
+                            <div class="radio">
                               <label>
                                 <input type="radio" v-model="method" value="2">
                                   {{ $l('play.modal_credit') }}
@@ -120,6 +129,7 @@
             return {
                 message: '',
                 amount: 0,
+                credit: 0,
                 payments: [],
                 method: 0,
                 payment: null,
@@ -141,7 +151,7 @@
 
         computed: {
             readySubmit() {
-                if((this.method == 2) ||(this.method == 3)|| (this.method == 1 && this.amount >= this.total)) {
+                if((this.method == 2) ||(this.method == 3)|| (this.method == 1 && this.amount >= this.total)||(this.method == 4 && this.credit >= this.total)) {
                     return true;
                 }
 

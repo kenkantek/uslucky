@@ -42,16 +42,16 @@ class OrderController extends Controller
                 ->withTotal($amount)
                 ->withDescription($request->description)
                 ->publish();
-            
+
             //Add $2 if amount > $10
-            $min_pro = Promotion::first();
-            if($min_pro->status == 1)
-            {
-                if($amount >= $min_pro->amount)
-                {
-                    $credit = Amount::find(\Auth::user()->id);
-                    $credit->credit = $credit->credit+2;
-                    $credit->save();
+            if($request->method != 4) {
+                $min_pro = Promotion::first();
+                if ($min_pro->status==1) {
+                    if ($amount >= $min_pro->amount) {
+                        $credit         = Amount::find(\Auth::user()->id);
+                        $credit->credit = $credit->credit + 2;
+                        $credit->save();
+                    }
                 }
             }
 
@@ -73,12 +73,17 @@ class OrderController extends Controller
                 //from balance
                 $message = $this->payWithBalance($user, $amount, $balance, $amount_total, $request->description);
 
+            } elseif ($request->method == 4){
+//              //Credit gift
+                $credit       = $user->credit - $amount;
+                $amount_total = $balance;
+                $message = $this->payWithCredit($user, $amount, $balance, $amount_total, $credit, $request->description);
             } else {
                 //Credit card
                 $message = $this->payWithCreditCard($user, $amount, $balance, $amount_total, $request);
             }
 
-            event(new OrderCreateStatusEvent($order, $user));
+//            event(new OrderCreateStatusEvent($order, $user));
 
             return $message ? response(['message' => 'Success']) : response(['message' => $message], 401);
         });
@@ -103,6 +108,33 @@ class OrderController extends Controller
 
             $amount = $user->updateAmount($user->amount)
                 ->withAmount($amount_total)
+                ->publish();
+
+            return true;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    private function payWithCredit($user, $amount, $balance, $amount_total,$credit, $description)
+    {
+        try {
+            $transaction = $user->newTransaction()
+                ->withType(2)
+                ->withAmount($amount)
+                ->withAmountPrev($balance)
+                ->withAmountTotal($amount_total)
+                ->withDescription($description)
+                ->publish();
+
+            // Transaction add status
+            $status = $transaction->updateOrNewStatus()
+                ->withStatus('succeeded')
+                ->publish();
+
+            $amount = $user->updateCredit($user->amount)
+                ->withCredit($credit)
                 ->publish();
 
             return true;

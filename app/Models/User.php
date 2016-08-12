@@ -111,6 +111,15 @@ class User extends Authenticatable
         return $amount;
     }
 
+    public function updateCredit($credit = null)
+    {
+        if (!$credit instanceof Amount) {
+            $credit = new Amount;
+            $credit->user()->associate($this);
+        }
+        return $credit;
+    }
+
     public function newOrder()
     {
         $order = new Order;

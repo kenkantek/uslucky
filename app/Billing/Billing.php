@@ -3,6 +3,7 @@ namespace App\Billing;
 
 use App\Charging\ChargeBalance;
 use App\Charging\ChargeCredit;
+use App\Charging\ChargeGift;
 use App\Events\Order\UserPurchasedTicket;
 use App\Models\Discount;
 use App\Models\Game;
@@ -116,7 +117,7 @@ class Billing implements BillingInterface
 
     public function charge()
     {
-        $charge = $this->method == 1 ? new ChargeBalance : new ChargeCredit;
+        $charge = $this->method == 1 ? new ChargeBalance : ($this->method == 4 ? new ChargeGift :new ChargeCredit);
         $charge = $charge->charge($this);
 
         return $charge;

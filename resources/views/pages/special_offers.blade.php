@@ -4,7 +4,11 @@
 
 @section('content')
     <div class="container">
-        <h1>{{$offer->name}}</h1>
-        {!! $offer->contents !!}
+        @if($offer->status == 1)
+            <h1>{{$offer->name}}</h1>
+            {!! $offer->contents !!}
+            @else
+            <h1>Not have offer today!</h1>
+        @endif
     </div>
 @stop
