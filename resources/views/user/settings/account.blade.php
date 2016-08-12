@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2> Update Your Account </h2>
+                <h2> 账户更新 </h2>
                 <hr>
                 <setting-account></setting-account>
             </div>

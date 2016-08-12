@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Events\Ecommerce\OrderCreateStatusEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Amount;
 use App\Models\Ecommerce\Product;
 use App\Models\Order;
+use App\Models\Promotion;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -41,6 +44,17 @@ class OrderController extends Controller
                 ->publish();
             
             //Add $2 if amount > $10
+            $min_pro = Promotion::first();
+            if($min_pro->status == 1)
+            {
+                if($amount >= $min_pro->amount)
+                {
+                    $credit = Amount::find(\Auth::user()->id);
+                    $credit->credit = $credit->credit+2;
+                    $credit->save();
+                }
+            }
+
             //HERE
             
             // add status

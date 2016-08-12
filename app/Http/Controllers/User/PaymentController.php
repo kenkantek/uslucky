@@ -94,6 +94,7 @@ class PaymentController extends Controller
             ],
             '_payments'       => $this->user->payments,
             '_amount'         => $this->user->balance,
+            '_credit'         => $this->user->credit,
             '_minimum_amount' => env('MINIMUM_AMOUNT'),
             '_stripe'         => [
                 'key' => config('services.stripe.key'),

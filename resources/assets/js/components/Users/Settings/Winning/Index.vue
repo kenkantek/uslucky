@@ -1,7 +1,15 @@
 <template>
     {{$l('setting.current')}}
-	<h3>US <span>{{ amount | currency }}</span> </h3>
-    {{$l('setting.inaccount')}}
+	<div class="row">
+		<div class="col-md-6">
+			<h3>US <span>{{ amount | currency }}</span> </h3>
+			{{$l('setting.inaccount')}}
+		</div>
+		<div class="col-md-6">
+			<h3>US <span>{{ credit | currency }}</span> </h3>
+			在您的账户信用
+		</div>
+	</div>
 	<hr>
 	<slot name="notice-minimum"></slot>
 	<hr>
@@ -30,6 +38,7 @@
 		data() {
 			return {
                 amount: _amount,
+                credit: _credit,
                 minimum: _minimum_amount,
 				payments: [],
 				statusForm: {

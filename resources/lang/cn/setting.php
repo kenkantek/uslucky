@@ -29,7 +29,7 @@ return [
     'modal_confirm'         => '再次确认输入的新密码',
     'modal_button_close'    => '关闭',
     'modal_button_save'     => '保存更改',
-    'title_winning'         => '取出奖金',
+    'title_winning'         => '中奖查询',
     'current'               => '你目前有',
     'inaccount'             => '在你的账户余款里',
     'minimum'               => '*最低取款金额是',

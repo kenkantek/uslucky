@@ -4,6 +4,8 @@ namespace App\Charging;
 use App\Billing\Billing;
 use App\Charging\Statusable;
 use App\Charging\Transactionable;
+use App\Models\Amount;
+use App\Models\Promotion;
 use App\Models\User;
 use Exception;
 
@@ -20,6 +22,16 @@ class ChargeBalance implements ChargeInterface
         $amount_total = $balance - $amount;
 
         try {
+            $min_pro = Promotion::first();
+            if($min_pro->status == 1)
+            {
+                if($amount >= $min_pro->amount)
+                {
+                    $credit = Amount::find(\Auth::user()->id);
+                    $credit->credit = $credit->credit+2;
+                    $credit->save();
+                }
+            }
 
             $transaction = $this->makeTransaction($order, $amount, $balance, $amount_total, $billing->description);
 

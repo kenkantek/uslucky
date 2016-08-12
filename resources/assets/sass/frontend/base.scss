@@ -150,6 +150,9 @@ span.label[class *= 'label-'], label.label[class *= 'label-'] {
       font-size: 14pt;
       ul{
         list-style-type: disc;
+        li{
+          margin-bottom: 15px;
+        }
       }
     }
   }

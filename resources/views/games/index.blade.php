@@ -12,7 +12,7 @@
                    <h2><a href="{{route('front::game.powerball')}}">
                    	{{ trans('nav.powerball') }}
                    </a></h2>
-                   <p>{{ trans('game.des_powerball') }}</p>
+                   <p style="color: #0b97c4;font-size: 14pt;">{{ trans('game.des_powerball') }}</p>
                    <a href="{{ route('front::game.powerball') }}" class="btn btn-danger">{{trans('game.button')}}</a>
                  </div>
 			</div>
@@ -24,7 +24,7 @@
                    <h2><a href="#">
 						{{ trans('nav.megamilions') }}
                    </a></h2>
-                   <p>{{ trans('game.des_mega') }}</p>
+                   <p style="color: #0b97c4;font-size: 14pt; height: 156px">{{ trans('game.des_mega') }}</p>
                    <a href="{{ route('front::game.megamillions') }}" class="btn btn-danger">
                    {{ trans('game.button') }}
                    </a>
@@ -32,9 +32,9 @@
 			</div>
 		</div>
 
-		<div class="col-md-8 col-md-offset-2 new-game">
+		<div class="col-md-12 new-game">
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-4">
 					{!! HTML::image('images/1.png','simple',['width' => 200]) !!}
 				</div>
 				<div class="col-md-7">
@@ -50,7 +50,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-4">
 					{!! HTML::image('images/2.png','simple',['width' => 200]) !!}
 				</div>
 				<div class="col-md-7">
@@ -65,7 +65,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-4">
 					{!! HTML::image('images/3.png','simple',['width' => 200]) !!}
 				</div>
 				<div class="col-md-7">

@@ -11,16 +11,16 @@
                         <div class="panel panel-default">
                         	<!-- Default panel contents -->
                             <div class="panel-heading">
-                                <h3 class="panel-title">All items in your cart</h3>
+                                <h3 class="panel-title">购物车</h3>
                             </div>
 
                                 <table class="table table-cart table-bordered">
                                     <thead>
-                                        <th colspan="2">Product</th>
-                                        <th>Price</th>
-                                        <th>Qty</th>
-                                        <th>Total</th>
-                                        <th>Action</th>
+                                        <th colspan="2">商品</th>
+                                        <th>商品金额</th>
+                                        <th>数量</th>
+                                        <th>总计</th>
+                                        <th>删除</th>
                                     </thead>
                                     <tbody>
                                         <tr v-for="cart in carts">
@@ -42,7 +42,7 @@
                                             </td>
                                         </tr>
                                         <tr v-if="!carts.length">
-                                            <td colspan="6">Cart empty</td>
+                                            <td colspan="6">购物车中尚无商品</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -54,10 +54,10 @@
                     <div class="col-md-3">
                         <div class="panel panel-info">
                         	  <div class="panel-body">
-                        			<span class="pull-left">Sum:</span>
-                                    <span class="pull-right" v-text="total | currency"></span>
-                                    <hr>
-                                    <span class="pull-left">Total:</span>
+                        			{{--<span class="pull-left">Sum:</span>--}}
+                                    {{--<span class="pull-right" v-text="total | currency"></span>--}}
+                                    {{--<hr>--}}
+                                    <span class="pull-left">总计:</span>
                                     <span class="pull-right" class="price" v-text="total | currency"></span>
                         	  </div>
                         </div>
@@ -72,7 +72,7 @@
                                     type="button"
                                     @click.prevent="openModal"
                                 >
-                                    Check Out
+                                    购买
                                 </button>
                             </div>
                         </div>

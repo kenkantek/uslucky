@@ -15,7 +15,7 @@
 		            <th>{{$l('winning.jackpot')}}</th>
 		        </tr>
 		        <tr v-for="pb in data.draws">
-		        	<td class="c1">{{ pb.gameName }}</td>
+		        	<td class="c1">{{ pb.gameName == 'Mega Millions' ? '百万大博彩' : '强力球' }}</td>
 		            <td>
 		            	<span v-if="checkWaiting(pb)" class="c1"> {{$l('winning.wait')}}</span>
 		                <ul v-else class="list">

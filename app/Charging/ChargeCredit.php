@@ -4,6 +4,8 @@ namespace App\Charging;
 use App\Billing\Billing;
 use App\Charging\Statusable;
 use App\Charging\Transactionable;
+use App\Models\Amount;
+use App\Models\Promotion;
 use App\Models\User;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Exception;
@@ -21,6 +23,16 @@ class ChargeCredit implements ChargeInterface
         $amount_total = $balance;
 
         try {
+            $min_pro = Promotion::first();
+            if($min_pro->status == 1)
+            {
+                if($amount >= $min_pro->amount)
+                {
+                    $credit = Amount::find(\Auth::user()->id);
+                    $credit->credit = $credit->credit+2;
+                    $credit->save();
+                }
+            }
             //Charge Stripe
             $charge = Stripe::charges()->create([
                 'source'        => $billing->source,

@@ -14,7 +14,7 @@
                 <div class="col-xs-12 col-md-2">
                     <label>{{$l('winning.game')}}:</label>
                     <select class="form-control" v-model="game">
-                        <option v-for="game in games" :value="game.id" v-text="game.name"></option>
+                        <option v-for="game in games" :value="game.id" v-text="game.name == 'Mega Millions' ? '百万大博彩' : '强力球'"></option>
                     </select>
                 </div>
                 <div class="col-xs-12 col-md-3">
