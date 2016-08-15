@@ -13,7 +13,7 @@ class AddCreditToAmountsTable extends Migration
     public function up()
     {
         Schema::table('amounts', function (Blueprint $table) {
-            $table->decimal('credit')->nullable();
+            $table->decimal('credit')->default(0);
         });
     }
 
