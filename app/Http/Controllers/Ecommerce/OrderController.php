@@ -48,7 +48,7 @@ class OrderController extends Controller
                 $min_pro = Promotion::first();
                 if ($min_pro->status==1) {
                     if ($amount >= $min_pro->amount) {
-                        $credit         = Amount::find(\Auth::user()->id);
+                        $credit         = Amount::where('user_id',\Auth::user()->id)->first();
                         $credit->credit = $credit->credit + 2;
                         $credit->save();
                     }

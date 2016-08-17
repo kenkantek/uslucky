@@ -44,7 +44,7 @@ return [
     'button_continue_claim' => '继续兑奖',
     'button_cancel'         => '取消',
     'title_order'           => '你的彩票订单',
-    'title_order_ticket'    => '你的产品订单',
+    'title_order_ticket'    => '你的票务订单',
     'game'                  => '彩票种类',
     'ticket'                => '彩票总数',
     'date'                  => '购买时间',

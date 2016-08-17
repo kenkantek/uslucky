@@ -96,8 +96,9 @@ class ProductController extends Controller
         }
 
         //Images
-        $this->updateImages($product, $request->images);
+
         if ($request->hasFile('images')) {
+            $this->updateImages($product, $request->images);
             foreach ((array) $request->file('images') as $file) {
                 $storeFile = Image::setDir('uploads/ecommerces')->fromForm($file);
 

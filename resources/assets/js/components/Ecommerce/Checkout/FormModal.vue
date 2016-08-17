@@ -64,7 +64,7 @@
                             <div class="radio">
                                 <label>
                                     <input type="radio" v-model="method" value="4">
-                                    By credit <strong>({{ credit | currency }})</strong>.
+                                    账户积分 <strong>({{ credit | currency }})</strong>.
                                 <span class="text-danger" v-show="method == 4 && credit < total">
                                     {{ $l('play.modal_afford') }}
                                 </span>

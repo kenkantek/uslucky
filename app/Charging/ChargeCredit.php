@@ -28,7 +28,7 @@ class ChargeCredit implements ChargeInterface
             {
                 if($amount >= $min_pro->amount)
                 {
-                    $credit = Amount::find(\Auth::user()->id);
+                    $credit = Amount::where('user_id',\Auth::user()->id)->first();
                     $credit->credit = $credit->credit+2;
                     $credit->save();
                 }

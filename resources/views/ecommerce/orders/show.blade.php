@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-xs-12 col-md-9">
-                <h2> Your Products </h2>
+                <h2>详细订单</h2>
                 <hr>
                 <ecommerce-show-order inline-template>
                     <div v-if="$loadingAsyncData">
@@ -22,22 +22,22 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <dl class="dl-horizontal">
-                                <dt>#</dt>
+                                <dt>订单号</dt>
                                 <dd>@{{ order.id }}</dd>
 
-                                <dt>User name</dt>
+                                <dt>名字</dt>
                                 <dd v-text="order.user.fullname"></dd>
 
-                                <dt>Bought date</dt>
+                                <dt>订购时间</dt>
                                 <dd>@{{ order.created_at }}</dd>
                             </dl>
                         </div>
                         <div class="col-xs-6">
                             <dl class="dl-horizontal">
-                                <dt>Total</dt>
+                                <dt>总计</dt>
                                 <dd>@{{ order.total | currency }}</dd>
 
-                                <dt>Qty</dt>
+                                <dt>数量</dt>
                                 <dd>@{{ order.products.length }}</dd>
 
                                 <dt>{{ trans('setting.status') }}</dt>
@@ -64,16 +64,16 @@
                     <table class="table table-bordered table-hover trans">
                         <thead>
                         <tr>
-                            <th>Order ID</th>
-                            <th colspan="2">Product name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Total</th>
+                            {{--<th>Order ID</th>--}}
+                            <th colspan="2">商品名字</th>
+                            <th>数量</th>
+                            <th>单价</th>
+                            <th>总价</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="product in order.products">
-                            <td v-text="product.id"></td>
+                            {{--<td v-text="product.id"></td>--}}
                             <td><img :src="product.thumb" alt="" width="100px"></td>
                             <td v-text="product.name"></td>
                             <td v-text="product.pivot.count"></td>
