@@ -34,6 +34,7 @@ import ShowOrder from './components/Users/Settings/Order/ShowOrder.vue'
 import Contact from './components/Others/Contact.vue';
 import Winnumber from './components/Games/Results/Winnumber.vue';
 import Notification from './components/Users/Settings/Notification/Index.vue';
+import Affiliate from './components/Users/Settings/Affiliate/Index.vue';
 
 import ItemProduct from './components/Ecommerce/ItemProduct.vue';
 import Cart from './components/Ecommerce/Cart.vue';
@@ -56,6 +57,7 @@ new Vue({
         ShowOrder,
         Winnumber,
         Notification,
+        Affiliate,
         MegaMillions,
         
         ItemProduct, Cart, ManageCart,

@@ -79,6 +79,7 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 		'getPayment'       => 'settings.payment',
 		'getWinning'       => 'settings.winning',
 		'getNotifications' => 'settings.notifications',
+		'getAffiliate'     => 'settings.affiliate',
 	]);
 
 	$router->controller('account', 'User\AccountController', [
@@ -363,10 +364,10 @@ $router->group([
 				'as'   => 'api.game.discount.add',
 				'uses' => 'ManageGameController@addDiscount',
 			]);
-			
-			$router->get('api-promotion',[
-				'as' => 'api.promotion',
-				'uses' => 'PromotionController@apiPromotion'
+
+			$router->get('api-promotion', [
+				'as'   => 'api.promotion',
+				'uses' => 'PromotionController@apiPromotion',
 			]);
 
 		}); //END API

@@ -51,4 +51,9 @@ class SettingsController extends Controller
     {
         return view('user.settings.notification');
     }
+
+    public function getAffiliate()
+    {
+        return view('user.settings.affiliate');
+    }
 }

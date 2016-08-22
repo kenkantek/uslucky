@@ -28,8 +28,8 @@
         <a href="{{ route('front::settings.payment') }}">Payments <span class="hidden-md">/Credit Card</span> <i class="fa fa-cc-visa fa-lg pull-right"></i></a>
     </li>
     <li class="hidden divider"></li>
-    <li class="@if($routeName === 'front::settings.notifications') current @endif">
-        <a href="{{ route('front::settings.notifications') }}">Affiliate <i class="fa fa-link fa-lg pull-right"></i></a>
+    <li class="@if($routeName === 'front::settings.affiliate') current @endif">
+        <a href="{{ route('front::settings.affiliate') }}">Affiliate <i class="fa fa-link fa-lg pull-right"></i></a>
     </li>
     <li class="divider"></li>
     <li class="@if($routeName === 'front::settings.account') current @endif">
