@@ -1,51 +1,30 @@
 <template>
     <loading v-if="$loadingAsyncData"></loading>
     <div v-else>
-        <ul v-if="notifications.length" class="notifications">
-            <li 
-                :class="{
-                    refund: notify.subject === 'canceled',
-                    reward: notify.subject === 'award',
-                    purchased: notify.subject === 'purchased',
-                    paid: notify.subject === 'claimrequest',
-                    unread: !notify.is_read
-                }"
-                v-for="notify in notifications"
-            >
-                <a :href="notify.url" target="_blank">
-                    <p>{{{ notify.body }}}<br>
-                        <small>{{ notify.created_at }}</small>
-                    </p>
-                </a>
-                <div class="controls">
-                    <span title="Delete" data-toggle="tooltip" data-placement="top"
-                        @click="onDelete(notify)"
-                    >
-                        <i class="fa fa-times"></i>
-                    </span>
-                    <span title="{{ notify.is_read ? 'Readed' : 'Mark read' }}" data-toggle="tooltip" data-placement="top"
-                        @click="onMarkRead(notify)"
-                    >
-                        <i class="fa fa-eye"></i>
-                    </span>
+
+        <div v-if="affiliate.length" class="notifications">
+            <div v-if="affiliate[0].type == 0">
+                <div class="error-notice" slot="notice-minimum">
+                    <div class="oaerror info">
+                        <p>
+                            *Your request become a member of Affiliate Program is considering. Please wait until administrator approve.!
+                        </p>
+                    </div>
                 </div>
-            </li>
-            <li class="text-center" v-show="next_page_url">
-                <button class="btn btn-warning" :disabled="loading" @click="onLoadMore">
-                    <i class="fa fa-circle-o-notch fa-spin" v-show="loading"></i> Load more {{ perPage }} notifications
-                </button>
-                <div class="text-right">
-                    Show {{ notifications.length }} of {{ total }} record.
-                </div>
-            </li>
-        </ul>
+            </div>
+
+            <div v-else>
+
+            </div>
+        </div>
 
         <div v-else>
             <div class="error-notice" slot="notice-minimum">
                 <div class="oaerror info">
                     <p>
-                        *You have not notifications!
+                        *You do not belong affiliate program!
                     </p>
+                    <a @click.prevent="onAffiliate" class="btn btn-primary">I want become to member of Affiliate program!</a>
                 </div>
             </div>
         </div>
@@ -62,32 +41,52 @@
         data() {
             return {
                 perPage: 10,
-                notifications: [],
+                affiliate: [],
                 next_page_url: null,
                 total: 0,
-                api: laroute.route('front::api::get.notifications'),
+                api: laroute.route('front::api::get.affiliate'),
                 loading: false
             }
         },
 
         asyncData(resolve, reject) {
-            this._fetchNotifications(this.api, { per_page: this.perPage }).done(({data, next_page_url, total}) => {
-                resolve({ notifications: data, next_page_url, total });
-            }, err => {
+            this.$http.get(this.api).then(res => {
+                const affiliate = res.data;
+
+            resolve({
+                affiliate
+            });
+            }, (res) => {
                 COMMON.alertError();
             });
         },
 
         methods: {
-            _fetchNotifications(api, params = {}) {
-                const def = deferred();
-                this.$http.get(api, params).then(res => {
-                    def.resolve(res.data);
-                }, res => {
-                    def.reject(res);
+            onAffiliate() {
+                swal({
+                    title: "Are you sure?",
+                    type: "info",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, (isConfirm) => {
+                    if(isConfirm) {
+                        this.$http.post(laroute.route('front::api::post.affiliate')).then(res => {
+                            swal.close();
+                            toastr.success('Your request was sent!');
+                            this.reloadAsyncData();
+                        }, (res) => {
+                            COMMON.alertError();
+                            this.loading = false;
+                        });
+                    } else {
+                        swal.close();
+                    }
                 });
-                return def.promise;
             },
+
             onLoadMore() {
                 this.loading = true;
                 this._fetchNotifications(this.next_page_url).done(({ data, next_page_url }) => {

@@ -6,7 +6,7 @@
 @stop
 @section('content')
 
-    {!! Breadcrumbs::render('promotion') !!}
+    {!! Breadcrumbs::render('contact') !!}
 
     <div class="app-ticket app-ticket-list">
         <div class="row">

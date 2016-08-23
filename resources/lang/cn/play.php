@@ -3,9 +3,9 @@
 return [
     'luckynumber'         => '我的幸运号码',
     'quick_pick'          => '随机选号',
-    'per_line_extra'      => '倍增彩：将非头等大奖奖金增加10倍，每注价格增加$1.5',
-    'per_line'            => '彩票价格',
-    'extra'               => '加倍',
+    'per_line_extra'      => '倍增彩：将非头等大奖奖金增加10倍，每注官方价格 ${extra}',
+    'per_line'            => '官方彩票价格',
+    'extra'               => '倍增彩加倍价格',
     'play_now'            => '现在投注',
     'total'               => '总计',
     'choose'              => '选号',

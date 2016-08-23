@@ -215,6 +215,36 @@
                     <span class="arrow"></span>
                 </a>
             </li>
+
+            <li class="nav-item  @if(starts_with($routeName, 'admin.affiliate')) active open @endif">
+                <a href="{{ route('admin.affiliate.index') }}" class="nav-link nav-toggle">
+                    <i class="icon-link"></i>
+                    <span class="title">Affiliate Program</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+
+                <ul class="sub-menu">
+                    <li class="nav-item start">
+                        <a href="{{ route('admin.affiliate.index') }}" class="nav-link ">
+                            <span class="title">Member list</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item start">
+                        <a href="{{ route('admin.affiliate.approve') }}" class="nav-link ">
+                            <span class="title">Not approved yet</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item start">
+                        <a href="{{ route('admin.affiliate.config') }}" class="nav-link">
+                            <span class="title">Configure</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

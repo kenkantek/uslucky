@@ -58,9 +58,14 @@ import DiscountEdit from './components/Discount/DicountEdit.vue';
 
 import Promotion from './components/Promotion/Index.vue';
 
+import NonApproved from './components/Affiliate/Index.vue';
+import MemberList from './components/Affiliate/MemberList.vue';
+
 new Vue({
     el: 'body',
     components: {
+        NonApproved,
+        MemberList,
         Promotion,
         SignIn,
         Contacts,

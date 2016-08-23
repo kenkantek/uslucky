@@ -68,13 +68,13 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    {{ $l('play.per_line') }} ({{ ticketsActive.length }} 注<!--{{ ticketsActive.length | pluralize 'Line'}}--> X {{ eachPerTicket | currency }})
+                                    {{ $l('play.per_line') }} (<!--{{ ticketsActive.length | pluralize 'Line'}}-->{{ eachPerTicket | currency }}X{{ ticketsActive.length }} 注)
                                 </td>
                                 <td>{{ priceTickets | currency }}</td>
                                 <td></td>
                             </tr>
                             <tr v-show="extra">
-                                <td>{{ $l('play.extra') }} ({{ ticketsActive.length }} 注<!--{{ ticketsActive.length | pluralize 'Line'}}--> X {{ extraPerTicket | currency }})</td>
+                                <td>{{ $l('play.extra') }} (<!--{{ ticketsActive.length | pluralize 'Line'}}-->{{ extraPerTicket | currency }}X{{ ticketsActive.length }} 注)</td>
                                 <td>{{ priceExtraTickets | currency }}</td>
                                 <td></td>
                             </tr>
@@ -95,9 +95,6 @@
                                         data-keyboard="false">{{ $l('play.play_now') }}
                                     </button>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">**收费说明：官方强力球彩票$2 /张，网上第三方行用卡安全支付平台收取$0.33/张，uslucky代购费$0.67/张。倍增彩官方收取$1/张。</td>
                             </tr>
                         </tfoot>
                     </table>

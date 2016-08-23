@@ -114,6 +114,15 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 
 	// FOR API
 	$router->group(['as' => 'api::', 'prefix' => 'api'], function () use ($router){
+		$router->get('affiliate', [
+			'as'   => 'get.affiliate',
+			'uses' => 'User\AffiliateController@getAffiliate',
+		]);
+		$router->post('affiliate', [
+			'as'   => 'post.affiliate',
+			'uses' => 'User\AffiliateController@postAffiliate',
+		]);
+
 		$router->get('orders', [
 			'as'   => 'get.orders',
 			'uses' => 'User\OrderController@getOrders',
@@ -370,6 +379,19 @@ $router->group([
 				'uses' => 'PromotionController@apiPromotion',
 			]);
 
+			$router->get('affiliates/non-approved', [
+				'as'   => 'api.affiliates',
+				'uses' => 'AffiliateController@getAffiliate',
+			]);
+			$router->get('affiliates', [
+				'as'   => 'api.affiliates.list',
+				'uses' => 'AffiliateController@getMember',
+			]);
+			$router->put('affiliates/{id}', [
+				'as'   => 'api.affiliates.put.type',
+				'uses' => 'AffiliateController@putType',
+			]);
+
 		}); //END API
 
 		$router->resource('contact', 'ContactController', [
@@ -379,7 +401,21 @@ $router->group([
 		$router->resource('promotion', 'PromotionController', [
 			'only' => ['index', 'update'],
 		]);
+		//begin Affiliate
+		$router->get('affiliate/config', [
+			'as'   => 'admin.affiliate.config',
+			'uses' => 'AffiliateController@getConfig',
+		]);
 
+		$router->get('affiliate/non-approve', [
+			'as'   => 'admin.affiliate.approve',
+			'uses' => 'AffiliateController@getApprove',
+		]);
+		$router->resource('affiliate', 'AffiliateController', [
+			'only' => ['index', 'update'],
+		]);
+		
+		//end Affiliate
 		$router->resource('users/winners', 'WinnerController', [
 			'only' => 'index',
 		]);

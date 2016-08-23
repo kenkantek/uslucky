@@ -25,9 +25,6 @@
                            </div>
                            <ul class="dropdown-menu">
                                <li>
-                                   <a href="{{ route('front::payment.history') }}">{!! trans('setting.menu_trans') !!} <i class="fa fa-history fa-lg pull-right"></i></a>
-                               </li>
-                               <li>
                                    <a href="{{ route('front::ecommerce.order') }}">
                                        {!! trans('setting.menu_order_product') !!} <i class="fa fa-lg fa-cart-plus pull-right"></i>
                                    </a>
@@ -41,7 +38,13 @@
                                    <a href="{{ route('front::settings.winning') }}">{!! trans('setting.menu_winning') !!} <i class="fa fa-trophy fa-lg pull-right"></i></a>
                                </li>
                                <li>
+                                   <a href="{{ route('front::payment.history') }}">{!! trans('setting.menu_trans') !!} <i class="fa fa-history fa-lg pull-right"></i></a>
+                               </li>
+                               <li>
                                    <a href="{{ route('front::settings.notifications') }}">{!! trans('setting.menu_notic') !!} <span class="badge pull-right"> {{ $auth->notification_not_read }} </span></a>
+                               </li>
+                               <li>
+                                   <a href="{{ route('front::settings.affiliate') }}">Affiliate <i class="fa fa-link fa-lg pull-right"></i></a>
                                </li>
                                <li>
                                    <a href="{{ route('front::settings.account') }}">{!! trans('setting.menu_account_setting') !!} <i class="fa fa-cog fa-lg pull-right"></i></a>

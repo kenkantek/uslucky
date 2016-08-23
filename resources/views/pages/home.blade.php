@@ -38,17 +38,18 @@
 							<div class="product-price pull-right">
 								<span>$ {{ number_format($product->price,2) }}</span>
 							</div>
-						</a>
-						<div class="product-description">
-							<div style="
+							<div class="product-description">
+								<div style="
 								vertical-align: middle;
 								width: 100%;
 								height: 260px;
 								display: table-cell;
 							">
-								{{ $product->description }}
+									{{ $product->description }}
+								</div>
 							</div>
-						</div>
+						</a>
+
 					</article>
 					@endforeach
 				</div>
@@ -85,12 +86,13 @@
 								<div class="product-price pull-right">
 									<span>$ {{ number_format($product->price,2) }}</span>
 								</div>
-    						</a>
-    						<div class="product-description">
-    							<div style="width: 100%;height: 260px; display: table-cell; vertical-align: middle">
-									{{ $product->description }}
+								<div class="product-description">
+									<div style="width: 100%;height: 260px; display: table-cell; vertical-align: middle">
+										{{ $product->description }}
+									</div>
 								</div>
-    						</div>
+    						</a>
+
     					</article>
     					@endforeach
     				</div>

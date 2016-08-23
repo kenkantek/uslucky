@@ -18,7 +18,7 @@
                     <div class="error-notice" slot="notice-minimum">
                         <div class="oaerror info">
                             <p>
-                                {{trans('setting.minimum')}} <strong>US $ {{ env('MINIMUM_AMOUNT', 25) }}</strong>
+                                {!! trans('setting.minimum',['minimum'=>env('MINIMUM_AMOUNT', 25)])!!}
                             </p>
                         </div>
                     </div>

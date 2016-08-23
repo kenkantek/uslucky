@@ -198,4 +198,9 @@ class User extends Authenticatable
             ->withObjectType($object)
             ->publish();
     }
+    
+    public function affiliate()
+    {
+        return $this->hasOne(Affiliate::class);
+    }
 }

@@ -27,6 +27,16 @@ Breadcrumbs::register('contact.show', function ($breadcrumbs, $contact) {
     $breadcrumbs->push('Contact #' . $contact->id, route('admin.contact.show', $contact->id));
 });
 
+Breadcrumbs::register('promotion', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Promotion', route('admin.promotion.index'));
+});
+
+Breadcrumbs::register('affiliate', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Affiliate', route('admin.affiliate.index'));
+});
+
 Breadcrumbs::register('user', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Users', route('admin.users.index'));

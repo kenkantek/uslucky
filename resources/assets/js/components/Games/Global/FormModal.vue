@@ -39,7 +39,7 @@
                     <div v-if="message">
                         {{{ message }}}
                             <span v-show="!checkLogin">
-                                Click <a  @click.stop="closeModal" href="/login?redirect=front::game.{{ name }}">here</a> and try again.
+                                <a  @click.stop="closeModal" href="/login?redirect=front::game.{{ name }}">请点击这里登录</a>.
                             </span>
                     </div>
                     <loading v-else></loading>
@@ -64,7 +64,7 @@
                         <div class="radio">
                             <label>
                                 <input type="radio" v-model="method" value="4">
-                                账户积分 <strong>({{ credit | currency }})</strong>.
+                                账户积分，免费彩票 <strong>({{ credit | currency }})</strong>.
                                 <span class="text-danger" v-show="method == 4 && credit < total">
                                     {{ $l('play.modal_afford') }}
                                 </span>

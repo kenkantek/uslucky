@@ -21,10 +21,10 @@
         </div>
         <div class="row">
             <div class="row" style="text-align: right">
-                <span>Read More About Playing on Uslucky</span>
-                <a onclick="show()" class="btn">Show / Hide</a>
+                <span>怎样操作</span>
+                <a onclick="show()" class="btn">展开/隐藏</a>
             </div>
-            <div class="col-md-8 col-md-offset-2 new-game" id="show">
+            <div class="col-md-12 new-game" id="show">
                 <div class="row">
                     <div class="col-md-5">
                         {!! HTML::image('images/1.png','simple',['width' => 200]) !!}
