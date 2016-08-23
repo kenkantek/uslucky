@@ -13,6 +13,14 @@
 
 $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($router){
 	$router->auth();
+
+	//after ref link
+	$router->get('game/ref/{code}', [
+		'as'   => 'get.affiliate.ref',
+		'uses' => 'User\AffiliateController@getRef',
+	]);
+	//end ref link
+
 	$router->get('terms', [
 		'as'   => 'terms.get',
 		'uses' => function (){
@@ -414,7 +422,7 @@ $router->group([
 		$router->resource('affiliate', 'AffiliateController', [
 			'only' => ['index', 'update'],
 		]);
-		
+
 		//end Affiliate
 		$router->resource('users/winners', 'WinnerController', [
 			'only' => 'index',

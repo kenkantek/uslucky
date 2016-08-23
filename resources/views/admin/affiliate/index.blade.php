@@ -32,39 +32,44 @@
                                             <table v-else class="table-striped table-checkable table table-hover table-bordered admin">
                                                 <thead>
                                                 <tr class="uppercase">
-                                                    <th>
-                                                        <input type="checkbox" v-model="checkAll">
-                                                    </th>
+                                                    {{--<th>--}}
+                                                    {{--<input type="checkbox" v-model="checkAll">--}}
+                                                    {{--</th>--}}
                                                     <th colspan="2"> MEMBER </th>
-                                                    <th colspan="2"> Ticket total bought </th>
-                                                    <th> DEPOSIT Total </th>
-                                                    <th> WITHDRAW/CLAIM Total </th>
-                                                    <th> Blance </th>
-                                                    <th>Actived</th>
+                                                    <th> Affiliate Type </th>
+                                                    <th> Value (% or $) </th>
+                                                    <th> Code </th>
+                                                    <th> Amount </th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr v-for="user in data.data" :class="[$index % 2 == 0 ? 'odd' : 'even']">
-                                                    <td>
-                                                        <input type="checkbox" v-model="ids" :value="user.id">
-                                                    </td>
+                                                    {{--<td>--}}
+                                                    {{--<input type="checkbox" v-model="ids" :value="user.id">--}}
+                                                    {{--</td>--}}
                                                     <td class="fit">
                                                         <img class="user-pic" :src="user.image" width="30px"> </td>
                                                     <td>
                                                         <a :href="user.id | linkShow" class="primary-link">@{{user.fullname}}</a>
                                                     </td>
-                                                    <td> @{{user.ticket_total}} </td>
-                                                    <td> @{{user.price_total | currency}} </td>
-                                                    <td class="font-blue-madison"> +@{{user.deposit_total | currency}} </td>
-                                                    <td class="font-red-mint"> -@{{user.withdraw_total | currency}} </td>
                                                     <td>
-                                                        <span class="bold theme-font">@{{user.balance | currency}}</span>
+                                                        <label>
+                                                            <input type="radio" v-model="user.affiliate.type" :value="0" @change.prevent="onChange({{auth()->user()->id}},$index)">
+                                                            Non-approved
+                                                        </label>&nbsp;&nbsp;
+                                                        <label>
+                                                            <input type="radio" v-model="user.affiliate.type" :value="1" @change.prevent="onChange({{auth()->user()->id}},$index)">
+                                                            Percent
+                                                        </label>&nbsp;&nbsp;
+                                                        <label>
+                                                            <input type="radio" v-model="user.affiliate.type" :value="2" @change.prevent="onChange({{auth()->user()->id}},$index)">
+                                                            Cash
+                                                        </label>
                                                     </td>
-                                                    <td>
-                                                        <a v-if="user.active == 0" class="label label-danger" href="#" @click.prevent="onActive(user.id)" title="Active user">Active</a>
-                                                        <span v-else class="label label-success">Actived</span>
-                                                    </td>
+                                                    <td><input type="text" v-model="user.affiliate.avalue" class="form-control" placeholder="value" @keyup="onChange({{auth()->user()->id}},$index) | debounce 500 "> </td>
+                                                    <td class="font-blue-madison"> @{{user.affiliate.code}} </td>
+                                                    <td class="font-blue-madison"> @{{user.affiliate.amount | currency}} </td>
                                                     <td>
                                                         <a class="label label-danger" href="" @click.prevent="onDelete(user.id)" title="Delete user"><i class="fa fa-remove"></i></a>
                                                     </td>

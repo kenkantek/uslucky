@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Affiliate;
 use App\Models\Game;
 use Javascript;
 
@@ -54,6 +55,7 @@ class SettingsController extends Controller
 
     public function getAffiliate()
     {
-        return view('user.settings.affiliate');
+        $code = Affiliate::where('user_id',\Auth::user()->id)->first()->code;
+        return view('user.settings.affiliate',compact('code'));
     }
 }

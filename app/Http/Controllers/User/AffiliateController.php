@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\Affiliate;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,5 +24,15 @@ class AffiliateController extends Controller
 		$aff->save();
 
 		return $aff;
+	}
+	
+	public function getRef($code)
+	{
+		$aff = Affiliate::where('code',$code)->first();
+		if(($aff != '') && ($aff->type != 0))
+		{
+			session()->put('ref',$code);
+		}
+		return session()->all();
 	}
 }

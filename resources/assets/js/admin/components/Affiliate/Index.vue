@@ -14,10 +14,7 @@
                 keyword: '',
                 ids: [],
                 checkAll: false,
-                formUpdate: {
-                    type: '',
-                    values: 0
-                }
+                formUpdate: {}
             }
         },
 
@@ -106,9 +103,10 @@
                 });
             },
 
-            onChange(id) {
-                this.$http.put(laroute.route('admin.api.affiliates.put.type',{'id': id}),this.user.affiliate).then(res => {
-                    console.log(res);
+            onChange(id,index) {
+                this.$http.put(laroute.route('admin.api.affiliates.put.type',{'id': id}),this.data.data[index].affiliate).then(res => {
+                    toastr.success('User was set to member of Affiliate Program!','SUCCESS');
+                    return;
             });
             }
         },

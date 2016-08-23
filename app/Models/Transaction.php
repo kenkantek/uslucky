@@ -55,8 +55,47 @@ class Transaction extends Model
     }
     public function publish()
     {
-        $this->save();
-        return $this;
+        $trans = $this->where('user_id', \Auth::user()->id)->where('type','<>',1)->first();
+        if (($trans=='') && (session()->has('ref'))) {
+            //get affiliate info of user share link
+            $aff = Affiliate::where('code', session()->get('ref'))->first();
+
+            //if type = 1 calculator percent else plus value to amount of user share link
+            if ($aff->type==1) {
+                //calculator percent
+                $aff_amount = ($aff->avalue / 100) * $this->amount;
+                //set amount to user is member affiliate
+                $aff->amount = $aff->amount + $aff_amount;
+                $aff->save();
+
+            }
+            else {
+                $aff_amount  = $aff->avalue;
+                $aff->amount = $aff->amount + $aff_amount;
+                $aff->save();
+            }
+            //create transaction affiliate
+            $affiliate_id = $aff->id;
+            $this->save();
+            $order_id                 = $this->id;
+            $aff_tran                 = new AffiliateTransaction;
+            $aff_tran->affiliate_id   = $affiliate_id;
+            $aff_tran->transaction_id = $order_id;
+            $aff_tran->type           = $aff->type;
+            $aff_tran->amount         = $aff_amount;
+            $aff_tran->save();
+            //update amount of amount table of user is member affiliate
+            $user_amount         = Amount::where('user_id', $aff->user_id)->first();
+            $user_amount->amount = $user_amount->amount + $aff_amount;
+            $user_amount->save();
+
+            return $this;
+        }
+        else {
+            $this->save();
+            return $this;
+        }
+
     }
     //END NEW TRACSACTION
 
