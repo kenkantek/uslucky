@@ -33,6 +33,6 @@ class AffiliateController extends Controller
 		{
 			session()->put('ref',$code);
 		}
-		return session()->all();
+		return view('games.index');
 	}
 }
