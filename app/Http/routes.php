@@ -387,6 +387,11 @@ $router->group([
 				'uses' => 'PromotionController@apiPromotion',
 			]);
 
+			$router->get('api-affiliate', [
+				'as'   => 'api.affiliate',
+				'uses' => 'AffiliateController@apiAffiliate',
+			]);
+
 			$router->get('affiliates/non-approved', [
 				'as'   => 'api.affiliates',
 				'uses' => 'AffiliateController@getAffiliate',

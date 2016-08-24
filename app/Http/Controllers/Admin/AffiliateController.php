@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Affiliate;
+use App\Models\AffiliateConfig;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,14 +17,21 @@ class AffiliateController extends Controller
 		return view('admin.affiliate.index');
 	}
 
-	public function update()
+	public function update(Request $request, $id)
 	{
+		AffiliateConfig::where('id',$id)->update([
+			'name'     => $request->name,
+			'status'   => $request->status,
+			'contents' => $request->contents,
+		]);
 
+		return 'done';
 	}
 
 	public function getConfig()
 	{
-		return view('admin.affiliate.config');
+		$aff = AffiliateConfig::first();
+		return view('admin.affiliate.config',compact('aff'));
 	}
 
 	public function getApprove()
@@ -68,5 +76,10 @@ class AffiliateController extends Controller
 		$aff->save();
 
 		return $aff;
+	}
+
+	public function apiAffiliate()
+	{
+		return $promotion = AffiliateConfig::first();
 	}
 }

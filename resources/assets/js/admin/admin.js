@@ -57,6 +57,7 @@ import DiscountCreate from './components/Discount/DicountCreate.vue';
 import DiscountEdit from './components/Discount/DicountEdit.vue';
 
 import Promotion from './components/Promotion/Index.vue';
+import Affiliate from './components/Affiliate/Config.vue';
 
 import NonApproved from './components/Affiliate/Index.vue';
 import MemberList from './components/Affiliate/MemberList.vue';
@@ -67,6 +68,7 @@ new Vue({
         NonApproved,
         MemberList,
         Promotion,
+        Affiliate,
         SignIn,
         Contacts,
         Order,

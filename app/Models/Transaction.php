@@ -55,8 +55,10 @@ class Transaction extends Model
     }
     public function publish()
     {
+
+        $aff_conf = AffiliateConfig::first();
         $trans = $this->where('user_id', \Auth::user()->id)->where('type','<>',1)->first();
-        if (($trans=='') && (session()->has('ref'))) {
+        if (($trans=='') && (session()->has('ref'))&&($aff_conf->status == 1)) {
             //get affiliate info of user share link
             $aff = Affiliate::where('code', session()->get('ref'))->first();
 
