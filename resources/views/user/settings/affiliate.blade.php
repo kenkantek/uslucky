@@ -35,7 +35,7 @@
                                         <h4>Your amount from Affiliate Program: @{{affiliate[0].amount | currency}}</h4>
                                         <p>Your award: @{{affiliate[0].type == 1 ? affiliate[0].avalue + '%' : '$' + affiliate[0].avalue}}</p>
                                         <p>
-                                            <input style="max-width: 300px;float: left;" readonly id="post-shortlink" type="text" value="{{route('front::get.affiliate.ref',$code)}}" class="form-control">
+                                            <input style="max-width: 300px;float: left;" readonly id="post-shortlink" type="text" value="{{$code ? route('front::get.affiliate.ref',$code->code) : ''}}" class="form-control">
                                             <button style="max-width: 300px;float: left;" class="btn btn-primary" id="copy-button" data-clipboard-target="#post-shortlink">Copy your link to clipboard</button></p>
                                     </div>
                                     <div class="col-md-12">

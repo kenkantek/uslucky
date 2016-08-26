@@ -55,19 +55,19 @@
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            <input type="radio" v-model="user.affiliate.type" :value="0" @change.prevent="onChange({{auth()->user()->id}},$index)">
+                                                            <input type="radio" v-model="user.affiliate.type" :value="0" @change.prevent="onChange(user.id,$index)">
                                                             Non-approved
                                                         </label>&nbsp;&nbsp;
                                                         <label>
-                                                            <input type="radio" v-model="user.affiliate.type" :value="1" @change.prevent="onChange({{auth()->user()->id}},$index)">
+                                                            <input type="radio" v-model="user.affiliate.type" :value="1" @change.prevent="onChange(user.id,$index)">
                                                             Percent
                                                         </label>&nbsp;&nbsp;
                                                         <label>
-                                                            <input type="radio" v-model="user.affiliate.type" :value="2" @change.prevent="onChange({{auth()->user()->id}},$index)">
+                                                            <input type="radio" v-model="user.affiliate.type" :value="2" @change.prevent="onChange(user.id,$index)">
                                                             Cash
                                                         </label>
                                                     </td>
-                                                    <td><input type="text" v-model="user.affiliate.avalue" class="form-control" placeholder="value" @keyup="onChange({{auth()->user()->id}},$index) | debounce 500 "> </td>
+                                                    <td><input type="text" v-model="user.affiliate.avalue" class="form-control" placeholder="value" @keyup="onChange(user.id,$index) | debounce 500 "> </td>
                                                     <td class="font-blue-madison"> @{{user.affiliate.code}} </td>
                                                     <td class="font-blue-madison"> @{{user.affiliate.amount | currency}} </td>
                                                     <td>

@@ -59,10 +59,13 @@ class Transaction extends Model
         $aff_conf = AffiliateConfig::first();
         $trans = $this->where('user_id', \Auth::user()->id)->where('type','<>',1)->first();
         if (($trans=='') && (session()->has('ref'))&&($aff_conf->status == 1)) {
+
+
             //get affiliate info of user share link
             $aff = Affiliate::where('code', session()->get('ref'))->first();
 
             //if type = 1 calculator percent else plus value to amount of user share link
+
             if ($aff->type==1) {
                 //calculator percent
                 $aff_amount = ($aff->avalue / 100) * $this->amount;
@@ -70,11 +73,13 @@ class Transaction extends Model
                 $aff->amount = $aff->amount + $aff_amount;
                 $aff->save();
 
-            }
-            else {
+            } elseif ($aff->type==2) {
                 $aff_amount  = $aff->avalue;
                 $aff->amount = $aff->amount + $aff_amount;
                 $aff->save();
+            } else {
+                $this->save();
+                return $this;
             }
             //create transaction affiliate
             $affiliate_id = $aff->id;
@@ -87,7 +92,7 @@ class Transaction extends Model
             $aff_tran->amount         = $aff_amount;
             $aff_tran->save();
             //update amount of amount table of user is member affiliate
-            $user_amount         = Amount::where('user_id', $aff->user_id)->first();
+            $user_amount         = Amount::where('user_id', $aff->user_id)->firstOrNew(['user_id' => $aff->user_id]);
             $user_amount->amount = $user_amount->amount + $aff_amount;
             $user_amount->save();
 

@@ -82,27 +82,6 @@
             });
             },
 
-            onActive(ids){
-                this.$http.put(laroute.route('user.post.active',{ 'users': [ids]})).then(res => {
-                    this.reloadAsyncData();
-                swal({
-                    title: "This user was activated!",
-                    type: "info",
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: false,
-                }, function() {
-                    swal.close();
-                });
-
-            },(res) => {
-                    if(res.status === 500) {
-                        COMMON.alertError();
-                    } else  {
-                        toastr.error('Please check input field!.', 'Validate!');
-                    }
-                });
-            },
-
             onChange(id,index) {
                 this.$http.put(laroute.route('admin.api.affiliates.put.type',{'id': id}),this.data.data[index].affiliate).then(res => {
                     toastr.success('User was set to member of Affiliate Program!','SUCCESS');

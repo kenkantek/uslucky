@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Amount extends Model
 {
     use TransactionTrait;
+    
+    protected $fillable = [
+        'user_id','amount','credit'
+    ];
 
     public function user()
     {

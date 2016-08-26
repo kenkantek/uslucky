@@ -55,7 +55,7 @@ class SettingsController extends Controller
 
     public function getAffiliate()
     {
-        $code = Affiliate::where('user_id',\Auth::user()->id)->first()->code;
+        $code = Affiliate::where('user_id',\Auth::user()->id)->first();
         return view('user.settings.affiliate',compact('code'));
     }
 }
