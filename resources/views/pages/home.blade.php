@@ -36,7 +36,9 @@
 								{{$product->name}}
 							</p>
 							<div class="product-price pull-right">
-								<span>$ {{ number_format($product->price,2) }}</span>
+								@if($product->price > 0)
+									<span>$ {{ number_format($product->price,2) }}</span>
+								@endif
 							</div>
 							<div class="product-description">
 								<div style="
@@ -84,7 +86,9 @@
     								{{ $product->name }}
     							</p>
 								<div class="product-price pull-right">
-									<span>$ {{ number_format($product->price,2) }}</span>
+									@if($product->price > 0)
+										<span>$ {{ number_format($product->price,2) }}</span>
+									@endif
 								</div>
 								<div class="product-description">
 									<div style="width: 100%;height: 260px; display: table-cell; vertical-align: middle">

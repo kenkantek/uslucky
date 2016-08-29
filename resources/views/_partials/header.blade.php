@@ -116,17 +116,17 @@
             </li>
             <li>
                 <a href="{{ route('front::ecommerce.category.show', 12) }}">
-                    博物馆
+                    美景超享受
                 </a>
             </li>
             <li>
                 <a href="{{ route('front::ecommerce.category.show', 13) }}">
-                    演唱会
+                    美食超折扣
                 </a>
             </li>
             <li>
                 <a href="{{ route('front::ecommerce.category.show', 14) }}">
-                    球赛
+                    好玩超刺激
                 </a>
             </li>
             {{--<li>--}}

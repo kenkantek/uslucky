@@ -21,7 +21,9 @@
 							<p class="product-name">{{ $product->name }}</p>
 						</div>
 						<div class="col-xs-4">
-							<p class="product-price pull-right">$ {{ number_format($product->price) }}</p>
+							@if($product->price > 0)
+								<p class="product-price pull-right">$ {{ number_format($product->price) }}</p>
+							@endif
 						</div>
 					</div>
 				</a>

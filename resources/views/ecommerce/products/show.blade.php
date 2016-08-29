@@ -43,23 +43,27 @@
 	        	<div class="col-xs-12 col-md-5">
 	        		<div class="price">
 	        			<p>
-	        				<strong>${{ number_format($product->price,2) }}</strong><br>
-							@if(($product->sale_price != null) && ($product->sale_price > 0))
-								<strike>${{number_format($product->sale_price,2)}}</strike>
+							@if($product->price > 0)
+								<strong>${{ number_format($product->price,2) }}</strong><br>
+								@if(($product->sale_price != null) && ($product->sale_price > 0))
+									<strike>${{number_format($product->sale_price,2)}}</strike>
+								@endif
 							@endif
 	        			</p>
 	        		</div>
 
 	        		<div class="button-add-cart">
 	        			<item-product inline-template product="{{ collect($product)->merge(['content' => '']) }}">
-							<div class="form-group col-md-12">
-								<label>数量: </label>
-								<select @change="updateCountCart(qty, $event)" v-model="qty" class="form-control">
-								@for($i =1; $i <= 15; ++$i)
-								<option value="{{$i}}">{{$i}}</option>
-								@endfor
-								</select>
-							</div>
+							@if($product->price > 0)
+								<div class="form-group col-md-12">
+									<label>数量: </label>
+									<select @change="updateCountCart(qty, $event)" v-model="qty" class="form-control">
+									@for($i =1; $i <= 15; ++$i)
+										<option value="{{$i}}">{{$i}}</option>
+										@endfor
+										</select>
+								</div>
+							@endif
 							@if($product->offer)
 							<div class="col-md-12">
 								<div style="width: 300px; margin-bottom: 10px; text-align: justify">
@@ -68,9 +72,12 @@
 								</div>
 							</div>
 							@endif
-	        				<div class="col-md-12">
-								<a href="#" class="add2cart text-uppercase col-md-9" @click.prevent="addToCart"><i class="fa fa-shopping-cart fa-lg"></i> 立即抢购</a>
-							</div>
+							@if($product->price > 0)
+								<div class="col-md-12">
+									<a href="#" class="add2cart text-uppercase col-md-9" @click.prevent="addToCart"><i class="fa fa-shopping-cart fa-lg"></i> 立即抢购</a>
+								</div>
+							@endif
+
 	        			</item-product>
 	        		</div>
 	        	</div>
