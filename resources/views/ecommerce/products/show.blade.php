@@ -64,15 +64,15 @@
 										</select>
 								</div>
 							@endif
-							@if($product->offer)
-							<div class="col-md-12">
-								<div style="width: 300px; margin-bottom: 10px; text-align: justify">
-									<h4>优惠:</h4>
-									{{$product->offer}}
-								</div>
-							</div>
-							@endif
 							@if($product->price > 0)
+									@if($product->offer)
+										<div class="col-md-12">
+											<div style="width: 300px; margin-bottom: 10px; text-align: justify">
+												<h4>优惠:</h4>
+												{{$product->offer}}
+											</div>
+										</div>
+									@endif
 								<div class="col-md-12">
 									<a href="#" class="add2cart text-uppercase col-md-9" @click.prevent="addToCart"><i class="fa fa-shopping-cart fa-lg"></i> 立即抢购</a>
 								</div>

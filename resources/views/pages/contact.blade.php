@@ -23,9 +23,9 @@
 
 			                <dl>
 			                    <dt></dt>
-			                    <dd>{{ trans('contact.phone') }}: <span>+1 800 559 6580</span></dd
+			                    <dd>{{ trans('contact.phone') }}: <span>+1 800 559 6580</span></dd>
 			                    <dd>FAX: <span>+1 504 889 9898</span></dd>
-			                    <dd>E-mail: <span><a href="#">mail@demolink.org</a></span></dd>
+			                    <dd>E-mail: <span><a href="#">hello@uslucky.com</a></span></dd>
 			                </dl>
 			            </address>
 					</div>
