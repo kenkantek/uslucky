@@ -169,11 +169,11 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('front::special.offers') }}">
-                    优惠
-                </a>
-            </li>
+            {{--<li>--}}
+                {{--<a href="{{ route('front::special.offers') }}">--}}
+                    {{--优惠--}}
+                {{--</a>--}}
+            {{--</li>--}}
         </ul>
     </div>
   </section>
