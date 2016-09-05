@@ -5,7 +5,7 @@
 		<div class="row">
 
 			<div class="col-md-8">
-				<h2>UsLucky</h2>
+				{{--<h2>UsLucky</h2>--}}
 				{!! HTML::image('images/contactus.jpg', 'contactus', ['class' => 'img-responsive']) !!}
 			</div>
 
@@ -23,8 +23,8 @@
 
 			                <dl>
 			                    <dt></dt>
-			                    <dd>{{ trans('contact.phone') }}: <span>+1 800 559 6580</span></dd>
-			                    <dd>FAX: <span>+1 504 889 9898</span></dd>
+			                    {{--<dd>{{ trans('contact.phone') }}: <span>+1 800 559 6580</span></dd>--}}
+			                    {{--<dd>FAX: <span>+1 504 889 9898</span></dd>--}}
 			                    <dd>E-mail: <span><a href="#">hello@uslucky.com</a></span></dd>
 			                </dl>
 			            </address>
