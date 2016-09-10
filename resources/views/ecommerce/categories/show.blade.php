@@ -22,7 +22,7 @@
 						</div>
 						<div class="col-xs-4">
 							@if($product->price > 0)
-								<p class="product-price pull-right">$ {{ number_format($product->price) }}</p>
+								<p class="product-price pull-right">$ {{ number_format($product->price,2) }}</p>
 							@endif
 						</div>
 					</div>
