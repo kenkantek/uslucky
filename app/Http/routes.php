@@ -21,6 +21,11 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 	]);
 	//end ref link
 
+	$router->get('contact-for-partner',[
+		'as' => 'contact.partner',
+		'uses' => 'PagesController@getPartner'
+	]);
+
 	$router->get('terms', [
 		'as'   => 'terms.get',
 		'uses' => function (){

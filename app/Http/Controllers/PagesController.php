@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Http\Requests\Request;
 use App\Models\Contact;
+use App\Models\ContactPartner;
 use App\Models\Ecommerce\Category;
 use App\Models\Game;
 use App\Models\Promotion;
@@ -86,5 +88,16 @@ class PagesController extends Controller
         $contacts->message = $request->message;
         $contacts->save();
         return $contacts;
+    }
+    
+    public function getPartner()
+    {
+        return view('pages.partner');
+    }
+    
+    public function postPartner(Request $request)
+    {
+        $partner = new ContactPartner;
+        $partner->name = $request->name;
     }
 }

@@ -26,7 +26,7 @@
 			                    <dd>{{ trans('contact.phone') }}: <span>888.587.6885</span></dd>
 			                    {{--<dd>FAX: <span>+1 504 889 9898</span></dd>--}}
 			                    <dd>E-mail: <span><a href="#">hello@uslucky.com</a></span></dd>
-								<dd><a href="">Partnership with us</a></dd>
+								<dd><a href="{{route('front::contact.partner')}}">Partnership with us</a></dd>
 			                </dl>
 			            </address>
 					</div>

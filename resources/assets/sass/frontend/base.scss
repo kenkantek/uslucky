@@ -157,3 +157,220 @@ span.label[class *= 'label-'], label.label[class *= 'label-'] {
     }
   }
 }
+
+.partner{
+  .bg-header {
+    background-color: #c4261d;
+    padding: 0;
+  }
+  .bg-header .bg-title {
+    font-size: 4.4em;
+    text-align: center;
+    color: #fff;
+    clear: both;
+    padding-bottom: 20px;
+  }
+  hr {
+    border: 8px #fff solid;
+  }
+  hr:last-child {
+    margin-bottom: 30px;
+  }
+  .main {
+    background-color: #fff;
+    margin-top: 20px;
+
+  }
+  .padding-left {
+    padding: 0;
+  }
+  .padding-right-10{
+    padding:0 10px 0 0;
+  }
+  .padding-left p {
+    color: #000;
+    font-size: 3em;
+    text-align: center;
+    line-height: 46px;
+    height: 138px;
+    padding-top: 55px;
+    font-weight: bold;
+  }
+  .bg2 {
+    background-color: #69909f;
+    border-radius: 28px;
+    padding-top: 27px;
+  }
+
+  .bg4{
+    background-color:#666666;
+    text-align:center;
+    clear:both;
+  }
+  .bg4 p{
+    background-color:#666666;
+    font-size:5em;
+    color:#fff;
+    margin-bottom:0px;
+  }
+  .hr1{
+    border-bottom: 3px #fff solid;
+    background-color: #666666;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 15px;
+  }
+  .hr2{
+    border-top: 3px #fff solid;
+    background-color: #666666;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 15px;
+  }
+  .paddinglr {
+    padding-left: 31px;
+    padding-right: 60px;
+  }
+  .paddinglr p{
+    font-size: 2.4em;
+    color: #fff;
+    padding-top:0;
+  }
+  .main-left ul{
+    list-style-type: decimal;
+    font-size: 2.3em;
+    color: red;
+  }
+  .main-left li{
+    margin-bottom:30px;
+  }
+  .main-left li span{
+    color:#000;
+    font-size:0.8em;
+    font-weight:bold;
+  }
+  .main3{
+    background-color:#3aa697;
+    padding:70px 0 75px 65px;
+    color:#fff;
+    font-size:2.5em;
+    margin-top:20px;
+  }
+  @media screen and (max-width:767px){
+    .bg-header .bg-title {
+      font-size: 1.8em;
+    }
+    .img-220{
+      width:100%;
+    }
+    .paddinglr {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .paddinglr p {
+      font-size: 1.3em;
+      color: #fff;
+      padding-top: 0;
+    }
+    .bg3{
+      background-color: #3aa697;
+      border-radius: 28px;
+      width:100%;
+      margin-left:0;
+      margin-top:20px;
+      font-size: 2em;
+      padding: 20px;
+    }
+    .bg4 p{
+      font-size: 2em;
+    }
+    .main3 {
+      background-color: #3aa697;
+      padding: 20px;
+      color: #fff;
+      font-size: 21em;
+      margin-top: 20px;
+    }
+  }
+  @media screen and (min-width:768px){
+    .padding-left p {
+      color: #000;
+      font-size: 2.5em;
+      text-align: center;
+      line-height: 46px;
+      height: 138px;
+      padding-top: 55px;
+      font-weight: bold;
+    }
+    .paddinglr p{
+      font-size:2em;
+      color:#fff;
+      padding-top:0;
+    }
+    .bg2{
+      margin-top:20px;
+    }
+    .bg3{
+      background-color: #3aa697;
+      border-radius: 28px;
+      width:100%;
+      margin-left:0;
+      margin-top:20px;
+      font-size: 2.8em;
+      padding: 35px 20px 43px 30px;
+    }
+    .padding-left img{
+      float:left;
+      width:100%;
+      height:220px;
+    }
+    row paddinglr2 img
+    {
+      height:auto;
+    }
+    .info{
+      font-size:0.7em;
+    }
+    .main-left li {
+      margin-bottom: 0px;
+    }
+    .main-left li span {
+      color: #000;
+      font-size: 0.5em;
+      font-weight: bold;
+    }
+  }
+  @media screen and (min-width:1200px){
+    .bg3{
+      background-color: #3aa697;
+      border-radius: 28px;
+      padding: 50px 20px 224px 30px;
+      font-size: 2.3em;
+      color: #fff;
+      width: 40%;
+      margin-left: 18px;
+
+    }
+    .bg3 ul li {
+      margin-bottom:25px;
+    }
+    .padding-left img{
+      float: left;
+      width: 294px;
+      height: 294px;
+    }
+    .paddinglr p {
+      font-size: 2em;
+      color: #fff;
+      padding-top: 10px;
+    }
+    .main-left li {
+      margin-bottom: 30px;
+    }
+    .main-left li span {
+      color: #000;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  }
+}
