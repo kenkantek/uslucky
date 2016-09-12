@@ -9,7 +9,7 @@
             return{
                 api: laroute.route('ecommerce.api.list'),
                 data: {
-                    per_page: "1",
+                    per_page: "10",
                 },
                 linkCreate: laroute.route('ecommerce.admin.ecommerce.product.create'),
                 ids: [],
@@ -76,6 +76,13 @@
             linkEdit(product) {
                 return laroute.route('ecommerce.admin.ecommerce.product.edit', { product });
             },
+        },
+
+        events: {
+            'go-to-page'(api) {
+                this.api = api;
+                this.reloadAsyncData();
+            }
         },
 
 
