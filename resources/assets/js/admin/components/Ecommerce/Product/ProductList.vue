@@ -9,7 +9,7 @@
             return{
                 api: laroute.route('ecommerce.api.list'),
                 data: {
-                    per_page: "10",
+                    per_page: "1",
                 },
                 linkCreate: laroute.route('ecommerce.admin.ecommerce.product.create'),
                 ids: [],

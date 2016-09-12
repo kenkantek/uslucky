@@ -22,6 +22,14 @@
                         closeOnConfirm: false,
                         showLoaderOnConfirm: true,
                     })
+                }, (err) => {
+                    this.formErrors = res.data;
+                    this.submiting = false;
+                    if(res.status === 422) {
+                        toastr.error(this.$l('message.check_field'), this.$l('message.validate'));
+                    } else  {
+                        BOX.alertError();
+                    }
                 });
             }
         }

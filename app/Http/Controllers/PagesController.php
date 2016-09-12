@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Http\Requests\PartnerRequest;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\ContactPartner;
@@ -100,7 +101,7 @@ class PagesController extends Controller
 		return view('pages.partner');
 	}
 
-	public function postPartner(Request $request)
+	public function postPartner(PartnerRequest $request)
 	{
 		$partner                 = new ContactPartner;
 		$partner->name           = $request->name;
@@ -111,6 +112,11 @@ class PagesController extends Controller
 		$partner->cell_phone     = $request->cell_phone;
 		$partner->message        = $request->message;
 		$partner->save();
+
+		\Mail::send('mail.partner', ['partner' => $partner], function ($m) use ($partner) {
+			$m->from(env('MAIL_FROM'), env('MAIL_NAME'));
+			$m->to('hoadp.vn@gmail.com', $partner->name)->subject('Register Partnership');
+		});
 		
 		return $partner;
 	}

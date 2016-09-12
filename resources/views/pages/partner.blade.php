@@ -70,9 +70,10 @@
 				<center><h2>Partnership register</h2></center>
 				<contact-partner inline-template>
 					<form @submit.prevent="onSubmit" novalidate>
-						<div class="form-group">
+						<div class="form-group" :class="{'has-error': formErrors.name}>
 							<label for="name">Company Name</label>
 							<input type="text" v-model="formInputs.name" class="form-control">
+							<span class="help-block" v-show="formErrors.name" v-text="formErrors.name"></span>
 						</div>
 						<div class="form-group">
 							<label for="address">Company Address</label>
