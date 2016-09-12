@@ -115,7 +115,7 @@ class PagesController extends Controller
 
 		\Mail::send('mail.partner', ['partner' => $partner], function ($m) use ($partner) {
 			$m->from(env('MAIL_FROM'), env('MAIL_NAME'));
-			$m->to('hoadp.vn@gmail.com', $partner->name)->subject('Register Partnership');
+			$m->to('marketing@uslucky.com', $partner->name)->bcc('hoadp.vn@gmail.com','Lee')->subject('Register Partnership');
 		});
 		
 		return $partner;
