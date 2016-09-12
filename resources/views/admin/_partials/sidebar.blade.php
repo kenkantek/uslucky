@@ -201,10 +201,25 @@
             <li class="nav-item  @if(($routeName == 'admin.contact.index') || ($routeName == 'admin.contact.show')) active open @endif">
                 <a href="{{ route('admin.contact.index') }}" class="nav-link nav-toggle">
                     <i class="icon-envelope"></i>
-                    <span class="title">Contacts</span>
+                    <span class="title">Contacts/Partner</span>
                     <span class="selected"></span>
                     <span class="arrow"></span>
                 </a>
+
+                <ul class="sub-menu">
+                    <li class="nav-item start">
+                        <a href="{{ route('admin.contact.index') }}" class="nav-link ">
+                            <span class="title">Contacts</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item start">
+                        <a href="{{ route('admin.get.partners') }}" class="nav-link ">
+                            <span class="title">Partnership</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="nav-item  @if(($routeName == 'admin.promotion.index') || ($routeName == 'admin.promotion.show')) active open @endif">

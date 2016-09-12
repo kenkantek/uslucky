@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReplyContactRequest;
 use App\Models\Contact;
+use App\Models\ContactPartner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -51,5 +52,17 @@ class ContactController extends Controller
         $contact->save();
 
         return $contact;
+    }
+    
+    public function getPartner()
+    {
+        return view('admin.partners.index');
+    }
+
+    public function getPartnerList(Request $request)
+    {
+        $take = $request->take;
+
+        return ContactPartner::latest()->paginate($take);
     }
 }

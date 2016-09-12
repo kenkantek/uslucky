@@ -21,9 +21,14 @@ $router->group(['as' => 'front::', 'middleware' => ['web']], function () use ($r
 	]);
 	//end ref link
 
-	$router->get('contact-for-partner',[
-		'as' => 'contact.partner',
-		'uses' => 'PagesController@getPartner'
+	$router->get('contact-for-partner', [
+		'as'   => 'contact.partner',
+		'uses' => 'PagesController@getPartner',
+	]);
+
+	$router->post('contact-for-partner', [
+		'as'   => 'contact.partner.post',
+		'uses' => 'PagesController@postPartner',
 	]);
 
 	$router->get('terms', [
@@ -267,6 +272,10 @@ $router->group([
 				'as'   => 'get.contacts',
 				'uses' => 'ContactController@getContacts',
 			]);
+			$router->get('partners', [
+				'as'   => 'api.get.partners',
+				'uses' => 'ContactController@getPartnerList',
+			]);
 
 			$router->get('orders', [
 				'as'   => 'get.orders',
@@ -414,6 +423,10 @@ $router->group([
 
 		$router->resource('contact', 'ContactController', [
 			'only' => ['index', 'show', 'update'],
+		]);
+		$router->get('partners', [
+			'as'   => 'admin.get.partners',
+			'uses' => 'ContactController@getPartner',
 		]);
 
 		$router->resource('promotion', 'PromotionController', [

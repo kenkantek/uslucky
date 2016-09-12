@@ -68,40 +68,42 @@
 			</div>
 			<div class="col-md-8 col-md-offset-2" style="padding-top: 20px">
 				<center><h2>Partnership register</h2></center>
-				<form action="" method="post">
-					<div class="form-group">
-						<label for="name">Company Name</label>
-						<input type="text" name="name" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="address">Company Address</label>
-						<input type="text" name="address" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="zipcode">Company Zipcode</label>
-						<input type="text" name="zipcode" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="phone">Company Phone</label>
-						<input type="text" name="phone" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="contact_person">Contact Person</label>
-						<input type="text" name="contact_person" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="cell_phone">Cell phone</label>
-						<input type="text" name="cell_phone" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="message">Message</label>
-						<textarea name="message" class="form-control" cols="30" rows="10"></textarea>
-					</div>
-					<div class="form-group" style="text-align: center">
-						<button type="button" class="btn btn-primary" onClick="alert('Function is building')">Submit</button>
-						<button type="reset" class="btn btn-warning">Reset</button>
-					</div>
-				</form>
+				<contact-partner inline-template>
+					<form @submit.prevent="onSubmit" novalidate>
+						<div class="form-group">
+							<label for="name">Company Name</label>
+							<input type="text" v-model="formInputs.name" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="address">Company Address</label>
+							<input type="text" v-model="formInputs.address" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="zipcode">Company Zipcode</label>
+							<input type="text" v-model="formInputs.zipcode" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="phone">Company Phone</label>
+							<input type="text" v-model="formInputs.phone" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="contact_person">Contact Person</label>
+							<input type="text" v-model="formInputs.contact_person" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="cell_phone">Cell phone</label>
+							<input type="text" v-model="formInputs.cell_phone" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="message">Message</label>
+							<textarea v-model="formInputs.message" class="form-control" cols="30" rows="10"></textarea>
+						</div>
+						<div class="form-group" style="text-align: center">
+							<button :disabled="submiting" type="submit" class="btn btn-primary"><i class="fa fa-circle-o-notch fa-spin" v-show="submiting"></i> Submit</button>
+							<button type="reset" class="btn btn-warning">Reset</button>
+						</div>
+					</form>
+				</contact-partner>
 			</div>
 
 		</div>
