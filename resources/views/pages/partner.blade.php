@@ -93,7 +93,7 @@
 							<input type="text" v-model="formInputs.contact_person" class="form-control">
 						</div>
 						<div class="form-group">
-							<label style="font-weight: normal" for="cell_phone">Mobil</label>
+							<label style="font-weight: normal" for="cell_phone">Mobile</label>
 							<input type="text" v-model="formInputs.cell_phone" class="form-control">
 						</div>
 						<div class="form-group">
