@@ -26,7 +26,6 @@ class PartnerRequest extends Request
 		return [
 			'name'           => 'required',
 			'address'        => 'required',
-			'zipcode'        => 'required',
 			'phone'          => 'required',
 			'contact_person' => 'required',
 			'cell_phone'     => 'required',

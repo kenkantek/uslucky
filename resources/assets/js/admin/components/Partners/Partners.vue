@@ -8,11 +8,10 @@
                 <tr>
                     <th> ID # </th>
                     <th> Comapny Name </th>
-                    <th> Comapny Address </th>
-                    <th> Comapny Zipcode </th>
-                    <th> Comapny Phone </th>
+                    <th> Address </th>
+                    <th> Telephone </th>
                     <th> Contact Person </th>
-                    <th> Cell phone </th>
+                    <th> Mobil </th>
                     <th> Date/Time </th>
                 </tr>
             </thead>
@@ -21,7 +20,6 @@
                     <td v-text="contact.id"></td>
                     <td v-text="contact.name"></td>
                     <td v-text="contact.address"></td>
-                    <td v-text="contact.zipcode"></td>
                     <td v-text="contact.phone"></td>
                     <td v-text="contact.contact_person"></td>
                     <td v-text="contact.cell_phone"></td>

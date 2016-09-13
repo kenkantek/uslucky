@@ -4,15 +4,16 @@
 	<div class="container">
 		<div class="row partner">
 
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-header"> <img src="img/unnamed.png" class="img-responsive" alt="" style="width:135px; height:60px; float:right; padding:10px 10px 0 0">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-header">
+				<img src="img/unnamed.png" class="img-responsive" alt="" style="width:135px; height:60px; float:right; padding:10px 10px 0 0">
 				<p class="bg-title"><span style="color:#fefd0c;">Free</span> marketing for you restaurant</p>
 				<hr>
 				<hr>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main">
 				<div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 padding-left">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="img/unnamed (5).png" class="img-responsive img-220" alt=""></div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="img/unnamed (6).png" class="img-responsive img-220" alt=""></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="img/unnamed (5).png" class="img-responsive img-220" alt="" style="height: 200px;width: auto"></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="img/unnamed (6).png" class="img-responsive img-220" alt="" style="height: 200px;width: auto"></div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 						<p>Free Marketing</p>
 					</div>
@@ -33,7 +34,7 @@
 				<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 bg3">
 					<ul>
 						<li>uslucky.com, a tech startup recommending high quality restaurants to Chinese tourists</li>
-						<li>100% free marketing to our partner restaurants; paid b travel agencies</li>
+						<li>100% free marketing to our partner restaurants; paid by travel agencies</li>
 						<li>100k+members getting our recommendations and growing everday</li>
 						<li>hundreds of restaurants already working with us</li>
 					</ul>
@@ -70,33 +71,33 @@
 				<center><h2>Partnership register</h2></center>
 				<contact-partner inline-template>
 					<form @submit.prevent="onSubmit" novalidate>
-						<div class="form-group" :class="{'has-error': formErrors.name}>
-							<label for="name">Company Name</label>
+						<div class="form-group" :class="{'has-error': formErrors.name}">
+							<label style="font-weight: normal" for="name">Company Name</label>
 							<input type="text" v-model="formInputs.name" class="form-control">
 							<span class="help-block" v-show="formErrors.name" v-text="formErrors.name"></span>
 						</div>
 						<div class="form-group">
-							<label for="address">Company Address</label>
+							<label style="font-weight: normal" for="address">Address</label>
 							<input type="text" v-model="formInputs.address" class="form-control">
 						</div>
+						{{--<div class="form-group">--}}
+							{{--<label for="zipcode">Company Zipcode</label>--}}
+							{{--<input type="text" v-model="formInputs.zipcode" class="form-control" value=" ">--}}
+						{{--</div>--}}
 						<div class="form-group">
-							<label for="zipcode">Company Zipcode</label>
-							<input type="text" v-model="formInputs.zipcode" class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="phone">Company Phone</label>
+							<label style="font-weight: normal" for="phone">Telephone</label>
 							<input type="text" v-model="formInputs.phone" class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="contact_person">Contact Person</label>
+							<label style="font-weight: normal" for="contact_person">Contact Person</label>
 							<input type="text" v-model="formInputs.contact_person" class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="cell_phone">Cell phone</label>
+							<label style="font-weight: normal" for="cell_phone">Mobil</label>
 							<input type="text" v-model="formInputs.cell_phone" class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="message">Message</label>
+							<label style="font-weight: normal" for="message">Message</label>
 							<textarea v-model="formInputs.message" class="form-control" cols="30" rows="10"></textarea>
 						</div>
 						<div class="form-group" style="text-align: center">

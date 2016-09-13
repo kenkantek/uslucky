@@ -106,7 +106,7 @@ class PagesController extends Controller
 		$partner                 = new ContactPartner;
 		$partner->name           = $request->name;
 		$partner->address        = $request->address;
-		$partner->zipcode        = $request->zipcode;
+		$partner->zipcode        = '';
 		$partner->phone          = $request->phone;
 		$partner->contact_person = $request->contact_person;
 		$partner->cell_phone     = $request->cell_phone;
