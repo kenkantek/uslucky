@@ -256,6 +256,7 @@ span.label[class *= 'label-'], label.label[class *= 'label-'] {
     font-size:2.5em;
     margin-top:20px;
   }
+
   @media screen and (max-width:767px){
     .bg-header .bg-title {
       font-size: 1.8em;
@@ -288,7 +289,7 @@ span.label[class *= 'label-'], label.label[class *= 'label-'] {
       background-color: #3aa697;
       padding: 20px;
       color: #fff;
-      font-size: 21em;
+      font-size: 1.2em;
       margin-top: 20px;
     }
   }
