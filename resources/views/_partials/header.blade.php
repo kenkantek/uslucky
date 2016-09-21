@@ -29,14 +29,14 @@
                                        {!! trans('setting.menu_order_product') !!} <i class="fa fa-lg fa-cart-plus pull-right"></i>
                                    </a>
                                </li>
-                               <li>
-                                   <a href="{{ route('front::orders.index') }}">
-                                       {!! trans('setting.menu_order') !!} <i class="fa fa-lg fa-shopping-cart pull-right"></i>
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="{{ route('front::settings.winning') }}">{!! trans('setting.menu_winning') !!} <i class="fa fa-trophy fa-lg pull-right"></i></a>
-                               </li>
+                               {{--<li>--}}
+                                   {{--<a href="{{ route('front::orders.index') }}">--}}
+                                       {{--{!! trans('setting.menu_order') !!} <i class="fa fa-lg fa-shopping-cart pull-right"></i>--}}
+                                   {{--</a>--}}
+                               {{--</li>--}}
+                               {{--<li>--}}
+                                   {{--<a href="{{ route('front::settings.winning') }}">{!! trans('setting.menu_winning') !!} <i class="fa fa-trophy fa-lg pull-right"></i></a>--}}
+                               {{--</li>--}}
                                <li>
                                    <a href="{{ route('front::payment.history') }}">{!! trans('setting.menu_trans') !!} <i class="fa fa-history fa-lg pull-right"></i></a>
                                </li>
@@ -152,23 +152,27 @@
                     {{--</li>--}}
                 {{--</ul>--}}
             {{--</li>--}}
-            <li>
-                <a href="{{ route('front::game.get.index') }}">
-                    美国彩票
-                </a>
-                <ul class="sub-nav">
-                    <li>
-                        <a href="{{ route('front::game.powerball') }}">
-                            {{ trans('nav.powerball') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('front::game.megamillions') }}">
-                            {{ trans('nav.megamilions') }}
-                        </a>
-                    </li>
-                </ul>
-            </li>
+
+            <!--enable Game-->
+            {{--<li>--}}
+                {{--<a href="{{ route('front::game.get.index') }}">--}}
+                    {{--美国彩票--}}
+                {{--</a>--}}
+                {{--<ul class="sub-nav">--}}
+                    {{--<li>--}}
+                        {{--<a href="{{ route('front::game.powerball') }}">--}}
+                            {{--{{ trans('nav.powerball') }}--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    {{--<li>--}}
+                        {{--<a href="{{ route('front::game.megamillions') }}">--}}
+                            {{--{{ trans('nav.megamilions') }}--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+            {{--</li>--}}
+            <!--enable Game-->
+
             {{--<li>--}}
                 {{--<a href="{{ route('front::special.offers') }}">--}}
                     {{--优惠--}}

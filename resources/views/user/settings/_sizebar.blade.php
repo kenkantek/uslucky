@@ -5,15 +5,15 @@
         </a>
     </li>
     <li class="divider"></li>
-    <li class="@if(($routeName === 'front::orders.index')||($routeName === 'front::orders.show')) current @endif">
-        <a href="{{ route('front::orders.index') }}">
-            {!! trans('setting.menu_order') !!} <i class="fa fa-lg fa-shopping-cart pull-right"></i>
-        </a>
-    </li>
-    <li class="divider"></li>
-    <li class="@if($routeName === 'front::settings.winning') current @endif">
-        <a href="{{ route('front::settings.winning') }}">{!! trans('setting.menu_winning') !!} <i class="fa fa-trophy fa-lg pull-right"></i></a>
-    </li>
+    {{--<li class="@if(($routeName === 'front::orders.index')||($routeName === 'front::orders.show')) current @endif">--}}
+        {{--<a href="{{ route('front::orders.index') }}">--}}
+            {{--{!! trans('setting.menu_order') !!} <i class="fa fa-lg fa-shopping-cart pull-right"></i>--}}
+        {{--</a>--}}
+    {{--</li>--}}
+    {{--<li class="divider"></li>--}}
+    {{--<li class="@if($routeName === 'front::settings.winning') current @endif">--}}
+        {{--<a href="{{ route('front::settings.winning') }}">{!! trans('setting.menu_winning') !!} <i class="fa fa-trophy fa-lg pull-right"></i></a>--}}
+    {{--</li>--}}
     <li class="divider"></li>
     <li class="@if($routeName === 'front::payment.history') current @endif">
         <a href="{{ route('front::payment.history') }}">{!! trans('setting.menu_trans') !!} <i class="fa fa-history fa-lg pull-right"></i></a>
